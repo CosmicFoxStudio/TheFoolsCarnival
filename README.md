@@ -1,4 +1,4 @@
-#Itsy Bitsy & Cosmic Fox GameJam+ 24/25
+# Itsy Bitsy & Cosmic Fox GameJam+ 24/25
 Membros:
 - Otto - Produção, Negócios, Pitch
 - Renata - Arte
