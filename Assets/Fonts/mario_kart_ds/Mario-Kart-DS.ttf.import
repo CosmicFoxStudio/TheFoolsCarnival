@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dt84iq2ew2www"
-path="res://.godot/imported/Mario-Kart-DS.ttf-608cf431d6707a17ae894ce3fabb74a8.fontdata"
+path="res://.godot/imported/Mario-Kart-DS.ttf-b72e649fbcf177da7bc60076d830707f.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/mario_kart_ds/Mario-Kart-DS.ttf"
-dest_files=["res://.godot/imported/Mario-Kart-DS.ttf-608cf431d6707a17ae894ce3fabb74a8.fontdata"]
+source_file="res://Assets/Fonts/mario_kart_ds/Mario-Kart-DS.ttf"
+dest_files=["res://.godot/imported/Mario-Kart-DS.ttf-b72e649fbcf177da7bc60076d830707f.fontdata"]
 
 [params]
 
