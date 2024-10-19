@@ -10,12 +10,12 @@ extends CharacterBody2D
 
 const state_type = preload("res://Scripts/state_type_enum.gd").state_type
 
-var state_queue:Array[CharacterState]
+var state_queue:StateQueue
 var default_state: CharacterState
 var current_state:CharacterState
 
 func _ready():
-	state_queue = []
+	state_queue = StateQueue.new(max_state_queue_size)
 	default_state = CharacterState.new(state_type.idle, true)
 	current_state = default_state
 
@@ -48,8 +48,7 @@ func _physics_process(delta):
 		enqueue_state(state_type.jump)
 	elif is_on_floor():
 		end_state(state_type.jump)
-
-
+	
 	move_and_slide()
 
 func _process(_delta):
@@ -58,8 +57,6 @@ func _process(_delta):
 	if Input.is_action_just_pressed("basic_attack") and is_on_floor():
 		end_state()
 		enqueue_state(state_type.attack)
-	elif not _animation_player.is_playing():
-		end_state(state_type.attack)
 	
 	if current_state.type == state_type.idle:
 		_animation_player.play("idle")
@@ -71,41 +68,27 @@ func _process(_delta):
 		_animation_player.play("attack")
 
 func update_state():
-	if current_state.done:
-		dequeue_state()
+	if current_state.done and not is_idle():
+		current_state = state_queue.dequeue()
 	
 func enqueue_state(type:state_type):
-	if current_state.type == type or find_in_queue(type) != -1:
+	if current_state.type == type:
 		return
 
-	var state = CharacterState.new(type)
-
-	state_queue.append(state)
-
-func dequeue_state():
-	if state_queue.size() == 0:
-		if current_state.type != state_type.idle:
-			current_state = default_state
-		return
-
-	var state = state_queue.pop_front()
-
-	if not current_state.done:
-		return
-
-	current_state = state
-
-func find_in_queue(type:state_type):
-	var index = -1
-
-	for i in range(state_queue.size()):
-		var character_state = state_queue[i]
-		if character_state.type == type:
-			index = i
-			break
-
-	return index
+	return state_queue.enqueue(type)
 
 func end_state(type:state_type = state_type.any):
 	if current_state.type == type or type == state_type.any:
 		current_state.done = true
+
+func is_idle():
+	if state_queue.queue.size() == 0:
+		if current_state.type != state_type.idle:
+			current_state = default_state
+		return true
+
+	return false
+	
+func _on_animation_player_animation_finished(anim_name:StringName):
+	if anim_name == "attack":
+		end_state(state_type.attack)
