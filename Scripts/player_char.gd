@@ -27,7 +27,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
+	if direction and current_state.type != state_type.attack:
 		velocity.x = direction * speed
 		if direction < 0 && velocity.x < 0:
 			_sprite2d.flip_h = true
@@ -44,6 +44,7 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
+		end_state()
 		enqueue_state(state_type.jump)
 	elif is_on_floor():
 		end_state(state_type.jump)
@@ -110,3 +111,8 @@ func find_in_queue(type:state_type):
 func end_state(type:state_type = state_type.any):
 	if current_state.type == type or type == state_type.any:
 		current_state.done = true
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "attack":
+		end_state(state_type.attack)
