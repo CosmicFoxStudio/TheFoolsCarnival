@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=5 format=4 uid="uid://c3juuqfo1tbmb"]
 
 [ext_resource type="PackedScene" uid="uid://r7rgt8qyt1eq" path="res://Scenes/player_char.tscn" id="1_nr1tu"]
 [ext_resource type="Texture2D" uid="uid://ba05blkoq4hdx" path="res://Assets/platformPack_tilesheet.png" id="2_1ylxg"]
-[ext_resource type="Script" path="res://Scripts/player_char.gd" id="2_5g47p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssi7d"]
 texture = ExtResource("2_1ylxg")
@@ -1023,7 +1022,6 @@ sources/0 = SubResource("TileSetAtlasSource_ssi7d")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_nr1tu")]
 position = Vector2(57, 469)
-script = ExtResource("2_5g47p")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAA=")

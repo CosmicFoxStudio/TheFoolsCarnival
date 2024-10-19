@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://r7rgt8qyt1eq"]
 
-[ext_resource type="Script" path="res://Scenes/player_char.gd" id="1_lu6l8"]
+[ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
 [ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
 
 [sub_resource type="Animation" id="Animation_yurhh"]
@@ -20,8 +20,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_mlcyx"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_mvp4b"]
+resource_name = "jump"
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,7 +36,7 @@ tracks/0/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_fvma3"]
+[sub_resource type="Animation" id="Animation_h3mn7"]
 resource_name = "walk"
 length = 0.4
 loop_mode = 1
@@ -55,16 +56,16 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fb24e"]
 _data = {
-"RESET": SubResource("Animation_mlcyx"),
 "idle": SubResource("Animation_yurhh"),
-"walk": SubResource("Animation_fvma3")
+"jump": SubResource("Animation_mvp4b"),
+"walk": SubResource("Animation_h3mn7")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpn84"]
 size = Vector2(29, 58)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_lu6l8")
+script = ExtResource("1_t0eug")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
