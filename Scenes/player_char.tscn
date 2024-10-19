@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://r7rgt8qyt1eq"]
+
+[ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
+[ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
+
+[sub_resource type="Animation" id="Animation_yurhh"]
+resource_name = "idle"
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mvp4b"]
+resource_name = "jump"
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_h3mn7"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fb24e"]
+_data = {
+"idle": SubResource("Animation_yurhh"),
+"jump": SubResource("Animation_mvp4b"),
+"walk": SubResource("Animation_h3mn7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpn84"]
+size = Vector2(29, 58)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_t0eug")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_0pim1")
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fb24e")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 19)
+shape = SubResource("RectangleShape2D_bpn84")
