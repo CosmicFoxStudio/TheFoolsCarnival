@@ -1,0 +1,1 @@
+extends AttackArea2D
