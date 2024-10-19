@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://0mcgaaj1qptg"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_char.gd" id="1_bya7y"]
+[ext_resource type="Texture2D" uid="uid://bb6qswdpyw44u" path="res://Assets/Enemies/Placeholders/leadbloon_sheet.png" id="2_lv1pr"]
+[ext_resource type="Resource" uid="uid://dev3b53hvl70i" path="res://Resources/Enemies/DogBalloon.tres" id="2_n527v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsblt"]
+size = Vector2(62, 75)
+
+[sub_resource type="Animation" id="Animation_bmaht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fkb5e"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_ull0x"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ql45q"]
+resource_name = "walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lyo04"]
+_data = {
+"RESET": SubResource("Animation_bmaht"),
+"attack": SubResource("Animation_fkb5e"),
+"idle": SubResource("Animation_ull0x"),
+"walk": SubResource("Animation_ql45q")
+}
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_gmccd"]
+
+[node name="EnemyChar" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayer")]
+collision_layer = 2
+script = ExtResource("1_bya7y")
+enemyResource = ExtResource("2_n527v")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_lv1pr")
+hframes = 10
+region_enabled = true
+region_rect = Rect2(10, 33.5, 1224, 153.757)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dsblt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lyo04")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationRootNode_gmccd")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=2 format=3 uid="uid://dev3b53hvl70i"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_data.gd" id="1_jetog"]
+
+[resource]
+script = ExtResource("1_jetog")
+health = 15.0
+speed = 100.0
