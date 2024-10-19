@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://42ji6mni5tx4"]
+
+[ext_resource type="Script" path="res://Scenes/player_char.gd" id="1_lu6l8"]
+[ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
+
+[sub_resource type="Animation" id="Animation_yurhh"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fb24e"]
+_data = {
+"idle": SubResource("Animation_yurhh")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpn84"]
+size = Vector2(29, 58)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_lu6l8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_0pim1")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fb24e")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 19)
+shape = SubResource("RectangleShape2D_bpn84")
