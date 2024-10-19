@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://r7rgt8qyt1eq"]
+[gd_scene load_steps=11 format=3 uid="uid://r7rgt8qyt1eq"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
 [ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
@@ -54,8 +54,66 @@ tracks/0/keys = {
 "values": [2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_5cyx6"]
+resource_name = "attack"
+length = 0.3
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackCollision:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.125, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ymqpu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackCollision:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fb24e"]
 _data = {
+"RESET": SubResource("Animation_ymqpu"),
+"attack": SubResource("Animation_5cyx6"),
 "idle": SubResource("Animation_yurhh"),
 "jump": SubResource("Animation_mvp4b"),
 "walk": SubResource("Animation_h3mn7")
@@ -63,6 +121,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpn84"]
 size = Vector2(29, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd2dr"]
+size = Vector2(39, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_t0eug")
@@ -72,13 +133,22 @@ texture_filter = 1
 texture = ExtResource("2_0pim1")
 hframes = 4
 vframes = 2
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_fb24e")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(3.5, 19)
 shape = SubResource("RectangleShape2D_bpn84")
+
+[node name="AttackCollision" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackCollision"]
+position = Vector2(37.5, -1)
+shape = SubResource("RectangleShape2D_nd2dr")

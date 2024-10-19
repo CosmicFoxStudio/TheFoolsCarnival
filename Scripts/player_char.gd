@@ -39,14 +39,10 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func _process(delta):
+func _process(_delta):
 	if state == states.idle:
 		_animation_player.play("idle")
 	if state == states.walk:
 		_animation_player.play("walk")
 	if state == states.jump:
 		_animation_player.play("jump")
-	
-
-func _on_started_walking(extra_arg_0):
-	pass # Replace with function body.
