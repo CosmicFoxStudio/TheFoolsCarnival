@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjw1h07ogg0e2"
-path="res://.godot/imported/platformerPack_character.png-b315fb1808e132c23e7d753b1ddeb40f.ctex"
+uid="uid://bc0dvf6upsg8a"
+path="res://.godot/imported/spr_carX2.png-11cb7502715fe6391eec4567eed8d6a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/platformerPack_character.png"
-dest_files=["res://.godot/imported/platformerPack_character.png-b315fb1808e132c23e7d753b1ddeb40f.ctex"]
+source_file="res://Assets/Sprites/Enemies/spr_carX2.png"
+dest_files=["res://.godot/imported/spr_carX2.png-11cb7502715fe6391eec4567eed8d6a2.ctex"]
 
 [params]
 

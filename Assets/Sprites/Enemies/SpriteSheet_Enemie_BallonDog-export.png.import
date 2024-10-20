@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hrwhs4cow7gp"
-path="res://.godot/imported/WhiteBloon.png-1aae46d39c05358a7efc7f8479b3c3c0.ctex"
+uid="uid://cl7w25y55jyt7"
+path="res://.godot/imported/SpriteSheet_Enemie_BallonDog-export.png-a08c7b46de9e809baf4acedfcf9e698f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/Placeholders/WhiteBloon.png"
-dest_files=["res://.godot/imported/WhiteBloon.png-1aae46d39c05358a7efc7f8479b3c3c0.ctex"]
+source_file="res://Assets/Sprites/Enemies/SpriteSheet_Enemie_BallonDog-export.png"
+dest_files=["res://.godot/imported/SpriteSheet_Enemie_BallonDog-export.png-a08c7b46de9e809baf4acedfcf9e698f.ctex"]
 
 [params]
 
