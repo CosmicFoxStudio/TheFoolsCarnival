@@ -1,5 +1,7 @@
 extends ProgressBar
 
+class_name AudienceMeter
+
 @export var min_val_color : Color
 @export var max_val_color : Color
 
@@ -38,3 +40,7 @@ func add_meter(amount: float):
 	on_meter_changed.emit(meter)
 	
 	
+
+
+func _on_player_lower_approval(value:int):
+	meter -= value

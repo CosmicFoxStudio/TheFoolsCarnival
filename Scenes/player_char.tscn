@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnc5qx7ibltin"]
+[gd_scene load_steps=17 format=3 uid="uid://dl6heu77klscw"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
 [ext_resource type="Texture2D" uid="uid://grp00iy427yr" path="res://Assets/Sprites/Placeholders/player_character_idle.tres" id="2_h0ufs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dbxub0sjgc8fy" path="res://Assets/Sprites/Placeholders/player_character_walk.tres" id="4_823nu"]
 [ext_resource type="Texture2D" uid="uid://orph6xwen8g0" path="res://Assets/Sprites/Placeholders/player_character_jump.tres" id="4_hmpah"]
 [ext_resource type="Texture2D" uid="uid://djqupn15n86qr" path="res://Assets/Sprites/Placeholders/player_character_strong_attack.tres" id="6_3pa3s"]
+[ext_resource type="Script" path="res://Scenes/attack_collision.gd" id="7_8qw6e"]
 
 [sub_resource type="Animation" id="Animation_ymqpu"]
 length = 0.001
@@ -48,14 +49,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackCollision:process_mode")
+tracks/3/path = NodePath("AttackCollision/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_5cyx6"]
@@ -101,14 +102,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackCollision:process_mode")
+tracks/3/path = NodePath("AttackCollision/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0.125, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_yurhh"]
@@ -237,14 +238,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackCollision:process_mode")
+tracks/3/path = NodePath("AttackCollision/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0.125, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_h3mn7"]
@@ -306,6 +307,8 @@ size = Vector2(16, 23)
 size = Vector2(16.5, 9)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_t0eug")
 max_state_queue_size = 3
 combo_anims = Array[String](["attack", "attack", "strong_attack"])
@@ -325,12 +328,16 @@ position = Vector2(2, 7.5)
 shape = SubResource("RectangleShape2D_bpn84")
 
 [node name="AttackCollision" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
+script = ExtResource("7_8qw6e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackCollision"]
 position = Vector2(11.75, 0.5)
 shape = SubResource("RectangleShape2D_nd2dr")
+disabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

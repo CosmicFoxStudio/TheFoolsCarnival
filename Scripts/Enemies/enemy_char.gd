@@ -1,6 +1,8 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 class_name EnemyBase
+
+signal enemy_dead(enemy:EnemyBase)
 
 @export var enemyResource : EnemyResource
 func _set_enemyResource(res:EnemyResource): 
@@ -8,14 +10,18 @@ func _set_enemyResource(res:EnemyResource):
 
 @export var animationPlayer : AnimationPlayer
 
+@export var score_value: int
+
 @onready var ground_raycast2D: RayCast2D = $RayCast2D
 @onready var enemySprite: Sprite2D = $Sprite2D
 @onready var player : CharacterBody2D = get_parent().get_node("Player")
 
-@export var detection_radius := 4.0
+@export var detection_radius := 10
 @export var attack_trigger_radius := 1.0
 
 @export var attack_area : AttackArea2D
+
+var previous_state: CharacterState
 
 
 var motion : Vector2
@@ -47,36 +53,33 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	update_state()
 	_movement(delta)
-	move_and_slide()
 	
 func _movement(delta) -> void:
 	if isDead:
-		print("Enemy is dead")
+		emit_signal("enemy_dead", self)
+		queue_free()
 		return
 	
-	if not _is_on_ground():
-		velocity += get_gravity() * delta
-		
 	var target = (player.transform.origin - transform.origin);
 	var target_normalized = target.normalized()
 	
 	var distance = sqrt(target.length())
 	
-	x_direction = target_normalized.x; # Sets the direction the enemy will walk
-
+	#x_direction = target_normalized.x; # Sets the direction the enemy will walk
+	
 	walkTimer += delta
 	if(walkTimer > randi_range(2,5)):
 		walkTimer = 0
 		
-	if(distance <= detection_radius * detection_radius): # Walk when the Player is near
-		motion = Vector2(x_direction * enemyResource.speed * 10 * delta,velocity.y)
-		enqueue_state(state_type.walk)
+	#if(distance <= detection_radius * detection_radius): # Walk when the Player is near
+		#apply_force(target_normalized * floating_speed)
+		#enqueue_state(state_type.walk)
 		
-	if(distance <= attack_trigger_radius * attack_trigger_radius):
-		motion = Vector2(0.1 * delta,velocity.y)
-		enqueue_state(state_type.attack)
+	#if(distance <= attack_trigger_radius * attack_trigger_radius):
+		#apply_force(target_normalized * floating_speed)
+		#enqueue_state(state_type.attack)
 	
-	velocity = motion
+	# velocity = motion
 	
 	
 func _is_on_ground() -> bool:
@@ -98,19 +101,20 @@ func _take_damage(amount) -> void:
 		isDead = true
 		#enqueue_state() # dead state
 	pass
+	
+func _on_character_push(direction:Vector2, magnitude:float):
+	apply_force(direction.normalized() * magnitude)
 
 func _animations() -> void:
-	
-	
-	if current_state.type == state_type.idle:
+	if state_just_entered(state_type.idle):
 		animationPlayer.play("idle")
-	if current_state.type == state_type.walk:
+	if state_just_entered(state_type.walk):
 		animationPlayer.play("walk")
-	if current_state.type == state_type.attack:
+	if state_just_entered(state_type.attack):
 		animationPlayer.play("attack")
-	
 
 func update_state():
+	previous_state = current_state
 	if current_state.done and not is_idle():
 		current_state = state_queue.dequeue()
 		
@@ -123,7 +127,9 @@ func enqueue_state(type:state_type):
 func _end_state(type: state_type) -> void:
 	if current_state.type == type or type == state_type.any:
 		current_state.done = true
-
+		
+func state_just_entered(type:state_type):
+	return current_state.type == type && previous_state.type != type
 
 func is_idle():
 	if state_queue.queue.size() == 0:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=11 format=4 uid="uid://c3juuqfo1tbmb"]
 
 [ext_resource type="Texture2D" uid="uid://ba05blkoq4hdx" path="res://Assets/Sprites/Placeholders/platformPack_tilesheet.png" id="2_1ylxg"]
-[ext_resource type="PackedScene" uid="uid://bygj3pc17mbnf" path="res://Scenes/player.tscn" id="3_5nhjn"]
-[ext_resource type="PackedScene" uid="uid://0mcgaaj1qptg" path="res://Scenes/enemy_char.tscn" id="3_l52vg"]
-[ext_resource type="PackedScene" uid="uid://cnc5qx7ibltin" path="res://Scenes/player_char.tscn" id="4_l3shp"]
+[ext_resource type="PackedScene" uid="uid://dl6heu77klscw" path="res://Scenes/player_char.tscn" id="3_ght13"]
+[ext_resource type="PackedScene" uid="uid://binsk6qu3qi5r" path="res://Scenes/enemy_char.tscn" id="3_l52vg"]
+[ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://Scenes/UI/audience_meter.tscn" id="4_smnpq"]
+[ext_resource type="Script" path="res://Scenes/director.gd" id="5_t6gyq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssi7d"]
 texture = ExtResource("2_1ylxg")
@@ -1017,8 +1018,18 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSet" id="TileSet_sqyue"]
 tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
 sources/0 = SubResource("TileSetAtlasSource_ssi7d")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ge8dj"]
+b = Vector2(0, 408)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6yrpb"]
+b = Vector2(640, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_giray"]
+a = Vector2(640, 400)
+b = Vector2(640, 0)
 
 [node name="Node2D" type="Node2D"]
 
@@ -1026,13 +1037,44 @@ sources/0 = SubResource("TileSetAtlasSource_ssi7d")
 tile_map_data = PackedByteArray("AAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAAAAcAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAEAAcAAAADAAAAAAAFAAcAAAADAAAAAAAGAAcAAAADAAAAAAAHAAcAAAADAAAAAAAIAAcAAAADAAAAAAAJAAcAAAADAAAAAAA=")
 tile_set = SubResource("TileSet_sqyue")
 
-[node name="Player" parent="." instance=ExtResource("3_5nhjn")]
-visible = false
-position = Vector2(64, 516)
-
 [node name="BalloonEnemy" parent="." instance=ExtResource("3_l52vg")]
-position = Vector2(541, 271)
+position = Vector2(512, 344)
 attack_trigger_radius = 4.5
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("4_l3shp")]
-position = Vector2(79, 278)
+[node name="Player" parent="." node_paths=PackedStringArray("director_node") instance=ExtResource("3_ght13")]
+position = Vector2(128, 344)
+director_node = NodePath("../Director")
+
+[node name="AudienceMeter" parent="." instance=ExtResource("4_smnpq")]
+offset_left = 224.0
+offset_top = 0.0
+offset_right = 425.0
+offset_bottom = 40.0
+
+[node name="StageLimitsLeft" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="Collision" type="CollisionShape2D" parent="StageLimitsLeft"]
+shape = SubResource("SegmentShape2D_ge8dj")
+
+[node name="StageLimitsTop" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="Collision" type="CollisionShape2D" parent="StageLimitsTop"]
+shape = SubResource("SegmentShape2D_6yrpb")
+
+[node name="StageLimitsRight" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="Collision" type="CollisionShape2D" parent="StageLimitsRight"]
+shape = SubResource("SegmentShape2D_giray")
+
+[node name="Director" type="Node" parent="." node_paths=PackedStringArray("instances", "audience_meter")]
+script = ExtResource("5_t6gyq")
+instances = [NodePath("../BalloonEnemy")]
+audience_meter = NodePath("../AudienceMeter")
+
+[connection signal="lower_approval" from="Player" to="AudienceMeter" method="_on_player_lower_approval"]
