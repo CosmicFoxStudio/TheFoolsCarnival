@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1_jetog")
 health = 15.0
+
 damage = 20.0
+
 speed = 100.0
