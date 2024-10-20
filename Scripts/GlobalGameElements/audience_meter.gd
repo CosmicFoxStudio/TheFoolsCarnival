@@ -8,12 +8,14 @@ var meter : float
 
 var fillBar : StyleBoxFlat
 
+var meterZero : bool
+
 signal on_meter_changed(value:float)
+signal on_meter_reached_zero
 
 func _ready() -> void:
 	fillBar = get_theme_stylebox("fill", "ProgressBar")	
 	meter = max_value
-	print(fillBar)
 
 func _process(delta: float) -> void:
 	meter -= delta;
@@ -22,6 +24,11 @@ func _process(delta: float) -> void:
 	fillBar.bg_color = lerp(min_val_color, max_val_color, meter / max_value) # 
 	
 	value = meter
+	
+	if(meter <= 0 && not meterZero):
+		on_meter_reached_zero.emit()
+		meterZero = true
+		print("Meter reached ZERO")
 	
 func add_meter(amount: float):
 	meter += amount
