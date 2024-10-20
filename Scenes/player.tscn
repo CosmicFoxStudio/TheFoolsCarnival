@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://r7rgt8qyt1eq"]
+[gd_scene load_steps=11 format=3 uid="uid://bygj3pc17mbnf"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
 [ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
@@ -125,7 +125,7 @@ size = Vector2(29, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd2dr"]
 size = Vector2(39, 32)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_t0eug")
 max_state_queue_size = 3
 

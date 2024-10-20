@@ -1,0 +1,194 @@
+[gd_scene load_steps=14 format=3 uid="uid://0mcgaaj1qptg"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/ballon_enemy.gd" id="1_qtcrx"]
+[ext_resource type="Texture2D" uid="uid://bb6qswdpyw44u" path="res://Assets/Enemies/Placeholders/leadbloon_sheet.png" id="2_lv1pr"]
+[ext_resource type="Resource" uid="uid://dev3b53hvl70i" path="res://Resources/Enemies/DogBalloon.tres" id="2_n527v"]
+[ext_resource type="Script" path="res://Scripts/Enemies/enemy_attack_area.gd" id="5_xatft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsblt"]
+size = Vector2(62, 75)
+
+[sub_resource type="Animation" id="Animation_bmaht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExplosionVFX:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fkb5e"]
+resource_name = "attack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.566667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_attack"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExplosionVFX:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ull0x"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ql45q"]
+resource_name = "walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lyo04"]
+_data = {
+"RESET": SubResource("Animation_bmaht"),
+"attack": SubResource("Animation_fkb5e"),
+"idle": SubResource("Animation_ull0x"),
+"walk": SubResource("Animation_ql45q")
+}
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_gmccd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1n7j8"]
+resource_local_to_scene = true
+radius = 70.0
+
+[sub_resource type="Gradient" id="Gradient_3h7pj"]
+offsets = PackedFloat32Array(0, 0.721713, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.0745098, 0.0745098, 0.0745098, 0)
+
+[node name="BalloonEnemy" type="CharacterBody2D" node_paths=PackedStringArray("particleSystem", "animationPlayer", "attack_area")]
+collision_layer = 2
+script = ExtResource("1_qtcrx")
+particleSystem = NodePath("ExplosionVFX")
+enemyResource = ExtResource("2_n527v")
+animationPlayer = NodePath("AnimationPlayer")
+attack_trigger_radius = 3.0
+attack_area = NodePath("AttackArea2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_lv1pr")
+hframes = 10
+region_enabled = true
+region_rect = Rect2(10, 33.5, 1224, 153.757)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dsblt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lyo04")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationRootNode_gmccd")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+process_mode = 4
+disable_mode = 2
+collision_layer = 2
+script = ExtResource("5_xatft")
+
+[node name="AttackShape" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("CircleShape2D_1n7j8")
+debug_color = Color(0.94902, 0, 0.470588, 0.419608)
+
+[node name="Timer" type="Timer" parent="AttackArea2D"]
+wait_time = 0.1
+
+[node name="ExplosionVFX" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 200
+lifetime = 2.0
+explosiveness = 1.0
+randomness = 0.19
+emission_shape = 1
+emission_sphere_radius = 35.0
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 74.87
+initial_velocity_max = 112.3
+angular_velocity_min = 63.9
+angular_velocity_max = 63.9
+radial_accel_min = -3.8
+radial_accel_max = -3.8
+color_ramp = SubResource("Gradient_3h7pj")
+
+[connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_character_attack_body_entered"]
+[connection signal="timeout" from="AttackArea2D/Timer" to="AttackArea2D" method="_on_timer_timeout"]

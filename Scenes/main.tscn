@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=6 format=4 uid="uid://c3juuqfo1tbmb"]
 
-[ext_resource type="PackedScene" uid="uid://cnc5qx7ibltin" path="res://Scenes/player_char.tscn" id="1_nr1tu"]
 [ext_resource type="Texture2D" uid="uid://ba05blkoq4hdx" path="res://Assets/platformPack_tilesheet.png" id="2_1ylxg"]
+[ext_resource type="PackedScene" uid="uid://bygj3pc17mbnf" path="res://Scenes/player.tscn" id="3_5nhjn"]
+[ext_resource type="PackedScene" uid="uid://0mcgaaj1qptg" path="res://Scenes/enemy_char.tscn" id="3_l52vg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssi7d"]
 texture = ExtResource("2_1ylxg")
@@ -1020,9 +1021,12 @@ sources/0 = SubResource("TileSetAtlasSource_ssi7d")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_nr1tu")]
-position = Vector2(32, 360)
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAAAAcAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAEAAcAAAADAAAAAAAFAAcAAAADAAAAAAAGAAcAAAADAAAAAAAHAAcAAAADAAAAAAAIAAcAAAADAAAAAAAJAAcAAAADAAAAAAA=")
 tile_set = SubResource("TileSet_sqyue")
+
+[node name="EnemyChar" parent="." instance=ExtResource("3_l52vg")]
+position = Vector2(979, 523)
+
+[node name="Player" parent="." instance=ExtResource("3_5nhjn")]
+position = Vector2(64, 516)
