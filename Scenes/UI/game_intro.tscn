@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://2dftu4pgnmt8"]
+
+[ext_resource type="Script" path="res://Scenes/scenemanager.gd" id="1_dw6fi"]
+[ext_resource type="Script" path="res://Scripts/Cutscenes/cutscene_handler.gd" id="1_fkvak"]
+[ext_resource type="Shader" uid="uid://3gtymxhqjjnk" path="res://Shaders/twirl_heat_distortion.tres" id="3_3eyem"]
+[ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="4_3v2fm"]
+
+[sub_resource type="Animation" id="Animation_yieed"]
+resource_name = "cutscene_1"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SceneManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["res://Scenes/main.tscn", 0],
+"method": &"load_scene"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_56and"]
+_data = {
+"cutscene_1": SubResource("Animation_yieed")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0c7fe"]
+shader = ExtResource("3_3eyem")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bp1fc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yedbf"]
+atlas = SubResource("CanvasTexture_bp1fc")
+
+[node name="GameIntro" type="Node2D" node_paths=PackedStringArray("cutscene_player")]
+script = ExtResource("1_fkvak")
+cutscene_player = NodePath("CutscenePlayer")
+
+[node name="CutscenePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"intro_cutscene": SubResource("AnimationLibrary_56and")
+}
+
+[node name="SceneManager" type="Node2D" parent="."]
+script = ExtResource("1_dw6fi")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasModulate"]
+material = SubResource("ShaderMaterial_0c7fe")
+use_parent_material = true
+scale = Vector2(115, 65.056)
+texture = SubResource("AtlasTexture_yedbf")
+region_rect = Rect2(7.305, 0, 0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 50.0
+scale = Vector2(0.3, 0.3)
+vertical = true
+
+[node name="SkipButton" type="Button" parent="BoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3v2fm")
+text = "SKIP"
+
+[connection signal="pressed" from="BoxContainer/SkipButton" to="." method="_on_skip_button_pressed"]
