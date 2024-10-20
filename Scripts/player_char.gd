@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var max_state_queue_size:int
+@export var combo_anims:Array[String]
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
@@ -15,10 +16,16 @@ var default_state: CharacterState
 var current_state:CharacterState
 var previous_state: CharacterState
 
+var combo_queue:Array[String]
+var combo_index:int
+var previous_combo_index:int
+
 func _ready():
 	state_queue = StateQueue.new(max_state_queue_size)
 	default_state = CharacterState.new(state_type.idle, true)
 	current_state = default_state
+	combo_index = -1
+	previous_combo_index = -1
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -55,9 +62,7 @@ func _physics_process(delta):
 func _process(_delta):
 	update_state()
 	
-	if Input.is_action_just_pressed("basic_attack") and is_on_floor() and current_state.type != state_type.attack:
-		end_state()
-		enqueue_state(state_type.attack)
+	handle_attack_input()
 	
 	if state_just_entered(state_type.idle):
 		_animation_player.play("idle")
@@ -66,7 +71,8 @@ func _process(_delta):
 	if state_just_entered(state_type.jump):
 		_animation_player.play("jump")
 	if state_just_entered(state_type.attack):
-		_animation_player.play("attack")
+		combo_index = 0
+		_animation_player.play(combo_anims[combo_index])
 
 func update_state():
 	previous_state = current_state
@@ -95,5 +101,23 @@ func state_just_entered(type:state_type):
 	return current_state.type == type && previous_state.type != type
 	
 func _on_animation_player_animation_finished(anim_name:StringName):
-	if anim_name == "attack":
-		end_state(state_type.attack)
+	if combo_anims.find(anim_name) != -1:
+		previous_combo_index = combo_index
+		if combo_queue.size() > 0:
+			_animation_player.play(combo_queue.pop_front())
+		else:
+			end_state(state_type.attack)
+			combo_index = -1
+			previous_combo_index = -1
+
+func handle_attack_input():	
+	if Input.is_action_just_pressed("basic_attack") and is_on_floor():
+		if current_state.type == state_type.attack:
+			if combo_index < combo_anims.size() -1:
+				combo_index += 1
+				combo_queue.append(combo_anims[combo_index])
+			return
+		
+		end_state()
+		enqueue_state(state_type.attack)
+	
