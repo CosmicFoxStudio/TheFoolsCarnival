@@ -1,27 +1,19 @@
-[gd_scene load_steps=22 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=14 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://Scripts/UI/menu_options.gd" id="1_66hmi"]
 [ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://Scenes/UI/game_intro.tscn" id="2_kfr05"]
 [ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="2_vgjd0"]
+[ext_resource type="Texture2D" uid="uid://cnyhffrvu4svc" path="res://Assets/UI/spr_stageX2.png" id="3_uybyk"]
 [ext_resource type="Texture2D" uid="uid://yp1u8pati5sc" path="res://Assets/UI/Logo_the_fools_Carnival.png" id="4_vrhmx"]
-[ext_resource type="Shader" path="res://Shaders/heat_twirl_distortion.gdshader" id="5_7rjl2"]
-
-[sub_resource type="Gradient" id="Gradient_8j31g"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6d17l"]
-gradient = SubResource("Gradient_8j31g")
+[ext_resource type="Texture2D" uid="uid://ybuby2dkgmh5" path="res://Assets/UI/spr_curtainsX2.png" id="5_wb3cr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lo14r"]
-atlas = SubResource("GradientTexture1D_6d17l")
+atlas = ExtResource("5_wb3cr")
+region = Rect2(0, 0, 190, 360)
 
-[sub_resource type="Gradient" id="Gradient_1a2eo"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fy5br"]
-gradient = SubResource("Gradient_1a2eo")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d3vqq"]
-atlas = SubResource("GradientTexture1D_fy5br")
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6j03"]
+atlas = ExtResource("5_wb3cr")
+region = Rect2(447, 0, 193, 360)
 
 [sub_resource type="Animation" id="Animation_ywsi5"]
 length = 0.001
@@ -55,7 +47,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(576, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(385, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/3/type = "bezier"
@@ -128,7 +120,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(576, -0.25, 0, 0.25, 0, 1190, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(385, -0.25, 0, 0.25, 0, 1190, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/3/type = "bezier"
@@ -172,48 +164,38 @@ _data = {
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_01lyi"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jcrix"]
-seed = 5
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kqx5x"]
-noise = SubResource("FastNoiseLite_jcrix")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_13qy3"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqcwh"]
-resource_local_to_scene = true
-shader = ExtResource("5_7rjl2")
-shader_parameter/speed = 0.02
-shader_parameter/strength = 0.03
-shader_parameter/direction = Vector2(1, 1)
-shader_parameter/screen_texture = SubResource("ViewportTexture_13qy3")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_kqx5x")
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_hyxij"]
-
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("animPlayer")]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_66hmi")
 animPlayer = NodePath("MenuAnimationPlayer")
 gameScene = ExtResource("2_kfr05")
 
+[node name="BG_Palco" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_uybyk")
+stretch_mode = 5
+
 [node name="Title" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_top = -1.0
-offset_right = 301.0
-offset_bottom = 337.0
+offset_left = -176.0
+offset_top = 3.0
+offset_right = 176.0
+offset_bottom = 201.0
 grow_horizontal = 2
 texture = ExtResource("4_vrhmx")
 
@@ -224,14 +206,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -71.0
-offset_top = -157.0
-offset_right = 73.0
-offset_bottom = -85.0
+offset_left = -57.0
+offset_top = -135.0
+offset_right = 60.0
+offset_bottom = -77.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_vgjd0")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Start
 "
 
@@ -242,14 +224,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -71.0
-offset_right = 66.0
-offset_bottom = -11.0
+offset_left = -55.0
+offset_top = -67.0
+offset_right = 57.0
+offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_vgjd0")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Exit"
 
 [node name="Curtains" type="Node" parent="."]
@@ -258,23 +240,25 @@ text = "Exit"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -96.0
-offset_right = -480.0
-offset_bottom = 206.0
+offset_right = -384.0
+offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_lo14r")
+stretch_mode = 5
 
 [node name="RightCurtain" type="TextureRect" parent="Curtains"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 480.0
-offset_right = 96.0
-offset_bottom = 206.0
+offset_left = 385.0
+offset_right = 1.0
+offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_d3vqq")
+texture = SubResource("AtlasTexture_p6j03")
+stretch_mode = 5
+metadata/_edit_group_ = true
 
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -285,16 +269,6 @@ libraries = {
 [node name="DiegeticSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(119.5, 140.5)
 sprite_frames = SubResource("SpriteFrames_01lyi")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_yqcwh")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_hyxij")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
