@@ -4,7 +4,8 @@ extends Node2D
 @export var skipButton : Button
 
 func _ready() -> void:
-	cutscene_player.play("intro_cutscene/cutscene_1")
+	cutscene_player.play("intro_cutscene/cutscene_1") # Starts the Cutscene
+	
 func _skip() -> void:
 	# Skip scene
 	cutscene_player.seek(cutscene_player.current_animation_length,true);
