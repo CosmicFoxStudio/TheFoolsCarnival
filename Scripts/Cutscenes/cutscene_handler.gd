@@ -8,10 +8,14 @@ extends Node2D
 
 func _ready() -> void:
 	cutscene_player.play(cutsceneName) # Starts the Cutscene
+	skipButton.visible = false
 
 func _process(delta: float) -> void:
 	if(Input.is_anything_pressed() and not cutscene_player.is_playing()):
 		cutscene_player.play()
+		
+	if(Input.is_anything_pressed()):
+		skipButton.visible = true
 	
 func _pause() -> void:
 	cutscene_player.pause()

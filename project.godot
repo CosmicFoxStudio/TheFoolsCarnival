@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="GameJamplus 24-25 itsy bitsy cosmic fox"
+config/name="The Fool's Carnival"
+config/version="0.0.1"
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/UI/clown_icon.png"
 
 [autoload]
 
@@ -24,6 +25,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="res://Assets/UI/spr_cursorX2.png"
 
 [editor_plugins]
 
