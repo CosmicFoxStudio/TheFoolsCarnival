@@ -1,5 +1,7 @@
 extends Node
 
+class_name SceneManager
+
 enum LoadMode {SINGLE, ADDITIVE}
 
 
