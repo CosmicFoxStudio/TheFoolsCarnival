@@ -9,7 +9,7 @@ max_value = 10.0
 _data = [Vector2(0.00544959, 10), 0.0, 0.399843, 0, 0, Vector2(0.99455, 0.184794), -33.1772, 0.0, 0, 0]
 point_count = 2
 
-[node name="AudienceMeter" type="TextureProgressBar"]
+[node name="AudienceMeter" type="TextureProgressBar" node_paths=PackedStringArray("meterArrow")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -18,6 +18,7 @@ offset_top = 1.0
 offset_right = 87.0
 offset_bottom = 67.0
 grow_horizontal = 2
+min_value = -10.0
 max_value = 10.0
 value = 10.0
 texture_under = ExtResource("1_iu2si")
@@ -25,6 +26,7 @@ texture_progress_offset = Vector2(9, 0)
 script = ExtResource("1_a3plt")
 max_val_color = Color(1, 1, 1, 1)
 meterCurve = SubResource("Curve_60tnk")
+meterArrow = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -34,7 +36,6 @@ offset_left = 73.0
 offset_top = 33.0
 offset_right = -68.428
 offset_bottom = 58.0
-rotation = 0.00514084
 pivot_offset = Vector2(12.5382, 57.3433)
 texture = ExtResource("3_rgpex")
 expand_mode = 2
