@@ -32,7 +32,6 @@ func _process(delta: float) -> void:
 	
 	meterArrow.rotation_degrees = (meter * 5)
 	meterArrow.rotation_degrees = clampf(meterArrow.rotation_degrees, -50,50)
-	print(meterArrow.rotation_degrees)
 	
 	if(meter <= min_value && not meterZero):
 		on_meter_reached_zero.emit()

@@ -30,13 +30,16 @@ func _movement(delta) -> void:
 
 	Sprite.flip_h = target_normalized.x < 0 # Sets the direction the enemy will walk
 	
-	if distance <= detection_radius and current_state.type == state_type.idle: # Walk when the Player is near
+	if distance <= detection_radius and current_state.type == state_type.idle:
+		state_queue.enqueue(state_type.walk)
+		_end_state(state_type.idle) # Walk when the Player is near
+		
+	if current_state.type == state_type.walk:
 		apply_force(target_normalized * walk_speed)
-	else:
+	elif current_state.type == state_type.attack:
 		apply_force(linear_velocity * -1)
 	
 	if(distance <= attack_trigger_radius):
-		print(distance)
 		_end_state(state_type.any)
 		state_queue.enqueue(state_type.attack)
 

@@ -24,6 +24,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/resizable=false
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://Assets/UI/spr_cursorX2.png"
 
