@@ -1,12 +1,162 @@
-[gd_scene load_steps=10 format=3 uid="uid://2dftu4pgnmt8"]
+[gd_scene load_steps=20 format=3 uid="uid://2dftu4pgnmt8"]
 
 [ext_resource type="Script" path="res://Scenes/scenemanager.gd" id="1_dw6fi"]
 [ext_resource type="Script" path="res://Scripts/Cutscenes/cutscene_handler.gd" id="1_fkvak"]
-[ext_resource type="Shader" uid="uid://3gtymxhqjjnk" path="res://Shaders/twirl_heat_distortion.tres" id="3_3eyem"]
+[ext_resource type="Texture2D" uid="uid://b33wjhtgfauwj" path="res://Assets/UI/intro1.png" id="3_b8rl1"]
 [ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="4_3v2fm"]
+[ext_resource type="Texture2D" uid="uid://cfqmo20677co2" path="res://Assets/UI/cutscenes/spr_intro_2_porriet_afraidX2.png" id="4_uy0rb"]
+[ext_resource type="Texture2D" uid="uid://d166lar76rpdv" path="res://Assets/UI/intro_template.png" id="4_w2ng7"]
+[ext_resource type="Texture2D" uid="uid://st0pp7ds5r8u" path="res://Assets/UI/cutscenes/intro/spr_bg_introX2.png" id="7_444cb"]
+[ext_resource type="Texture2D" uid="uid://dhtmvtyc0g0ek" path="res://Assets/UI/cutscenes/intro/spr_intro_frameX2.png" id="8_15t56"]
+[ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://Assets/UI/Diamond Transition/Diamond Transition/spr_transition_diamond.tres" id="8_v0xgi"]
+[ext_resource type="Texture2D" uid="uid://c5y3gg42nxo6d" path="res://Assets/UI/cutscenes/spr_intro_2_porrietX2.png" id="9_xacjl"]
+[ext_resource type="Texture2D" uid="uid://bxajfmigdocyp" path="res://Assets/UI/cutscenes/spr_intro_2_ringmasterX2.png" id="11_bkn3x"]
+[ext_resource type="Texture2D" uid="uid://4lvuraupnc0k" path="res://Assets/Audio/intro_3 trapped.png" id="11_s75vs"]
+[ext_resource type="Texture2D" uid="uid://ct4h6r1l2ibq8" path="res://Assets/UI/cutscenes/spr_intro_2_jesterX2.png" id="12_xjhou"]
+[ext_resource type="AudioStream" uid="uid://dx1qwopialsi7" path="res://Assets/Audio/tfc_intro.ogg" id="13_5d4uh"]
+
+[sub_resource type="Animation" id="Animation_alxy0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeAnim:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DialogueBoxLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tortor sem, scelerisque id pellentesque ac, vehicula quis neque. Sed dignissim lacus id tortor maximus, in euismod nulla pharetra. Donec at porttitor lectus, a faucibus massa. Nunc ante dui, malesuada sit amet varius a, dapibus at arcu. Nullam bibendum augue quis mauris"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasModulate/IntroBox:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasModulate/FullCutscene:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_w2ng7")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasModulate/IntroBox/PorrietSprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_xacjl")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasModulate/IntroBox:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasModulate/IntroBox/Ringmaster:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasModulate/IntroBox/Jester:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CanvasModulate/IntroBox/PorrietSprite:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CanvasModulate/IntroBox/Trapped:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rn0v1"]
+_data = {
+"RESET": SubResource("Animation_alxy0")
+}
 
 [sub_resource type="Animation" id="Animation_yieed"]
 resource_name = "cutscene_1"
+length = 8.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14,12 +164,169 @@ tracks/0/path = NodePath("SceneManager")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["res://Scenes/main.tscn", 0],
 "method": &"load_scene"
 }]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2.63333, 6.03333, 7.76667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_pause"
+}, {
+"args": [],
+"method": &"_pause"
+}, {
+"args": [],
+"method": &"_pause"
+}, {
+"args": [],
+"method": &"_pause"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasModulate:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FadeAnim:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 3.93333, 4.2, 4.4)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DialogueBoxLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2, 3.56667, 5.53333, 6.73333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Era uma vez... Um reino onde o espetaculo nunca parava e o riso era a lei.", "Ainda que muito jovem, pierrot sonhava em comandar seu proprio circo. Mas a paz nao duraria...", "
+
+", "Sua família foi capturada, oh nao...! E agora? ", "Elu deve dar o show de sua vida ou encarar o seu fim e a todos que ama.
+"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasModulate/IntroBox/PorrietSprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 4.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("9_xacjl"), ExtResource("4_uy0rb")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasModulate/IntroBox/Ringmaster:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3, 4.2, 6.76667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasModulate/IntroBox/Jester:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(4.2, 6.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasModulate/IntroBox:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CanvasModulate/FullCutscene:texture")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_b8rl1")]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CanvasModulate/IntroBox:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(4.2, 4.26667, 4.33333, 4.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("CanvasModulate/IntroBox/PorrietSprite:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 6.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CanvasModulate/IntroBox/Trapped:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 6.73333, 6.76667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56and"]
@@ -27,20 +334,21 @@ _data = {
 "cutscene_1": SubResource("Animation_yieed")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0c7fe"]
-shader = ExtResource("3_3eyem")
+[sub_resource type="LabelSettings" id="LabelSettings_cdirn"]
+font_size = 11
+font_color = Color(1, 0.945098, 0.0705882, 1)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_bp1fc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yedbf"]
-atlas = SubResource("CanvasTexture_bp1fc")
-
-[node name="GameIntro" type="Node2D" node_paths=PackedStringArray("cutscene_player")]
+[node name="GameIntro" type="Node2D" node_paths=PackedStringArray("cutscene_player", "nextButton", "skipButton", "dialogueLabel")]
 script = ExtResource("1_fkvak")
 cutscene_player = NodePath("CutscenePlayer")
+nextButton = NodePath("SideButtons/NextButton")
+skipButton = NodePath("SideButtons/SkipButton")
+dialogueLabel = NodePath("DialogueBoxLabel")
+cutsceneName = "intro_cutscene/cutscene_1"
 
 [node name="CutscenePlayer" type="AnimationPlayer" parent="."]
 libraries = {
+"": SubResource("AnimationLibrary_rn0v1"),
 "intro_cutscene": SubResource("AnimationLibrary_56and")
 }
 
@@ -48,28 +356,98 @@ libraries = {
 script = ExtResource("1_dw6fi")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+show_behind_parent = true
+z_index = -1
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasModulate"]
-material = SubResource("ShaderMaterial_0c7fe")
+[node name="FullCutscene" type="Sprite2D" parent="CanvasModulate"]
 use_parent_material = true
-scale = Vector2(115, 65.056)
-texture = SubResource("AtlasTexture_yedbf")
+scale = Vector2(2, 2)
+texture = ExtResource("4_w2ng7")
 region_rect = Rect2(7.305, 0, 0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(10, 10)
+[node name="IntroBox" type="Sprite2D" parent="CanvasModulate"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_444cb")
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
-offset_left = 35.0
-offset_top = 20.0
-offset_right = 100.0
-offset_bottom = 50.0
+[node name="Frame" type="Sprite2D" parent="CanvasModulate/IntroBox"]
+scale = Vector2(2, 2)
+texture = ExtResource("8_15t56")
+
+[node name="PorrietSprite" type="Sprite2D" parent="CanvasModulate/IntroBox"]
+scale = Vector2(2, 2)
+texture = ExtResource("9_xacjl")
+
+[node name="Ringmaster" type="Sprite2D" parent="CanvasModulate/IntroBox"]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("11_bkn3x")
+
+[node name="Jester" type="Sprite2D" parent="CanvasModulate/IntroBox"]
+scale = Vector2(2, 2)
+texture = ExtResource("12_xjhou")
+
+[node name="Trapped" type="Sprite2D" parent="CanvasModulate/IntroBox"]
+position = Vector2(0, -148)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("11_s75vs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="SideButtons" type="BoxContainer" parent="."]
+clip_contents = true
+layout_direction = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 133.0
+offset_right = 574.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.3, 0.3)
+alignment = 1
 vertical = true
 
-[node name="SkipButton" type="Button" parent="BoxContainer"]
+[node name="NextButton" type="Button" parent="SideButtons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_3v2fm")
+theme_override_font_sizes/font_size = 72
+text = "NEXT"
+
+[node name="SkipButton" type="Button" parent="SideButtons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_3v2fm")
+theme_override_font_sizes/font_size = 85
 text = "SKIP"
 
-[connection signal="pressed" from="BoxContainer/SkipButton" to="." method="_on_skip_button_pressed"]
+[node name="FadeAnim" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("8_v0xgi")
+
+[node name="DialogueBoxLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -273.5
+offset_top = 24.0
+offset_right = 273.5
+offset_bottom = 169.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.74902, 0, 1)
+theme_override_colors/font_outline_color = Color(0.803922, 0.0392157, 0.172549, 1)
+theme_override_fonts/font = ExtResource("4_3v2fm")
+theme_override_font_sizes/font_size = 2
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tortor sem, scelerisque id pellentesque ac, vehicula quis neque. Sed dignissim lacus id tortor maximus, in euismod nulla pharetra. Donec at porttitor lectus, a faucibus massa. Nunc ante dui, malesuada sit amet varius a, dapibus at arcu. Nullam bibendum augue quis mauris"
+label_settings = SubResource("LabelSettings_cdirn")
+autowrap_mode = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_5d4uh")
+autoplay = true
+
+[connection signal="pressed" from="SideButtons/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="SideButtons/SkipButton" to="." method="_on_skip_button_pressed"]
