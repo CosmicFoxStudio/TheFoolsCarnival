@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=13 format=3 uid="uid://c3juuqfo1tbmb"]
 
 [ext_resource type="Texture2D" uid="uid://cnyhffrvu4svc" path="res://Assets/UI/spr_stageX2.png" id="1_xfw7y"]
-[ext_resource type="PackedScene" uid="uid://dl6heu77klscw" path="res://Scenes/player_char.tscn" id="3_ght13"]
+[ext_resource type="PackedScene" uid="uid://cnc5qx7ibltin" path="res://Scenes/player_char.tscn" id="3_ght13"]
 [ext_resource type="PackedScene" uid="uid://binsk6qu3qi5r" path="res://Scenes/enemy_char.tscn" id="3_l52vg"]
 [ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://Scenes/UI/audience_meter.tscn" id="4_smnpq"]
 [ext_resource type="Script" path="res://Scenes/director.gd" id="5_t6gyq"]
 [ext_resource type="Texture2D" uid="uid://ybuby2dkgmh5" path="res://Assets/UI/spr_curtainsX2.png" id="6_tp4g0"]
 [ext_resource type="PackedScene" uid="uid://5a4vbo8v467s" path="res://Scenes/enemy_choro.tscn" id="7_888ti"]
+[ext_resource type="PackedScene" uid="uid://0a1q4an4fuqb" path="res://Scenes/UI/game_over.tscn" id="7_qjwqn"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ge8dj"]
 b = Vector2(0, 408)
@@ -74,10 +75,18 @@ collision_mask = 3
 [node name="Collision" type="CollisionShape2D" parent="Stage_Limits/StageLimitsRight2"]
 shape = SubResource("SegmentShape2D_h8grb")
 
-[node name="Director" type="Node" parent="." node_paths=PackedStringArray("instances", "audience_meter")]
+[node name="Director" type="Node" parent="." node_paths=PackedStringArray("instances", "audience_meter", "player", "spawnPositions", "spawnTimer")]
 script = ExtResource("5_t6gyq")
 instances = [NodePath("../BalloonEnemy"), NodePath("../EnemyChoro")]
 audience_meter = NodePath("../AudienceMeter")
+player = NodePath("../Player")
+enemiesToSpawn = Array[PackedScene]([ExtResource("7_888ti"), ExtResource("3_l52vg")])
+spawnPositions = [NodePath("../SpawnPoint")]
+spawnTimer = NodePath("../Timer")
+gameOverScene = ExtResource("7_qjwqn")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(300, 35)
 
 [node name="EnemyChoro" parent="." instance=ExtResource("7_888ti")]
 position = Vector2(363, 259)
@@ -85,5 +94,8 @@ position = Vector2(363, 259)
 [node name="Foreground" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
 texture = ExtResource("6_tp4g0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
 
 [connection signal="lower_approval" from="Player" to="AudienceMeter" method="_on_player_lower_approval"]
