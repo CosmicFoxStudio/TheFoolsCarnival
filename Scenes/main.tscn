@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=18 format=3 uid="uid://c3juuqfo1tbmb"]
 
 [ext_resource type="Texture2D" uid="uid://cnyhffrvu4svc" path="res://Assets/UI/spr_stageX2.png" id="1_xfw7y"]
 [ext_resource type="PackedScene" uid="uid://cnc5qx7ibltin" path="res://Scenes/player_char.tscn" id="3_ght13"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ybuby2dkgmh5" path="res://Assets/UI/spr_curtainsX2.png" id="6_tp4g0"]
 [ext_resource type="PackedScene" uid="uid://5a4vbo8v467s" path="res://Scenes/enemy_choro.tscn" id="7_888ti"]
 [ext_resource type="PackedScene" uid="uid://0a1q4an4fuqb" path="res://Scenes/UI/game_over.tscn" id="7_qjwqn"]
+[ext_resource type="Texture2D" uid="uid://cuvrt8hhvv2mc" path="res://Assets/UI/ingame/Plateia_animation.png" id="9_je4c5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ge8dj"]
 b = Vector2(0, 408)
@@ -22,6 +23,47 @@ b = Vector2(640, 0)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_h8grb"]
 a = Vector2(0, 296)
 b = Vector2(641, 296)
+
+[sub_resource type="Animation" id="Animation_bvy1a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlateiaAnimation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8hc3"]
+_data = {
+"RESET": SubResource("Animation_bvy1a")
+}
+
+[sub_resource type="Animation" id="Animation_uwlkm"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlateiaAnimation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.1, 0.166667, 0.233333, 0.3, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yioy3"]
+_data = {
+"cheering": SubResource("Animation_uwlkm")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -97,5 +139,18 @@ texture = ExtResource("6_tp4g0")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
+
+[node name="PlateiaLayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w8hc3"),
+"plateia": SubResource("AnimationLibrary_yioy3")
+}
+
+[node name="PlateiaAnimation" type="Sprite2D" parent="."]
+position = Vector2(314.06, 178)
+scale = Vector2(2, 2)
+texture = ExtResource("9_je4c5")
+hframes = 3
+frame = 2
 
 [connection signal="lower_approval" from="Player" to="AudienceMeter" method="_on_player_lower_approval"]

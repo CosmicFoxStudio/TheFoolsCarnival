@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dhtmvtyc0g0ek" path="res://Assets/UI/cutscenes/intro/spr_intro_frameX2.png" id="8_15t56"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://Assets/UI/Diamond Transition/Diamond Transition/spr_transition_diamond.tres" id="8_v0xgi"]
 [ext_resource type="Texture2D" uid="uid://c5y3gg42nxo6d" path="res://Assets/UI/cutscenes/spr_intro_2_porrietX2.png" id="9_xacjl"]
+[ext_resource type="Texture2D" uid="uid://8kup5yyqj7n1" path="res://Assets/UI/intro_3.png" id="11_6x8xc"]
 [ext_resource type="Texture2D" uid="uid://bxajfmigdocyp" path="res://Assets/UI/cutscenes/spr_intro_2_ringmasterX2.png" id="11_bkn3x"]
-[ext_resource type="Texture2D" uid="uid://4lvuraupnc0k" path="res://Assets/Audio/intro_3 trapped.png" id="11_s75vs"]
 [ext_resource type="Texture2D" uid="uid://ct4h6r1l2ibq8" path="res://Assets/UI/cutscenes/spr_intro_2_jesterX2.png" id="12_xjhou"]
 [ext_resource type="AudioStream" uid="uid://dx1qwopialsi7" path="res://Assets/Audio/tfc_intro.ogg" id="13_5d4uh"]
 
@@ -387,9 +387,8 @@ scale = Vector2(2, 2)
 texture = ExtResource("12_xjhou")
 
 [node name="Trapped" type="Sprite2D" parent="CanvasModulate/IntroBox"]
-position = Vector2(0, -148)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("11_s75vs")
+scale = Vector2(2, 2)
+texture = ExtResource("11_6x8xc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
