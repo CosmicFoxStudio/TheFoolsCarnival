@@ -16,7 +16,7 @@ func _set_enemyResource(res:EnemyResource):
 @export var attack_trigger_radius := 1.0
 
 @export var attack_area : AttackArea2D
-#const attack_area := preload("res://Scripts/char_attack.gd")
+
 
 var motion : Vector2
 
@@ -36,17 +36,16 @@ var x_direction := 0.0
 var walkTimer := 0.0
 
 func _ready() -> void:
-	randomize()
-	state_queue = StateQueue.new(2)
+	state_queue = StateQueue.new(3)
 	default_state = CharacterState.new(state_type.idle, true)
 	current_state = default_state
 
 func _process(delta: float) -> void:
-	
 	_animations()
 	_flip()
 	
 func _physics_process(delta: float) -> void:
+	update_state()
 	_movement(delta)
 	move_and_slide()
 	
@@ -64,15 +63,17 @@ func _movement(delta) -> void:
 	var distance = sqrt(target.length())
 	
 	x_direction = target_normalized.x; # Sets the direction the enemy will walk
-	print(distance)
+
 	walkTimer += delta
 	if(walkTimer > randi_range(2,5)):
 		walkTimer = 0
 		
-	if(distance <= (detection_radius * detection_radius)): # Walk when the Player is near
+	if(distance <= detection_radius * detection_radius): # Walk when the Player is near
 		motion = Vector2(x_direction * enemyResource.speed * 10 * delta,velocity.y)
+		enqueue_state(state_type.walk)
 		
-	if(distance <= (attack_trigger_radius * attack_trigger_radius)):
+	if(distance <= attack_trigger_radius * attack_trigger_radius):
+		motion = Vector2(0.1 * delta,velocity.y)
 		enqueue_state(state_type.attack)
 	
 	velocity = motion
@@ -86,7 +87,6 @@ func _flip() -> void:
 	elif motion.x > 0: enemySprite.flip_h = false
 	
 func _attack() -> void:
-	attack_area.process_mode = Node.PROCESS_MODE_INHERIT
 	attack_area.set_attack_damage(enemyResource.damage)
 	
 func _take_damage(amount) -> void:
@@ -100,14 +100,12 @@ func _take_damage(amount) -> void:
 	pass
 
 func _animations() -> void:
-	update_state()
+	
 	
 	if current_state.type == state_type.idle:
 		animationPlayer.play("idle")
 	if current_state.type == state_type.walk:
 		animationPlayer.play("walk")
-	if current_state.type == state_type.jump:
-		animationPlayer.play("jump")
 	if current_state.type == state_type.attack:
 		animationPlayer.play("attack")
 	

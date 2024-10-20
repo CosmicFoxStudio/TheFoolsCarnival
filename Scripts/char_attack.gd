@@ -14,4 +14,5 @@ func _on_character_attack_body_entered(body: Node2D) -> void:
 	body._take_damage(attack_damage)
 
 func _on_timer_timeout() -> void:
-	process_mode = PROCESS_MODE_DISABLED
+	#process_mode = PROCESS_MODE_DISABLED[
+	pass

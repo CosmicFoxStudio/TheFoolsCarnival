@@ -1025,8 +1025,9 @@ sources/0 = SubResource("TileSetAtlasSource_ssi7d")
 tile_map_data = PackedByteArray("AAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAAAAcAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAEAAcAAAADAAAAAAAFAAcAAAADAAAAAAAGAAcAAAADAAAAAAAHAAcAAAADAAAAAAAIAAcAAAADAAAAAAAJAAcAAAADAAAAAAA=")
 tile_set = SubResource("TileSet_sqyue")
 
-[node name="EnemyChar" parent="." instance=ExtResource("3_l52vg")]
-position = Vector2(979, 523)
-
 [node name="Player" parent="." instance=ExtResource("3_5nhjn")]
 position = Vector2(64, 516)
+
+[node name="BalloonEnemy" parent="." instance=ExtResource("3_l52vg")]
+position = Vector2(1108, 532)
+attack_trigger_radius = 4.5
