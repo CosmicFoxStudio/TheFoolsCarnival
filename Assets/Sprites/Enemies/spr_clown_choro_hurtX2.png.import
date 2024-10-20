@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba05blkoq4hdx"
-path="res://.godot/imported/platformPack_tilesheet.png-ee17a155660ea850126d8c8aa0137e3b.ctex"
+uid="uid://dxivvbrfwryl6"
+path="res://.godot/imported/spr_clown_choro_hurtX2.png-c931208e5633473a486eb92804390070.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/platformPack_tilesheet.png"
-dest_files=["res://.godot/imported/platformPack_tilesheet.png-ee17a155660ea850126d8c8aa0137e3b.ctex"]
+source_file="res://Assets/Sprites/Enemies/spr_clown_choro_hurtX2.png"
+dest_files=["res://.godot/imported/spr_clown_choro_hurtX2.png-c931208e5633473a486eb92804390070.ctex"]
 
 [params]
 

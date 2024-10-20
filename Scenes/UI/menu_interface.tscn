@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=22 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://Scripts/UI/menu_options.gd" id="1_66hmi"]
 [ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://Scenes/UI/game_intro.tscn" id="2_kfr05"]
 [ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="2_vgjd0"]
+[ext_resource type="Texture2D" uid="uid://yp1u8pati5sc" path="res://Assets/UI/Logo_the_fools_Carnival.png" id="4_vrhmx"]
+[ext_resource type="Shader" path="res://Shaders/heat_twirl_distortion.gdshader" id="5_7rjl2"]
 
 [sub_resource type="Gradient" id="Gradient_8j31g"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -142,7 +144,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "bezier"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("Curtains/LeftCurtain:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -153,7 +155,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "bezier"
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/path = NodePath("Curtains/RightCurtain:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -170,6 +172,27 @@ _data = {
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_01lyi"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jcrix"]
+seed = 5
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kqx5x"]
+noise = SubResource("FastNoiseLite_jcrix")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_13qy3"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqcwh"]
+resource_local_to_scene = true
+shader = ExtResource("5_7rjl2")
+shader_parameter/speed = 0.02
+shader_parameter/strength = 0.03
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/screen_texture = SubResource("ViewportTexture_13qy3")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_kqx5x")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hyxij"]
+
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("animPlayer")]
 layout_direction = 1
 layout_mode = 3
@@ -182,6 +205,18 @@ script = ExtResource("1_66hmi")
 animPlayer = NodePath("MenuAnimationPlayer")
 gameScene = ExtResource("2_kfr05")
 
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = -1.0
+offset_right = 301.0
+offset_bottom = 337.0
+grow_horizontal = 2
+texture = ExtResource("4_vrhmx")
+
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -189,9 +224,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -59.0
+offset_left = -71.0
 offset_top = -157.0
-offset_right = 61.0
+offset_right = 73.0
 offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -223,8 +258,7 @@ text = "Exit"
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -595.0
-offset_right = -1171.0
+offset_right = -576.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -234,8 +268,7 @@ texture = SubResource("AtlasTexture_lo14r")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1190.0
-offset_right = 614.0
+offset_left = 576.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -250,6 +283,16 @@ libraries = {
 [node name="DiegeticSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(119.5, 140.5)
 sprite_frames = SubResource("SpriteFrames_01lyi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_yqcwh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_hyxij")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
