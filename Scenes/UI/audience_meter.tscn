@@ -1,34 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1rr4cb6qbteb"]
+[gd_scene load_steps=5 format=3 uid="uid://d1rr4cb6qbteb"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalGameElements/audience_meter.gd" id="1_a3plt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jxfn"]
-bg_color = Color(1, 1, 1, 1)
-border_color = Color(0.994095, 0, 0.347329, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[ext_resource type="Texture2D" uid="uid://c4rr51rb6878r" path="res://Assets/UI/spr_drama_meterX2.png" id="1_iu2si"]
+[ext_resource type="Texture2D" uid="uid://bg870xvf0k2vu" path="res://Assets/UI/spr_arrowX2.png" id="3_rgpex"]
 
 [sub_resource type="Curve" id="Curve_60tnk"]
 max_value = 10.0
 _data = [Vector2(0.00544959, 10), 0.0, 0.399843, 0, 0, Vector2(0.99455, 0.184794), -33.1772, 0.0, 0, 0]
 point_count = 2
 
-[node name="AudienceMeter" type="ProgressBar"]
+[node name="AudienceMeter" type="TextureProgressBar"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 476.0
-offset_top = 38.0
-offset_right = 677.0
-offset_bottom = 78.0
+offset_left = -85.0
+offset_top = 1.0
+offset_right = 87.0
+offset_bottom = 67.0
 grow_horizontal = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_0jxfn")
 max_value = 10.0
 value = 10.0
-show_percentage = false
+texture_under = ExtResource("1_iu2si")
+texture_progress_offset = Vector2(9, 0)
 script = ExtResource("1_a3plt")
 max_val_color = Color(1, 1, 1, 1)
 meterCurve = SubResource("Curve_60tnk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.828
+offset_left = 73.0
+offset_top = 33.0
+offset_right = -68.428
+offset_bottom = 58.0
+rotation = 0.00514084
+pivot_offset = Vector2(12.5382, 57.3433)
+texture = ExtResource("3_rgpex")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]

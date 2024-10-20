@@ -45,7 +45,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AttackArea2D/AttackShape:shape")
+tracks/2/path = NodePath("AttackArea2D/AttackAreaShape:shape")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -142,7 +142,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AttackArea2D/AttackShape:shape")
+tracks/3/path = NodePath("AttackArea2D/AttackAreaShape:shape")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -273,7 +273,6 @@ linear_damp = 0.5
 script = ExtResource("1_qtcrx")
 enemyResource = ExtResource("2_n527v")
 animationPlayer = NodePath("AnimationPlayer")
-score_value = 10
 attack_trigger_radius = 3.5
 attack_area = NodePath("AttackArea2D")
 
@@ -298,7 +297,7 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("5_xatft")
 
-[node name="AttackShape" type="CollisionShape2D" parent="AttackArea2D"]
+[node name="AttackAreaShape" type="CollisionShape2D" parent="AttackArea2D"]
 shape = SubResource("CircleShape2D_1n7j8")
 disabled = true
 debug_color = Color(0.94902, 0, 0.470588, 0.419608)
