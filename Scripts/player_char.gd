@@ -1,13 +1,18 @@
 extends CharacterBody2D
 
+signal lower_approval(value:int)
+
 @export var max_state_queue_size:int
 @export var combo_anims:Array[String]
+
+@export var director_node:Director
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
 
-@onready var _animation_player = $AnimationPlayer
-@onready var _sprite2d = $Sprite2D
+@onready var _animation_player:AnimationPlayer = $AnimationPlayer
+@onready var _sprite2d:Sprite2D = $Sprite2D
+@onready var _attack_collision:Area2D = $AttackCollision
 
 const state_type = preload("res://Scripts/state_type_enum.gd").state_type
 
@@ -26,7 +31,13 @@ func _ready():
 	current_state = default_state
 	combo_index = -1
 	previous_combo_index = -1
-
+	for body in director_node.instances:
+		add_collision_exception_with(body)
+		if(body.get_collision_layer_value(2)):
+			var enemy:EnemyBase = body as EnemyBase
+			var delta = body.position - position
+			_attack_collision.connect("body_entered", _on_hit_enemy)
+			
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -120,4 +131,11 @@ func handle_attack_input():
 		
 		end_state()
 		enqueue_state(state_type.attack)
+	
+func take_damage():
+	emit_signal("lower_approval", 1)
+	
+func _on_hit_enemy(body:Node2D):
+	var enemy = body as EnemyBase
+	enemy._on_character_push((body.position - position).normalized(), 800)
 	

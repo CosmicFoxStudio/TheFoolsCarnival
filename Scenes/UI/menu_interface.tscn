@@ -255,20 +255,22 @@ text = "Exit"
 [node name="Curtains" type="Node" parent="."]
 
 [node name="LeftCurtain" type="TextureRect" parent="Curtains"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -576.0
+offset_left = -96.0
+offset_right = -480.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_lo14r")
 
 [node name="RightCurtain" type="TextureRect" parent="Curtains"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 576.0
+offset_left = 480.0
+offset_right = 96.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
