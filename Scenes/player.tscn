@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bygj3pc17mbnf"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
-[ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/platformerPack_character.png" id="2_0pim1"]
+[ext_resource type="Texture2D" uid="uid://cjw1h07ogg0e2" path="res://Assets/Sprites/Placeholders/platformerPack_character.png" id="2_0pim1"]
 
 [sub_resource type="Animation" id="Animation_ymqpu"]
 length = 0.001

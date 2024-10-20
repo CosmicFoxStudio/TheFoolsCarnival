@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://0mcgaaj1qptg"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/ballon_enemy.gd" id="1_qtcrx"]
-[ext_resource type="Texture2D" uid="uid://bb6qswdpyw44u" path="res://Assets/Enemies/Placeholders/leadbloon_sheet.png" id="2_lv1pr"]
+[ext_resource type="Texture2D" uid="uid://bb6qswdpyw44u" path="res://Assets/Sprites/Placeholders/leadbloon_sheet.png" id="2_lv1pr"]
 [ext_resource type="Resource" uid="uid://dev3b53hvl70i" path="res://Resources/Enemies/DogBalloon.tres" id="2_n527v"]
 [ext_resource type="Script" path="res://Scripts/Enemies/ballon_enemy_attack.gd" id="5_xatft"]
 

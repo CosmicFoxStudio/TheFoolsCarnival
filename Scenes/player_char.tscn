@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://cnc5qx7ibltin"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.gd" id="1_t0eug"]
-[ext_resource type="Texture2D" uid="uid://grp00iy427yr" path="res://Assets/Sprites/player_character_idle.tres" id="2_h0ufs"]
-[ext_resource type="Texture2D" uid="uid://bdgnud8vwaje6" path="res://Assets/Sprites/player_character_attack.tres" id="3_dbtq3"]
-[ext_resource type="Texture2D" uid="uid://dbxub0sjgc8fy" path="res://Assets/Sprites/player_character_walk.tres" id="4_823nu"]
-[ext_resource type="Texture2D" uid="uid://orph6xwen8g0" path="res://Assets/Sprites/player_character_jump.tres" id="4_hmpah"]
-[ext_resource type="Texture2D" uid="uid://djqupn15n86qr" path="res://Assets/Sprites/player_character_strong_attack.tres" id="6_3pa3s"]
+[ext_resource type="Texture2D" uid="uid://grp00iy427yr" path="res://Assets/Sprites/Placeholders/player_character_idle.tres" id="2_h0ufs"]
+[ext_resource type="Texture2D" uid="uid://bdgnud8vwaje6" path="res://Assets/Sprites/Placeholders/player_character_attack.tres" id="3_dbtq3"]
+[ext_resource type="Texture2D" uid="uid://dbxub0sjgc8fy" path="res://Assets/Sprites/Placeholders/player_character_walk.tres" id="4_823nu"]
+[ext_resource type="Texture2D" uid="uid://orph6xwen8g0" path="res://Assets/Sprites/Placeholders/player_character_jump.tres" id="4_hmpah"]
+[ext_resource type="Texture2D" uid="uid://djqupn15n86qr" path="res://Assets/Sprites/Placeholders/player_character_strong_attack.tres" id="6_3pa3s"]
 
 [sub_resource type="Animation" id="Animation_ymqpu"]
 length = 0.001
@@ -194,48 +194,6 @@ tracks/2/keys = {
 "values": [ExtResource("4_hmpah")]
 }
 
-[sub_resource type="Animation" id="Animation_h3mn7"]
-resource_name = "walk"
-length = 0.4
-loop_mode = 1
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_823nu")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-
 [sub_resource type="Animation" id="Animation_1dxbc"]
 resource_name = "strong_attack"
 length = 0.6
@@ -287,6 +245,48 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 4]
+}
+
+[sub_resource type="Animation" id="Animation_h3mn7"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_823nu")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fb24e"]
