@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=18 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://Scripts/UI/menu_options.gd" id="1_66hmi"]
 [ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://Scenes/UI/game_intro.tscn" id="2_kfr05"]
@@ -6,16 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cnyhffrvu4svc" path="res://Assets/UI/spr_stageX2.png" id="3_uybyk"]
 [ext_resource type="Texture2D" uid="uid://yp1u8pati5sc" path="res://Assets/UI/Logo_the_fools_Carnival.png" id="4_vrhmx"]
 [ext_resource type="Texture2D" uid="uid://ybuby2dkgmh5" path="res://Assets/UI/spr_curtainsX2.png" id="5_wb3cr"]
+[ext_resource type="Texture2D" uid="uid://boifbsh7bytvo" path="res://Assets/UI/tent_left/tent_left1.png" id="7_25kia"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://Assets/UI/Diamond Transition/Diamond Transition/spr_transition_diamond.tres" id="7_cagvw"]
+[ext_resource type="Texture2D" uid="uid://d1x35quadmma0" path="res://Assets/UI/tent_right/tent_right1.png" id="8_0f1jf"]
 [ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://Assets/Audio/tfc_menu.ogg" id="8_k1cjw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lo14r"]
-atlas = ExtResource("5_wb3cr")
-region = Rect2(0, 0, 190, 360)
+[ext_resource type="Texture2D" uid="uid://bt0csr6gkchx4" path="res://Assets/UI/tent_decorationX2.png" id="9_emrf2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p6j03"]
-atlas = ExtResource("5_wb3cr")
-region = Rect2(447, 0, 193, 360)
+atlas = ExtResource("8_0f1jf")
 
 [sub_resource type="Animation" id="Animation_ywsi5"]
 length = 0.001
@@ -108,6 +106,17 @@ tracks/7/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fgekc"]
 _data = {
@@ -133,9 +142,9 @@ tracks/1/path = NodePath("Curtains/LeftCurtain:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -145,7 +154,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(385, -0.25, 0, 0.25, 0, 1190, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 595, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/3/type = "bezier"
@@ -155,9 +164,9 @@ tracks/3/path = NodePath("Curtains/RightCurtain:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 tracks/4/type = "bezier"
 tracks/4/imported = false
@@ -180,6 +189,28 @@ tracks/5/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Curtains/TentDecorationX2:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(354, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 1),
+"points": PackedFloat32Array(180, -0.25, 0, 0.25, 0, -25, 0, 0, 0, 0),
+"times": PackedFloat32Array(0.4, 1)
 }
 
 [sub_resource type="Animation" id="Animation_m4pnx"]
@@ -233,6 +264,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_uybyk")
@@ -243,10 +276,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -176.0
-offset_top = 3.0
-offset_right = 176.0
-offset_bottom = 201.0
+offset_left = -210.0
+offset_top = -16.0
+offset_right = 210.0
+offset_bottom = 220.0
 grow_horizontal = 2
 texture = ExtResource("4_vrhmx")
 
@@ -287,15 +320,21 @@ text = "Exit"
 
 [node name="Curtains" type="Node" parent="."]
 
+[node name="StaticCurtains" type="TextureRect" parent="Curtains"]
+visible = false
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("5_wb3cr")
+
 [node name="LeftCurtain" type="TextureRect" parent="Curtains"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -384.0
+offset_right = 80.0
 offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_lo14r")
+texture = ExtResource("7_25kia")
 stretch_mode = 5
 
 [node name="RightCurtain" type="TextureRect" parent="Curtains"]
@@ -303,13 +342,16 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 385.0
-offset_right = 1.0
+offset_right = 465.0
 offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_p6j03")
 stretch_mode = 5
-metadata/_edit_group_ = true
+
+[node name="TentDecorationX2" type="Sprite2D" parent="Curtains"]
+position = Vector2(354, 0)
+texture = ExtResource("9_emrf2")
 
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -318,6 +360,7 @@ libraries = {
 }
 
 [node name="FadeAnimSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 modulate = Color(0, 0, 0, 0)
 top_level = true
 position = Vector2(320, 180)

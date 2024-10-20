@@ -12,7 +12,7 @@ config_version=5
 
 config/name="The Fool's Carnival"
 config/version="0.0.1"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/UI/menu_interface.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/UI/clown_icon.png"
 
