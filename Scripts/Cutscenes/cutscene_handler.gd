@@ -2,6 +2,8 @@ extends Node2D
 
 @export var cutscene_player: AnimationPlayer
 @export var skipButton : Button
+@export var dialogueLabel : Label
+
 @export var cutsceneName : String
 
 func _ready() -> void:

@@ -56,23 +56,6 @@ _data = {
 "RESET": SubResource("Animation_og42q")
 }
 
-[sub_resource type="Animation" id="Animation_dnse4"]
-length = 2.5
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SceneManager")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(2.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["res://Scenes/main.tscn", 0],
-"method": &"load_scene"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_svlv4"]
 length = 0.75
 tracks/0/type = "method"
@@ -145,6 +128,23 @@ tracks/5/keys = {
 "values": [{
 "args": [&"default", 1.0, false],
 "method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dnse4"]
+length = 2.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SceneManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["res://Scenes/main.tscn", 0],
+"method": &"load_scene"
 }]
 }
 
