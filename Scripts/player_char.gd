@@ -37,6 +37,7 @@ func _ready():
 			var enemy:EnemyBase = body as EnemyBase
 			var delta = body.position - position
 			_attack_collision.connect("body_entered", _on_hit_enemy)
+			enemy
 			
 func _physics_process(delta):
 	# Add the gravity.
@@ -137,5 +138,8 @@ func take_damage():
 	
 func _on_hit_enemy(body:Node2D):
 	var enemy = body as EnemyBase
+	if enemy.enemy_type == "choro" and _animation_player.current_animation != "strong_attack":
+		enemy._on_character_push((body.position - position).normalized(), 0)
+		return
 	enemy._on_character_push((body.position - position).normalized(), 800)
 	

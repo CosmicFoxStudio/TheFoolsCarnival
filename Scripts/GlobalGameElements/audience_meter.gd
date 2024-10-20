@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 
 class_name AudienceMeter
 
@@ -31,7 +31,8 @@ func _process(delta: float) -> void:
 		on_meter_reached_zero.emit()
 		meterZero = true
 		print("Meter reached ZERO")
-	
+		
+
 func add_meter(amount: float):
 	meter += amount
 	if(meter >= max_value):
@@ -39,8 +40,6 @@ func add_meter(amount: float):
 		
 	on_meter_changed.emit(meter)
 	
-	
-
 
 func _on_player_lower_approval(value:int):
 	meter -= value

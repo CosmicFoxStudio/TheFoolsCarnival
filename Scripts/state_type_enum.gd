@@ -1,1 +1,1 @@
-enum state_type {walk, idle, jump, attack, any}
+enum state_type {walk, idle, jump, attack, hurt, any}

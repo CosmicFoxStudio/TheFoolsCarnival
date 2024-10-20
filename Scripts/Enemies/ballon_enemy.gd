@@ -2,6 +2,11 @@ extends EnemyBase
 
 @onready var _animation_player = $AnimationPlayer
 
+func _ready():
+	super._ready()
+	enemy_type="balloon"
+	score_value = 10
+
 # Do Stuff here????????????????????
 func _on_character_push(direction:Vector2, magnitude:float):
 	super._on_character_push(direction, magnitude)

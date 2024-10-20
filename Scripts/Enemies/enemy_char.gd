@@ -10,8 +10,6 @@ func _set_enemyResource(res:EnemyResource):
 
 @export var animationPlayer : AnimationPlayer
 
-@export var score_value: int
-
 @onready var ground_raycast2D: RayCast2D = $RayCast2D
 @onready var enemySprite: Sprite2D = $Sprite2D
 @onready var player : CharacterBody2D = get_parent().get_node("Player")
@@ -23,7 +21,6 @@ func _set_enemyResource(res:EnemyResource):
 
 var previous_state: CharacterState
 
-
 var motion : Vector2
 
 const state_type := preload("res://Scripts/state_type_enum.gd").state_type
@@ -34,6 +31,9 @@ var current_state : CharacterState
 
 var health : float
 var damage : float
+
+var score_value: int
+var enemy_type: String
 
 var isDead := false
 
@@ -47,11 +47,11 @@ func _ready() -> void:
 	current_state = default_state
 
 func _process(delta: float) -> void:
+	update_state()
 	_animations()
 	_flip()
 	
 func _physics_process(delta: float) -> void:
-	update_state()
 	_movement(delta)
 	
 func _movement(delta) -> void:
@@ -59,27 +59,6 @@ func _movement(delta) -> void:
 		emit_signal("enemy_dead", self)
 		queue_free()
 		return
-	
-	var target = (player.transform.origin - transform.origin);
-	var target_normalized = target.normalized()
-	
-	var distance = sqrt(target.length())
-	
-	#x_direction = target_normalized.x; # Sets the direction the enemy will walk
-	
-	walkTimer += delta
-	if(walkTimer > randi_range(2,5)):
-		walkTimer = 0
-		
-	#if(distance <= detection_radius * detection_radius): # Walk when the Player is near
-		#apply_force(target_normalized * floating_speed)
-		#enqueue_state(state_type.walk)
-		
-	#if(distance <= attack_trigger_radius * attack_trigger_radius):
-		#apply_force(target_normalized * floating_speed)
-		#enqueue_state(state_type.attack)
-	
-	# velocity = motion
 	
 	
 func _is_on_ground() -> bool:
@@ -112,6 +91,8 @@ func _animations() -> void:
 		animationPlayer.play("walk")
 	if state_just_entered(state_type.attack):
 		animationPlayer.play("attack")
+	if state_just_entered(state_type.hurt):
+		animationPlayer.play("hurt")
 
 func update_state():
 	previous_state = current_state
