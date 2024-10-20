@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://Scripts/UI/menu_options.gd" id="1_66hmi"]
-[ext_resource type="PackedScene" uid="uid://c3juuqfo1tbmb" path="res://Scenes/main.tscn" id="2_neypg"]
+[ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://Scenes/UI/game_intro.tscn" id="2_kfr05"]
 [ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="2_vgjd0"]
 
 [sub_resource type="Gradient" id="Gradient_8j31g"]
@@ -180,7 +180,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_66hmi")
 animPlayer = NodePath("MenuAnimationPlayer")
-gameScene = ExtResource("2_neypg")
+gameScene = ExtResource("2_kfr05")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
@@ -223,7 +223,8 @@ text = "Exit"
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -576.0
+offset_left = -595.0
+offset_right = -1171.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -233,7 +234,8 @@ texture = SubResource("AtlasTexture_lo14r")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 576.0
+offset_left = 1190.0
+offset_right = 614.0
 offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
