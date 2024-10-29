@@ -8,14 +8,16 @@ extends Node2D
 @export var dialogueLabel : Label
 
 @export var cutsceneName : String
+@export var sceneManager : SceneManager
+
 
 func _ready() -> void:
 	cutscene_player.play(cutsceneName) # Starts the Cutscene
 	nextButton.visible = false
 
 func _process(delta: float) -> void:
-	if(Input.is_anything_pressed() and not cutscene_player.is_playing()):
-		cutscene_player.play()
+	if(cutscene_player.current_animation_position >= cutscene_player.current_animation_length):
+		get_tree().change_scene_to_file("res://Scenes/main.tscn")
 		
 		
 	
@@ -26,14 +28,21 @@ func _pause() -> void:
 	
 func _skip() -> void:
 	# Skip scene
-	cutscene_player.seek(cutscene_player.current_animation_length,true);
+	cutscene_player.seek(cutscene_player.current_animation_length - 1,true);
+	#sceneManager.load_scene(path)
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 
 func _on_skip_button_pressed() -> void:
 	_skip()
+	cutscene_player.play()
 
 
 func _on_next_button_pressed() -> void:
+	if(cutscene_player.current_animation_position >= cutscene_player.current_animation_length):
+		sceneManager.load_scene("res://Scenes/main.tscn")
+		return
+		
 	if(not cutscene_player.is_playing()):
 		cutscene_player.play()
 		nextButton.visible = false

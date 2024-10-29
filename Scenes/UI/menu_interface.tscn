@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=20 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://Scripts/UI/menu_options.gd" id="1_66hmi"]
 [ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://Scenes/UI/game_intro.tscn" id="2_kfr05"]
 [ext_resource type="FontFile" uid="uid://c1v3643n5fb3m" path="res://Assets/Fonts/daydream_3/Daydream.ttf" id="2_vgjd0"]
 [ext_resource type="Texture2D" uid="uid://cnyhffrvu4svc" path="res://Assets/UI/spr_stageX2.png" id="3_uybyk"]
+[ext_resource type="Shader" path="res://Shaders/uv_distortion.gdshader" id="4_uqn0i"]
 [ext_resource type="Texture2D" uid="uid://yp1u8pati5sc" path="res://Assets/UI/Logo_the_fools_Carnival.png" id="4_vrhmx"]
 [ext_resource type="Texture2D" uid="uid://ybuby2dkgmh5" path="res://Assets/UI/spr_curtainsX2.png" id="5_wb3cr"]
 [ext_resource type="Texture2D" uid="uid://boifbsh7bytvo" path="res://Assets/UI/tent_left/tent_left1.png" id="7_25kia"]
@@ -11,6 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://d1x35quadmma0" path="res://Assets/UI/tent_right/tent_right1.png" id="8_0f1jf"]
 [ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://Assets/Audio/tfc_menu.ogg" id="8_k1cjw"]
 [ext_resource type="Texture2D" uid="uid://bt0csr6gkchx4" path="res://Assets/UI/tent_decorationX2.png" id="9_emrf2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
+shader = ExtResource("4_uqn0i")
+shader_parameter/offset = Vector2(10, 3)
+shader_parameter/colorA = Vector3(0.5, 0.5, 0.5)
+shader_parameter/colorB = Vector3(0.5, 0.5, 0.5)
+shader_parameter/colorC = Vector3(2, 1, 1)
+shader_parameter/colorD = Vector3(0.5, 0.2, 0.25)
+shader_parameter/colorSpeed = 0.45
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p6j03"]
 atlas = ExtResource("8_0f1jf")
@@ -272,6 +282,7 @@ texture = ExtResource("3_uybyk")
 stretch_mode = 5
 
 [node name="Title" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_whpjl")
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -330,10 +341,8 @@ texture = ExtResource("5_wb3cr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -595.0
-offset_top = -41.0
-offset_right = -515.0
-offset_bottom = 78.0
+offset_right = 80.0
+offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_25kia")
@@ -343,10 +352,9 @@ stretch_mode = 5
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 595.0
-offset_top = -41.0
-offset_right = 675.0
-offset_bottom = 78.0
+offset_left = 385.0
+offset_right = 465.0
+offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_p6j03")
