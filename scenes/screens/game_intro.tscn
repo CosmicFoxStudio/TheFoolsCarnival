@@ -167,7 +167,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(8),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": ["res://Scenes/main.tscn", 0],
+"args": ["res://scenes/main.tscn", 0],
 "method": &"load_scene"
 }]
 }
@@ -427,7 +427,7 @@ text = "SKIP"
 modulate = Color(1, 1, 1, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("8_v0xgi")
-frame_progress = 0.082619
+frame_progress = 0.819944
 
 [node name="DialogueBoxLabel" type="Label" parent="."]
 anchors_preset = 5
