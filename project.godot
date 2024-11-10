@@ -22,7 +22,7 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursorX2.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
 
 [input]
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=16 format=3 uid="uid://cir64q6hn6swc"]
 
 [ext_resource type="Script" path="res://scripts/ui/game_over_options.gd" id="1_g1b8w"]
-[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream_3/Daydream.ttf" id="1_od0as"]
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="1_od0as"]
 [ext_resource type="Texture2D" uid="uid://boe8bwk5gpy44" path="res://assets/sprites/ui/icons/icon_clown.png" id="2_dpef4"]
 [ext_resource type="PackedScene" uid="uid://c3juuqfo1tbmb" path="res://scenes/main.tscn" id="2_kbr6h"]
 [ext_resource type="PackedScene" uid="uid://de1grc5og7a72" path="res://scenes/screens/menu_interface.tscn" id="3_aa31a"]
 [ext_resource type="Texture2D" uid="uid://c41eagea20oes" path="res://assets/sprites/ui/icons/icon_skull.png" id="3_hn6wl"]
-[ext_resource type="Script" path="res://scripts/controllers/scenemanager.gd" id="4_4r6yh"]
+[ext_resource type="Script" path="res://scripts/controllers/scene_manager.gd" id="4_4r6yh"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="8_igrns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3pxs"]
