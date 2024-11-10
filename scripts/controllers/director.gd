@@ -11,15 +11,16 @@ class_name Director
 @export var spawnPositions: Array[Node2D]
 @export var spawnTimer : Timer
 
+### BEWARE OF CYCLICAL REFERENCES HERE
 @export var gameOverScene : PackedScene
 
 var score:int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#for instance in instances:
+	for instance in instances:
 		#var enemy = instance as EnemyBase
-		#instance.connect("enemy_dead", _on_enemy_dead)
+		instance.connect("enemy_dead", _on_enemy_dead)
 	
 	audience_meter.on_meter_reached_zero.connect(_end_game)
 	
@@ -41,6 +42,7 @@ func _spawn_enemies() -> void:
 	
 	
 func _on_enemy_dead(enemy:EnemyBase):
+	print("Enemy defeated!")
 	audience_meter.add_meter(enemy.score_value * 0.1)
 	score += enemy.score_value
 

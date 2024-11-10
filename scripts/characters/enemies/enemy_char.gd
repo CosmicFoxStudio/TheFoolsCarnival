@@ -67,6 +67,7 @@ func _take_damage(amount) -> void:
 	health -= amount
 	if(health <= 0):
 		isDead = true
+		enemy_dead.emit()
 		#enqueue_state() # dead state
 	
 func _on_character_push(direction:Vector2, magnitude:float):
