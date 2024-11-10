@@ -1,11 +1,8 @@
 extends Control
 
-
 @export var sceneManager : SceneManager
-
 @export var gameScene : PackedScene
 @export var menuScene : PackedScene
-
 @export var selectionSequence : AnimationPlayer
 
 func _ready() -> void:

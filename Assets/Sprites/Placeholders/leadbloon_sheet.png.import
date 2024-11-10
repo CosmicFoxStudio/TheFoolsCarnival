@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb6qswdpyw44u"
-path="res://.godot/imported/leadbloon_sheet.png-4ac8fc20012bbc750504b5507d307606.ctex"
+uid="uid://dxicjebd4buil"
+path="res://.godot/imported/leadbloon_sheet.png-c33f0e2b7010dffa3cc3459b11aec57f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Placeholders/leadbloon_sheet.png"
-dest_files=["res://.godot/imported/leadbloon_sheet.png-4ac8fc20012bbc750504b5507d307606.ctex"]
+source_file="res://assets/sprites/placeholders/leadbloon_sheet.png"
+dest_files=["res://.godot/imported/leadbloon_sheet.png-c33f0e2b7010dffa3cc3459b11aec57f.ctex"]
 
 [params]
 

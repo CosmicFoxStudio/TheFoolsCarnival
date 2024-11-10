@@ -1,0 +1,387 @@
+[gd_scene load_steps=20 format=3 uid="uid://de1grc5og7a72"]
+
+[ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_lvuj4"]
+[ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://scenes/screens/game_intro.tscn" id="2_kfr05"]
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream_3/Daydream.ttf" id="2_vgjd0"]
+[ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_stageX2.png" id="3_uybyk"]
+[ext_resource type="Shader" path="res://shaders/uv_distortion.gdshader" id="4_uqn0i"]
+[ext_resource type="Texture2D" uid="uid://bymhnonhdcjno" path="res://assets/sprites/ui/logo/Logo_the_fools_Carnival.png" id="4_vrhmx"]
+[ext_resource type="Texture2D" uid="uid://3jmjab0ca7w8" path="res://assets/sprites/ui/spr_curtainsX2.png" id="5_wb3cr"]
+[ext_resource type="Texture2D" uid="uid://cw5bq5m06bw4u" path="res://assets/sprites/ui/tent/tent_left/tent_left1.png" id="7_25kia"]
+[ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="7_cagvw"]
+[ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/tent_right1.png" id="8_0f1jf"]
+[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/tfc_menu.ogg" id="8_k1cjw"]
+[ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/tent_decorationX2.png" id="9_emrf2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
+shader = ExtResource("4_uqn0i")
+shader_parameter/offset = Vector2(10, 3)
+shader_parameter/colorA = Vector3(0.5, 0.5, 0.5)
+shader_parameter/colorB = Vector3(0.5, 0.5, 0.5)
+shader_parameter/colorC = Vector3(2, 1, 1)
+shader_parameter/colorD = Vector3(0.5, 0.2, 0.25)
+shader_parameter/colorSpeed = 0.45
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6j03"]
+atlas = ExtResource("8_0f1jf")
+
+[sub_resource type="Animation" id="Animation_ywsi5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Curtains/LeftCurtain:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Curtains/LeftCurtain:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Curtains/RightCurtain:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(385, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Curtains/RightCurtain:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Curtains/LeftCurtain:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Curtains/RightCurtain:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FadeAnimSprite:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FadeAnimSprite:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgekc"]
+_data = {
+"RESET": SubResource("Animation_ywsi5")
+}
+
+[sub_resource type="Animation" id="Animation_qifd8"]
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Curtains/LeftCurtain:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -595, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Curtains/LeftCurtain:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Curtains/RightCurtain:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 595, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Curtains/RightCurtain:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Curtains/LeftCurtain:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/path = NodePath("Curtains/RightCurtain:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Curtains/TentDecorationX2:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(354, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 1),
+"points": PackedFloat32Array(180, -0.25, 0, 0.25, 0, -25, 0, 0, 0, 0),
+"times": PackedFloat32Array(0.4, 1)
+}
+
+[sub_resource type="Animation" id="Animation_m4pnx"]
+resource_name = "start_game"
+length = 0.425
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeAnimSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.266667)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeAnimSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1jp1y"]
+_data = {
+"curtain_sequence": SubResource("Animation_qifd8"),
+"start_game": SubResource("Animation_m4pnx")
+}
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("animPlayer")]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lvuj4")
+animPlayer = NodePath("MenuAnimationPlayer")
+gameScene = ExtResource("2_kfr05")
+
+[node name="BG_Palco" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_uybyk")
+stretch_mode = 5
+
+[node name="Title" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_whpjl")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -215.0
+offset_top = -16.0
+offset_right = 205.0
+offset_bottom = 220.0
+grow_horizontal = 2
+texture = ExtResource("4_vrhmx")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -135.0
+offset_right = 60.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_vgjd0")
+theme_override_font_sizes/font_size = 20
+text = "Start
+"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -67.0
+offset_right = 57.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_vgjd0")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+
+[node name="Curtains" type="Node" parent="."]
+
+[node name="StaticCurtains" type="TextureRect" parent="Curtains"]
+visible = false
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("5_wb3cr")
+
+[node name="LeftCurtain" type="TextureRect" parent="Curtains"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 80.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_25kia")
+stretch_mode = 5
+
+[node name="RightCurtain" type="TextureRect" parent="Curtains"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 385.0
+offset_right = 465.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_p6j03")
+stretch_mode = 5
+
+[node name="TentDecorationX2" type="Sprite2D" parent="Curtains"]
+position = Vector2(354, 0)
+texture = ExtResource("9_emrf2")
+
+[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fgekc"),
+"MenuOperations": SubResource("AnimationLibrary_1jp1y")
+}
+
+[node name="FadeAnimSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0)
+top_level = true
+position = Vector2(320, 180)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("7_cagvw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_k1cjw")
+volume_db = 5.0
+autoplay = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

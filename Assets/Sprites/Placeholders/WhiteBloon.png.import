@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hrwhs4cow7gp"
-path="res://.godot/imported/WhiteBloon.png-fc16bf9b6ee2cc8e8476c603b9ea53f0.ctex"
+uid="uid://deao17htev24p"
+path="res://.godot/imported/WhiteBloon.png-df5ef639b3052e06cd6da6a69d3f4592.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Placeholders/WhiteBloon.png"
-dest_files=["res://.godot/imported/WhiteBloon.png-fc16bf9b6ee2cc8e8476c603b9ea53f0.ctex"]
+source_file="res://assets/sprites/placeholders/WhiteBloon.png"
+dest_files=["res://.godot/imported/WhiteBloon.png-df5ef639b3052e06cd6da6a69d3f4592.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4lvuraupnc0k"
-path="res://.godot/imported/intro_3 trapped.png-b760914ccdd7672d58bd245fbb036524.ctex"
+uid="uid://crqx5mrqq0n02"
+path="res://.godot/imported/intro_3 trapped.png-2595b39aee1a171b78121a9df5d1356b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Audio/intro_3 trapped.png"
-dest_files=["res://.godot/imported/intro_3 trapped.png-b760914ccdd7672d58bd245fbb036524.ctex"]
+source_file="res://assets/audio/intro_3 trapped.png"
+dest_files=["res://.godot/imported/intro_3 trapped.png-2595b39aee1a171b78121a9df5d1356b.ctex"]
 
 [params]
 

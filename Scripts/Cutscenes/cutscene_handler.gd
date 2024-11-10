@@ -15,9 +15,9 @@ func _ready() -> void:
 	cutscene_player.play(cutsceneName) # Starts the Cutscene
 	nextButton.visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(cutscene_player.current_animation_position >= cutscene_player.current_animation_length):
-		get_tree().change_scene_to_file("res://Scenes/main.tscn")
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
 		
 		
 	
@@ -29,8 +29,9 @@ func _pause() -> void:
 func _skip() -> void:
 	# Skip scene
 	cutscene_player.seek(cutscene_player.current_animation_length - 1,true);
-	#sceneManager.load_scene(path)
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	
+	# get_tree().change_scene_to_file("res://scenes/main.tscn")
+	sceneManager.load_scene("res://scenes/main.tscn")
 
 
 func _on_skip_button_pressed() -> void:
@@ -40,7 +41,7 @@ func _on_skip_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
 	if(cutscene_player.current_animation_position >= cutscene_player.current_animation_length):
-		sceneManager.load_scene("res://Scenes/main.tscn")
+		sceneManager.load_scene("res://scenes/main.tscn")
 		return
 		
 	if(not cutscene_player.is_playing()):
