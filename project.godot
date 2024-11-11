@@ -12,9 +12,9 @@ config_version=5
 
 config/name="The Fools Carnival"
 config/version="0.0.1"
-run/main_scene="res://scenes-rename/screens/menu_interface.tscn"
+run/main_scene="res://scenes/screens/menu_interface.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://assets-rename/sprites-rename/ui/icons/clown_icon.png"
+config/icon="res://assets/sprites/ui/icons/clown_icon.png"
 
 [display]
 
@@ -22,7 +22,7 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets-rename/sprites-rename/ui/icons/spr_cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
 
 [input]
 
