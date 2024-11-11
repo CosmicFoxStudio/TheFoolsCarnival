@@ -1,0 +1,34 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://baa3vo41b1uf0"]
+
+[ext_resource type="Texture2D" uid="uid://boopfa6m6wwlb" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond1.png" id="1_k6faw"]
+[ext_resource type="Texture2D" uid="uid://j73r8s0w4h5x" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond2.png" id="2_nvg6x"]
+[ext_resource type="Texture2D" uid="uid://bwmti7hdrg0up" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond3.png" id="3_5r82b"]
+[ext_resource type="Texture2D" uid="uid://dk1cbj3amt86s" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond4.png" id="4_c2o3u"]
+[ext_resource type="Texture2D" uid="uid://dwh8qq2qv8ke0" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond5.png" id="5_cv8uk"]
+[ext_resource type="Texture2D" uid="uid://cj1nhaivryf76" path="res://assets-rename/sprites-rename/ui/transitions/diamond_transition/spr_transition_diamond6.png" id="6_khgx4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k6faw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nvg6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5r82b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c2o3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cv8uk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_khgx4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
