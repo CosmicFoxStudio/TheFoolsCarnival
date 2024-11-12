@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpftwkcofjay3"]
+
+[ext_resource type="Shader" path="res://shaders/dither_gradient.gdshader" id="1_2yj06"]
+[ext_resource type="Script" path="res://scripts/utilities/scene_transition.gd" id="1_bvgt7"]
+[ext_resource type="Script" path="res://scripts/utilities/screenshot.gd" id="2_h6b7x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t7lll"]
+shader = ExtResource("1_2yj06")
+shader_parameter/fade = 0.0
+shader_parameter/tiling = 14.0
+
+[sub_resource type="Animation" id="Animation_h8mw7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenshotTexture:material:shader_parameter/fade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jylt"]
+_data = {
+"RESET": SubResource("Animation_h8mw7")
+}
+
+[sub_resource type="Animation" id="Animation_gnkx5"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenshotTexture:material:shader_parameter/fade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_l2g60"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScreenshotTexture:material:shader_parameter/fade")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kku7"]
+_data = {
+"dither_in": SubResource("Animation_gnkx5"),
+"dither_out": SubResource("Animation_l2g60")
+}
+
+[node name="Transition" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bvgt7")
+
+[node name="OverlayColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ScreenshotTexture" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_t7lll")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_h6b7x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6jylt"),
+"anim_transitions": SubResource("AnimationLibrary_1kku7")
+}

@@ -16,6 +16,10 @@ run/main_scene="res://scenes/screens/menu_interface.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://assets/sprites/ui/icons/clown_icon.png"
 
+[autoload]
+
+Global="*res://Scripts/global.gd"
+
 [display]
 
 window/size/viewport_width=640
