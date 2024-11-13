@@ -15,4 +15,3 @@ func _ready() -> void:
 func transition(scenePath: String) -> void:
 	#Place animation dither_in dither_out here
 	pass
-	

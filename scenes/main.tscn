@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="1_xfw7y"]
 [ext_resource type="PackedScene" uid="uid://dl6heu77klscw" path="res://scenes/prefab/player/player_char.tscn" id="3_ght13"]
 [ext_resource type="PackedScene" uid="uid://binsk6qu3qi5r" path="res://scenes/prefab/enemies/enemy_char.tscn" id="3_l52vg"]
-[ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui-rename/audience_meter.tscn" id="4_smnpq"]
+[ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui/ui_audience_meter.tscn" id="4_smnpq"]
 [ext_resource type="Script" path="res://scripts/controllers/director.gd" id="5_t6gyq"]
 [ext_resource type="Texture2D" uid="uid://3jmjab0ca7w8" path="res://assets/sprites/ui/spr_curtains.png" id="6_tp4g0"]
 [ext_resource type="PackedScene" uid="uid://5a4vbo8v467s" path="res://scenes/prefab/enemies/enemy_choro.tscn" id="7_888ti"]
