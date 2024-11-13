@@ -1,12 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://cir64q6hn6swc"]
+[gd_scene load_steps=13 format=3 uid="uid://cir64q6hn6swc"]
 
 [ext_resource type="Script" path="res://scripts/ui/game_over_options.gd" id="1_g1b8w"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="1_od0as"]
 [ext_resource type="Texture2D" uid="uid://boe8bwk5gpy44" path="res://assets/sprites/ui/icons/icon_clown.png" id="2_dpef4"]
-[ext_resource type="PackedScene" uid="uid://c3juuqfo1tbmb" path="res://scenes/main.tscn" id="2_kbr6h"]
-[ext_resource type="PackedScene" uid="uid://de1grc5og7a72" path="res://scenes/screens/menu_interface.tscn" id="3_aa31a"]
 [ext_resource type="Texture2D" uid="uid://c41eagea20oes" path="res://assets/sprites/ui/icons/icon_skull.png" id="3_hn6wl"]
-[ext_resource type="Script" path="res://scripts/controllers/scene_manager.gd" id="4_4r6yh"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="8_igrns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3pxs"]
@@ -47,38 +44,24 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_svlv4"]
 length = 0.75
-tracks/0/type = "method"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SceneManager")
+tracks/0/path = NodePath("FadeAnimSprite:modulate:a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["res://scenes/screens/menu_interface.tscn", 0],
-"method": &"load_scene"
-}]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FadeAnimSprite:modulate:a")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, 0, 0, 0.5, 0),
 "times": PackedFloat32Array(0, 0.4)
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FadeAnimSprite")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeAnimSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -89,20 +72,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_dnse4"]
 length = 2.5
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SceneManager")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(2.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["res://scenes/main.tscn", 0],
-"method": &"load_scene"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_c6qsv"]
 resource_name = "start"
@@ -139,7 +108,7 @@ _data = {
 "start": SubResource("Animation_c6qsv")
 }
 
-[node name="GameOver" type="Control" node_paths=PackedStringArray("sceneManager", "selectionSequence")]
+[node name="GameOver" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,10 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g1b8w")
-sceneManager = NodePath("SceneManager")
-gameScene = ExtResource("2_kbr6h")
-menuScene = ExtResource("3_aa31a")
-selectionSequence = NodePath("SelectionSequence")
+next_scene = "res://scenes/screens/menu_interface.tscn"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -196,9 +162,6 @@ theme_override_fonts/font = ExtResource("1_od0as")
 theme_override_font_sizes/font_size = 20
 text = "MENU"
 icon = ExtResource("3_hn6wl")
-
-[node name="SceneManager" type="Node" parent="."]
-script = ExtResource("4_4r6yh")
 
 [node name="FadeAnimSprite" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)

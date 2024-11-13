@@ -5,7 +5,8 @@ signal enemy_dead(enemy: EnemyBase)
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D if has_node("AnimatedSprite2D") else null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer if has_node("AnimationPlayer") else null
 @onready var ground_raycast2D: RayCast2D = $RayCast2D if has_node("RayCast2D") else null
-@onready var player : CharacterBody2D = get_tree().current_scene.get_node("Player")
+# @onready var player : CharacterBody2D = get_tree().current_scene.get_node("Player")
+@onready var player : CharacterBody2D = Global.level.player
 
 const state_type := preload("res://scripts/characters/state_type_enum.gd").state_type
 

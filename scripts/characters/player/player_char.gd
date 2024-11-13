@@ -4,9 +4,6 @@ extends CharacterBody2D
 
 @export var max_state_queue_size:int
 @export var combo_anims:Array[String]
-
-@export var director_node:Director
-
 @export var speed = 300.0
 @export var jump_velocity = -400.0
 
@@ -31,7 +28,7 @@ func _ready():
 	current_state = default_state
 	combo_index = -1
 	previous_combo_index = -1
-	for body in director_node.instances:
+	for body in Global.level.instances:
 		add_collision_exception_with(body)
 		if(body.get_collision_layer_value(2)):
 			# var enemy:EnemyBase = body as EnemyBase

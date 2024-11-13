@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3juuqfo1tbmb"]
+[gd_scene load_steps=17 format=3 uid="uid://c3juuqfo1tbmb"]
 
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="1_xfw7y"]
 [ext_resource type="PackedScene" uid="uid://dl6heu77klscw" path="res://scenes/prefab/player/player_char.tscn" id="3_ght13"]
-[ext_resource type="PackedScene" uid="uid://binsk6qu3qi5r" path="res://scenes/prefab/enemies/enemy_char.tscn" id="3_l52vg"]
 [ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui/ui_audience_meter.tscn" id="4_smnpq"]
-[ext_resource type="Script" path="res://scripts/controllers/director.gd" id="5_t6gyq"]
+[ext_resource type="Script" path="res://scripts/controllers/level_controller.gd" id="5_t6gyq"]
 [ext_resource type="Texture2D" uid="uid://3jmjab0ca7w8" path="res://assets/sprites/ui/spr_curtains.png" id="6_tp4g0"]
 [ext_resource type="PackedScene" uid="uid://5a4vbo8v467s" path="res://scenes/prefab/enemies/enemy_choro.tscn" id="7_888ti"]
 [ext_resource type="Texture2D" uid="uid://ou1m1gnkdf85" path="res://assets/sprites/ui/spr_audience.png" id="10_xbi4d"]
@@ -59,24 +58,20 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Level0" type="Node2D"]
-
-[node name="Director" type="Node" parent="." node_paths=PackedStringArray("instances", "audience_meter", "player", "spawnPositions", "spawnTimer")]
+[node name="Level0" type="Node2D" node_paths=PackedStringArray("_player", "_audience_meter", "_instances", "_spawnTimer")]
 script = ExtResource("5_t6gyq")
-instances = [NodePath("../EnemyChoro")]
-audience_meter = NodePath("../AudienceMeter")
-player = NodePath("../Player")
-enemiesToSpawn = Array[PackedScene]([ExtResource("3_l52vg")])
-spawnPositions = [NodePath("../SpawnPoint")]
-spawnTimer = NodePath("../Timer")
+_player = NodePath("Player")
+_audience_meter = NodePath("AudienceMeter")
+_instances = [NodePath("EnemyChoro")]
+_spawnTimer = NodePath("Timer")
+next_scene = "res://scenes/screens/menu_interface.tscn"
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
 texture = ExtResource("1_xfw7y")
 
-[node name="Player" parent="." node_paths=PackedStringArray("director_node") instance=ExtResource("3_ght13")]
+[node name="Player" parent="." instance=ExtResource("3_ght13")]
 position = Vector2(88, 271)
-director_node = NodePath("../Director")
 
 [node name="AudienceMeter" parent="." instance=ExtResource("4_smnpq")]
 offset_left = 239.5

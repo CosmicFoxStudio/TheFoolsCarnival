@@ -1,11 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=17 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_1hkr3"]
-[ext_resource type="PackedScene" uid="uid://2dftu4pgnmt8" path="res://scenes/screens/game_intro.tscn" id="2_ojme8"]
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="3_m27lk"]
 [ext_resource type="Texture2D" uid="uid://bymhnonhdcjno" path="res://assets/sprites/ui/logo/logo.png" id="5_qb540"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="6_ly0se"]
-[ext_resource type="Texture2D" uid="uid://3jmjab0ca7w8" path="res://assets/sprites/ui/spr_curtains.png" id="7_obp4a"]
 [ext_resource type="Texture2D" uid="uid://cw5bq5m06bw4u" path="res://assets/sprites/ui/tent/tent_left/spr_tent_part_left_1.png" id="8_wcslb"]
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
@@ -111,13 +109,36 @@ tracks/7/keys = {
 tracks/8/type = "bezier"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/8/path = NodePath("Curtains/TentDecoration:position:y")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Curtains/TentDecoration:position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Buttons:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fgekc"]
@@ -134,7 +155,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, 0, 0, 0, 0, -595, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -363, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
@@ -145,7 +166,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/2/type = "bezier"
@@ -156,7 +177,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 595, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 283, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/3/type = "bezier"
@@ -167,7 +188,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -41, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/4/type = "bezier"
@@ -195,24 +216,36 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Curtains/TentDecorationX2:position:x")
+tracks/6/path = NodePath("Curtains/TentDecoration:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(354, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
 }
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Curtains/TentDecorationX2:position:y")
+tracks/7/path = NodePath("Curtains/TentDecoration:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 1),
-"points": PackedFloat32Array(180, -0.25, 0, 0.25, 0, -25, 0, 0, 0, 0),
-"times": PackedFloat32Array(0.4, 1)
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -92, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Buttons:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_m4pnx"]
@@ -248,18 +281,17 @@ _data = {
 "start_game": SubResource("Animation_m4pnx")
 }
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("animPlayer")]
+[node name="MainMenu" type="Control"]
 layout_direction = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_1hkr3")
-animPlayer = NodePath("MenuAnimationPlayer")
-gameScene = ExtResource("2_ojme8")
+next_scene = "res://scenes/screens/game_intro.tscn"
 
 [node name="BG_Palco" type="TextureRect" parent="."]
 layout_mode = 1
@@ -286,82 +318,6 @@ offset_bottom = 220.0
 grow_horizontal = 2
 texture = ExtResource("5_qb540")
 
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -57.0
-offset_top = -135.0
-offset_right = 60.0
-offset_bottom = -77.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("6_ly0se")
-theme_override_font_sizes/font_size = 20
-text = "Start
-"
-
-[node name="QuitButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -55.0
-offset_top = -67.0
-offset_right = 57.0
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("6_ly0se")
-theme_override_font_sizes/font_size = 20
-text = "Exit"
-
-[node name="Curtains" type="Node" parent="."]
-
-[node name="StaticCurtains" type="TextureRect" parent="Curtains"]
-visible = false
-offset_right = 640.0
-offset_bottom = 360.0
-texture = ExtResource("7_obp4a")
-
-[node name="LeftCurtain" type="TextureRect" parent="Curtains"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 80.0
-offset_bottom = 119.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_wcslb")
-stretch_mode = 5
-
-[node name="RightCurtain" type="TextureRect" parent="Curtains"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 385.0
-offset_right = 465.0
-offset_bottom = 119.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_p6j03")
-stretch_mode = 5
-
-[node name="TentDecorationX2" type="Sprite2D" parent="Curtains"]
-position = Vector2(354, 0)
-texture = ExtResource("10_psq3u")
-
-[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fgekc"),
-"MenuOperations": SubResource("AnimationLibrary_1jp1y")
-}
-
 [node name="FadeAnimSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(0, 0, 0, 0)
@@ -370,10 +326,72 @@ position = Vector2(320, 180)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("11_sxiee")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Curtains" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="LeftCurtain" type="TextureRect" parent="Curtains"]
+layout_mode = 1
+offset_right = 720.0
+offset_bottom = 360.0
+texture = ExtResource("8_wcslb")
+stretch_mode = 5
+
+[node name="RightCurtain" type="TextureRect" parent="Curtains"]
+layout_mode = 1
+offset_left = 385.0
+offset_right = 1105.0
+offset_bottom = 360.0
+texture = SubResource("AtlasTexture_p6j03")
+stretch_mode = 5
+
+[node name="TentDecoration" type="TextureRect" parent="Curtains"]
+layout_mode = 1
+offset_right = 720.0
+offset_bottom = 360.0
+texture = ExtResource("10_psq3u")
+
+[node name="Buttons" type="GridContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.5
+offset_top = -128.0
+offset_right = 58.5
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("6_ly0se")
+theme_override_font_sizes/font_size = 20
+text = "Start
+"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("6_ly0se")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+
+[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fgekc"),
+"MenuOperations": SubResource("AnimationLibrary_1jp1y")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_dllvj")
 volume_db = 5.0
 autoplay = true
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
