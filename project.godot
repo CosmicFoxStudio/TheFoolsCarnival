@@ -10,30 +10,41 @@ config_version=5
 
 [application]
 
-config/name="The Fool's Carnival"
+config/name="The Fools Carnival"
 config/version="0.0.1"
-run/main_scene="res://Scenes/UI/menu_interface.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Assets/UI/clown_icon.png"
+run/main_scene="res://scenes/main_scene.tscn"
+config/features=PackedStringArray("4.3")
+config/icon="res://assets/sprites/ui/icons/clown_icon.png"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/resizable=false
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://Assets/UI/spr_cursorX2.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
 
 [input]
 
 basic_attack={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":90,"key_label":0,"unicode":122,"location":0,"echo":false,"script":null)
 ]
 }
 special_attack={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
+]
+}
+switch_scene={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194447,"key_label":0,"unicode":57,"location":0,"echo":false,"script":null)
 ]
 }
 
