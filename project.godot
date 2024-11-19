@@ -30,6 +30,10 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
 
+[global_group]
+
+effects="The effects that will be used inside the Gameplay (Hit Effects, Death Effects)"
+
 [input]
 
 basic_attack={

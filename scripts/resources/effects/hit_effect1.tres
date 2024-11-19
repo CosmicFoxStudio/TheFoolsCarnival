@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HitEffectResource" load_steps=5 format=3 uid="uid://bem4iv408plrm"]
+
+[ext_resource type="Script" path="res://scripts/resources/effects/hit_effect_res.gd" id="1_i8sbj"]
+[ext_resource type="Texture2D" uid="uid://crm8cxk3chxxi" path="res://assets/sprites/effects/Free Smoke Fx  Pixel 04.png" id="1_vbaeb"]
+
+[sub_resource type="Gradient" id="Gradient_l3hut"]
+offsets = PackedFloat32Array(0, 0.649547, 0.97281)
+colors = PackedColorArray(1, 0.686275, 0.443137, 1, 0.96, 0.5456, 0.2496, 1, 0.91, 0.364, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tpaw"]
+atlas = ExtResource("1_vbaeb")
+region = Rect2(0, 324.128, 511.422, 55.2339)
+
+[resource]
+script = ExtResource("1_i8sbj")
+hit_sprite_sheet = SubResource("AtlasTexture_8tpaw")
+gradient = SubResource("Gradient_l3hut")

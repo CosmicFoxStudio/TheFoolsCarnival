@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://clj53k1uhgo4l"]
+
+[ext_resource type="Script" path="res://scripts/effects/hit_effect.gd" id="1_1t2re"]
+[ext_resource type="Texture2D" uid="uid://crm8cxk3chxxi" path="res://assets/sprites/effects/Free Smoke Fx  Pixel 04.png" id="2_8j7qm"]
+[ext_resource type="Resource" uid="uid://bem4iv408plrm" path="res://scripts/resources/effects/hit_effect1.tres" id="2_nkfp6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tpaw"]
+atlas = ExtResource("2_8j7qm")
+region = Rect2(0, 324.128, 511.422, 55.2339)
+
+[node name="HitEffect" type="Node2D" groups=["effects"]]
+script = ExtResource("1_1t2re")
+hitEffectResource = ExtResource("2_nkfp6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.961151, 0.549646, 0.255167, 1)
+texture = SubResource("AtlasTexture_8tpaw")
