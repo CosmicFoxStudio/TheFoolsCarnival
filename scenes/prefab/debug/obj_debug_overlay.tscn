@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://b017j8kmnrqn7"]
+
+[ext_resource type="Script" path="res://scripts/debug/scr_debug_overlay.gd" id="1_fnaj4"]
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_sap0t"]
+
+[node name="DebugOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fnaj4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -21.5
+offset_right = 31.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="OverridableLabel" type="Label" parent="VBoxContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_sap0t")
+theme_override_font_sizes/font_size = 8
+text = "State"
