@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3fbnjysn7pfo"]
+
+[ext_resource type="Script" path="res://scripts/debug/scr_global_debug.gd" id="1_nw1k3"]
+[ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="2_so7pt"]
+[ext_resource type="Theme" uid="uid://vprwvq2k5g2w" path="res://themes/theme_debug.tres" id="2_y51n2"]
+
+[node name="GlobalDebug" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nw1k3")
+
+[node name="MousePositionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.0
+offset_right = 58.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("2_y51n2")
+theme_override_fonts/font = ExtResource("2_so7pt")
+theme_override_font_sizes/font_size = 10
+text = "Mouse Pos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 118.0
+offset_bottom = 24.0

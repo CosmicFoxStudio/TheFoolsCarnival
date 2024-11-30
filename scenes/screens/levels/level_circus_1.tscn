@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh5aw3urpaxq0"]
+
+[ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_p1qbe"]
+[ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_48hy1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgsi4"]
+size = Vector2(20, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wych1"]
+size = Vector2(640, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
+size = Vector2(640, 20)
+
+[node name="LevelCircus1" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_p1qbe")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("2_48hy1")]
+position = Vector2(75, 327)
+
+[node name="StageLimits" type="Node" parent="."]
+
+[node name="StageLimitsLeft" type="StaticBody2D" parent="StageLimits"]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsLeft"]
+position = Vector2(-10, 180)
+shape = SubResource("RectangleShape2D_hxc3u")
+
+[node name="StageLimitsRight" type="StaticBody2D" parent="StageLimits"]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsRight"]
+position = Vector2(650, 180)
+shape = SubResource("RectangleShape2D_jgsi4")
+
+[node name="StageLimitsBottom" type="StaticBody2D" parent="StageLimits"]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsBottom"]
+position = Vector2(320, 337)
+shape = SubResource("RectangleShape2D_wych1")
+
+[node name="StageLimitsTop" type="StaticBody2D" parent="StageLimits"]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsTop"]
+position = Vector2(320, -10)
+shape = SubResource("RectangleShape2D_vk4j7")
