@@ -19,6 +19,7 @@ config/icon="res://assets/sprites/ui/icons/clown_icon.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+AudioGlobal="*res://scripts/audio/audio_global.gd"
 
 [display]
 

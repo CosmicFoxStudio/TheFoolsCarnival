@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HitEffectResource" load_steps=4 format=3 uid="uid://dvow4ow1b3211"]
+
+
+[ext_resource type="Texture2D" uid="uid://crm8cxk3chxxi" path="res://assets/sprites/effects/Free Smoke Fx  Pixel 04.png" id="1_io120"]
+[ext_resource type="Script" path="res://scripts/resources/effects/hit_effect_res.gd" id="1_mxupj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ogrj"]
+atlas = ExtResource("1_io120")
+region = Rect2(0, 260, 512, 64)
+
+[resource]
+script = ExtResource("1_mxupj")
+hit_sprite_sheet = SubResource("AtlasTexture_5ogrj")

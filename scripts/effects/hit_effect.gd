@@ -2,28 +2,27 @@
 extends Node
 
 @export var hitEffectResource : HitEffectResource
-@onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+@export var animation_player: AnimationPlayer
 
 var time : float = 0
 
-func _init() -> void:
+func _ready() -> void:
 	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
+	animation_player.play("effects_anims/hit_effect")
+	
 
 func _process(delta: float) -> void:
-	if not Engine.is_editor_hint():
-		return
 	
 	if not hitEffectResource:
 		return
 		
-	time += delta
+	if Engine.is_editor_hint():
+		sprite_2d.texture = hitEffectResource.hit_sprite_sheet
 	
-	sprite_2d.self_modulate = hitEffectResource.gradient.sample(time * 5)
 	
-	if(time > 1):
-		time = 0
-		
-	time = clamp(time,0,1)
+	# Changes the Color based on the Position of the Gradient
+	sprite_2d.self_modulate = hitEffectResource.gradient.sample(animation_player.current_animation_position)
 	
