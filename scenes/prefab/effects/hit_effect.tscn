@@ -1,17 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://clj53k1uhgo4l"]
+[gd_scene load_steps=8 format=3 uid="uid://clj53k1uhgo4l"]
 
 [ext_resource type="Script" path="res://scripts/effects/hit_effect.gd" id="1_1t2re"]
 [ext_resource type="Texture2D" uid="uid://crm8cxk3chxxi" path="res://assets/sprites/effects/Free Smoke Fx  Pixel 04.png" id="2_8j7qm"]
-[ext_resource type="Resource" uid="uid://bem4iv408plrm" path="res://scripts/resources/effects/hit_effect1.tres" id="2_nkfp6"]
+[ext_resource type="Resource" uid="uid://dvow4ow1b3211" path="res://scripts/resources/effects/hit_effect4.tres" id="2_dcdnw"]
+[ext_resource type="AnimationLibrary" uid="uid://c2rgfa7n06vld" path="res://assets/animation_libraries/effects_anims.res" id="4_k45c1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8tpaw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ogrj"]
 atlas = ExtResource("2_8j7qm")
-region = Rect2(0, 324.128, 511.422, 55.2339)
+region = Rect2(0, 260, 512, 64)
 
-[node name="HitEffect" type="Node2D" groups=["effects"]]
+[sub_resource type="Animation" id="Animation_g48wb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_224b2"]
+_data = {
+"RESET": SubResource("Animation_g48wb")
+}
+
+[node name="HitEffect" type="Node2D" node_paths=PackedStringArray("animation_player") groups=["effects"]]
 script = ExtResource("1_1t2re")
-hitEffectResource = ExtResource("2_nkfp6")
+hitEffectResource = ExtResource("2_dcdnw")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.961151, 0.549646, 0.255167, 1)
-texture = SubResource("AtlasTexture_8tpaw")
+texture = SubResource("AtlasTexture_5ogrj")
+hframes = 8
+frame = 1
+region_rect = Rect2(0, 7, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_224b2"),
+"effects_anims": ExtResource("4_k45c1")
+}
