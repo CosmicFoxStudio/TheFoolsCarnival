@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://crm8cxk3chxxi" path="res://assets/sprites/effects/Free Smoke Fx  Pixel 04.png" id="1_vbaeb"]
 
 [sub_resource type="Gradient" id="Gradient_l3hut"]
-offsets = PackedFloat32Array(0, 0.279883, 0.833819, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.990645, 0.327593, 0, 1, 0.997904, 0.942552, 0.880694, 1, 0.91, 0.364, 0, 0)
+offsets = PackedFloat32Array(0, 0.553936, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.867386, 0, 0.128697, 1, 0.91, 0.364, 0, 0)
 metadata/_snap_count = 7
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tpaw"]

@@ -7,12 +7,11 @@ extends Node
 
 @export var animation_player: AnimationPlayer
 
-
-
 var time : float = 0
 
 func _ready() -> void:
 	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
+	animation_player.play("effects_anims/hit_effect")
 	
 
 func _process(delta: float) -> void:
