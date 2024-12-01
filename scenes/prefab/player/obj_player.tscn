@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://3ay3cu5gnbw2"]
+[gd_scene load_steps=20 format=3 uid="uid://3ay3cu5gnbw2"]
 
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health_component.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
 [ext_resource type="Resource" uid="uid://drt3b8pm3eayx" path="res://resources/characters/res_char_pierrot.tres" id="2_7k0pf"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_00ysq"]
 [ext_resource type="PackedScene" uid="uid://b017j8kmnrqn7" path="res://scenes/prefab/debug/obj_debug_overlay.tscn" id="6_affh4"]
+[ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/crowd_applause.wav" id="7_f6o7l"]
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
+[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/crowd_applause_crushed.wav" id="8_s6yx5"]
+[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/crowd_booing_crushed.wav" id="9_oybm7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]
 radius = 21.0
@@ -174,6 +177,24 @@ _data = {
 "walk": SubResource("Animation_faukw")
 }
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_lk7uh"]
+shuffle = true
+stream_count = 2
+stream_0 = ExtResource("9_oybm7")
+stream_1 = ExtResource("8_s6yx5")
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_mkb2x"]
+clip_count = 3
+clip_0/name = &"IDLE"
+clip_0/stream = ExtResource("7_f6o7l")
+clip_0/auto_advance = 0
+clip_1/name = &"WALK"
+clip_1/stream = ExtResource("8_s6yx5")
+clip_1/auto_advance = 0
+clip_2/name = &"ATTACK"
+clip_2/stream = SubResource("AudioStreamPlaylist_lk7uh")
+clip_2/auto_advance = 0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
@@ -203,6 +224,9 @@ position = Vector2(41, -39)
 shape = SubResource("RectangleShape2D_g7pcs")
 debug_color = Color(0.986348, 0, 0.324526, 0.42)
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_k1ba5")
@@ -213,3 +237,9 @@ autoplay = "idle"
 visible = false
 offset_top = -109.0
 offset_bottom = -109.0
+
+[node name="PlayerAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamInteractive_mkb2x")
+volume_db = -10.0
+attenuation = 2.0
+bus = &"sfx"

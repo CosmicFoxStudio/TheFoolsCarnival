@@ -28,6 +28,7 @@ static var spawnTimer : Timer
 
 # Runs before ready
 func _enter_tree() -> void:
+	Global.audioManager.current_stage = "Stage1" # Change it to a Data Structure (Dictionary)
 	Global.level = self
 
 	player = _player

@@ -8,5 +8,8 @@ var playerResource : CharacterData = preload("res://resources/characters/res_cha
 # var HUD : UI
 var debug : GlobalDebug
 
+var audioManager : AudioManager
+
+
 var pause : bool = false
 var debugMode : bool = true

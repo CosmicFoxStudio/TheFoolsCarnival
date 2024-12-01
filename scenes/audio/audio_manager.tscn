@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://djcmkr3wdgvix"]
+[gd_scene load_steps=7 format=3 uid="uid://djcmkr3wdgvix"]
 
 [ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="1_mgqhi"]
+[ext_resource type="AudioStream" uid="uid://c4aaw2qoku4ax" path="res://assets/audio/sfx/tfc_intro.ogg" id="2_chv0h"]
+[ext_resource type="AudioStream" uid="uid://d1mdmynewbhch" path="res://assets/audio/sfx/tfc_battle.ogg" id="3_25p1q"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_brvyg"]
+stream_count = 2
+stream_0 = ExtResource("2_chv0h")
+stream_1 = ExtResource("3_25p1q")
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_5byfl"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_wcblp"]
 clip_count = 2
-clip_0/name = &"Stage1"
+clip_0/name = &"CircusMusic"
 clip_0/stream = SubResource("AudioStreamPlaylist_brvyg")
 clip_0/auto_advance = 0
-clip_1/name = &"Stage2"
+clip_1/name = &"Stage2Music"
 clip_1/stream = SubResource("AudioStreamPlaylist_5byfl")
 clip_1/auto_advance = 0
 _transitions = {
@@ -32,6 +37,8 @@ Vector2i(1, 0): {
 [node name="AudioManager" type="Node" node_paths=PackedStringArray("bg_music_stage")]
 script = ExtResource("1_mgqhi")
 bg_music_stage = NodePath("BackgroundMusicPlayer")
+music_volume = 1
+sfx_volume = 1
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_wcblp")
