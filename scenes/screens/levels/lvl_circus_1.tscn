@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bh5aw3urpaxq0"]
 
-[ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_p1qbe"]
-[ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_48hy1"]
+[ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
+[ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
 size = Vector2(20, 360)
@@ -18,10 +18,10 @@ size = Vector2(640, 20)
 [node name="LevelCircus1" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("1_p1qbe")
+texture = ExtResource("1_if02w")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("2_48hy1")]
+[node name="Player" parent="." instance=ExtResource("2_xu5av")]
 position = Vector2(75, 327)
 
 [node name="StageLimits" type="Node" parent="."]

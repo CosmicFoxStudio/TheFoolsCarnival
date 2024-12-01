@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	# Load first scene
 	# load_scene("res://scenes/screens/menu_interface.tscn")
-	load_scene("res://scenes/screens/levels/level_circus_1.tscn")
+	load_scene("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:

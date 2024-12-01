@@ -331,7 +331,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tyida")
-next_scene = "res://scenes/screens/main.tscn"
+next_scene = "res://scenes/screens/levels/lvl_test_0.tscn"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 show_behind_parent = true
