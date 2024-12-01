@@ -1,6 +1,8 @@
 class_name Player extends Character
 
-# enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
+@onready var audioStreamPlayer: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+# enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING } # Not being used at the moment
 
 # Get input dynamically (read-only)
 var direction: float:
@@ -11,11 +13,13 @@ var jump: float:
 var attack: bool:
 	get: return Input.is_action_just_pressed("basic_attack")
 
-# Keyboard Pressure Variables
-var minPressure: float = 0.8
-var maxPressure: float = 8.0
-var pressureThreshold: float = 8.0
+# Jump variables
+var minPressure: float = 20.0
+var maxPressure: float = 40.0
+var pressureThreshold: float = 30.0
 var pressure: float = 0.0
+var jump_time: float = 0.0
+var max_jump_time: float = 0.3  # Maximum time (in seconds) the jump can build height
 
 func _ready() -> void:
 	super()
@@ -27,18 +31,25 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	
-	if (Global.pause):
+
+	if Global.pause:
 		ChangeState(eState.IDLE)
 
-	## Handle pressure logic only when jump is pressed
-	#if jump:
-		#pressure += delta * 10.0
-	#else:
-		#pressure -= delta * 15.0
-#
-	## Clamp pressure between min and max
-	#pressure = clamp(pressure, minPressure, maxPressure)
+	# JUMP
+	if jump and (state == eState.JUMP or state == eState.IDLE):
+		pressure += delta * 10.0
+	elif not jump:
+		pressure -= delta * 15.0
+
+	pressure = clamp(pressure, minPressure, maxPressure)
+
+func _debug() -> void:
+	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
+	Global.debug.UpdateDebugVariable(1, "Velocity Y: " + str(velocity.y))
+	Global.debug.UpdateDebugVariable(2, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(3, "Direction: " + str(direction))
+	Global.debug.UpdateDebugVariable(4, "Jump: " + str(jump))
+	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
 
 func EnablePlayerMovement() -> void:
 	if direction:
@@ -68,33 +79,28 @@ func StateWalk() -> void:
 	if jump: ChangeState(eState.JUMP)
 	if attack: ChangeState(eState.ATTACK1)
 
-# Handle input for jumping
 func StateJump() -> void:
 	if dead: return
-	
+
 	PlayAnimation("jump")
 	EnablePlayerMovement()
-	
-	if is_on_floor():
-		# Ensure pressure starts at minimum when jump is triggered
-		if pressure <= minPressure:
-			pressure = minPressure
-		
-		# Build pressure while the jump key is held
-		if Input.is_action_pressed("jump"):
-			pressure += get_process_delta_time() * 20.0  # Faster pressure accumulation
-			pressure = clamp(pressure, minPressure, maxPressure)
-		else:
-			# Apply jump velocity when jump key is released
-			var default_jump_strength = 0.5  # Default jump strength (50% of max)
-			var jump_strength = max(default_jump_strength, pressure / maxPressure)
-			velocity.y = -properties.jump_velocity * jump_strength
-			print("Jumping with strength:", jump_strength, "Velocity:", velocity.y)
-			
-			# Reset pressure for the next jump
-			pressure = 0
-	
-	# Transition to falling state if airborne
+
+	# Initial jump and pressure handling
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		pressure = minPressure
+		velocity.y = -properties.jump_velocity * (pressure / maxPressure)
+		jump_time = 0.0
+
+	# Building jump height while button is held
+	if Input.is_action_pressed("jump") and jump_time < max_jump_time:
+		jump_time += get_process_delta_time()
+		#pressure += get_process_delta_time() * 10.0
+		#pressure = clamp(pressure, minPressure, maxPressure)
+		velocity.y = -properties.jump_velocity * (pressure / maxPressure)
+
+	if Input.is_action_just_released("jump") or pressure >= maxPressure or jump_time >= max_jump_time:
+		pressure = 0
+
 	if velocity.y > 0:
 		ChangeState(eState.FALL)
 
@@ -107,10 +113,6 @@ func StateFall() -> void:
 		print("Is on floor")
 		ChangeState(eState.IDLE)
 
-func _debug() -> void:
-	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(1, "Velocity Y: " + str(velocity.y))
-	Global.debug.UpdateDebugVariable(2, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(3, "Direction: " + str(direction))
-	Global.debug.UpdateDebugVariable(4, "Jump: " + str(jump))
-	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
+func UpdatePlayerAudio(__audio: String) -> void:
+	if __audio == null: 
+		audioStreamPlayer.stop()

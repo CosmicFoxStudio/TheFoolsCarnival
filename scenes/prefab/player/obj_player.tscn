@@ -213,3 +213,5 @@ autoplay = "idle"
 visible = false
 offset_top = -109.0
 offset_bottom = -109.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
