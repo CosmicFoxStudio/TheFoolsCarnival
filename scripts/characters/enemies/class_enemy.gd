@@ -8,6 +8,7 @@ var walkTimer : float = 0
 var faceRight : bool = false
 var inAttack : bool = false
 var hurtIndex : int = 0
+var scoreValue : int = 30 # Change Later
 #var SOUNDS = []
 
 @onready var AITimer: Timer = $AITimer

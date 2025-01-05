@@ -69,20 +69,11 @@ _data = {
 "go": SubResource("Animation_nx0h5")
 }
 
-[node name="HUD" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_tnmyb")
 
 [node name="Go" type="TextureRect" parent="."]
 visible = false
-layout_mode = 0
 offset_left = 530.0
 offset_right = 570.0
 offset_bottom = 40.0
@@ -91,7 +82,7 @@ texture = ExtResource("2_pkq37")
 stretch_mode = 5
 
 [node name="UIGameplay" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -183,7 +174,7 @@ offset_bottom = 65.0
 texture = ExtResource("4_1iqq3")
 metadata/_edit_lock_ = true
 
-[node name="HUDLevelCleared" type="Control" parent="."]
+[node name="HUDLevelCleared" type="Control" parent="UIGameplay"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -192,7 +183,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="HUDLevelCleared"]
+[node name="ColorRect" type="ColorRect" parent="UIGameplay/HUDLevelCleared"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,7 +192,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.627451)
 
-[node name="Label" type="Label" parent="HUDLevelCleared"]
+[node name="Label" type="Label" parent="UIGameplay/HUDLevelCleared"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -218,7 +209,7 @@ theme_override_fonts/font = ExtResource("2_cvup0")
 theme_override_font_sizes/font_size = 32
 text = "Level Cleared"
 
-[node name="LevelClearedJingle" type="AudioStreamPlayer" parent="HUDLevelCleared"]
+[node name="LevelClearedJingle" type="AudioStreamPlayer" parent="UIGameplay/HUDLevelCleared"]
 stream = ExtResource("6_tot4r")
 
 [node name="TimerEnemyUI" type="Timer" parent="."]

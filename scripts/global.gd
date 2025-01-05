@@ -3,7 +3,6 @@ extends Node
 var main_scene : Node
 var scene_transition : SceneTransition
 var level : LevelController
-var camera : Camera2D
 var playerResource : CharacterData = preload("res://resources/characters/res_char_pierrot.tres")
 var debug : GlobalDebug
 
