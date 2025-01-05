@@ -22,6 +22,11 @@ var pause_timer: float = 0.0
 var player_detected: bool = false
 var is_patrolling: bool = true
 
+# Custom logic to decide AI attack behavior
+#func ContinueCombo() -> bool:
+	#return randi() % 2 == 0  # 50% chance to continue combo
+
+# Initialization
 func _ready() -> void:
 	super()
 	type = eType.ENEMY
@@ -67,7 +72,7 @@ func PatrolBehavior(delta: float) -> void:
 		detection_target = player
 		ai_state = eAIState.CHASE
 
-func ChaseBehavior(delta: float) -> void:
+func ChaseBehavior(_delta: float) -> void:
 	if not detection_target:
 		ai_state = eAIState.RETURN
 		return
@@ -83,7 +88,7 @@ func ChaseBehavior(delta: float) -> void:
 	if position.distance_to(detection_target.position) > detection_range:
 		ai_state = eAIState.RETURN
 
-func AttackBehavior(delta: float) -> void:
+func AttackBehavior(_delta: float) -> void:
 	# Stop moving and attack
 	StopMovement()
 	PlayAnimation("attack1")
@@ -98,7 +103,7 @@ func AttackBehavior(delta: float) -> void:
 	if detection_target and position.distance_to(detection_target.position) > attack_range:
 		ai_state = eAIState.CHASE
 
-func ReturnToPatrolBehavior(delta: float) -> void:
+func ReturnToPatrolBehavior(_delta: float) -> void:
 	# Return to the nearest patrol point
 	var target_position = patrol_points[current_patrol_point]
 	MoveTowardsTarget(target_position, patrol_speed)
@@ -124,17 +129,23 @@ func DetectPlayer() -> Node2D:
 
 # State Overrides
 func StateIdle() -> void:
+	if dead: return
+	PlayAnimation("idle")
 	StopMovement()
-	print("Enemy idle state")
 
-func StateWalk() -> void:
-	print("Enemy walk state")
+	# Example AI logic to decide when to attack (25% chance to start attacking)
+	if randi() % 4 == 0: ChangeState(eState.ATTACK)
 
-func StateAttack1() -> void:
-	PlayAnimation("Enemy attack state")
+func StateWalk() -> void: print("Enemy WALK state")
 
-func StateFall() -> void:
-	PlayAnimation("Enemy fall state")
+func StateJump() -> void:
+	if is_on_floor():
+		velocity.y = -properties.jump_velocity
+		PlayAnimation("jump")
+
+func StateFall() -> void: print("Enemy FALL state")
+func StateAttack() -> void: pass #HandleAttack(0)
+func StateAttack2() -> void: pass #HandleAttack(1)
 
 # Review this later
 func ChangeState(new_state: eState) -> void:
@@ -144,5 +155,5 @@ func ChangeState(new_state: eState) -> void:
 	match state:
 		eState.IDLE: StateIdle()
 		eState.WALK: StateWalk()
-		eState.ATTACK1: StateAttack1()
+		eState.ATTACK: StateAttack()
 		eState.FALL: StateFall()
