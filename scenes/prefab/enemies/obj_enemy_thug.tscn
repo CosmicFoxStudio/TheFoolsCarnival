@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/characters/enemies/scr_thug.gd" id="1_gavmj"]
 [ext_resource type="Resource" uid="uid://cc2827sdn5wil" path="res://resources/characters/res_char_thug.tres" id="2_bckja"]
 [ext_resource type="Texture2D" uid="uid://bbybilbbskgll" path="res://assets/sprites/characters/enemies/thug/sheet_thug.png" id="2_fh77o"]
-[ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health_component.tscn" id="3_ynp6g"]
+[ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="3_ynp6g"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_5prjj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcyja"]

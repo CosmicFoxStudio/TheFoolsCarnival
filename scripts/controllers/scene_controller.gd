@@ -9,7 +9,7 @@ var scene_instance : Node = null
 
 func _ready() -> void:
 	# Hides the mouse cursor
-	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	Global.main_scene = self
 
