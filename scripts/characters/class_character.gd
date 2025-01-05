@@ -1,6 +1,6 @@
 class_name Character extends CharacterBody2D
 
-enum eState { IDLE, WALK, JUMP, FALL, ATTACK, HURT, DIED }
+enum eState { IDLE, WALK, JUMP, FALL, ATTACK, HURT, DOWN, UP, DIED }
 enum eType { PLAYER, ENEMY, NPC }
 
 # Signals

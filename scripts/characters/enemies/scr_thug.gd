@@ -74,11 +74,128 @@ func StateWalk(delta) -> void:
 	Flip() # Only flips towards the player while in walk state
 	move_and_slide()
 	
-func StateAttack() -> void: 
-	print("Enemy is in ATTACK state.")
-	
 	# Example AI logic to decide when to attack (25% chance to start attacking)
-	#if randi() % 4 == 0: ChangeState(eState.ATTACK)
+	# if randi() % 4 == 0: ChangeState(eState.ATTACK)
+	
+func StateAttack() -> void: 
+	if dead or Global.level.player.dead: return
+
+	if enterState:
+		enterState = false
+		StopMovement()
+		StartAttackCollision()
+		PlayAnimation("attack1")
+		isAttacking = true
+
+		# Ensure the animation_finished signal is connected
+		if not animationPlayer.animation_finished.is_connected(OnEnemyAnimationFinished):
+			animationPlayer.animation_finished.connect(OnEnemyAnimationFinished)
+
+func OnEnemyAnimationFinished(__animName: String) -> void:
+	if __animName == "attack1":
+		EndAttackCollision()
+		isAttacking = false
+		ChangeState(eState.IDLE)
+
+func StateHurt() -> void:
+	if enterState:
+		enterState = false
+		PlayAnimation("hurt")
+
+		AITimer.stop()
+		AITimer.wait_time = randf_range(0.5, 1)
+		AITimer.start()
+
+		await AITimer.timeout
+		ChangeState(eState.IDLE)
+
+func StateDown() -> void:
+	if enterState:
+		enterState = false
+
+		# Down animation and VFX
+		SetHurtThrow()
+		await AITimer.timeout
+		
+		ChangeState(eState.UP)
+
+	# Physics
+	move_and_slide()
+
+func SetHurtThrow() -> void:
+	PlayAnimation("down")
+	
+	# Can't receive damage while downed
+	hitboxCollision.disabled = true
+	
+	# Horizontal throw - Not working too nicely with move_and_slide() :( 
+	velocity.x = 0.3 if Global.level.player.global_position.x < self.global_position.x else -0.3
+	
+	# Vertical throw
+	velocity.y = 3
+	#velocity.x = 0
+
+	AITimer.stop()
+	AITimer.wait_time = randf_range(1, 2)
+	AITimer.start()
+
+func StateUp() -> void:
+	if enterState:
+		enterState = false
+		PlayAnimation("up")
+		await animationPlayer.animation_finished
+		
+		# Can receive damage after getting up
+		hitboxCollision.disabled = false
+		
+		ChangeState(eState.IDLE)
+
+func StateDied() -> void:
+	if enterState:
+		enterState = false
+		dead = true
+
+		#PlaySound(SOUNDS[2]) # Play death sound
+
+		# Down animation and VFX
+		SetHurtThrow()
+		
+		# Update enemy HUD 
+		# HUD.HudUpdateEnemy(chara_name, 0, hp_max, portrait)
+
+		await AITimer.timeout
+		velocity.x = 0 # To prevent the death sliding
+
+		PlayAnimation("died")
+
+		# Death VFX (flicker sprite)
+		for i in range(8):
+			sprite.visible = not sprite.visible
+			await get_tree().create_timer(0.1).timeout
+		# Makes the enemy disappear after being defeated
+		sprite.hide()
+		
+		# Tells the Level Controller this enemy has died
+		Global.level.EnemyDied()
+		
+		# Removes the node safely
+		queue_free()
+	
+	# Physics
+	move_and_slide()
+
+func OnDamage(__health: float) -> void:
+	# Update enemy HUD 
+	# HUD.HudUpdateEnemy(chara_name, __health, hp_max, portrait)
+	
+	hurtIndex += 1 # Reset is on idle state
+	match hurtIndex:
+		1: 
+			# PlaySound(SOUNDS[0])
+			ChangeState(eState.HURT)
+		2: 
+			# PlaySound(SOUNDS[1])
+			ChangeState(eState.DOWN)
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(8, "Velocity X: " + str(velocity.x))

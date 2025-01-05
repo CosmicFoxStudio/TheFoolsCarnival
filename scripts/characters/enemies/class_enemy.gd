@@ -11,11 +11,9 @@ var hurtIndex : int = 0
 #var SOUNDS = []
 
 @onready var AITimer: Timer = $AITimer
+@onready var hitboxCollision: CollisionShape2D = $Hitbox/HitboxCollision
 @onready var enemyVoice: AudioStreamPlayer = $EnemyVoice
-
-# Custom logic to decide AI attack behavior
-#func ContinueCombo() -> bool:
-	#return randi() % 2 == 0  # 50% chance to continue combo
+@onready var HUD: UI = Global.level.HUD
 
 # Initialization
 func _ready() -> void:
@@ -31,6 +29,7 @@ func Flip() -> void:
 	sprite.flip_h = faceRight
 
 	# Flip attack collision based on facing direction
+	# (FIX ME) Attack Box doesn't adapt correctly when sprite is flipped
 	attackBox.scale.x = -1 if faceRight else 1
 
 # State Overrides

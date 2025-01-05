@@ -118,8 +118,8 @@ func StateAttack() -> void:
 	StopMovement()
 
 	# Connect the animation_finished signal if not already connected
-	if not animationPlayer.animation_finished.is_connected(_on_animation_finished):
-		animationPlayer.animation_finished.connect(_on_animation_finished)
+	if not animationPlayer.animation_finished.is_connected(OnAnimationFinished):
+		animationPlayer.animation_finished.connect(OnAnimationFinished)
 
 	# Combo logic
 	if not comboTimer.is_stopped():
@@ -141,11 +141,11 @@ func StateAttack() -> void:
 		comboTimer.wait_time = 0.8
 		comboTimer.start()
 
-func _on_animation_finished(anim_name: String) -> void:
+func OnAnimationFinished(__animName: String) -> void:
 	EndAttackCollision()
 	
-	if anim_name in ["attack1", "attack2"]:
-		print(anim_name, " finished, returning to idle")
+	if __animName in ["attack1", "attack2"]:
+		print(__animName, " finished, returning to idle")
 		isAttacking = false
 		
 		ChangeState(eState.IDLE)
