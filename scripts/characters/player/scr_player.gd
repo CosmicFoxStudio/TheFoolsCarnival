@@ -50,15 +50,20 @@ func EnablePlayerMovement() -> void:
 func StateIdle() -> void:
 	if dead: return
 	
+	# For safety, reset variables
+	isAttacking = false
+	comboIndex = 0
+	comboTimer.stop()
+	
 	PlayAnimation("idle")
 	StopMovement()
 	
 	if direction: ChangeState(eState.WALK)
 	if jump: ChangeState(eState.JUMP)
-	if attack: ChangeState(eState.ATTACK1)
+	if attack: ChangeState(eState.ATTACK)
 
-func StateWalk() -> void:
-	if dead: return
+func StateWalk(_delta) -> void:
+	if dead or isAttacking: return
 	
 	PlayAnimation("walk")
 	EnablePlayerMovement()
@@ -66,7 +71,7 @@ func StateWalk() -> void:
 	
 	if not direction: ChangeState(eState.IDLE)
 	if jump: ChangeState(eState.JUMP)
-	if attack: ChangeState(eState.ATTACK1)
+	if attack: ChangeState(eState.ATTACK)
 
 # Handle input for jumping
 func StateJump() -> void:
@@ -86,10 +91,10 @@ func StateJump() -> void:
 			pressure = clamp(pressure, minPressure, maxPressure)
 		else:
 			# Apply jump velocity when jump key is released
-			var default_jump_strength = 0.5  # Default jump strength (50% of max)
-			var jump_strength = max(default_jump_strength, pressure / maxPressure)
-			velocity.y = -properties.jump_velocity * jump_strength
-			print("Jumping with strength:", jump_strength, "Velocity:", velocity.y)
+			var defaultJumpStrength = 0.5  # Default jump strength (50% of max)
+			var jumpStrength = max(defaultJumpStrength, pressure / maxPressure)
+			velocity.y = -properties.jumpVelocity * jumpStrength
+			print("Jumping with strength:", jumpStrength, "Velocity:", velocity.y)
 			
 			# Reset pressure for the next jump
 			pressure = 0
@@ -107,6 +112,49 @@ func StateFall() -> void:
 		print("Is on floor")
 		ChangeState(eState.IDLE)
 
+func StateAttack() -> void:
+	if dead: return
+
+	StopMovement()
+
+	# Connect the animation_finished signal if not already connected
+	if not animationPlayer.animation_finished.is_connected(OnAnimationFinished):
+		animationPlayer.animation_finished.connect(OnAnimationFinished)
+
+	# Combo logic
+	if not comboTimer.is_stopped():
+		if attack:  # Player pressed attack again
+			if comboIndex == 1:
+				print("Second attack triggered")
+				StartAttackCollision()
+				animationPlayer.play("attack2")
+				comboIndex += 1
+				#comboTimer.stop()
+				#comboTimer.start()
+
+	if comboIndex == 0:
+		print("First attack triggered")
+		StartAttackCollision()
+		animationPlayer.play("attack1")
+		comboIndex += 1
+		isAttacking = true
+		comboTimer.wait_time = 0.8
+		comboTimer.start()
+
+func OnAnimationFinished(__animName: String) -> void:
+	EndAttackCollision()
+	
+	if __animName in ["attack1", "attack2"]:
+		print(__animName, " finished, returning to idle")
+		isAttacking = false
+		
+		ChangeState(eState.IDLE)
+
+func _physics_process(delta: float) -> void: 
+	super(delta)
+	# Clamps the player position to the camera boundaries
+	position.x = clamp(position.x, camera.position.x - 640, camera.clampedPos + 640)
+
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
 	Global.debug.UpdateDebugVariable(1, "Velocity Y: " + str(velocity.y))
@@ -114,3 +162,11 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(3, "Direction: " + str(direction))
 	Global.debug.UpdateDebugVariable(4, "Jump: " + str(jump))
 	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
+	Global.debug.UpdateDebugVariable(6, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(7, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(camera.position.x) + " / " + str(camera.position.y))
+	Global.debug.UpdateDebugVariable(9, "Last Area?: " + str(Global.level.lastArea))
+
+	# Console
+	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))
+	
