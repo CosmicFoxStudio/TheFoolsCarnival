@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://3ay3cu5gnbw2"]
 
-[ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health_component.tscn" id="1_safe6"]
+[ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
 [ext_resource type="Resource" uid="uid://drt3b8pm3eayx" path="res://resources/characters/res_char_pierrot.tres" id="2_7k0pf"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_00ysq"]
