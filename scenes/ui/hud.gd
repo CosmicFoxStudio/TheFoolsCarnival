@@ -1,4 +1,4 @@
-class_name UI extends Control
+class_name UI extends CanvasLayer
 
 # Go
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
@@ -53,7 +53,7 @@ func LevelCleared() -> void:
 	var levelMusic = get_parent().get_node("AudioStreamPlayer")
 	levelMusic.stop()
 
-	# Show Level Cleared HUD
+	# Show Level Cleared
 	var hudLevelCleared = $UIGameplay/HUDLevelCleared
 	hudLevelCleared.show()
 	var levelClearMusic = $UIGameplay/HUDLevelCleared/LevelClearedJingle
@@ -63,7 +63,7 @@ func LevelCleared() -> void:
 	await get_tree().create_timer(5).timeout
 	
 	# Change back to menu
-	Global.screen_transition.transition(
-		"res://scenes/screens/player_selector.tscn", 
-		Global.screen_transition.TransitionType.FADE
+	Global.scene_transition.transition(
+		"res://scenes/screens/menu_interface.tscn", 
+		Global.scene_transition.TransitionType.FADE
 	)

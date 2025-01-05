@@ -13,6 +13,7 @@ script = ExtResource("1_80xyb")
 [node name="LayerControl" type="CanvasLayer" parent="."]
 
 [node name="Debug" parent="LayerControl" instance=ExtResource("2_feukp")]
+visible = false
 
 [node name="LayerTransition" type="CanvasLayer" parent="."]
 layer = 2

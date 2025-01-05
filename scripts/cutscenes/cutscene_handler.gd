@@ -22,7 +22,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if cutscene_player.current_animation_position >= cutscene_player.current_animation_length:
 		# Change scene after the cutscene is done
-		Global.scene_transition.transition("res://scenes/screens/levels/lvl_test_0.tscn")
+		Global.scene_transition.transition("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 func _pause() -> void:
 	cutscene_player.pause()
@@ -31,7 +31,7 @@ func _pause() -> void:
 func _skip() -> void:
 	# Skip the scene
 	cutscene_player.seek(cutscene_player.current_animation_length - 1, true)
-	Global.scene_transition.transition("res://scenes/screens/levels/lvl_test_0.tscn")
+	Global.scene_transition.transition("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 func _on_skip_button_pressed() -> void:
 	_highlight_button(selected_button_index)
@@ -41,7 +41,7 @@ func _on_skip_button_pressed() -> void:
 func _on_next_button_pressed() -> void:
 	_highlight_button(selected_button_index)
 	if cutscene_player.current_animation_position >= cutscene_player.current_animation_length:
-		Global.scene_transition.transition("res://scenes/screens/levels/lvl_test_0.tscn")
+		Global.scene_transition.transition("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 	if not cutscene_player.is_playing():
 		cutscene_player.play()

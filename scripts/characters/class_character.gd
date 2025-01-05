@@ -21,8 +21,8 @@ var dead : bool = false
 #var comboAnims: Array[String] = ["attack1", "attack2"]
 var comboIndex: int = 0  # The current attack in the combo
 
-# @onready var HUD: UI = Global.level.HUD
-@onready var camera: Camera2D = Global.camera
+@onready var HUD: UI = Global.level.HUD
+@onready var camera: Camera2D = Global.level.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
 @onready var hpMax := properties.hpMax
@@ -93,7 +93,8 @@ func _ready() -> void:
 	health.hp_max = properties.hpMax
 	health.hp = hpMax
 	
-	# Connect signals
+	### Connect signals
+	# This one is mostly used by enemies, but I'll leave it here for now
 	health.__on_damage.connect(func(_hp: float): 
 		OnDamage(_hp)
 		# SFX and VFX could go here

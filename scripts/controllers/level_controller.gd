@@ -3,11 +3,11 @@ class_name LevelController extends Scene
 ## This controller handles connection between nodes in the level scenes
 
 @export var _player : CharacterBody2D
-@export var _camera: Camera2D
-@export var _HUD: UI
+@export var _camera : Camera2D
+@export var _HUD : UI
 #@export var _audience_meter : AudienceMeter
 
-var score:int = 0
+var score : int = 0
 
 # Static variables persist across instances and scene changes
 # ideal for global data management, utility functions, and ensuring a single data copy 
@@ -39,24 +39,24 @@ func EnemyDied() -> void:
 	enemies -= 1
 	print("Enemy defeated!")
 	
-	#audience_meter.add_meter(enemy.score_value * 0.1)
-	#score += enemy.score_value
+	# audience_meter.add_meter(enemy.score_value * 0.1)
+	# score += enemy.scoreValue
 	
-	#if lastArea: 
-		## Ends the game if level is cleared
-		#HUD.LevelCleared()
-		#return
-		#
-	#if enemies <= 0:
-		#HUD.ShowGo()
-		#NextArea(unlockedAtArea)
+	if lastArea: 
+		# Ends the game if level is cleared
+		HUD.LevelCleared()
+		return
+		
+	if enemies <= 0:
+		HUD.ShowGo()
+		NextArea(unlockedAtArea)
 
-#func NextArea(__cameraLimit: float) -> void:
-	#Global.level.camera.SetCameraLimit(__cameraLimit)
+func NextArea(__cameraLimit: float) -> void:
+	Global.level.camera.SetCameraLimit(__cameraLimit)
 
-#func ConfigNextArea(__amount: int, __unlocked: float) -> void:
-	#enemies = __amount
-	#unlockedAtArea = __unlocked
+func ConfigNextArea(__amount: int, __unlocked: float) -> void:
+	enemies = __amount
+	unlockedAtArea = __unlocked
 
 func EndGame():
 	print("GAME OVER")

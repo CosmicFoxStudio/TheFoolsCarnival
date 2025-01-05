@@ -2,9 +2,6 @@ class_name Player extends Character
 
 # enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
 
-# Player HUD
-@onready var HUD: UI = Global.level.HUD
-
 # Get input dynamically (read-only)
 var direction: float:
 	get:
@@ -156,8 +153,7 @@ func OnAnimationFinished(__animName: String) -> void:
 func _physics_process(delta: float) -> void: 
 	super(delta)
 	# Clamps the player position to the camera boundaries
-	# position.x = clamp(position.x, camera.position.x - CAMERA_OFFSET, camera.clamped_pos + CAMERA_OFFSET)
-
+	position.x = clamp(position.x, camera.position.x - 640, camera.clampedPos + 640)
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
@@ -168,7 +164,9 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
 	Global.debug.UpdateDebugVariable(6, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(7, "Combo Index: " + str(comboIndex))
-	
+	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(camera.position.x) + " / " + str(camera.position.y))
+	Global.debug.UpdateDebugVariable(9, "Last Area?: " + str(Global.level.lastArea))
+
 	# Console
 	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))
 	

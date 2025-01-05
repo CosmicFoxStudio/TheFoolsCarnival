@@ -1,7 +1,6 @@
 extends Enemy
 
 var targetDistance : Vector2 # Distance to player
-@onready var HUD: UI = Global.level.HUD
 
 # State Overrides
 func StateIdle() -> void:
@@ -199,10 +198,10 @@ func OnDamage(__health: float) -> void:
 			ChangeState(eState.DOWN)
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(8, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(9, "Velocity Y: " + str(velocity.y))
-	Global.debug.UpdateDebugVariable(10, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(11, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(12, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(13, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
+	Global.debug.UpdateDebugVariable(10, "Velocity X: " + str(velocity.x))
+	Global.debug.UpdateDebugVariable(11, "Velocity Y: " + str(velocity.y))
+	Global.debug.UpdateDebugVariable(12, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(15, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
 	
