@@ -1,7 +1,10 @@
 class_name Character extends CharacterBody2D
 
-enum eState { IDLE, WALK, JUMP, FALL, ATTACK1, ATTACK2, HURT, DIED }
+enum eState { IDLE, WALK, JUMP, FALL, ATTACK, HURT, DIED }
 enum eType { PLAYER, ENEMY, NPC }
+
+# Signals
+# signal __on_item_picked(item : Item)
 
 # Shared properties
 @export var properties: CharacterData
@@ -15,6 +18,8 @@ var enterState: bool = true
 var currentHealth: int
 var isAttacking: bool = false
 var dead : bool = false
+#var comboAnims: Array[String] = ["attack1", "attack2"]
+var comboIndex: int = 0  # The current attack in the combo
 
 @onready var camera: Camera2D = Global.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
@@ -23,9 +28,7 @@ var dead : bool = false
 @onready var attackBox: Area2D = $Attack
 @onready var attackCollision: CollisionShape2D = $Attack/AttackCollision
 @onready var health: Health = $Health
-
-# Signals
-# signal __on_item_picked(item : Item)
+@onready var comboTimer: Timer = $ComboTimer # Timer to reset combo after a delay
 
 ### General Functions
 func StopMovement() -> void:
@@ -45,47 +48,16 @@ func ApplyGravity(delta: float) -> void:
 func PlayAnimation(__animName: String) -> void:
 	if enterState:
 		enterState = false
-		if not isAttacking: # and not animationPlayer.is_playing()
-			animationPlayer.play(__animName)
+		animationPlayer.play(__animName)
 
-# State Methods (override in subclasses if needed)
-func StateIdle() -> void:
-	velocity.x = 0
-	PlayAnimation("idle")
-
-func StateWalk() -> void:
-	PlayAnimation("walk")
-
-func StateJump() -> void:
-	if is_on_floor():
-		velocity.y = -properties.jump_velocity
-		PlayAnimation("jump")
-
-func StateFall() -> void:
-	PlayAnimation("fall")
-
-func StateAttack1() -> void:
-	if not isAttacking:
-		isAttacking = true
-		PlayAnimation("attack1")
-		# Add attack behavior
-		isAttacking = false
-
-func StateAttack2() -> void:
-	if not isAttacking:
-		isAttacking = true
-		PlayAnimation("attack2")
-		# Add different attack behavior
-		isAttacking = false
-
-func StateHurt() -> void:
-	# PlayAnimation("hurt")
-	print("hurt")
-
-func StateDied() -> void:
-	# PlayAnimation("died")
-	print("died")
-	queue_free()
+# State Methods (overridable in subclasses)
+func StateIdle() -> void: pass
+func StateWalk() -> void: pass
+func StateJump() -> void: pass
+func StateFall() -> void: pass
+func StateAttack() -> void: pass
+func StateHurt() -> void: pass
+func StateDied() -> void: queue_free()
 
 # Change State Method
 func ChangeState(new_state: eState) -> void:
@@ -93,6 +65,15 @@ func ChangeState(new_state: eState) -> void:
 	if state != new_state:
 		Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 		state = new_state
+
+# Attack Functions
+
+
+# Reset the combo chain
+func ResetCombo() -> void:
+	comboIndex = 0
+	isAttacking = false
+	ChangeState(eState.IDLE)
 
 # Initialization
 func _ready() -> void:
@@ -121,8 +102,7 @@ func _physics_process(delta: float) -> void:
 		eState.WALK: StateWalk()
 		eState.JUMP: StateJump()
 		eState.FALL: StateFall()
-		eState.ATTACK1: StateAttack1()
-		eState.ATTACK2: StateAttack2()
+		eState.ATTACK: StateAttack()
 		eState.HURT: StateHurt()
 		eState.DIED: StateDied()
 
