@@ -2,6 +2,9 @@ class_name Player extends Character
 
 # enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
 
+# Player HUD
+@onready var HUD: UI = Global.level.HUD
+
 # Get input dynamically (read-only)
 var direction: float:
 	get:
@@ -91,10 +94,10 @@ func StateJump() -> void:
 			pressure = clamp(pressure, minPressure, maxPressure)
 		else:
 			# Apply jump velocity when jump key is released
-			var default_jump_strength = 0.5  # Default jump strength (50% of max)
-			var jump_strength = max(default_jump_strength, pressure / maxPressure)
-			velocity.y = -properties.jump_velocity * jump_strength
-			print("Jumping with strength:", jump_strength, "Velocity:", velocity.y)
+			var defaultJumpStrength = 0.5  # Default jump strength (50% of max)
+			var jumpStrength = max(defaultJumpStrength, pressure / maxPressure)
+			velocity.y = -properties.jumpVelocity * jumpStrength
+			print("Jumping with strength:", jumpStrength, "Velocity:", velocity.y)
 			
 			# Reset pressure for the next jump
 			pressure = 0
