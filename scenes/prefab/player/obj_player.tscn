@@ -12,7 +12,7 @@ radius = 21.0
 height = 92.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7pcs"]
-size = Vector2(20, 54)
+size = Vector2(8, 54)
 
 [sub_resource type="Animation" id="Animation_56qf7"]
 length = 0.001
@@ -257,8 +257,9 @@ collision_layer = 0
 collision_mask = 20
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Attack"]
-position = Vector2(41, -39)
+position = Vector2(31, -39)
 shape = SubResource("RectangleShape2D_g7pcs")
+disabled = true
 debug_color = Color(0.986348, 0, 0.324526, 0.42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
