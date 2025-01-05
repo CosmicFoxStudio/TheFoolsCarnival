@@ -1,5 +1,5 @@
 @tool
-extends Node
+class_name HitEffect extends Node2D
 
 @export var hitEffectResource : HitEffectResource
 
@@ -8,6 +8,11 @@ extends Node
 @export var animation_player: AnimationPlayer
 
 var time : float = 0
+
+func _set_hitEffectRes(hitEffectRes : HitEffectResource) -> void:
+	self.hitEffectResource = hitEffectRes
+	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
+	
 
 func _ready() -> void:
 	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
@@ -24,5 +29,5 @@ func _process(delta: float) -> void:
 	
 	
 	# Changes the Color based on the Position of the Gradient
-	sprite_2d.self_modulate = hitEffectResource.gradient.sample(animation_player.current_animation_position)
+	sprite_2d.self_modulate = hitEffectResource.gradient.sample(animation_player.current_animation_position / animation_player.current_animation_length)
 	

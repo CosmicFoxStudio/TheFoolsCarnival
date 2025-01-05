@@ -1,0 +1,10 @@
+[gd_scene load_steps=5 format=3 uid="uid://d28u6u3mibdg0"]
+
+[ext_resource type="Script" path="res://scripts/utilities/scr_enemy_manager.gd" id="1_wxycf"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/enemy_data.gd" id="2_v4ak4"]
+[ext_resource type="Resource" uid="uid://dev3b53hvl70i" path="res://scripts/resources/enemies/dog_balloon.tres" id="3_qqsb0"]
+[ext_resource type="Resource" uid="uid://dx1lbxq2r0k01" path="res://scripts/resources/enemies/grounded_enemy.tres" id="4_b80aw"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_wxycf")
+enemyResources = Array[ExtResource("2_v4ak4")]([ExtResource("3_qqsb0"), ExtResource("4_b80aw")])

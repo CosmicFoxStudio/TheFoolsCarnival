@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://cc2827sdn5wil"]
+
+[ext_resource type="Texture2D" uid="uid://dsh8r4m7va8d5" path="res://assets/sprites/ui/portraits/spr_portrait_thug.png" id="1_gcm6a"]
+[ext_resource type="Script" path="res://scripts/characters/data/scr_data_character.gd" id="1_hxaiu"]
+
+[resource]
+script = ExtResource("1_hxaiu")
+name = "Thug"
+portrait = ExtResource("1_gcm6a")
+hpMax = 20.0
+speed = 8.0
+jumpVelocity = 100.0
+strength = 3
+color = Color(1, 0.129412, 0.270588, 1)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ep1uat73q4wg"]
+
+[ext_resource type="Script" path="res://scripts/effects/src_effects_manager.gd" id="1_3wvh6"]
+
+[node name="Effects" type="Node"]
+process_priority = 5
+script = ExtResource("1_3wvh6")

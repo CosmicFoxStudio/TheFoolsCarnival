@@ -1,7 +1,10 @@
 class_name Character extends CharacterBody2D
 
-enum eState { IDLE, WALK, JUMP, FALL, ATTACK1, ATTACK2, HURT, DIED }
+enum eState { IDLE, WALK, JUMP, FALL, ATTACK, HURT, DOWN, UP, DIED }
 enum eType { PLAYER, ENEMY, NPC }
+
+# Signals
+# signal __on_item_picked(item : Item)
 
 # Shared properties
 @export var properties: CharacterData
@@ -15,17 +18,18 @@ var enterState: bool = true
 var currentHealth: int
 var isAttacking: bool = false
 var dead : bool = false
+#var comboAnims: Array[String] = ["attack1", "attack2"]
+var comboIndex: int = 0  # The current attack in the combo
 
-@onready var camera: Camera2D = Global.camera
+@onready var HUD: UI = Global.level.HUD
+@onready var camera: Camera2D = Global.level.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
-@onready var hpMax := properties.hp
+@onready var hpMax := properties.hpMax
 @onready var attackBox: Area2D = $Attack
 @onready var attackCollision: CollisionShape2D = $Attack/AttackCollision
 @onready var health: Health = $Health
-
-# Signals
-# signal __on_item_picked(item : Item)
+@onready var comboTimer: Timer = $ComboTimer # Timer to reset combo after a delay
 
 ### General Functions
 func StopMovement() -> void:
@@ -43,74 +47,67 @@ func ApplyGravity(delta: float) -> void:
 
 # Animation handling
 func PlayAnimation(__animName: String) -> void:
-	if enterState:
-		enterState = false
-		if not isAttacking: # and not animationPlayer.is_playing()
-			animationPlayer.play(__animName)
+	animationPlayer.play(__animName)
 
-# State Methods (override in subclasses if needed)
-func StateIdle() -> void:
-	velocity.x = 0
-	PlayAnimation("idle")
-
-func StateWalk() -> void:
-	PlayAnimation("walk")
-
-func StateJump() -> void:
-	if is_on_floor():
-		velocity.y = -properties.jump_velocity
-		PlayAnimation("jump")
-
-func StateFall() -> void:
-	PlayAnimation("fall")
-
-func StateAttack1() -> void:
-	if not isAttacking:
-		isAttacking = true
-		PlayAnimation("attack1")
-		# Add attack behavior
-		isAttacking = false
-
-func StateAttack2() -> void:
-	if not isAttacking:
-		isAttacking = true
-		PlayAnimation("attack2")
-		# Add different attack behavior
-		isAttacking = false
-
-func StateHurt() -> void:
-	# PlayAnimation("hurt")
-	print("hurt")
-
-func StateDied() -> void:
-	# PlayAnimation("died")
-	print("died")
-	queue_free()
+# State Methods (overridable in subclasses)
+func StateIdle() -> void: pass
+func StateWalk(_delta) -> void: pass
+func StateJump() -> void: pass
+func StateFall() -> void: pass
+func StateAttack() -> void: pass
+func StateHurt() -> void: pass
+func StateDied() -> void: queue_free()
 
 # Change State Method
 func ChangeState(new_state: eState) -> void:
-	enterState = true
 	if state != new_state:
 		Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 		state = new_state
+		enterState = true
 
+# Attack Functions
+func StartAttackCollision() -> void:
+	if not isAttacking:
+		attackCollision.disabled = false
+
+func EndAttackCollision() -> void:
+	if isAttacking:
+		attackCollision.disabled = true
+
+# Reset the combo chain
+func ResetCombo() -> void:
+	comboIndex = 0
+	isAttacking = false
+	ChangeState(eState.IDLE)
+
+# This function is different for each enemy, based on the amount of hurt states
+func OnDamage(__hp: float) -> void: pass
+
+# Sound
+func PlaySound(__sound) -> void: pass
+	#audio_stream_player.stream = sound
+	#audio_stream_player.play()
+	
 # Initialization
 func _ready() -> void:
-	health.hp_max = properties.hp
+	health.hp_max = properties.hpMax
 	health.hp = hpMax
 	
-	# Connect signals
+	### Connect signals
+	# This one is mostly used by enemies, but I'll leave it here for now
 	health.__on_damage.connect(func(_hp: float): 
+		OnDamage(_hp)
 		# SFX and VFX could go here
 		ChangeState(eState.HURT)
-	)
+	)	
+	
 	health.__on_dead.connect(func(): ChangeState(eState.DIED))
 	health.__on_recover.connect(func(__amount: float): 
 		print("Recovered " + str(__amount) + " HP"))
 	
 	# Detects collision with the enemy's hitbox component
 	attackBox.area_entered.connect(func(hitbox: Hitbox):
-		print(hitbox.get_parent().name)
+		Global.debug.DebugPrint("Hitting on: " + str(hitbox.get_parent().name))
 		hitbox.__take_damage(properties.strength)
 	)
 
@@ -118,19 +115,15 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		eState.IDLE: StateIdle()
-		eState.WALK: StateWalk()
+		eState.WALK: StateWalk(delta)
 		eState.JUMP: StateJump()
 		eState.FALL: StateFall()
-		eState.ATTACK1: StateAttack1()
-		eState.ATTACK2: StateAttack2()
+		eState.ATTACK: StateAttack()
 		eState.HURT: StateHurt()
 		eState.DIED: StateDied()
 
 	ApplyGravity(delta)
 	move_and_slide() # Needs to be the last function call
-	
-	# Clamps the player position to the camera boundaries
-	# position.x = clamp(position.x, camera.position.x - CAMERA_OFFSET, camera.clamped_pos + CAMERA_OFFSET)
 
 func _debug() -> void: pass
 func _process(_delta: float) -> void: _debug()

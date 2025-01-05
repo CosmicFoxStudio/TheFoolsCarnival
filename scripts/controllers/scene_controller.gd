@@ -9,13 +9,13 @@ var scene_instance : Node = null
 
 func _ready() -> void:
 	# Hides the mouse cursor
-	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	Global.main_scene = self
 
 	# Load first scene
-	# load_scene("res://scenes/screens/menu_interface.tscn")
-	load_scene("res://scenes/screens/levels/lvl_circus_1.tscn")
+	load_scene("res://scenes/screens/menu_interface.tscn")
+	# load_scene("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:

@@ -1,7 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=13 format=3 uid="uid://bh5aw3urpaxq0"]
 
+[ext_resource type="Script" path="res://scripts/controllers/level_controller.gd" id="1_01xsf"]
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
+[ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
+[ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/hud.tscn" id="3_kp1wh"]
+[ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_spawn_enemy.tscn" id="4_3exrk"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="4_888jb"]
+[ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="8_cguhp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
 size = Vector2(20, 360)
@@ -10,19 +16,25 @@ size = Vector2(20, 360)
 size = Vector2(20, 360)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wych1"]
-size = Vector2(640, 20)
+size = Vector2(2560, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
-size = Vector2(640, 20)
+size = Vector2(2560, 20)
 
-[node name="LevelCircus1" type="Node2D"]
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera")]
+script = ExtResource("1_01xsf")
+_player = NodePath("Player")
+_camera = NodePath("Camera")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_if02w")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("2_xu5av")]
-position = Vector2(75, 327)
+[node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("4_888jb")
 
 [node name="StageLimits" type="Node" parent="."]
 
@@ -39,7 +51,7 @@ collision_mask = 6
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsRight"]
-position = Vector2(650, 180)
+position = Vector2(2570, 180)
 shape = SubResource("RectangleShape2D_jgsi4")
 
 [node name="StageLimitsBottom" type="StaticBody2D" parent="StageLimits"]
@@ -47,7 +59,7 @@ collision_mask = 6
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsBottom"]
-position = Vector2(320, 337)
+position = Vector2(1280, 337)
 shape = SubResource("RectangleShape2D_wych1")
 
 [node name="StageLimitsTop" type="StaticBody2D" parent="StageLimits"]
@@ -55,5 +67,43 @@ collision_mask = 6
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsTop"]
-position = Vector2(320, -10)
+position = Vector2(1280, -10)
 shape = SubResource("RectangleShape2D_vk4j7")
+
+[node name="SpawnEnemy" parent="." instance=ExtResource("4_3exrk")]
+position = Vector2(480, 359)
+unlockedAtArea = 480.0
+amount = 1
+enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+
+[node name="SpawnEnemy2" parent="." instance=ExtResource("4_3exrk")]
+position = Vector2(1015, 361)
+unlockedAtArea = 1120.0
+amount = 1
+enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+
+[node name="SpawnEnemy3" parent="." instance=ExtResource("4_3exrk")]
+position = Vector2(1431, 360)
+unlockedAtArea = 1600.0
+amount = 1
+enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+
+[node name="SpawnEnemy4" parent="." instance=ExtResource("4_3exrk")]
+position = Vector2(1833, 360)
+unlockedAtArea = 2080.0
+amount = 1
+enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+
+[node name="SpawnEnemy5" parent="." instance=ExtResource("4_3exrk")]
+position = Vector2(2323, 360)
+unlockedAtArea = 2080.0
+amount = 1
+enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+lastArea = true
+
+[node name="Player" parent="." instance=ExtResource("2_xu5av")]
+position = Vector2(75, 327)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_cguhp")
+autoplay = true
