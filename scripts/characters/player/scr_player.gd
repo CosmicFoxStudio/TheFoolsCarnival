@@ -121,11 +121,12 @@ func StateAttack() -> void:
 	if not animationPlayer.animation_finished.is_connected(_on_animation_finished):
 		animationPlayer.animation_finished.connect(_on_animation_finished)
 
-	# Handle combo logic
+	# Combo logic
 	if not comboTimer.is_stopped():
 		if attack:  # Player pressed attack again
-			if comboIndex == 1:  # Trigger second attack
+			if comboIndex == 1:
 				print("Second attack triggered")
+				StartAttackCollision()
 				animationPlayer.play("attack2")
 				comboIndex += 1
 				#comboTimer.stop()
@@ -133,6 +134,7 @@ func StateAttack() -> void:
 
 	if comboIndex == 0:
 		print("First attack triggered")
+		StartAttackCollision()
 		animationPlayer.play("attack1")
 		comboIndex += 1
 		isAttacking = true
@@ -140,10 +142,12 @@ func StateAttack() -> void:
 		comboTimer.start()
 
 func _on_animation_finished(anim_name: String) -> void:
-	# Check if the animation was one of the attack animations
+	EndAttackCollision()
+	
 	if anim_name in ["attack1", "attack2"]:
-		print(anim_name, "finished, returning to idle")
+		print(anim_name, " finished, returning to idle")
 		isAttacking = false
+		
 		ChangeState(eState.IDLE)
 
 func _debug() -> void:
