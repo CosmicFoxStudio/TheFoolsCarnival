@@ -21,6 +21,7 @@ var dead : bool = false
 #var comboAnims: Array[String] = ["attack1", "attack2"]
 var comboIndex: int = 0  # The current attack in the combo
 
+# @onready var HUD: UI = Global.level.HUD
 @onready var camera: Camera2D = Global.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
@@ -46,13 +47,11 @@ func ApplyGravity(delta: float) -> void:
 
 # Animation handling
 func PlayAnimation(__animName: String) -> void:
-	if enterState:
-		enterState = false
-		animationPlayer.play(__animName)
+	animationPlayer.play(__animName)
 
 # State Methods (overridable in subclasses)
 func StateIdle() -> void: pass
-func StateWalk() -> void: pass
+func StateWalk(_delta) -> void: pass
 func StateJump() -> void: pass
 func StateFall() -> void: pass
 func StateAttack() -> void: pass
@@ -61,10 +60,10 @@ func StateDied() -> void: queue_free()
 
 # Change State Method
 func ChangeState(new_state: eState) -> void:
-	enterState = true
 	if state != new_state:
 		Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 		state = new_state
+		enterState = true
 
 # Attack Functions
 func StartAttackCollision() -> void:
@@ -81,6 +80,11 @@ func ResetCombo() -> void:
 	isAttacking = false
 	ChangeState(eState.IDLE)
 
+# Sound
+func PlaySound(__sound) -> void: pass
+	#audio_stream_player.stream = sound
+	#audio_stream_player.play()
+	
 # Initialization
 func _ready() -> void:
 	health.hp_max = properties.hp
@@ -97,7 +101,7 @@ func _ready() -> void:
 	
 	# Detects collision with the enemy's hitbox component
 	attackBox.area_entered.connect(func(hitbox: Hitbox):
-		print(hitbox.get_parent().name)
+		Global.debug.DebugPrint("Hitting on: " + str(hitbox.get_parent().name))
 		hitbox.__take_damage(properties.strength)
 	)
 
@@ -105,7 +109,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		eState.IDLE: StateIdle()
-		eState.WALK: StateWalk()
+		eState.WALK: StateWalk(delta)
 		eState.JUMP: StateJump()
 		eState.FALL: StateFall()
 		eState.ATTACK: StateAttack()
@@ -114,9 +118,6 @@ func _physics_process(delta: float) -> void:
 
 	ApplyGravity(delta)
 	move_and_slide() # Needs to be the last function call
-	
-	# Clamps the player position to the camera boundaries
-	# position.x = clamp(position.x, camera.position.x - CAMERA_OFFSET, camera.clamped_pos + CAMERA_OFFSET)
 
 func _debug() -> void: pass
 func _process(_delta: float) -> void: _debug()

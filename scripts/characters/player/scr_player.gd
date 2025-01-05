@@ -62,7 +62,7 @@ func StateIdle() -> void:
 	if jump: ChangeState(eState.JUMP)
 	if attack: ChangeState(eState.ATTACK)
 
-func StateWalk() -> void:
+func StateWalk(_delta) -> void:
 	if dead or isAttacking: return
 	
 	PlayAnimation("walk")
@@ -149,6 +149,12 @@ func _on_animation_finished(anim_name: String) -> void:
 		isAttacking = false
 		
 		ChangeState(eState.IDLE)
+
+func _physics_process(delta: float) -> void: 
+	super(delta)
+	# Clamps the player position to the camera boundaries
+	# position.x = clamp(position.x, camera.position.x - CAMERA_OFFSET, camera.clamped_pos + CAMERA_OFFSET)
+
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))

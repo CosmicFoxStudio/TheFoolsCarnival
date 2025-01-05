@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4wanetid4rri"
-path="res://.godot/imported/spr_enemy_choro_idle.png-bf50726c5adbcb2859fb847a75ecc455.ctex"
+uid="uid://c0aqrjnrepgrq"
+path="res://.godot/imported/spr_enemy_choro_attack.png-36f7d9be3ef18077927e95645b537e58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/enemies/spr_enemy_choro_idle.png"
-dest_files=["res://.godot/imported/spr_enemy_choro_idle.png-bf50726c5adbcb2859fb847a75ecc455.ctex"]
+source_file="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_attack.png"
+dest_files=["res://.godot/imported/spr_enemy_choro_attack.png-36f7d9be3ef18077927e95645b537e58.ctex"]
 
 [params]
 

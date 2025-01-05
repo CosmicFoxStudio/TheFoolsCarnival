@@ -1,6 +1,6 @@
 class_name GlobalDebug extends Control
 
-const MAX_LABELS = 10
+const MAX_LABELS = 20
 
 var debugTheme : Theme = preload("res://themes/theme_debug.tres")
 var labelSlots : Array[Label] = []
