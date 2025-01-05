@@ -17,6 +17,10 @@ static var player: CharacterBody2D
 static var camera: Camera2D
 static var HUD: UI
 
+var enemies := 0
+var unlockedAtArea := 0.0
+var lastArea : bool = false
+
 # Runs before ready
 func _enter_tree() -> void:
 	Global.level = self
@@ -28,14 +32,32 @@ func _enter_tree() -> void:
 
 func _ready():
 	Global.level = self
-	#audience_meter.on_meter_reached_zero.connect(_end_game)
+	#audience_meter.on_meter_reached_zero.connect(EndGame)
 
-func _on_enemy_dead(enemy:EnemyBase):
+func EnemyDied() -> void:
+	enemies -= 1
 	print("Enemy defeated!")
+	
 	#audience_meter.add_meter(enemy.score_value * 0.1)
-	score += enemy.score_value
+	#score += enemy.score_value
+	
+	#if lastArea: 
+		## Ends the game if level is cleared
+		#HUD.LevelCleared()
+		#return
+		#
+	#if enemies <= 0:
+		#HUD.ShowGo()
+		#NextArea(unlockedAtArea)
 
-func _end_game():
+#func NextArea(__cameraLimit: float) -> void:
+	#Global.level.camera.SetCameraLimit(__cameraLimit)
+
+#func ConfigNextArea(__amount: int, __unlocked: float) -> void:
+	#enemies = __amount
+	#unlockedAtArea = __unlocked
+
+func EndGame():
 	print("GAME OVER")
 
 	# if gameOverScene: # is loaded
