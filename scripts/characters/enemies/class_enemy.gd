@@ -13,7 +13,6 @@ var hurtIndex : int = 0
 @onready var AITimer: Timer = $AITimer
 @onready var hitboxCollision: CollisionShape2D = $Hitbox/HitboxCollision
 @onready var enemyVoice: AudioStreamPlayer = $EnemyVoice
-@onready var HUD: UI = Global.level.HUD
 
 # Initialization
 func _ready() -> void:
@@ -44,6 +43,3 @@ func StateJump() -> void:
 func StateFall() -> void: pass
 func StateAttack() -> void: pass #HandleAttack(0)
 func StateAttack2() -> void: pass #HandleAttack(1)
-
-# This function is different for each enemy, based on the amount of hurt states
-func OnDamage(__hp: float) -> void: pass

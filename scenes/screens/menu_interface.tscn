@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
-[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/mus_title.ogg" id="12_dllvj"]
+[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/music/mus_title.ogg" id="12_dllvj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
 

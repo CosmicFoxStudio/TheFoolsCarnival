@@ -25,7 +25,7 @@ var comboIndex: int = 0  # The current attack in the combo
 @onready var camera: Camera2D = Global.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
-@onready var hpMax := properties.hp
+@onready var hpMax := properties.hpMax
 @onready var attackBox: Area2D = $Attack
 @onready var attackCollision: CollisionShape2D = $Attack/AttackCollision
 @onready var health: Health = $Health
@@ -80,6 +80,9 @@ func ResetCombo() -> void:
 	isAttacking = false
 	ChangeState(eState.IDLE)
 
+# This function is different for each enemy, based on the amount of hurt states
+func OnDamage(__hp: float) -> void: pass
+
 # Sound
 func PlaySound(__sound) -> void: pass
 	#audio_stream_player.stream = sound
@@ -87,14 +90,16 @@ func PlaySound(__sound) -> void: pass
 	
 # Initialization
 func _ready() -> void:
-	health.hp_max = properties.hp
+	health.hp_max = properties.hpMax
 	health.hp = hpMax
 	
 	# Connect signals
 	health.__on_damage.connect(func(_hp: float): 
+		OnDamage(_hp)
 		# SFX and VFX could go here
 		ChangeState(eState.HURT)
-	)
+	)	
+	
 	health.__on_dead.connect(func(): ChangeState(eState.DIED))
 	health.__on_recover.connect(func(__amount: float): 
 		print("Recovered " + str(__amount) + " HP"))

@@ -1,6 +1,7 @@
 extends Enemy
 
 var targetDistance : Vector2 # Distance to player
+@onready var HUD: UI = Global.level.HUD
 
 # State Overrides
 func StateIdle() -> void:
@@ -161,7 +162,7 @@ func StateDied() -> void:
 		SetHurtThrow()
 		
 		# Update enemy HUD 
-		# HUD.HudUpdateEnemy(chara_name, 0, hp_max, portrait)
+		HUD.HudUpdateEnemy(properties, 0)
 
 		await AITimer.timeout
 		velocity.x = 0 # To prevent the death sliding
@@ -186,7 +187,7 @@ func StateDied() -> void:
 
 func OnDamage(__health: float) -> void:
 	# Update enemy HUD 
-	# HUD.HudUpdateEnemy(chara_name, __health, hp_max, portrait)
+	HUD.HudUpdateEnemy(properties, __health)
 	
 	hurtIndex += 1 # Reset is on idle state
 	match hurtIndex:

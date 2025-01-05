@@ -1,0 +1,233 @@
+[gd_scene load_steps=15 format=3 uid="uid://3eyt7ia23p7u"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_tnmyb"]
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_cvup0"]
+[ext_resource type="Texture2D" uid="uid://cdrex8wggbvry" path="res://assets/sprites/ui/icons/go.png" id="2_pkq37"]
+[ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="3_rfdim"]
+[ext_resource type="Texture2D" uid="uid://dsh8r4m7va8d5" path="res://assets/sprites/ui/portraits/spr_portrait_thug.png" id="4_1iqq3"]
+[ext_resource type="AudioStream" uid="uid://cd5uy3tdipe0v" path="res://assets/audio/sfx/sfx_go.wav" id="6_oxw1x"]
+[ext_resource type="AudioStream" uid="uid://muskke1o7abc" path="res://assets/audio/sfx/sfx_level_clear.mp3" id="6_tot4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmqlr"]
+bg_color = Color(0.886275, 0.427451, 0.580392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwwma"]
+bg_color = Color(0.286275, 0.682353, 0.580392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2gfd"]
+bg_color = Color(0.886275, 0.427451, 0.580392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssith"]
+bg_color = Color(0.286275, 0.682353, 0.580392, 1)
+
+[sub_resource type="Animation" id="Animation_uhr8r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Go:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nx0h5"]
+resource_name = "go"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Go:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GoSFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667, 0.933333, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxnvi"]
+_data = {
+"RESET": SubResource("Animation_uhr8r"),
+"go": SubResource("Animation_nx0h5")
+}
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_tnmyb")
+
+[node name="Go" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 530.0
+offset_right = 570.0
+offset_bottom = 40.0
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_pkq37")
+stretch_mode = 5
+
+[node name="UIGameplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUDPlayer" type="Control" parent="UIGameplay"]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 218.0
+offset_bottom = 81.0
+
+[node name="NamePlayer" type="Label" parent="UIGameplay/HUDPlayer"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 41.0
+offset_right = 141.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_cvup0")
+theme_override_font_sizes/font_size = 12
+text = "PLAYER"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HealthPlayer" type="ProgressBar" parent="UIGameplay/HUDPlayer"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 23.0
+offset_right = 187.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_cvup0")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_mmqlr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dwwma")
+value = 100.0
+metadata/_edit_lock_ = true
+
+[node name="PortraitPlayer" type="TextureRect" parent="UIGameplay/HUDPlayer"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 72.0
+offset_bottom = 65.0
+texture = ExtResource("3_rfdim")
+metadata/_edit_lock_ = true
+
+[node name="HUDEnemy" type="Control" parent="UIGameplay"]
+visible = false
+anchors_preset = 0
+offset_left = 431.0
+offset_top = 14.0
+offset_right = 629.0
+offset_bottom = 82.0
+
+[node name="NameEnemy" type="Label" parent="UIGameplay/HUDEnemy"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 40.0
+offset_right = 123.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_cvup0")
+theme_override_font_sizes/font_size = 12
+text = "ENEMY"
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HealthEnemy" type="ProgressBar" parent="UIGameplay/HUDEnemy"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 22.0
+offset_right = 124.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("2_cvup0")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_x2gfd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ssith")
+value = 100.0
+fill_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="PortraitEnemy" type="TextureRect" parent="UIGameplay/HUDEnemy"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 1.0
+offset_right = 195.0
+offset_bottom = 65.0
+texture = ExtResource("4_1iqq3")
+metadata/_edit_lock_ = true
+
+[node name="HUDLevelCleared" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUDLevelCleared"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.627451)
+
+[node name="Label" type="Label" parent="HUDLevelCleared"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -11.5
+offset_right = 52.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_cvup0")
+theme_override_font_sizes/font_size = 32
+text = "Level Cleared"
+
+[node name="LevelClearedJingle" type="AudioStreamPlayer" parent="HUDLevelCleared"]
+stream = ExtResource("6_tot4r")
+
+[node name="TimerEnemyUI" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="GoSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_oxw1x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nxnvi")
+}
