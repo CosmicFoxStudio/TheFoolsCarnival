@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=10 format=3 uid="uid://bh5aw3urpaxq0"]
 
+[ext_resource type="Script" path="res://scripts/controllers/level_controller.gd" id="1_01xsf"]
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
+[ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="5_etc5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
 size = Vector2(20, 360)
@@ -15,14 +18,29 @@ size = Vector2(640, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
 size = Vector2(640, 20)
 
-[node name="LevelCircus1" type="Node2D"]
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera", "_HUD")]
+script = ExtResource("1_01xsf")
+_player = NodePath("Player")
+_camera = NodePath("Camera")
+_HUD = NodePath("HUD")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_if02w")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("2_xu5av")]
-position = Vector2(75, 327)
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("5_etc5a")
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
 
 [node name="StageLimits" type="Node" parent="."]
 
@@ -57,3 +75,9 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsTop"]
 position = Vector2(320, -10)
 shape = SubResource("RectangleShape2D_vk4j7")
+
+[node name="EnemyThug" parent="." instance=ExtResource("3_7ies1")]
+position = Vector2(510, 283)
+
+[node name="Player" parent="." instance=ExtResource("2_xu5av")]
+position = Vector2(75, 327)

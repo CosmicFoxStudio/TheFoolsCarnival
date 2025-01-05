@@ -58,12 +58,9 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Level0" type="Node2D" node_paths=PackedStringArray("_player", "_audience_meter", "_instances", "_spawnTimer")]
+[node name="Level0" type="Node2D" node_paths=PackedStringArray("_player")]
 script = ExtResource("5_t6gyq")
 _player = NodePath("Player")
-_audience_meter = NodePath("AudienceMeter")
-_instances = [NodePath("EnemyChoro")]
-_spawnTimer = NodePath("Timer")
 next_scene = "res://scenes/screens/menu_interface.tscn"
 
 [node name="Background" type="Sprite2D" parent="."]

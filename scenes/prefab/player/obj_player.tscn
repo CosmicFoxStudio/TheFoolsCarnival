@@ -14,6 +14,9 @@
 radius = 21.0
 height = 92.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnosy"]
+size = Vector2(40, 44)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7pcs"]
 size = Vector2(8, 54)
 
@@ -41,7 +44,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 56, 106)]
+"values": [Rect2(0, 6, 56, 106)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -263,7 +266,7 @@ properties = ExtResource("2_7k0pf")
 position = Vector2(0, -53)
 texture = ExtResource("7_qkmcm")
 region_enabled = true
-region_rect = Rect2(0, 0, 56, 106)
+region_rect = Rect2(0, 6, 56, 106)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(2, -46)
@@ -272,6 +275,11 @@ shape = SubResource("CapsuleShape2D_h2465")
 [node name="Health" parent="." instance=ExtResource("1_safe6")]
 
 [node name="Hitbox" parent="." instance=ExtResource("4_00ysq")]
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, -37)
+shape = SubResource("RectangleShape2D_qnosy")
+debug_color = Color(0.913725, 0.290196, 0, 0.419608)
 
 [node name="Attack" type="Area2D" parent="."]
 collision_layer = 0
@@ -306,3 +314,5 @@ bus = &"sfx"
 [node name="ComboTimer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
+
+[node name="PlayerVoice" type="AudioStreamPlayer" parent="."]

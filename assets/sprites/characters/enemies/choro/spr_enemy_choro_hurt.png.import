@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bskt6bqw8uyg0"
-path="res://.godot/imported/spr_enemy_choro_walk.png-ee29ad7fbf6a7d2a0fbaf32c02fed01d.ctex"
+uid="uid://lvcfnw1bwiah"
+path="res://.godot/imported/spr_enemy_choro_hurt.png-fb81a1e43a992f604934b98f738c967c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/enemies/spr_enemy_choro_walk.png"
-dest_files=["res://.godot/imported/spr_enemy_choro_walk.png-ee29ad7fbf6a7d2a0fbaf32c02fed01d.ctex"]
+source_file="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_hurt.png"
+dest_files=["res://.godot/imported/spr_enemy_choro_hurt.png-fb81a1e43a992f604934b98f738c967c.ctex"]
 
 [params]
 

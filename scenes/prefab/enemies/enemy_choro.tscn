@@ -1,11 +1,11 @@
 [gd_scene load_steps=26 format=3 uid="uid://5a4vbo8v467s"]
 
-[ext_resource type="Texture2D" uid="uid://c0aqrjnrepgrq" path="res://assets/sprites/characters/enemies/spr_enemy_choro_attack.png" id="1_4ac0y"]
+[ext_resource type="Texture2D" uid="uid://c0aqrjnrepgrq" path="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_attack.png" id="1_4ac0y"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/enemy_choro.gd" id="1_ltefj"]
-[ext_resource type="Texture2D" uid="uid://b4wanetid4rri" path="res://assets/sprites/characters/enemies/spr_enemy_choro_idle.png" id="1_v2sq0"]
-[ext_resource type="Texture2D" uid="uid://lvcfnw1bwiah" path="res://assets/sprites/characters/enemies/spr_enemy_choro_hurt.png" id="2_od7tn"]
-[ext_resource type="Texture2D" uid="uid://dehxm66aftmel" path="res://assets/sprites/characters/enemies/spr_enemy_choro_rotate.png" id="5_cylhr"]
-[ext_resource type="Texture2D" uid="uid://bskt6bqw8uyg0" path="res://assets/sprites/characters/enemies/spr_enemy_choro_walk.png" id="6_vxluo"]
+[ext_resource type="Texture2D" uid="uid://b4wanetid4rri" path="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_idle.png" id="1_v2sq0"]
+[ext_resource type="Texture2D" uid="uid://lvcfnw1bwiah" path="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_hurt.png" id="2_od7tn"]
+[ext_resource type="Texture2D" uid="uid://dehxm66aftmel" path="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_rotate.png" id="5_cylhr"]
+[ext_resource type="Texture2D" uid="uid://bskt6bqw8uyg0" path="res://assets/sprites/characters/enemies/choro/spr_enemy_choro_walk.png" id="6_vxluo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p4ysv"]
 radius = 15.0

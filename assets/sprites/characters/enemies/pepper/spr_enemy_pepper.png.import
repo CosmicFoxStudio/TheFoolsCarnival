@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ciyq6e2srf1cx"
-path="res://.godot/imported/spr_enemy_pepper.png-d564069fb3b8b02fe34c6bc9e5d10177.ctex"
+path="res://.godot/imported/spr_enemy_pepper.png-65a411603757d7f1db6402e48b8b4674.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/enemies/spr_enemy_pepper.png"
-dest_files=["res://.godot/imported/spr_enemy_pepper.png-d564069fb3b8b02fe34c6bc9e5d10177.ctex"]
+source_file="res://assets/sprites/characters/enemies/pepper/spr_enemy_pepper.png"
+dest_files=["res://.godot/imported/spr_enemy_pepper.png-65a411603757d7f1db6402e48b8b4674.ctex"]
 
 [params]
 
