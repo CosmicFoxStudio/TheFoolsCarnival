@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://38t6or63jfwa"]
 
-[ext_resource type="Script" path="res://scripts/characters/enemies/scr_spawn_enemies.gd" id="1_ar6jp"]
+[ext_resource type="Script" path="res://scripts/characters/enemies/scr_enemy_spawner.gd" id="1_ar6jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1e3o"]
 size = Vector2(58, 74)
