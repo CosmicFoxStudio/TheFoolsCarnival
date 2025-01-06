@@ -7,13 +7,11 @@ var smooth := 4.0
 var initialPos := 0.0
 var clampedPos := 0.0 # Start at half the screen width
 
-@onready var player: Player = Global.level.player
-
 func _process(delta: float) -> void:
 	# Ensure the camera only moves forward
-	if position.x < player.position.x:
+	if position.x < Global.level.player.position.x:
 		# Smoothly follow the player's X position
-		position.x = lerp(position.x, player.position.x, smooth * delta)
+		position.x = lerp(position.x, Global.level.player.position.x, smooth * delta)
 
 		# Clamp the camera within its current boundaries
 		position.x = clamp(position.x, initialPos, clampedPos)

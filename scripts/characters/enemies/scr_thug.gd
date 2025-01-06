@@ -161,7 +161,7 @@ func StateDied() -> void:
 		SetHurtThrow()
 		
 		# Update enemy HUD 
-		HUD.HudUpdateEnemy(properties, 0)
+		Global.level.HUD.HudUpdateEnemy(properties, 0)
 
 		await AITimer.timeout
 		velocity.x = 0 # To prevent the death sliding
@@ -186,7 +186,7 @@ func StateDied() -> void:
 
 func OnDamage(__health: float) -> void:
 	# Update enemy HUD 
-	HUD.HudUpdateEnemy(properties, __health)
+	Global.level.HUD.HudUpdateEnemy(properties, __health)
 	
 	hurtIndex += 1 # Reset is on idle state
 	match hurtIndex:

@@ -21,8 +21,6 @@ var dead : bool = false
 #var comboAnims: Array[String] = ["attack1", "attack2"]
 var comboIndex: int = 0  # The current attack in the combo
 
-@onready var HUD: UI = Global.level.HUD
-@onready var camera: Camera2D = Global.level.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
 @onready var hpMax := properties.hpMax

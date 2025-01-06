@@ -7,8 +7,6 @@ enum sides { LEFT = 0, RIGHT = 1 }
 @export var enemies: Array[PackedScene]
 @export var lastArea: bool = false
 
-@onready var camera: Camera2D = Global.level.camera
-
 func _ready() -> void:
 	# Connect signal to activate the functions when player collides
 	body_entered.connect(func(_player: Player): SpawnEnemies())
@@ -39,8 +37,8 @@ func SpawnEnemies() -> void:
 
 func SetEnemyRandomPosition() -> Vector2:
 	# Determine the screen bounds relative to the camera
-	var screenLeft = camera.position.x # Screen width divided by 2
-	var screenRight = camera.position.x
+	var screenLeft = Global.level.camera.position.x # Screen width divided by 2
+	var screenRight = Global.level.camera.position.x
 	var spawnY = randf_range(0.0, 260.0) # Random Y position within height range
 
 	var side = randi_range(sides.LEFT, sides.RIGHT)

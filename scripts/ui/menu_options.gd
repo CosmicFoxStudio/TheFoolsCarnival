@@ -49,7 +49,7 @@ func _on_menu_item_selected() -> void:
 func _on_start_button_pressed() -> void:
 	animation_player.play("MenuOperations/start_game")
 	await animation_player.animation_finished
-	Global.scene_transition.transition("res://scenes/screens/game_intro.tscn")
+	Global.sceneTransition.transition("res://scenes/screens/game_intro.tscn")
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

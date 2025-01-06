@@ -153,7 +153,7 @@ func OnAnimationFinished(__animName: String) -> void:
 func _physics_process(delta: float) -> void: 
 	super(delta)
 	# Clamps the player position to the camera boundaries
-	position.x = clamp(position.x, camera.position.x - 640, camera.clampedPos + 640)
+	position.x = clamp(position.x, Global.level.camera.position.x - 640, Global.level.camera.clampedPos + 640)
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
@@ -164,7 +164,7 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
 	Global.debug.UpdateDebugVariable(6, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(7, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(camera.position.x) + " / " + str(camera.position.y))
+	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(Global.level.camera.position.x) + " / " + str(Global.level.camera.position.y))
 	Global.debug.UpdateDebugVariable(9, "Last Area?: " + str(Global.level.lastArea))
 
 	# Console

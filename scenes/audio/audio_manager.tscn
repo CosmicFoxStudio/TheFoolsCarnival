@@ -34,11 +34,11 @@ Vector2i(1, 0): {
 }
 }
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("bg_music_stage")]
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("bgMusicStage")]
 script = ExtResource("1_mgqhi")
-bg_music_stage = NodePath("BackgroundMusicPlayer")
-music_volume = 1
-sfx_volume = 1
+bgMusicStage = NodePath("BackgroundMusicPlayer")
+musicVolume = 10.0
+sfxVolume = 10.0
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_wcblp")

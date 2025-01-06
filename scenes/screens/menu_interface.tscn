@@ -291,7 +291,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_1hkr3")
-next_scene = "res://scenes/screens/game_intro.tscn"
 
 [node name="BG_Palco" type="TextureRect" parent="."]
 layout_mode = 1

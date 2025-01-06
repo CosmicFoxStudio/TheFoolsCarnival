@@ -1,9 +1,8 @@
 extends Control
 
-@export var music_volume : ScrollBar
-@export var sfx_volume : ScrollBar
+@onready var musicVolume: HScrollBar = $"VBoxContainer/Music (in dB)"
+@onready var sfxVolume: HScrollBar = $"VBoxContainer/SFX (in dB)"
 
-
-func _process(delta: float) -> void:
-	Global.audioManager.music_volume = music_volume.value
-	Global.audioManager.sfx_volume = sfx_volume.value
+func _process(_delta: float) -> void:
+	Global.audio.musicVolume = musicVolume.value
+	Global.audio.sfxVolume = sfxVolume.value

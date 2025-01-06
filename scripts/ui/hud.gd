@@ -17,7 +17,7 @@ class_name UI extends CanvasLayer
 @onready var timerEnemyUI: Timer = $TimerEnemyUI
 
 func _ready() -> void:
-	Global.level.HUD = self
+	# Global.level.HUD = self
 	hudEnemy.hide()
 
 func HudUpdateHealth(__hp: float) -> void:
@@ -63,7 +63,7 @@ func LevelCleared() -> void:
 	await get_tree().create_timer(5).timeout
 	
 	# Change back to menu
-	Global.scene_transition.transition(
+	Global.sceneTransition.transition(
 		"res://scenes/screens/menu_interface.tscn", 
-		Global.scene_transition.TransitionType.FADE
+		Global.sceneTransition.TransitionType.FADE
 	)

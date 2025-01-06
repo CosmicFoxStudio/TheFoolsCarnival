@@ -2,16 +2,16 @@ class_name MainScene extends Scene
 
 signal loaded()
 
-@onready var scene_transition: SceneTransition = $LayerTransition/Transition
-@onready var layer_control: CanvasLayer = $LayerControl
-@onready var layer_2d : Node2D = $Layer2D
-var scene_instance : Node = null
+@onready var sceneTransition: SceneTransition = $LayerTransition/Transition
+@onready var layerControl: CanvasLayer = $LayerControl
+@onready var layer2D : Node2D = $Layer2D
+var sceneInstance : Node = null
 
 func _ready() -> void:
 	# Hides the mouse cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	Global.main_scene = self
+	Global.mainScene = self
 
 	# Load first scene
 	load_scene("res://scenes/screens/menu_interface.tscn")
@@ -22,25 +22,24 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("ui_cancel"):
 			get_tree().quit()  # Exit the game
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void: pass
 	# DEBUG
-	if Input.is_action_just_pressed("switch_scene"):
-		scene_transition.transition(next_scene, transition_type)
+	# if Input.is_action_just_pressed("switch_scene"): sceneTransition.transition(nextScene, transitionType)
 
 func load_scene(screen_name: String) -> void:
-	print(scene_instance) # DEBUG
+	# print(sceneInstance) # DEBUG
 	unload_scene()
 
 	var scene_resource := load(screen_name)
 	if scene_resource:
-		scene_instance = scene_resource.instantiate()
-		if scene_instance.is_class("Control"):
-			if not scene_instance.is_inside_tree(): layer_control.add_child(scene_instance)
-		elif scene_instance.is_class("Node2D"):
-			if not scene_instance.is_inside_tree(): layer_2d.add_child(scene_instance)
+		sceneInstance = scene_resource.instantiate()
+		if sceneInstance.is_class("Control"):
+			if not sceneInstance.is_inside_tree(): layerControl.add_child(sceneInstance)
+		elif sceneInstance.is_class("Node2D"):
+			if not sceneInstance.is_inside_tree(): layer2D.add_child(sceneInstance)
 	
 	# Simulate wait time
-	if scene_transition.transition_type == scene_transition.TransitionType.FADE:
+	if sceneTransition.transitionType == sceneTransition.TransitionType.FADE:
 		await get_tree().create_timer(1.0).timeout
 	else:
 		await get_tree().create_timer(0.1).timeout
@@ -48,6 +47,6 @@ func load_scene(screen_name: String) -> void:
 	loaded.emit()
 
 func unload_scene() -> void:
-	if is_instance_valid(scene_instance):
-		scene_instance.queue_free()
-	scene_instance = null
+	if is_instance_valid(sceneInstance):
+		sceneInstance.queue_free()
+	sceneInstance = null

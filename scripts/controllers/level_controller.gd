@@ -2,9 +2,12 @@ class_name LevelController extends Scene
 
 ## This controller handles connection between nodes in the level scenes
 
+# These variables are specific to each instance of the LevelController
 @export var _player : CharacterBody2D
 @export var _camera : Camera2D
 @export var _HUD : UI
+@export_file("*.ogg") var _music : String = "res://assets/audio/music/mus_default.ogg"
+
 #@export var _audience_meter : AudienceMeter
 
 var score : int = 0
@@ -16,6 +19,7 @@ static var player: CharacterBody2D
 #static var audience_meter : AudienceMeter
 static var camera: Camera2D
 static var HUD: UI
+static var music: String
 
 var enemies := 0
 var unlockedAtArea := 0.0
@@ -23,16 +27,17 @@ var lastArea : bool = false
 
 # Runs before ready
 func _enter_tree() -> void:
-	Global.audioManager.current_stage = "Stage1" # Change it to a Data Structure (Dictionary)
-	Global.level = self
-
 	player = _player
 	camera = _camera
 	HUD = _HUD
+	music = _music
 	#audience_meter = _audience_meter
 
 func _ready():
 	Global.level = self
+	Global.audio.currentStage = self
+	Global.audio.currentStageName = get_name()
+	Global.audio.currentMusic = music
 	#audience_meter.on_meter_reached_zero.connect(EndGame)
 
 func EnemyDied() -> void:

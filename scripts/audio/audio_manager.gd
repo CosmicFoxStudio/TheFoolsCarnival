@@ -1,21 +1,22 @@
 class_name AudioManager extends Node
 
-@export var bg_music_stage : AudioStreamPlayer
+@export var bgMusicStage : AudioStreamPlayer
+@export var musicVolume : float
+@export var sfxVolume : float
 
-@export var music_volume : int
-@export var sfx_volume : int
-
-var current_stage : String
+var currentStage : LevelController
+var currentStageName : String
+var currentMusic : String
 
 func _ready() -> void:
-	Global.audioManager = self
-	
-	
+	Global.audio = self
+
 func _process(_delta: float) -> void:
-	if(current_stage != Global.audioManager.current_stage):
-		current_stage = Global.audioManager.current_stage
-		update_music_for_scene()
-		
-func update_music_for_scene():
-	# var current_stage_music = str(current_stage + "Music") # Gets the Name of the Clip, each one MUST present the naming convention "Music" at the end
-	bg_music_stage["parameters/switch_to_clip"] = current_stage
+	if(currentStageName != Global.audio.currentStageName):
+		currentStageName = Global.audio.currentStageName
+		UpdateLevelMusic()
+
+func UpdateLevelMusic():
+	# var currentStageMusic = str(currentStageName + "Music") 
+	# Gets the Name of the Clip, each one MUST present the naming convention "Music" at the end
+	bgMusicStage["parameters/switch_to_clip"] = currentMusic

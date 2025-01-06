@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=12 format=3 uid="uid://bh5aw3urpaxq0"]
 
-[ext_resource type="Script" path="res://scripts/controllers/level_controller.gd" id="1_01xsf"]
+[ext_resource type="Script" path="res://scripts/levels/circus/scr_circus_1.gd" id="1_6gsv2"]
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
 [ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
 [ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/hud.tscn" id="3_kp1wh"]
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_888jb"]
-[ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="8_cguhp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
 size = Vector2(20, 360)
@@ -21,10 +20,12 @@ size = Vector2(2560, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
 size = Vector2(2560, 20)
 
-[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera")]
-script = ExtResource("1_01xsf")
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera", "_HUD")]
+script = ExtResource("1_6gsv2")
 _player = NodePath("Player")
 _camera = NodePath("Camera")
+_HUD = NodePath("HUD")
+_music = "\"res://assets/audio/music/mus_battle.ogg\""
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_if02w")
@@ -103,7 +104,3 @@ lastArea = true
 
 [node name="Player" parent="." instance=ExtResource("2_xu5av")]
 position = Vector2(75, 327)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_cguhp")
-autoplay = true

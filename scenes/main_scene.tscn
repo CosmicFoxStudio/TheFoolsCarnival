@@ -9,18 +9,18 @@
 [node name="MainScene" type="Node"]
 script = ExtResource("1_80xyb")
 
+[node name="AudioManager" parent="." instance=ExtResource("4_x5yje")]
+
 [node name="Layer2D" type="Node2D" parent="."]
 
 [node name="LayerControl" type="CanvasLayer" parent="."]
 
 [node name="Debug" parent="LayerControl" instance=ExtResource("2_feukp")]
-visible = false
 
 [node name="Settings" parent="LayerControl" instance=ExtResource("3_djt05")]
+visible = false
 
 [node name="LayerTransition" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="Transition" parent="LayerTransition" instance=ExtResource("2_v7yv1")]
-
-[node name="AudioManager" parent="." instance=ExtResource("4_x5yje")]
