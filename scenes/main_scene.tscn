@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/controllers/scene_controller.gd" id="1_80xyb"]
 [ext_resource type="PackedScene" uid="uid://b3fbnjysn7pfo" path="res://scenes/prefab/debug/obj_global_debug.tscn" id="2_feukp"]
-[ext_resource type="PackedScene" uid="uid://bpftwkcofjay3" path="res://scenes/ui/transition.tscn" id="2_v7yv1"]
+[ext_resource type="PackedScene" uid="uid://bpftwkcofjay3" path="res://scenes/ui/ui_transition.tscn" id="2_v7yv1"]
 [ext_resource type="PackedScene" uid="uid://dmo7ql8f31kes" path="res://scenes/ui/ui_settings.tscn" id="3_djt05"]
 [ext_resource type="PackedScene" uid="uid://djcmkr3wdgvix" path="res://scenes/audio/audio_manager.tscn" id="4_x5yje"]
 

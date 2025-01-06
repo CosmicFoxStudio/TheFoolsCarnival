@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://3eyt7ia23p7u"]
 
-[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_tnmyb"]
+[ext_resource type="Script" path="res://scripts/ui/scr_hud.gd" id="1_tnmyb"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_cvup0"]
 [ext_resource type="Texture2D" uid="uid://cdrex8wggbvry" path="res://assets/sprites/ui/icons/go.png" id="2_pkq37"]
 [ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="3_rfdim"]

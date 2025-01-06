@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		input.x += 1
 		
 	if menu_parent is VBoxContainer:
-		set_cursor_item_at_index(cursor_index + input.y)	
+		set_cursor_item_at_index(cursor_index + input.y)
 	elif menu_parent is HBoxContainer:
 		set_cursor_item_at_index(cursor_index + input.x)
 

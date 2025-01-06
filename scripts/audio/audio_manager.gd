@@ -4,6 +4,8 @@ class_name AudioManager extends Node
 @export var musicVolume : float
 @export var sfxVolume : float
 
+@onready var musicPlayer: AudioStreamPlayer = $BackgroundMusicPlayer
+
 var currentStage : LevelController
 var currentStageName : String
 var currentMusic : String

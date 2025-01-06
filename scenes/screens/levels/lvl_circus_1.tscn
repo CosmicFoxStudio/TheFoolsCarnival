@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
 [ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
-[ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/hud.tscn" id="3_kp1wh"]
+[ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/ui_hud.tscn" id="3_kp1wh"]
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="4_888jb"]
 

@@ -50,8 +50,10 @@ func ShowGo() -> void:
 
 func LevelCleared() -> void:
 	# Pause level music
-	var levelMusic = get_parent().get_node("AudioStreamPlayer")
-	levelMusic.stop()
+	Global.audio.musicPlayer.stop()
+
+	#Global.audio.musicPlayer.stream = load("res://assets/audio/music/boss_fight.mp3")
+	#Global.audio.musicPlayer.play()
 
 	# Show Level Cleared
 	var hudLevelCleared = $UIGameplay/HUDLevelCleared

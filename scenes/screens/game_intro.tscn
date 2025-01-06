@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://2dftu4pgnmt8"]
 
-[ext_resource type="Script" path="res://scripts/cutscenes/cutscene_handler.gd" id="1_tyida"]
+[ext_resource type="Script" path="res://scripts/cutscenes/scr_cutscene_intro.gd" id="1_tyida"]
 [ext_resource type="Texture2D" uid="uid://k357p08xnvau" path="res://assets/sprites/cutscenes/intro/intro_template.png" id="2_u7e2m"]
 [ext_resource type="Texture2D" uid="uid://h78jgb328ncn" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_2_porriet.png" id="3_udrcb"]
 [ext_resource type="Texture2D" uid="uid://dtcikqlgiick5" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_2_porriet_afraid.png" id="4_7ymdm"]
@@ -331,7 +331,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tyida")
-next_scene = "res://scenes/screens/levels/lvl_test_0.tscn"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 show_behind_parent = true

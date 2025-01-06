@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cir64q6hn6swc"]
 
-[ext_resource type="Script" path="res://scripts/ui/game_over_options.gd" id="1_g1b8w"]
+[ext_resource type="Script" path="res://scripts/ui/scr_gameover.gd" id="1_g1b8w"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="1_od0as"]
 [ext_resource type="Texture2D" uid="uid://boe8bwk5gpy44" path="res://assets/sprites/ui/icons/icon_clown.png" id="2_dpef4"]
 [ext_resource type="Texture2D" uid="uid://c41eagea20oes" path="res://assets/sprites/ui/icons/icon_skull.png" id="3_hn6wl"]

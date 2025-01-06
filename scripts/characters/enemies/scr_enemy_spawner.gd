@@ -13,12 +13,11 @@ func _ready() -> void:
 
 func SpawnEnemies() -> void:
 	if lastArea:
-		var levelMusic = get_parent().get_node("AudioStreamPlayer")
-		levelMusic.stop()
+		Global.audio.musicPlayer.stop()
 
 		# Play Boss Music
-		levelMusic.stream = load("res://assets/audio/music/boss_fight.mp3")
-		levelMusic.play()
+		Global.audio.musicPlayer.stream = load("res://assets/audio/music/boss_fight.mp3")
+		Global.audio.musicPlayer.play()
 
 	for i in amount:
 		# Returns a random value between 0 and the amount of enemies

@@ -38,6 +38,10 @@ func _ready():
 	Global.audio.currentStage = self
 	Global.audio.currentStageName = get_name()
 	Global.audio.currentMusic = music
+	
+	# Global.audio.UpdateLevelMusic() 
+	# (FIX ME) |---> Not working when the cutscene is skipped? Seems like it only adds the song to the playlist
+	
 	#audience_meter.on_meter_reached_zero.connect(EndGame)
 
 func EnemyDied() -> void:
