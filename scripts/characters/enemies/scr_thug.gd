@@ -1,5 +1,7 @@
 extends Enemy
 
+@export var effectResource : HitEffectResource
+
 var targetDistance : Vector2 # Distance to player
 
 # State Overrides
@@ -101,6 +103,7 @@ func StateHurt() -> void:
 	if enterState:
 		enterState = false
 		PlayAnimation("hurt")
+		Global.effects.spawn_effect(effectResource, global_position)
 
 		AITimer.stop()
 		AITimer.wait_time = randf_range(0.5, 1)
@@ -204,4 +207,3 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))
 	Global.debug.UpdateDebugVariable(15, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
-	

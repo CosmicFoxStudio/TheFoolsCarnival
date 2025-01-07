@@ -24,7 +24,6 @@ value = 10.0
 texture_under = ExtResource("1_iu2si")
 texture_progress_offset = Vector2(9, 0)
 script = ExtResource("1_a3plt")
-max_val_color = Color(1, 1, 1, 1)
 meterCurve = SubResource("Curve_60tnk")
 meterArrow = NodePath("TextureRect")
 

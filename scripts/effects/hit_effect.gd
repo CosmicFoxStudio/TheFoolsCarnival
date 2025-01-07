@@ -12,14 +12,13 @@ var time : float = 0
 func _set_hitEffectRes(hitEffectRes : HitEffectResource) -> void:
 	self.hitEffectResource = hitEffectRes
 	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
-	
 
 func _ready() -> void:
 	sprite_2d.texture = hitEffectResource.hit_sprite_sheet
 	animation_player.play("effects_anims/hit_effect")
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if not hitEffectResource:
 		return

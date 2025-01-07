@@ -1,10 +1,10 @@
 class_name AudienceMeter extends TextureProgressBar
 
-signal on_meter_changed(value:float)
-signal on_meter_reached_zero
+signal sOnMeterChanged(value:float)
+signal sOnMeterReachedZero
 
-@export var min_val_color : Color
-@export var max_val_color : Color
+@export var minValColor : Color
+@export var maxValColor : Color
 @export var meterCurve : Curve
 @export var meterArrow : TextureRect
 
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	meter -= delta;
 	meter = clampf(meter, min_value, max_value)
 	
-	fillBar.bg_color = lerp(min_val_color, max_val_color, meter / max_value) # 
+	fillBar.bg_color = lerp(minValColor, maxValColor, meter / max_value) # 
 	
 	value = meter
 	
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	meterArrow.rotation_degrees = clampf(meterArrow.rotation_degrees, -50,50)
 	
 	if(meter <= min_value && not meterZero):
-		on_meter_reached_zero.emit()
+		sOnMeterReachedZero.emit()
 		meterZero = true
 		print("Meter reached ZERO")
 		
@@ -38,7 +38,7 @@ func add_meter(amount: float):
 	if(meter >= max_value):
 		meter = max_value
 		
-	on_meter_changed.emit(meter)
+	sOnMeterChanged.emit(meter)
 
 func _on_player_lower_approval(points: int):
 	meter -= points

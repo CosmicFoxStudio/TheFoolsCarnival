@@ -11,6 +11,7 @@ var level : LevelController
 var debug : GlobalDebug
 var audio : AudioManager
 var HUD : UI
+var effects : EffectManager
 
 # Global Variables
 var pause : bool = false

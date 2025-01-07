@@ -1,15 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3cgdx1wpo4wq"]
+[gd_scene load_steps=12 format=3 uid="uid://b3cgdx1wpo4wq"]
 
 [ext_resource type="Script" path="res://scripts/controllers/scene_controller.gd" id="1_80xyb"]
 [ext_resource type="PackedScene" uid="uid://b3fbnjysn7pfo" path="res://scenes/prefab/debug/obj_global_debug.tscn" id="2_feukp"]
 [ext_resource type="PackedScene" uid="uid://bpftwkcofjay3" path="res://scenes/ui/ui_transition.tscn" id="2_v7yv1"]
 [ext_resource type="PackedScene" uid="uid://dmo7ql8f31kes" path="res://scenes/ui/ui_settings.tscn" id="3_djt05"]
+[ext_resource type="PackedScene" uid="uid://ep1uat73q4wg" path="res://scenes/effects/effects.tscn" id="3_pege0"]
+[ext_resource type="Script" path="res://scripts/resources/effects/hit_effect_res.gd" id="4_fcky6"]
 [ext_resource type="PackedScene" uid="uid://djcmkr3wdgvix" path="res://scenes/audio/audio_manager.tscn" id="4_x5yje"]
+[ext_resource type="Resource" uid="uid://bem4iv408plrm" path="res://scripts/resources/effects/hit_effect1.tres" id="5_0feaj"]
+[ext_resource type="Resource" uid="uid://djsp6rek0nev3" path="res://scripts/resources/effects/hit_effect2.tres" id="6_pgcr7"]
+[ext_resource type="Resource" uid="uid://dg84gkh5q0eag" path="res://scripts/resources/effects/hit_effect3.tres" id="7_2an5k"]
+[ext_resource type="Resource" uid="uid://dvow4ow1b3211" path="res://scripts/resources/effects/hit_effect4.tres" id="8_a6nry"]
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_80xyb")
 
 [node name="AudioManager" parent="." instance=ExtResource("4_x5yje")]
+
+[node name="Effects" parent="." instance=ExtResource("3_pege0")]
+hitEffectResources = Array[ExtResource("4_fcky6")]([ExtResource("5_0feaj"), ExtResource("6_pgcr7"), ExtResource("7_2an5k"), ExtResource("8_a6nry")])
 
 [node name="Layer2D" type="Node2D" parent="."]
 
