@@ -2,9 +2,11 @@ class_name Enemy extends Character
 
 # TO-DO: Cooldown Attack Time for enemies
 
-@export var distanceAttack := 1.2
 @export var scoreLoot := 25
+@export var distanceAttack := 1.2 # The min value of targetDistance for the enemy to attack
+@export var effectResource : HitEffectResource
 
+var targetDistance : Vector2 # Distance to player
 var walkTimer : float = 0
 var faceRight : bool = false
 var inAttack : bool = false
@@ -20,6 +22,7 @@ var scoreValue : int = 30 # Change Later
 func _ready() -> void:
 	super()
 	type = eType.ENEMY
+
 
 # Parent Class Overrides
 func Flip() -> void: 
@@ -48,7 +51,7 @@ func SetHurtThrow() -> void:
 
 # State Overrides
 func StateIdle() -> void: pass
-func StateWalk(_delta) -> void: pass
+func StateWalk(delta) -> void: targetDistance = Global.level.player.position - self.position
 
 func StateJump() -> void:
 	if is_on_floor():

@@ -1,9 +1,5 @@
 extends Enemy
 
-@export var effectResource : HitEffectResource
-
-var targetDistance : Vector2 # Distance to player
-
 # State Overrides
 func StateIdle() -> void:
 	if dead: return
@@ -30,6 +26,8 @@ func StateIdle() -> void:
 		ChangeState(eState.WALK)
 
 func StateWalk(delta) -> void:
+	super(delta)
+	
 	if dead: return
 
 	if enterState:
@@ -50,9 +48,6 @@ func StateWalk(delta) -> void:
 	# This code executes before the timer timeout
 	# =============================================
 	
-	# Distance to the player position
-	targetDistance = Global.level.player.position - self.position
-	
 	# Horizontal Movement (move toward the player's x position)
 	# sign() ensures the enemy moves left (-1) or right (1) based on the player's position
 	self.velocity.x = sign(targetDistance.x) * speed * delta
@@ -67,10 +62,11 @@ func StateWalk(delta) -> void:
 		# Stops moving before reaching the player position to attack
 		self.velocity.x = 0
 		
-	# Start attack
-	if abs(targetDistance.x) < distanceAttack:
-		velocity.x = 0
-		ChangeState(eState.ATTACK)
+		# Start attack
+		# if attackBox.get_overlapping_bodies().has(Global.level.player.hitbox):
+		if abs(targetDistance.x) < distanceAttack:
+			velocity.x = 0
+			ChangeState(eState.ATTACK)
 
 	PlayAnimation("idle" if velocity == Vector2.ZERO else "walk")
 	Flip() # Only flips towards the player while in walk state
@@ -195,3 +191,4 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))
 	Global.debug.UpdateDebugVariable(15, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
+	Global.debug.UpdateDebugVariable(16, "Distance to player: " + str(targetDistance.x))

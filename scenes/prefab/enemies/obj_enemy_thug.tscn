@@ -253,8 +253,9 @@ _data = {
 position = Vector2(0, -36)
 collision_layer = 4
 script = ExtResource("1_gavmj")
-effectResource = ExtResource("2_ivitl")
 scoreLoot = 15
+distanceAttack = 90.0
+effectResource = ExtResource("2_ivitl")
 properties = ExtResource("2_bckja")
 
 [node name="Sprite" type="Sprite2D" parent="."]

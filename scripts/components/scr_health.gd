@@ -11,7 +11,7 @@ var dead : bool
 @onready var host : Node2D = get_parent()
 @onready var hitbox : Hitbox = get_parent().get_node("Hitbox")
 
-func __take_damage(damage: float) -> void:
+func TakeDamage(damage: float) -> void:
 	if dead: return
 	
 	# Reduce HP
@@ -25,7 +25,7 @@ func __take_damage(damage: float) -> void:
 		# Not dead
 		__on_damage.emit(hp)
 
-func __recover(gain: float) -> void: 
+func Recover(gain: float) -> void: 
 	var prev_hp = hp
 	var new_hp : float = min(hp + gain, hp_max)
 	var recovered = new_hp - prev_hp

@@ -160,6 +160,45 @@ func OnDamage(__health: float) -> void:
 	var enemyComboMultiplier = 2
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
 
+func StateHurt() -> void:
+	if enterState:
+		enterState = false
+		
+		PlayAnimation("hurt")
+		StopMovement()
+		
+		# Update HUD
+		Global.level.HUD.HudUpdateHealth(health.hp)
+	
+	# Wait 0.5 seconds before changing state
+	await get_tree().create_timer(0.5).timeout
+	ChangeState(eState.IDLE)
+
+func StateDied() -> void:
+	if enterState:
+		enterState = false
+		PlayAnimation("died")
+		dead = true
+		StopMovement()
+		
+		# Update HUD
+		Global.level.HUD.HudUpdateHealth(health.hp)
+		
+		# Death VFX (flicker sprite)
+		for i in range(8):
+			sprite.visible = not sprite.visible
+			await get_tree().create_timer(0.1).timeout
+
+		# Makes the player disappear after being defeated
+		sprite.hide()
+		# if shadow != null: shadow.hide()
+		
+		# Change back to menu after 2 seconds
+		await get_tree().create_timer(2).timeout
+		
+		# Scene transition (TO-DO: Add pixilate transition here)
+		Global.sceneTransition.transition("res://scenes/screens/menu_interface.tscn")
+
 func _physics_process(delta: float) -> void: 
 	super(delta)
 	# Clamps the player position to the camera boundaries

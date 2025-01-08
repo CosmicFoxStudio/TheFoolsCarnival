@@ -26,6 +26,8 @@ var comboIndex: int = 0  # The current attack in the combo
 @onready var hpMax := properties.hpMax
 @onready var attackBox: Area2D = $Attack
 @onready var attackCollision: CollisionShape2D = $Attack/AttackCollision
+#@onready var hitbox: Hitbox = $Hitbox
+#@onready var hitbox_collision: CollisionShape2D = $Hitbox/HitboxCollision
 @onready var health: Health = $Health
 @onready var comboTimer: Timer = $ComboTimer # Timer to reset combo after a delay
 
@@ -97,7 +99,7 @@ func _ready() -> void:
 		OnDamage(_hp)
 		# SFX and VFX could go here
 		ChangeState(eState.HURT)
-	)	
+	)
 	
 	health.__on_dead.connect(func(): 
 		if type == eType.ENEMY: 
@@ -110,10 +112,13 @@ func _ready() -> void:
 		print("Recovered " + str(__amount) + " HP"))
 	
 	# Detects collision with the enemy's hitbox component
-	attackBox.area_entered.connect(func(hitbox: Hitbox):
-		Global.debug.DebugPrint("Hitting on: " + str(hitbox.get_parent().name))
-		hitbox.__take_damage(properties.strength)
+	attackBox.area_entered.connect(func(__hitbox: Hitbox):
+		Global.debug.DebugPrint("Hitting on: " + str(__hitbox.get_parent().name))
+		__hitbox.TakeDamage(properties.strength)
 	)
+	
+	# Update HUD
+	# Global.level.HUD.HudUpdateHealth(properties.hpMax)
 
 # Main Loop
 func _physics_process(delta: float) -> void:
