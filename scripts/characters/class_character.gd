@@ -61,9 +61,10 @@ func StateDied() -> void: queue_free()
 # Change State Method
 func ChangeState(new_state: eState) -> void:
 	if state != new_state:
-		Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 		state = new_state
 		enterState = true
+		# DEBUG
+		# Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 
 # Attack Functions
 func StartAttackCollision() -> void:

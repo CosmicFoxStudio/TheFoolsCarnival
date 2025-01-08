@@ -20,22 +20,47 @@ size = Vector2(2560, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
 size = Vector2(2560, 20)
 
-[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera", "_HUD")]
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera", "_HUD", "areaMarkers")]
 script = ExtResource("1_6gsv2")
 _player = NodePath("Player")
 _camera = NodePath("Camera")
 _HUD = NodePath("HUD")
+areaMarkers = [NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3")]
 _music = "\"res://assets/audio/music/mus_battle.ogg\""
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_if02w")
 centered = false
 
-[node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
-
 [node name="Camera" type="Camera2D" parent="."]
-anchor_mode = 0
+position = Vector2(75, 327)
+offset = Vector2(0, -147)
+limit_left = 0
+limit_right = 2560
+editor_draw_limits = true
 script = ExtResource("4_888jb")
+
+[node name="Segments" type="Node" parent="."]
+
+[node name="Segment1" type="Line2D" parent="Segments"]
+position = Vector2(640, 0)
+points = PackedVector2Array(0, 0, 0, 360)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Segment2" type="Line2D" parent="Segments"]
+position = Vector2(1280, 0)
+points = PackedVector2Array(0, 0, 0, 360)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Segment3" type="Line2D" parent="Segments"]
+position = Vector2(2040, 0)
+points = PackedVector2Array(0, 0, 0, 360)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
 
 [node name="StageLimits" type="Node" parent="."]
 
@@ -73,34 +98,28 @@ shape = SubResource("RectangleShape2D_vk4j7")
 
 [node name="SpawnEnemy" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(253, 359)
-unlockedAtArea = 480.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy2" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(1015, 361)
-unlockedAtArea = 1120.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy3" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(1431, 360)
-unlockedAtArea = 1600.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy4" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(1833, 360)
-unlockedAtArea = 2080.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy5" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(2323, 360)
-unlockedAtArea = 2080.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
-lastArea = true
 
 [node name="Player" parent="." instance=ExtResource("2_xu5av")]
 position = Vector2(75, 327)

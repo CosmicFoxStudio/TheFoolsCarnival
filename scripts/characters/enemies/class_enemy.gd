@@ -3,7 +3,7 @@ class_name Enemy extends Character
 # TO-DO: Cooldown Attack Time for enemies
 
 @export var scoreLoot := 25
-@export var distanceAttack := 1.2 # The min value of targetDistance for the enemy to attack
+@export var distanceAttack := 50 # The min value of targetDistance for the enemy to attack
 @export var effectResource : HitEffectResource
 
 var targetDistance : Vector2 # Distance to player
@@ -51,7 +51,10 @@ func SetHurtThrow() -> void:
 
 # State Overrides
 func StateIdle() -> void: pass
-func StateWalk(delta) -> void: targetDistance = Global.level.player.position - self.position
+
+# Maybe it makes more sense to calculate targetDistance on _process
+# But idk, I don't want it running all the time
+func StateWalk(_delta) -> void: targetDistance = Global.level.player.position - self.position
 
 func StateJump() -> void:
 	if is_on_floor():

@@ -1,28 +1,38 @@
 extends Camera2D
 
-const SCREEN_WIDTH : float = 640.0
-const SCREEN_HEIGHT : float = 360.0
+@export var smoothFactor : float = 5.0  # Smoothness of the camera movement
+@export var cameraOffset : Vector2 = Vector2(0, 0)  # Offset from the player's center
 
-var smooth := 4.0
-var initialPos := 0.0
-var clampedPos := 0.0 # Start at half the screen width
+var targetPosition : Vector2
+var currentPosition : Vector2
+var clampedPos : Vector2 = Vector2(0.0, 0.0)  # X and Y-bounds for the camera movement
+var currentSegmentBoundary : Vector2 # Camera's current segment's boundary
+
+func _ready() -> void:
+	# Initialize the camera's position relative to the player
+	position = Global.level.player.position + cameraOffset
+	currentPosition = position
 
 func _process(delta: float) -> void:
-	# Ensure the camera only moves forward
-	if position.x < Global.level.player.position.x:
-		# Smoothly follow the player's X position
-		position.x = lerp(position.x, Global.level.player.position.x, smooth * delta)
+	# Target position follows the player with an offset	
+	targetPosition = Global.level.player.position + cameraOffset
 
-		# Clamp the camera within its current boundaries
-		position.x = clamp(position.x, initialPos, clampedPos)
+	# Smoothly interpolate the camera's position towards the target
+	currentPosition = lerp(currentPosition, targetPosition, smoothFactor * delta)
+	# limit_right = 
+	
+	# Clamp the camera to stay within bounds
+	currentPosition.x = clamp(currentPosition.x, 0.0, clampedPos.x)
+#
+	# Apply the new position to the camera 
+	# (Because we use top-left anchor, position.x, position.y is the camera's top-left corner)
+	position = currentPosition
 
-func SetCameraLimit(__limit: float) -> void:
-	# Update the rightmost limit of the camera
-	clampedPos = __limit
+# Update the camera limits when advancing to the next segment
+func SetCameraLimit(__newLimit: Vector2) -> void:
+	limit_right = __newLimit.x # Big band-aid but IT WORKS!! LOL
+	clampedPos = __newLimit
 
-#func AdvanceToNextArea(enemies_beaten: int, total_enemies: int) -> void:
-	## Calculate the new camera limit based on player progression
-	#if enemies_beaten >= total_enemies:
-		## Move the camera to the next area
-		#initialPos = clampedPos
-		#clampedPos += SCREEN_WIDTH.to_float()
+func UpdateSegmentBoundary(newBoundary: Vector2) -> void:
+	# Update the segment's boundary when transitioning
+	currentSegmentBoundary = newBoundary

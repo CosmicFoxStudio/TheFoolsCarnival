@@ -150,10 +150,11 @@ func OnAnimationFinished(__animName: String) -> void:
 	EndAttackCollision()
 	
 	if __animName in ["attack1", "attack2"]:
-		print(__animName, " finished, returning to idle")
 		isAttacking = false
 		
 		ChangeState(eState.IDLE)
+		# DEBUG
+		# print(__animName, " finished, returning to idle")
 
 func OnDamage(__health: float) -> void:
 	# Update DramaMeter
@@ -201,18 +202,30 @@ func StateDied() -> void:
 
 func _physics_process(delta: float) -> void: 
 	super(delta)
+	
 	# Clamps the player position to the camera boundaries
-	position.x = clamp(position.x, Global.level.camera.position.x - 640, Global.level.camera.clampedPos + 640)
+	var camPos = Global.level.camera.position.x
+	var camLimit = Global.level.camera.clampedPos.x
+	# var camLimit = Global.level.areaMarkers[Global.level.currentSegmentIndex].position.x
+	
+	if camPos != null and camLimit != null:
+		position.x = clamp(position.x, camPos - camLimit, camLimit)
+	else:
+		print("Camera positions not properly set.")
+		
+	# position.x = clamp(position.x, Global.level.camera.position.x - 640, Global.level.camera.clampedPos.x + 640)
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity: " + str(velocity))
 	Global.debug.UpdateDebugVariable(1, "State: " + str(eState.keys()[state]))
 	Global.debug.UpdateDebugVariable(2, "Direction: " + str(direction))
-	Global.debug.UpdateDebugVariable(3, "Jump: " + str(jump))
-	Global.debug.UpdateDebugVariable(4, "Attack: " + str(attack))
-	Global.debug.UpdateDebugVariable(5, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(6, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(7, "Camera Pos: " + str(Global.level.camera.position.x) + " / " + str(Global.level.camera.position.y))
+	#Global.debug.UpdateDebugVariable(3, "Jump: " + str(jump))
+	#Global.debug.UpdateDebugVariable(4, "Attack: " + str(attack))
+	Global.debug.UpdateDebugVariable(3, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(4, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(5, "Camera Pos: " + str(Global.level.camera.position.x) + " / " + str(Global.level.camera.position.y))
+	Global.debug.UpdateDebugVariable(6, "Camera Clamped Pos: " + str(Global.level.camera.clampedPos.x) + " / " + str(Global.level.camera.clampedPos.y)) 
+	Global.debug.UpdateDebugVariable(7, "Segment Index: " + str(Global.level.currentSegmentIndex))
 	Global.debug.UpdateDebugVariable(8, "Last Area?: " + str(Global.level.lastArea))
 	Global.debug.UpdateDebugVariable(9, "DramaMeter: " + str(Global.level.HUD.dramaMeter.audienceValue))
 
