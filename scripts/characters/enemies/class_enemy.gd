@@ -3,6 +3,7 @@ class_name Enemy extends Character
 # TO-DO: Cooldown Attack Time for enemies
 
 @export var distanceAttack := 1.2
+@export var scoreLoot := 25
 
 var walkTimer : float = 0
 var faceRight : bool = false
@@ -32,6 +33,19 @@ func Flip() -> void:
 	# (FIX ME) Attack Box doesn't adapt correctly when sprite is flipped
 	attackBox.scale.x = -1 if faceRight else 1
 
+func SetHurtThrow() -> void:
+	PlayAnimation("down")
+	
+	# Can't receive damage while downed
+	hitboxCollision.disabled = true
+	
+	# Horizontal throw - Not working too nicely with move_and_slide() :( 
+	velocity.x = 0.3 if Global.level.player.global_position.x < self.global_position.x else -0.3
+	
+	# Vertical throw
+	velocity.y = 3
+	#velocity.x = 0
+
 # State Overrides
 func StateIdle() -> void: pass
 func StateWalk(_delta) -> void: pass
@@ -42,5 +56,9 @@ func StateJump() -> void:
 		PlayAnimation("jump")
 
 func StateFall() -> void: pass
-func StateAttack() -> void: pass #HandleAttack(0)
-func StateAttack2() -> void: pass #HandleAttack(1)
+func StateAttack() -> void: pass
+func StateAttack2() -> void: pass
+func StateHurt() -> void: pass
+func StateDown() -> void: pass
+func StateUp() -> void: pass
+func StateDied() -> void: Global.level.HUD.AddScore(scoreLoot)

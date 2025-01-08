@@ -254,6 +254,7 @@ position = Vector2(0, -36)
 collision_layer = 4
 script = ExtResource("1_gavmj")
 effectResource = ExtResource("2_ivitl")
+scoreLoot = 15
 properties = ExtResource("2_bckja")
 
 [node name="Sprite" type="Sprite2D" parent="."]

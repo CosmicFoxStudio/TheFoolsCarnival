@@ -125,10 +125,15 @@ func StateAttack() -> void:
 	if not comboTimer.is_stopped():
 		if attack:  # Player pressed attack again
 			if comboIndex == 1:
+				var playerComboMultiplier = 1
 				print("Second attack triggered")
 				StartAttackCollision()
 				animationPlayer.play("attack2")
 				comboIndex += 1
+				
+				# Update DramaMeter
+				Global.level.HUD.dramaMeter.IncreaseMeter(10 * playerComboMultiplier)
+				
 				#comboTimer.stop()
 				#comboTimer.start()
 
@@ -150,22 +155,27 @@ func OnAnimationFinished(__animName: String) -> void:
 		
 		ChangeState(eState.IDLE)
 
+func OnDamage(__health: float) -> void:
+	# Update DramaMeter
+	var enemyComboMultiplier = 2
+	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
+
 func _physics_process(delta: float) -> void: 
 	super(delta)
 	# Clamps the player position to the camera boundaries
 	position.x = clamp(position.x, Global.level.camera.position.x - 640, Global.level.camera.clampedPos + 640)
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(1, "Velocity Y: " + str(velocity.y))
-	Global.debug.UpdateDebugVariable(2, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(3, "Direction: " + str(direction))
-	Global.debug.UpdateDebugVariable(4, "Jump: " + str(jump))
-	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
-	Global.debug.UpdateDebugVariable(6, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(7, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(Global.level.camera.position.x) + " / " + str(Global.level.camera.position.y))
-	Global.debug.UpdateDebugVariable(9, "Last Area?: " + str(Global.level.lastArea))
+	Global.debug.UpdateDebugVariable(0, "Velocity: " + str(velocity))
+	Global.debug.UpdateDebugVariable(1, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(2, "Direction: " + str(direction))
+	Global.debug.UpdateDebugVariable(3, "Jump: " + str(jump))
+	Global.debug.UpdateDebugVariable(4, "Attack: " + str(attack))
+	Global.debug.UpdateDebugVariable(5, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(6, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(7, "Camera Pos: " + str(Global.level.camera.position.x) + " / " + str(Global.level.camera.position.y))
+	Global.debug.UpdateDebugVariable(8, "Last Area?: " + str(Global.level.lastArea))
+	Global.debug.UpdateDebugVariable(9, "DramaMeter: " + str(Global.level.HUD.dramaMeter.audienceValue))
 
 	# Console
 	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))

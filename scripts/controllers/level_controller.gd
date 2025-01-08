@@ -8,15 +8,12 @@ class_name LevelController extends Scene
 @export var _HUD : UI
 @export_file("*.ogg") var _music : String = "res://assets/audio/music/mus_default.ogg"
 
-#@export var _audience_meter : AudienceMeter
-
 var score : int = 0
 
 # Static variables persist across instances and scene changes
 # ideal for global data management, utility functions, and ensuring a single data copy 
 # These variables can be accessed directly from the class without creating a new instance
 static var player: CharacterBody2D 
-#static var audience_meter : AudienceMeter
 static var camera: Camera2D
 static var HUD: UI
 static var music: String
@@ -31,7 +28,6 @@ func _enter_tree() -> void:
 	camera = _camera
 	HUD = _HUD
 	music = _music
-	#audience_meter = _audience_meter
 
 func _ready():
 	Global.level = self
@@ -42,13 +38,14 @@ func _ready():
 	# Global.audio.UpdateLevelMusic() 
 	# (FIX ME) |---> Not working when the cutscene is skipped? Seems like it only adds the song to the playlist
 	
-	#audience_meter.on_meter_reached_zero.connect(EndGame)
+	# Global.level.HUD.dramaMeter.OnMeterReachedZero.connect(EndGame)
+	# if Global.level.HUD.dramaMeter.IsStageFailed(): EndGame()
 
 func EnemyDied() -> void:
 	enemies -= 1
 	print("Enemy defeated!")
 	
-	# audience_meter.add_meter(enemy.score_value * 0.1)
+	# Global.level.HUD.dramaMeter.addMeter(enemy.scoreValue * 0.1)
 	# score += enemy.scoreValue
 	
 	if lastArea: 

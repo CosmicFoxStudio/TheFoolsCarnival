@@ -1,13 +1,22 @@
 class_name UI extends CanvasLayer
 
+var score: int = 0
+
 # Go
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+
+# DramaMeter
+@onready var dramaMeter: DramaMeter = $UIGameplay/DramaMeter
+
+# Audience
+@onready var audience: Control = $UIGameplay/Audience
 
 # Player
 @onready var hudPlayer: Control = $UIGameplay/HUDPlayer
 @onready var namePlayer: Label = $UIGameplay/HUDPlayer/NamePlayer
 @onready var healthPlayer: ProgressBar = $UIGameplay/HUDPlayer/HealthPlayer
 @onready var portraitPlayer: TextureRect = $UIGameplay/HUDPlayer/PortraitPlayer
+@onready var scorePlayer: Label = $UIGameplay/HUDPlayer/ScorePlayer
 
 # Enemy
 @onready var hudEnemy: Control = $UIGameplay/HUDEnemy
@@ -17,12 +26,34 @@ class_name UI extends CanvasLayer
 @onready var timerEnemyUI: Timer = $TimerEnemyUI
 
 func _ready() -> void:
-	# Global.level.HUD = self
 	hudEnemy.hide()
+	UpdateScoreLabel()
+
+func AddScore(points: int):
+	var multiplier = GetDramaMeterMultiplier()
+	var pointsToAdd = points * multiplier
+
+	# Update score
+	score += int(pointsToAdd)
+	UpdateScoreLabel()
+
+func GetDramaMeterMultiplier() -> float:
+	match dramaMeter.GetAudienceLevel():
+		"Red": return 0.5
+		"Orange": return 1.0
+		"Yellow": return 1.5
+		"Green": return 2.0
+		"Blue": return 3.0
+		_: return 1.0  # Default multiplier
+
+# Helper function to format score to always display as a 5-digit number
+# For example: Score 50 -> 00050
+func UpdateScoreLabel():
+	scorePlayer.text = str(score).pad_zeros(5)
 
 func HudUpdateHealth(__hp: float) -> void:
 	healthPlayer.value = __hp
-	
+
 func HudUpdatePlayer(__properties: CharacterData) -> void:
 	namePlayer.text = __properties.name
 	healthPlayer.value = __properties.hpMax

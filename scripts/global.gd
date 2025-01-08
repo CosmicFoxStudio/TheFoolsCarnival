@@ -10,7 +10,6 @@ var sceneTransition : SceneTransition
 var level : LevelController
 var debug : GlobalDebug
 var audio : AudioManager
-var HUD : UI
 var effects : EffectManager
 
 # Global Variables

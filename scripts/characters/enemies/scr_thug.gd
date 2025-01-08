@@ -125,19 +125,6 @@ func StateDown() -> void:
 	# Physics
 	move_and_slide()
 
-func SetHurtThrow() -> void:
-	PlayAnimation("down")
-	
-	# Can't receive damage while downed
-	hitboxCollision.disabled = true
-	
-	# Horizontal throw - Not working too nicely with move_and_slide() :( 
-	velocity.x = 0.3 if Global.level.player.global_position.x < self.global_position.x else -0.3
-	
-	# Vertical throw
-	velocity.y = 3
-	#velocity.x = 0
-
 	AITimer.stop()
 	AITimer.wait_time = randf_range(1, 2)
 	AITimer.start()
@@ -154,6 +141,8 @@ func StateUp() -> void:
 		ChangeState(eState.IDLE)
 
 func StateDied() -> void:
+	super()
+	
 	if enterState:
 		enterState = false
 		dead = true
@@ -201,8 +190,7 @@ func OnDamage(__health: float) -> void:
 			ChangeState(eState.DOWN)
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(10, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(11, "Velocity Y: " + str(velocity.y))
+	Global.debug.UpdateDebugVariable(11, "Velocity: " + str(velocity))
 	Global.debug.UpdateDebugVariable(12, "State: " + str(eState.keys()[state]))
 	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))

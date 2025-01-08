@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co6srri4jvslo"
-path="res://.godot/imported/spr_drama_meter.png-4d74452342aa6c675bc2906483f7ed2e.ctex"
+uid="uid://vnvfyx1wj0yq"
+path="res://.godot/imported/sheet_emotes.png-e4f41e821bbf630278be6c019f392b2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/spr_drama_meter.png"
-dest_files=["res://.godot/imported/spr_drama_meter.png-4d74452342aa6c675bc2906483f7ed2e.ctex"]
+source_file="res://assets/sprites/ui/icons/emotes/sheet_emotes.png"
+dest_files=["res://.godot/imported/sheet_emotes.png-e4f41e821bbf630278be6c019f392b2d.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

@@ -72,7 +72,7 @@ position = Vector2(1280, -10)
 shape = SubResource("RectangleShape2D_vk4j7")
 
 [node name="SpawnEnemy" parent="." instance=ExtResource("4_3exrk")]
-position = Vector2(480, 359)
+position = Vector2(253, 359)
 unlockedAtArea = 480.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])

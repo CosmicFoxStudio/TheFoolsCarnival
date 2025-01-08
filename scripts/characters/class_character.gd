@@ -99,7 +99,13 @@ func _ready() -> void:
 		ChangeState(eState.HURT)
 	)	
 	
-	health.__on_dead.connect(func(): ChangeState(eState.DIED))
+	health.__on_dead.connect(func(): 
+		if type == eType.ENEMY: 
+			# Add "Heart Reaction" to the audience
+			Global.level.HUD.audience.SpawnReaction("Heart")
+		ChangeState(eState.DIED)
+	)
+		
 	health.__on_recover.connect(func(__amount: float): 
 		print("Recovered " + str(__amount) + " HP"))
 	
