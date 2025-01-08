@@ -1,6 +1,8 @@
 class_name AudioManager extends Node
 
 @export var bgMusicStage : AudioStreamPlayer
+@export var menuSFXs : AudioStreamPlayer
+
 @export var musicVolume : float
 @export var sfxVolume : float
 
@@ -22,3 +24,8 @@ func UpdateLevelMusic():
 	# var currentStageMusic = str(currentStageName + "Music") 
 	# Gets the Name of the Clip, each one MUST present the naming convention "Music" at the end
 	bgMusicStage["parameters/switch_to_clip"] = currentMusic
+
+# The index of the Clip from the Playlist that will be played
+func PlaySFX(playlistIndex : int):
+	print("streams/stream_" + str(playlistIndex))
+	menuSFXs["streams/stream_" + str(playlistIndex)].play()

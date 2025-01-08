@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmo7ql8f31kes"]
+[gd_scene load_steps=7 format=3 uid="uid://dmo7ql8f31kes"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_settings_manager.gd" id="1_57pyb"]
+[ext_resource type="Texture2D" uid="uid://coomnwsog1qx0" path="res://assets/sprites/square.png" id="2_ty8bl"]
+[ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="3_h17j1"]
+[ext_resource type="FontFile" uid="uid://dve7mgsjik4dg" path="res://addons/phantom_camera/fonts/Nunito-Regular.ttf" id="4_tudtn"]
 
-[node name="Settings" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_2pa03"]
+font = ExtResource("3_h17j1")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_b6vn3"]
+font = ExtResource("4_tudtn")
+font_size = 20
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("settingsButton")]
+process_mode = 3
+z_index = 200
+y_sort_enabled = true
 layout_mode = 3
 anchor_left = 0.2
 anchor_top = 0.2
@@ -11,8 +25,25 @@ anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_57pyb")
+settingsButton = NodePath("OpenSettingsButton")
+
+[node name="OpenSettingsButton" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 36.0
+offset_top = -115.0
+offset_right = 106.0
+offset_bottom = -84.0
+grow_horizontal = 0
+toggle_mode = true
+action_mode = 0
+text = "Settings"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 clip_contents = true
 layout_mode = 2
 offset_right = 384.0
@@ -44,3 +75,51 @@ layout_mode = 2
 min_value = -20.0
 max_value = 20.0
 page = 2.0
+
+[node name="ControlsBox" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0, 0, 0, 0.278431)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -150.0
+offset_right = 222.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ty8bl")
+
+[node name="Title" type="Label" parent="ControlsBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_2pa03")
+horizontal_alignment = 1
+
+[node name="ControlDescription" type="Label" parent="ControlsBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 51.0
+offset_right = -24.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WASD - Movimentar
+Z - Atacar
+Espaço - Pular
+Enter - Menu"
+label_settings = SubResource("LabelSettings_b6vn3")
+
+[connection signal="toggled" from="OpenSettingsButton" to="." method="_on_settings_button_toggled"]

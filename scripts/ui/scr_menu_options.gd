@@ -38,6 +38,8 @@ func _update_selection() -> void:
 			menu_items[i].add_theme_color_override("font_color", Color(1, 1, 0))
 		else:
 			menu_items[i].add_theme_color_override("font_color", Color(1, 1, 1))
+	
+	Global.audio.PlaySFX(0)
 
 func _on_menu_item_selected() -> void:
 	match selected_index:
@@ -53,3 +55,11 @@ func _on_start_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_start_button_focus_entered() -> void:
+	Global.audio.PlaySFX(0)
+
+
+func _on_quit_button_focus_entered() -> void:
+	Global.audio.PlaySFX(1)

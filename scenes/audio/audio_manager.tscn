@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://djcmkr3wdgvix"]
+[gd_scene load_steps=11 format=3 uid="uid://djcmkr3wdgvix"]
 
 [ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="1_mgqhi"]
 [ext_resource type="AudioStream" uid="uid://c4aaw2qoku4ax" path="res://assets/audio/sfx/tfc_intro.ogg" id="2_chv0h"]
 [ext_resource type="AudioStream" uid="uid://d1mdmynewbhch" path="res://assets/audio/sfx/tfc_battle.ogg" id="3_25p1q"]
+[ext_resource type="AudioStream" uid="uid://bqlkrsewf4okp" path="res://assets/audio/sfx/sfx_cursor_menu_(back).wav" id="4_tnvtt"]
+[ext_resource type="AudioStream" uid="uid://g7j5hcyh86uu" path="res://assets/audio/sfx/sfx_cursor_menu_(enter).wav" id="5_4vmfv"]
+[ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_(hover).wav" id="6_w3it8"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_brvyg"]
 stream_count = 2
@@ -34,9 +37,17 @@ Vector2i(1, 0): {
 }
 }
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("bgMusicStage")]
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_r54wt"]
+loop = false
+stream_count = 3
+stream_0 = ExtResource("4_tnvtt")
+stream_1 = ExtResource("5_4vmfv")
+stream_2 = ExtResource("6_w3it8")
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("bgMusicStage", "menuSFXs")]
 script = ExtResource("1_mgqhi")
 bgMusicStage = NodePath("BackgroundMusicPlayer")
+menuSFXs = NodePath("SFXs")
 musicVolume = 10.0
 sfxVolume = 10.0
 
@@ -45,3 +56,6 @@ stream = SubResource("AudioStreamInteractive_wcblp")
 volume_db = -20.0
 autoplay = true
 bus = &"music"
+
+[node name="SFXs" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPlaylist_r54wt")

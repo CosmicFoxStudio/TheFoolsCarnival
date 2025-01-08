@@ -365,9 +365,14 @@ offset_right = 58.5
 offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_top = NodePath("StartButton")
+focus_neighbor_bottom = NodePath("QuitButton")
+focus_mode = 2
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath("../QuitButton")
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("6_ly0se")
 theme_override_font_sizes/font_size = 20
@@ -376,6 +381,8 @@ text = "Start
 
 [node name="QuitButton" type="Button" parent="Buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath(".")
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("6_ly0se")
 theme_override_font_sizes/font_size = 20
@@ -392,5 +399,7 @@ stream = ExtResource("12_dllvj")
 volume_db = 5.0
 autoplay = true
 
+[connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="focus_entered" from="Buttons/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
