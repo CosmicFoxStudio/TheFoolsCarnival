@@ -2,6 +2,8 @@ class_name Player extends Character
 
 # enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
 
+@onready var camera: Camera = $Camera
+
 # Get input dynamically (read-only)
 var direction: float:
 	get:
@@ -207,9 +209,9 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	# Clamps the player position to the camera boundaries
-	# var camPos = Global.level.camera.position.x
-	# var camLimit = Global.level.camera.clampedPos.x
-	# var camLimit = Global.level.areaMarkers[Global.level.currentSegmentIndex].position.x
+	# var camPos = camera.position.x
+	# var camLimit = camera.clampedPos.x
+	# var camLimit = Global.level.camLimiters[Global.level.currentSegmentIndex].position.x
 	
 	#if camPos != null and camLimit != null:
 		#position.x = clamp(position.x, camPos - camLimit, camLimit)

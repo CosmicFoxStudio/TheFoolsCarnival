@@ -27,18 +27,18 @@ func SpawnEnemies() -> void:
 func SetEnemyRandomPosition() -> Vector2:
 	# Retrieve the current segment's boundaries from the Line2D markers
 	var segment = Global.level.currentSegmentIndex
-	var screenLeft = get_parent().areaMarkers[segment - 1].position
-	var screenRight = get_parent().areaMarkers[segment].position
+	var screenLeft = get_parent().camLimiters[segment - 1].position
+	var screenRight = get_parent().camLimiters[segment].position
 	var spawnY = Global.FLOOR 
 	#var spawnY = randf_range(0.0, 260.0)  # Random Y position within height range
 	
 	var side
 	# Enemies in first segment should spawn to the right
-	if Global.level.currentSegmentIndex == 0:
+	if Global.level.currentSegmentIndex == 1:
 		print("Enemy will spawn on the right")
 		side = sides.RIGHT
 	# Enemy in last segment (boss) should spawn to the left
-	elif Global.level.currentSegmentIndex == Global.level.areaMarkers.size() - 1: 
+	elif Global.level.currentSegmentIndex == Global.level.camLimiters.size() - 1: 
 		print("Boss will spawn on the left")
 		side = sides.LEFT
 	# Other segments

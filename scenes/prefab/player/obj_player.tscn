@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://3ay3cu5gnbw2"]
+[gd_scene load_steps=28 format=3 uid="uid://3ay3cu5gnbw2"]
 
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
 [ext_resource type="Resource" uid="uid://drt3b8pm3eayx" path="res://resources/characters/res_char_pierrot.tres" id="2_7k0pf"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_00ysq"]
+[ext_resource type="PackedScene" uid="uid://bjrjkb1m42ho6" path="res://scenes/prefab/camera/camera.tscn" id="5_k2bh6"]
 [ext_resource type="PackedScene" uid="uid://b017j8kmnrqn7" path="res://scenes/prefab/debug/obj_debug_overlay.tscn" id="6_affh4"]
 [ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/crowd_applause.wav" id="7_f6o7l"]
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
@@ -347,6 +348,10 @@ shape = SubResource("CapsuleShape2D_h2465")
 
 [node name="Health" parent="." instance=ExtResource("1_safe6")]
 
+[node name="Camera" parent="." instance=ExtResource("5_k2bh6")]
+position = Vector2(0, 0)
+offset = Vector2(0, 0)
+
 [node name="Hitbox" parent="." instance=ExtResource("4_00ysq")]
 collision_layer = 2
 collision_mask = 0
@@ -399,5 +404,3 @@ script = ExtResource("10_jdhmr")
 position = Vector2(2.5, -47)
 shape = SubResource("RectangleShape2D_5770w")
 debug_color = Color(0.843165, 0.00105945, 0.915948, 0.42)
-
-[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="_on_area_entered"]

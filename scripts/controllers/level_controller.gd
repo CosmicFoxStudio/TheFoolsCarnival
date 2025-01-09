@@ -4,30 +4,27 @@ class_name LevelController extends Scene
 
 # These variables are specific to each instance of the LevelController
 @export var _player : CharacterBody2D
-@export var _camera : Camera
 @export var _HUD : UI
-@export var areaMarkers : Array[Line2D]  # List of area boundary markers (Marker2D)
+# @export var areaMarkers : Array[Line2D]  # List of area boundary markers (Marker2D)
 
-@export var camLimiters : Array[Area2D] # List of camera limiters
+@export var camLimiters : Array[Node2D] # List of camera limiters
 
 @export_file("*.ogg") var _music : String = "res://assets/audio/music/mus_default.ogg"
 
 var score : int = 0
 var enemies := 0
-var currentSegmentIndex: int = 0
+var currentSegmentIndex: int = 1
 var lastArea : bool = false
 
 # Static variables persist across instances and scene changes
 # ideal for global data management, utility functions, and ensuring a single data copy 
 # These variables can be accessed directly from the class without creating a new instance
-static var camera: Camera
 static var player: CharacterBody2D 
 static var HUD: UI
 static var music: String
 
 # Runs before ready
 func _enter_tree() -> void:
-	camera = _camera
 	player = _player
 	HUD = _HUD
 	music = _music
@@ -37,28 +34,38 @@ func _enter_tree() -> void:
 	Global.audio.currentStageName = get_name()
 	Global.audio.currentMusic = music
 
-func _ready():
-	# UpdateCameraLimits()
-	
+func _ready():	
 	# Set to first limiter
-	camera.limitManager.SetLimiter(camLimiters[0], true)
+	player.camera.limit_left = 0
+	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
 	
 	# Global.audio.UpdateLevelMusic() 
 	# (FIX ME) |---> Not working when the cutscene is skipped? Seems like it only adds the song to the playlist
 
 # Update camera limits based on the current segment
-#func UpdateCameraLimits() -> void:
-	#var oldLimit = areaMarkers[currentSegmentIndex - 1].position.x
-	#var limit = areaMarkers[currentSegmentIndex].position.x
-#
-	#if currentSegmentIndex == 0:
-		#Global.level.camera.SetCameraLimit(Vector2(limit, 0))
-	#elif currentSegmentIndex < areaMarkers.size():
-		#oldLimit = areaMarkers[currentSegmentIndex - 1].position.x
-		#limit = areaMarkers[currentSegmentIndex].position.x
-		#Global.level.camera.SetCameraLimit(Vector2(limit, 0))
-	#else:
-		#print("Invalid segment index or areaMarkers not configured.")
+func UpdateCameraLimits() -> void:
+	# DEBUG
+	print(
+		"
+		Limit Left: %s, 
+		Limit Right: %s, 
+		Limit Top: %s, 
+		Limit Bottom: %s" % 
+		[player.camera.limit_left, player.camera.limit_right, player.camera.limit_top, player.camera.limit_bottom]
+	)
+	
+	var oldLimit = camLimiters[currentSegmentIndex - 1].position.x
+	var limit = camLimiters[currentSegmentIndex].position.x
+	print("Limit: " + str(limit))
+
+	if currentSegmentIndex < camLimiters.size():
+		oldLimit = camLimiters[currentSegmentIndex - 1].position.x
+		limit = camLimiters[currentSegmentIndex].position.x
+		player.camera.limit_right = limit
+		# Lock Camera Limit Right
+		player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
+	else:
+		print("Invalid segment index or camLimiters not configured.")
 
 func EnemyDied() -> void:
 	enemies -= 1
@@ -79,16 +86,17 @@ func EnemyDied() -> void:
 func AdvanceToNextSegment() -> void:
 	currentSegmentIndex += 1
 	
-	if currentSegmentIndex < areaMarkers.size() - 1:
+	# Normal Segment
+	if currentSegmentIndex < camLimiters.size() - 1:
 		# camera.UpdateSegmentBoundary(GetCurrentSegmentBoundary())
-		# UpdateCameraLimits()
+		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 	# Reached BOSS
-	elif currentSegmentIndex == areaMarkers.size() - 1:
+	elif currentSegmentIndex == camLimiters.size() - 1:
 		Global.level.lastArea = true
 		Global.debug.DebugPrint("Reached Last Area")
 		# camera.UpdateSegmentBoundary(GetCurrentSegmentBoundary())
-		# UpdateCameraLimits()
+		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 		
 		# Pause Current Music
@@ -98,14 +106,14 @@ func AdvanceToNextSegment() -> void:
 		Global.audio.musicPlayer.stream = load("res://assets/audio/music/boss_fight.mp3")
 		Global.audio.musicPlayer.play()
 	else: 
-		currentSegmentIndex = areaMarkers.size()
+		currentSegmentIndex = camLimiters.size()
 
 # Configure the next area's enemy count
 func ConfigNextArea(__amount: int) -> void:
 	enemies = __amount
 
 func GetCurrentSegmentBoundary() -> Vector2:
-	return areaMarkers[currentSegmentIndex].position
+	return camLimiters[currentSegmentIndex].position
 
 func EndGame():
 	print("GAME OVER")
@@ -127,6 +135,7 @@ func _debug() -> void:
 	# Global.debug.UpdateDebugVariable(19, "[LEVEL] Segment 0: " + str(areaMarkers[0].position.x))
 	Global.debug.UpdateDebugVariable(8, "[LEVEL] Segment Index: " + str(currentSegmentIndex))
 	# Camera Stuff
-	Global.debug.UpdateDebugVariable(9, "[LEVEL] Camera Pos: " + str(camera.position))
+	Global.debug.UpdateDebugVariable(9, "[LEVEL] Camera Pos: " + str(player.camera.position))
+
 	#Global.debug.UpdateDebugVariable(10, "[LEVEL] Camera Clamped Pos: " + str(camera.clampedPos)) 
 	#Global.debug.UpdateDebugVariable(11, "[LEVEL] Camera Clamped New Pos: " + str(camera.targetClampedPos))

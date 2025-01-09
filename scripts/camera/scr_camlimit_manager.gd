@@ -2,6 +2,8 @@ class_name CameraLimitManager extends Node2D
 
 const MAX_LIMIT = 100000
 
+@onready var camera : Camera = get_parent()
+
 var limitTransitionSpeed = 3
 
 # Camera Bounds
@@ -24,8 +26,7 @@ func _ready() -> void:
 	cameraBoundsYMax = cameraBounds.end.y
 
 # Limit camera bounds dynamically every frame
-func _physics_process(delta: float) -> void:
-	var camera = Global.level.camera
+func _physics_process(_delta: float) -> void:
 	camera.limit_left = CalculateLimit(camera.limit_left, limitLeftTarget, true)
 	camera.limit_right = CalculateLimit(camera.limit_right, limitRightTarget, true)
 	camera.limit_top = CalculateLimit(camera.limit_top, limitTopTarget, false)
@@ -64,11 +65,11 @@ func MoveLimitToward(__current, __target):
 func SetLimiter(__limiter: CameraLimiter, __instant = false):
 	limitLeftTarget = __limiter.GetLimitLeft()
 	limitRightTarget = __limiter.GetLimitRight()
-	limitTopTarget = __limiter.GetLimitTop() + Global.level.camera.offset.y
-	LimitBottomTarget = __limiter.GetLimitBottom() - Global.level.camera.offset.y
+	limitTopTarget = __limiter.GetLimitTop() + camera.offset.y
+	LimitBottomTarget = __limiter.GetLimitBottom() - camera.offset.y
 	
 	if __instant:
-		Global.level.camera.limit_left = limitLeftTarget
-		Global.level.camera.limit_top = limitTopTarget
-		Global.level.camera.limit_right = limitRightTarget
-		Global.level.camera.limit_bottom = LimitBottomTarget
+		camera.limit_left = limitLeftTarget
+		camera.limit_top = limitTopTarget
+		camera.limit_right = limitRightTarget
+		camera.limit_bottom = LimitBottomTarget

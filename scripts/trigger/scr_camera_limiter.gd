@@ -1,4 +1,4 @@
-class_name CameraLimiter extends Area2D
+class_name CameraLimiter extends Node2D
 
 enum eLimitX { NONE, LEFT, RIGHT }
 enum eLimitY { NONE, TOP, BOTTOM }
@@ -22,7 +22,8 @@ func GetLimitBottom():
 
 func GetLimitLeft():
 	if limitX != eLimitX.LEFT:
-		return -MAX_VALUE
+		# return -MAX_VALUE
+		return 0
 	return marker.global_position.x
 
 func GetLimitRight():

@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=12 format=3 uid="uid://bh5aw3urpaxq0"]
 
 [ext_resource type="Script" path="res://scripts/levels/circus/scr_circus_1.gd" id="1_6gsv2"]
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
 [ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
-[ext_resource type="PackedScene" uid="uid://bjrjkb1m42ho6" path="res://scenes/prefab/camera/camera.tscn" id="3_ckea2"]
 [ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/ui_hud.tscn" id="3_kp1wh"]
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="PackedScene" uid="uid://cg6v4kb7j5754" path="res://scenes/prefab/triggers/obj_camera_limiter.tscn" id="4_vxcq0"]
@@ -21,13 +20,11 @@ size = Vector2(2560, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
 size = Vector2(2560, 20)
 
-[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera", "_HUD", "areaMarkers", "camLimiters")]
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_HUD", "camLimiters")]
 script = ExtResource("1_6gsv2")
 _player = NodePath("Player")
-_camera = NodePath("Camera")
 _HUD = NodePath("HUD")
-areaMarkers = [NodePath("Segments/Segment0"), NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3")]
-camLimiters = [NodePath("CameraLimiters/CameraLimiter1"), NodePath("CameraLimiters/CameraLimiter2")]
+camLimiters = [NodePath("CameraLimiters/CameraLimiter0"), NodePath("CameraLimiters/CameraLimiter1"), NodePath("CameraLimiters/CameraLimiter2"), NodePath("CameraLimiters/CameraLimiter3"), NodePath("CameraLimiters/CameraLimiter4")]
 _music = "\"res://assets/audio/music/mus_battle.ogg\""
 metadata/_edit_lock_ = true
 
@@ -35,53 +32,58 @@ metadata/_edit_lock_ = true
 texture = ExtResource("1_if02w")
 centered = false
 
-[node name="Camera" parent="." instance=ExtResource("3_ckea2")]
-
 [node name="CameraLimiters" type="Node" parent="."]
 
-[node name="CameraLimiter1" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+[node name="CameraLimiter0" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(0, 360)
 limitX = 1
 limitY = 2
 
-[node name="LimiterCollision" parent="CameraLimiters/CameraLimiter1" index="0"]
-position = Vector2(648, 258)
-debug_color = Color(0.813844, 0.00202342, 0.979025, 0.42)
-
-[node name="LimitPosition" parent="CameraLimiters/CameraLimiter1" index="1"]
-position = Vector2(0, 360)
-
-[node name="CameraLimiter2" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+[node name="CameraLimiter1" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(640, 360)
 limitX = 2
 limitY = 2
 
-[node name="LimiterCollision" parent="CameraLimiters/CameraLimiter2" index="0"]
-position = Vector2(911, 260)
-debug_color = Color(0.815686, 0.00392157, 0.980392, 0.419608)
+[node name="CameraLimiter2" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(1280, 360)
+limitX = 2
+limitY = 2
 
-[node name="LimitPosition" parent="CameraLimiters/CameraLimiter2" index="1"]
-position = Vector2(640, 360)
+[node name="CameraLimiter3" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(2040, 360)
+limitX = 2
+limitY = 2
+
+[node name="CameraLimiter4" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(2560, 360)
+limitX = 2
+limitY = 2
 
 [node name="Segments" type="Node" parent="."]
 
 [node name="Segment0" type="Line2D" parent="Segments"]
+visible = false
 position = Vector2(640, 0)
 points = PackedVector2Array(0, 0, 0, 360)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="Segment1" type="Line2D" parent="Segments"]
+visible = false
 position = Vector2(1280, 0)
 points = PackedVector2Array(0, 0, 0, 360)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="Segment2" type="Line2D" parent="Segments"]
+visible = false
 position = Vector2(2040, 0)
 points = PackedVector2Array(0, 0, 0, 360)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="Segment3" type="Line2D" parent="Segments"]
+visible = false
 position = Vector2(2560, 0)
 points = PackedVector2Array(0, 0, 0, 360)
 width = 1.0
@@ -149,6 +151,3 @@ enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="Player" parent="." instance=ExtResource("2_xu5av")]
 position = Vector2(80, 327)
-
-[editable path="CameraLimiters/CameraLimiter1"]
-[editable path="CameraLimiters/CameraLimiter2"]
