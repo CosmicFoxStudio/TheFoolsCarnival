@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5fhwsjliclu1"
-path="res://.godot/imported/crowd_applause_crushed.wav-42c283f31466f2cb431b11670fa194aa.sample"
+path="res://.godot/imported/sfx_crowd_applause_crushed.wav-a1920dc1617fb6f7bccd93cb04f915e9.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/crowd_applause_crushed.wav"
-dest_files=["res://.godot/imported/crowd_applause_crushed.wav-42c283f31466f2cb431b11670fa194aa.sample"]
+source_file="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav"
+dest_files=["res://.godot/imported/sfx_crowd_applause_crushed.wav-a1920dc1617fb6f7bccd93cb04f915e9.sample"]
 
 [params]
 

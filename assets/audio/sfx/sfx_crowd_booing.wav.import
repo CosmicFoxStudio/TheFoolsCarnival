@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cdhqw4fvij5l5"
-path="res://.godot/imported/crowd_booing.wav-aafe43b894136132ff5a2e63399209e4.sample"
+path="res://.godot/imported/sfx_crowd_booing.wav-8891efd7f6940285dad314ceb878278b.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/crowd_booing.wav"
-dest_files=["res://.godot/imported/crowd_booing.wav-aafe43b894136132ff5a2e63399209e4.sample"]
+source_file="res://assets/audio/sfx/sfx_crowd_booing.wav"
+dest_files=["res://.godot/imported/sfx_crowd_booing.wav-8891efd7f6940285dad314ceb878278b.sample"]
 
 [params]
 

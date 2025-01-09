@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://dp1odohymqlcw"]
+
+[ext_resource type="Texture2D" uid="uid://bdd38lnsivgmo" path="res://assets/sprites/ui/portraits/spr_portrait_purple.png" id="1_7sp2t"]
+[ext_resource type="Script" path="res://scripts/characters/data/scr_data_character.gd" id="1_a83mr"]
+
+[resource]
+script = ExtResource("1_a83mr")
+name = "Boss"
+portrait = ExtResource("1_7sp2t")
+hpMax = 100.0
+speed = 1400.0
+jumpVelocity = 300.0
+strength = 40
+color = Color(0.603922, 0, 0.890196, 1)

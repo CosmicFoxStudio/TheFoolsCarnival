@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ca8xxv75e6fdf"
-path="res://.godot/imported/crowd_booing_crushed.wav-8bb133bd550869fc6bfe0bf753916c63.sample"
+path="res://.godot/imported/sfx_crowd_booing_crushed.wav-2e8ac7d8d58aefb462b05e08ae62a3c1.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/crowd_booing_crushed.wav"
-dest_files=["res://.godot/imported/crowd_booing_crushed.wav-8bb133bd550869fc6bfe0bf753916c63.sample"]
+source_file="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav"
+dest_files=["res://.godot/imported/sfx_crowd_booing_crushed.wav-2e8ac7d8d58aefb462b05e08ae62a3c1.sample"]
 
 [params]
 

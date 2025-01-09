@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_00ysq"]
 [ext_resource type="PackedScene" uid="uid://bjrjkb1m42ho6" path="res://scenes/prefab/camera/camera.tscn" id="5_k2bh6"]
 [ext_resource type="PackedScene" uid="uid://b017j8kmnrqn7" path="res://scenes/prefab/debug/obj_debug_overlay.tscn" id="6_affh4"]
-[ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/crowd_applause.wav" id="7_f6o7l"]
+[ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/sfx_crowd_applause.wav" id="7_f6o7l"]
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
-[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/crowd_applause_crushed.wav" id="8_s6yx5"]
-[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/crowd_booing_crushed.wav" id="9_oybm7"]
+[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav" id="8_s6yx5"]
+[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="9_oybm7"]
 [ext_resource type="Script" path="res://scenes/prefab/player/scr_player_interaction.gd" id="10_jdhmr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]

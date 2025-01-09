@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=13 format=3 uid="uid://bh5aw3urpaxq0"]
 
 [ext_resource type="Script" path="res://scripts/levels/circus/scr_circus_1.gd" id="1_6gsv2"]
 [ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/ui_hud.tscn" id="3_kp1wh"]
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="PackedScene" uid="uid://cg6v4kb7j5754" path="res://scenes/prefab/triggers/obj_camera_limiter.tscn" id="4_vxcq0"]
+[ext_resource type="PackedScene" uid="uid://dcya6dfpmgmyd" path="res://scenes/prefab/enemies/obj_enemy_purple.tscn" id="7_1xqmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
 size = Vector2(20, 360)
@@ -147,7 +148,7 @@ enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 [node name="SpawnEnemy4" parent="." instance=ExtResource("4_3exrk")]
 position = Vector2(2323, 360)
 amount = 1
-enemies = Array[PackedScene]([ExtResource("3_7ies1")])
+enemies = Array[PackedScene]([ExtResource("7_1xqmh")])
 
 [node name="Player" parent="." instance=ExtResource("2_xu5av")]
 position = Vector2(80, 327)
