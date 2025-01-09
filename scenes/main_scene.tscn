@@ -25,6 +25,7 @@ hitEffectResources = Array[ExtResource("4_fcky6")]([ExtResource("5_0feaj"), ExtR
 [node name="LayerControl" type="CanvasLayer" parent="."]
 
 [node name="Debug" parent="LayerControl" instance=ExtResource("2_feukp")]
+visible = false
 
 [node name="Settings" parent="LayerControl" instance=ExtResource("3_djt05")]
 

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_hxaiu")
-name = "Thug"
+name = "CAPACHO"
 portrait = ExtResource("1_gcm6a")
 hpMax = 20.0
 speed = 1200.0

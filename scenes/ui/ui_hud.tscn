@@ -114,13 +114,12 @@ metadata/_edit_lock_ = true
 layout_mode = 0
 offset_left = 70.0
 offset_top = 41.0
-offset_right = 141.0
+offset_right = 187.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("2_cvup0")
 theme_override_font_sizes/font_size = 12
 text = "PLAYER"
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="HealthPlayer" type="ProgressBar" parent="UIGameplay/HUDPlayer"]
 layout_mode = 0
@@ -145,7 +144,6 @@ texture = ExtResource("3_rfdim")
 metadata/_edit_lock_ = true
 
 [node name="HUDEnemy" type="Control" parent="UIGameplay"]
-visible = false
 anchors_preset = 0
 offset_left = 431.0
 offset_top = 14.0
@@ -154,7 +152,7 @@ offset_bottom = 82.0
 
 [node name="NameEnemy" type="Label" parent="UIGameplay/HUDEnemy"]
 layout_mode = 0
-offset_left = 58.0
+offset_left = 6.0
 offset_top = 40.0
 offset_right = 123.0
 offset_bottom = 63.0

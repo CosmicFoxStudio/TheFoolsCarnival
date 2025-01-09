@@ -23,8 +23,11 @@ func _ready() -> void:
 	super()
 	type = eType.PLAYER
 	
-	# Set initial position on the room
-	position = Vector2(80, 327)
+	# Set initial position on the room (directly on ground)
+	# position = Vector2(80, Global.FLOOR)
+	
+	# Spawn falling
+	position = Vector2(80, 300)
 	
 	# Get player properties
 	if Global.playerResource != null:
