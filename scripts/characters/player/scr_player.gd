@@ -209,14 +209,14 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	# Clamps the player position to the camera boundaries
-	# var camPos = camera.position.x
+	var camPos = camera.position.x
 	# var camLimit = camera.clampedPos.x
-	# var camLimit = Global.level.camLimiters[Global.level.currentSegmentIndex].position.x
+	var camLimit = Global.level.camLimiters[Global.level.currentSegmentIndex].position.x
 	
-	#if camPos != null and camLimit != null:
-		#position.x = clamp(position.x, camPos - camLimit, camLimit)
-	#else:
-		#print("Camera positions not properly set.")
+	if camPos != null and camLimit != null:
+		position.x = clamp(position.x, camPos - camLimit, camLimit)
+	else:
+		print("Camera positions not properly set.")
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(0, "Velocity: " + str(velocity))
