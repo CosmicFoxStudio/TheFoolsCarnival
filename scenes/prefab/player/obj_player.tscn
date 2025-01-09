@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://3ay3cu5gnbw2"]
+[gd_scene load_steps=27 format=3 uid="uid://3ay3cu5gnbw2"]
 
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
 [ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/crowd_applause_crushed.wav" id="8_s6yx5"]
 [ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/crowd_booing_crushed.wav" id="9_oybm7"]
+[ext_resource type="Script" path="res://scenes/prefab/player/scr_player_interaction.gd" id="10_jdhmr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]
 radius = 21.0
@@ -324,7 +325,11 @@ clip_2/name = &"ATTACK"
 clip_2/stream = SubResource("AudioStreamPlaylist_lk7uh")
 clip_2/auto_advance = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5770w"]
+size = Vector2(47, 94)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 50
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_yjweb")
@@ -386,3 +391,13 @@ wait_time = 0.8
 one_shot = true
 
 [node name="PlayerVoice" type="AudioStreamPlayer" parent="."]
+
+[node name="InteractionArea" type="Area2D" parent="."]
+script = ExtResource("10_jdhmr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(2.5, -47)
+shape = SubResource("RectangleShape2D_5770w")
+debug_color = Color(0.843165, 0.00105945, 0.915948, 0.42)
+
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="_on_area_entered"]

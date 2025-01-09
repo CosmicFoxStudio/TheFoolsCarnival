@@ -8,8 +8,6 @@ enum eType { PLAYER, ENEMY, NPC }
 
 # Shared properties
 @export var properties: CharacterData
-@export var speed: float = 200.0
-@export var maxHealth: int = 100
 
 # Variables
 var type : eType
@@ -52,8 +50,8 @@ func PlayAnimation(__animName: String) -> void:
 # State Methods (overridable in subclasses)
 func StateIdle() -> void: pass
 func StateWalk(_delta) -> void: pass
-func StateJump() -> void: pass
-func StateFall() -> void: pass
+func StateJump(_delta) -> void: pass
+func StateFall(_delta) -> void: pass
 func StateAttack() -> void: pass
 func StateHurt() -> void: pass
 func StateDied() -> void: queue_free()
@@ -126,8 +124,8 @@ func _physics_process(delta: float) -> void:
 	match state:
 		eState.IDLE: StateIdle()
 		eState.WALK: StateWalk(delta)
-		eState.JUMP: StateJump()
-		eState.FALL: StateFall()
+		eState.JUMP: StateJump(delta)
+		eState.FALL: StateFall(delta)
 		eState.ATTACK: StateAttack()
 		eState.HURT: StateHurt()
 		eState.DIED: StateDied()

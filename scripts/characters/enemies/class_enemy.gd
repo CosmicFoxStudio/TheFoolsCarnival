@@ -56,12 +56,12 @@ func StateIdle() -> void: pass
 # But idk, I don't want it running all the time
 func StateWalk(_delta) -> void: targetDistance = Global.level.player.position - self.position
 
-func StateJump() -> void:
+func StateJump(_delta) -> void:
 	if is_on_floor():
 		velocity.y = -properties.jump_velocity
 		PlayAnimation("jump")
 
-func StateFall() -> void: pass
+func StateFall(_delta) -> void: pass
 func StateAttack() -> void: pass
 func StateAttack2() -> void: pass
 func StateHurt() -> void: pass

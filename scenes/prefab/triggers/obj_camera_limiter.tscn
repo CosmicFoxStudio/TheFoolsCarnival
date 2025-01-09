@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg6v4kb7j5754"]
+
+[ext_resource type="Script" path="res://scripts/trigger/scr_camera_limiter.gd" id="1_t7p3f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_froae"]
+size = Vector2(20, 132)
+
+[node name="CameraLimiter" type="Area2D"]
+script = ExtResource("1_t7p3f")
+
+[node name="LimiterCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -56)
+shape = SubResource("RectangleShape2D_froae")
+
+[node name="LimitPosition" type="Marker2D" parent="."]

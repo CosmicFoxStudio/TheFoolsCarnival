@@ -3,6 +3,7 @@ extends Node
 # Const
 const SCREEN_WIDTH : float = 640.0
 const SCREEN_HEIGHT : float = 360.0
+const FLOOR : float = 327.0
 
 # Preloads
 var playerResource : CharacterData = preload("res://resources/characters/res_char_pierrot.tres")

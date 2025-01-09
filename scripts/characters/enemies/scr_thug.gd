@@ -50,7 +50,17 @@ func StateWalk(delta) -> void:
 	
 	# Horizontal Movement (move toward the player's x position)
 	# sign() ensures the enemy moves left (-1) or right (1) based on the player's position
-	self.velocity.x = sign(targetDistance.x) * speed * delta
+	self.velocity.x = sign(targetDistance.x) * properties.speed * delta
+	
+	# DEBUG
+	#print(
+		#"Char: %s, 
+		#Direction: %s, 
+		#Speed (properties): %s, 
+		#Delta: %s, 
+		#Final Velocity: %s" % 
+		#[get_name(), sign(targetDistance.x), properties.speed, delta, velocity]
+	#)
 	
 	# Walks for a random duration between 1s and 2s
 	walkTimer += delta
@@ -186,9 +196,9 @@ func OnDamage(__health: float) -> void:
 			ChangeState(eState.DOWN)
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(11, "Velocity: " + str(velocity))
-	Global.debug.UpdateDebugVariable(12, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(15, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
-	Global.debug.UpdateDebugVariable(16, "Distance to player: " + str(targetDistance.x))
+	Global.debug.UpdateDebugVariable(13, "Velocity: " + str(velocity))
+	Global.debug.UpdateDebugVariable(14, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(15, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(16, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(17, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
+	Global.debug.UpdateDebugVariable(18, "Distance to player: " + str(targetDistance.x))

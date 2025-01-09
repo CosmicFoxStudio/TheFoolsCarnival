@@ -9,12 +9,6 @@ func _ready() -> void:
 	body_entered.connect(func(_player: Player): SpawnEnemies())
 
 func SpawnEnemies() -> void:
-	if Global.level.lastArea:
-		Global.audio.musicPlayer.stop()
-		# Play Boss Music
-		Global.audio.musicPlayer.stream = load("res://assets/audio/music/boss_fight.mp3")
-		Global.audio.musicPlayer.play()
-
 	for i in range(amount):
 		# Returns a random value between 0 and the amount of enemies
 		var enemy = enemies[randi() % enemies.size()].instantiate()
@@ -32,17 +26,33 @@ func SpawnEnemies() -> void:
 
 func SetEnemyRandomPosition() -> Vector2:
 	# Retrieve the current segment's boundaries from the Line2D markers
-	var screenLeft = get_parent().areaMarkers[0].get_point_position(0)  # Assuming the first Line2D is the left boundary
-	var screenRight = get_parent().areaMarkers[0].get_point_position(1)  # Assuming the second Line2D is the right boundary
-	var spawnY = randf_range(0.0, 260.0)  # Random Y position within height range
-
-	var side = randi_range(sides.LEFT, sides.RIGHT)
+	var segment = Global.level.currentSegmentIndex
+	var screenLeft = get_parent().areaMarkers[segment - 1].position
+	var screenRight = get_parent().areaMarkers[segment].position
+	var spawnY = Global.FLOOR 
+	#var spawnY = randf_range(0.0, 260.0)  # Random Y position within height range
+	
+	var side
+	# Enemies in first segment should spawn to the right
+	if Global.level.currentSegmentIndex == 0:
+		print("Enemy will spawn on the right")
+		side = sides.RIGHT
+	# Enemy in last segment (boss) should spawn to the left
+	elif Global.level.currentSegmentIndex == Global.level.areaMarkers.size() - 1: 
+		print("Boss will spawn on the left")
+		side = sides.LEFT
+	# Other segments
+	else: 
+		side = randi_range(sides.LEFT, sides.RIGHT)
+	
 	var spawnX: float
 
 	match side:
 		sides.LEFT:
-			spawnX = randf_range(screenLeft.x - 50, screenLeft.x)  # Left outside view
+			# spawnX = screenLeft.x - 80
+			spawnX = randf_range(screenLeft.x - 80, screenLeft.x)
 		sides.RIGHT:
-			spawnX = randf_range(screenRight.x, screenRight.x + 50)  # Right outside view
+			# spawnX = screenRight.x + 80
+			spawnX = randf_range(screenRight.x, screenRight.x + 80)
 
 	return Vector2(spawnX, spawnY)

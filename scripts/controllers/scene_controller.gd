@@ -8,6 +8,9 @@ signal loaded()
 var sceneInstance : Node = null
 
 func _ready() -> void:
+	# Allows a new seed every run
+	randomize()
+	
 	# Hides the mouse cursor
 	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
