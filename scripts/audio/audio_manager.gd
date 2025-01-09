@@ -1,12 +1,10 @@
 class_name AudioManager extends Node
 
-@export var bgMusicStage : AudioStreamPlayer
-@export var menuSFXs : AudioStreamPlayer
-
 @export var musicVolume : float
 @export var sfxVolume : float
 
 @onready var musicPlayer: AudioStreamPlayer = $BackgroundMusicPlayer
+@onready var menuSFXs: AudioStreamPlayer = $SFXs
 
 var currentStage : LevelController
 var currentStageName : String
@@ -21,11 +19,23 @@ func _process(_delta: float) -> void:
 		UpdateLevelMusic()
 
 func UpdateLevelMusic():
-	# var currentStageMusic = str(currentStageName + "Music") 
-	# Gets the Name of the Clip, each one MUST present the naming convention "Music" at the end
-	bgMusicStage["parameters/switch_to_clip"] = currentMusic
+	# var currentStageMusic = str(currentStageName + "Music")
+	
+	# Gets the Name of the Clip
+	# Each one MUST present the naming convention "Music" at the end
+	musicPlayer["parameters/switch_to_clip"] = currentMusic
 
-# The index of the Clip from the Playlist that will be played
-func PlaySFX(playlistIndex : int):
-	print("streams/stream_" + str(playlistIndex))
-	menuSFXs["streams/stream_" + str(playlistIndex)].play()
+func PlaySFX(playlistIndex: int) -> void:
+	if menuSFXs.stream is AudioStreamPlaylist:
+		var playlist = menuSFXs.stream as AudioStreamPlaylist
+		
+		# Check if the index is within bounds
+		if playlistIndex >= 0 and playlistIndex < playlist.stream_count:
+			# Access the stream from the playlist
+			var selected_stream = playlist.get_list_stream(playlistIndex)
+			menuSFXs.stream = selected_stream
+			menuSFXs.play()
+		else:
+			print("Error: Invalid playlist index:", playlistIndex)
+	else:
+		print("Error: menuSFXs.stream is not an AudioStreamPlaylist.")

@@ -44,12 +44,10 @@ stream_0 = ExtResource("4_tnvtt")
 stream_1 = ExtResource("5_4vmfv")
 stream_2 = ExtResource("6_w3it8")
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("bgMusicStage", "menuSFXs")]
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_mgqhi")
-bgMusicStage = NodePath("BackgroundMusicPlayer")
-menuSFXs = NodePath("SFXs")
-musicVolume = 10.0
-sfxVolume = 10.0
+musicVolume = 50.0
+sfxVolume = 50.0
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_wcblp")

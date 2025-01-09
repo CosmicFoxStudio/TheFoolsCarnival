@@ -39,8 +39,8 @@ func _ready():
 	player.camera.limit_left = 0
 	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
 	
-	# Global.audio.UpdateLevelMusic() 
-	# (FIX ME) |---> Not working when the cutscene is skipped? Seems like it only adds the song to the playlist
+	Global.audio.musicPlayer.stream = load("res://assets/audio/music/mus_battle.ogg")
+	Global.audio.musicPlayer.play()
 
 # Update camera limits based on the current segment
 func UpdateCameraLimits() -> void:
