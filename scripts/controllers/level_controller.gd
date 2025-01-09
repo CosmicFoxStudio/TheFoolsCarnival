@@ -34,7 +34,7 @@ func _enter_tree() -> void:
 	Global.audio.currentStageName = get_name()
 	Global.audio.currentMusic = music
 
-func _ready():	
+func _ready():
 	# Set to first limiter
 	player.camera.limit_left = 0
 	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
@@ -44,28 +44,31 @@ func _ready():
 
 # Update camera limits based on the current segment
 func UpdateCameraLimits() -> void:
-	# DEBUG
-	print(
-		"
-		Limit Left: %s, 
-		Limit Right: %s, 
-		Limit Top: %s, 
-		Limit Bottom: %s" % 
-		[player.camera.limit_left, player.camera.limit_right, player.camera.limit_top, player.camera.limit_bottom]
-	)
+	# DEBUG 1
+	# print("Limit Left: %s, Limit Right: %s, Limit Top: %s, Limit Bottom: %s" % [player.camera.limit_left, player.camera.limit_right, player.camera.limit_top, player.camera.limit_bottom])
 	
-	var oldLimit = camLimiters[currentSegmentIndex - 1].position.x
-	var limit = camLimiters[currentSegmentIndex].position.x
-	print("Limit: " + str(limit))
-
 	if currentSegmentIndex < camLimiters.size():
-		oldLimit = camLimiters[currentSegmentIndex - 1].position.x
-		limit = camLimiters[currentSegmentIndex].position.x
-		player.camera.limit_right = limit
-		# Lock Camera Limit Right
+		# var old_limit = camLimiters[currentSegmentIndex - 1].position.x
+		var new_limit = camLimiters[currentSegmentIndex].position.x
+		print("New Limit: ", new_limit)
+		
+		# Smoothly transition the camera limit_right using a tween
+		var tween := create_tween()
+
+		# Start the interpolation
+		tween.tween_property(
+			player.camera,
+			"limit_right",
+			new_limit,
+			1.0  # Duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		
 		player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
 	else:
 		print("Invalid segment index or camLimiters not configured.")
+	
+	# DEBUG 2
+	# print("Limit Left: %s, Limit Right: %s, Limit Top: %s, Limit Bottom: %s" % [player.camera.limit_left, player.camera.limit_right, player.camera.limit_top, player.camera.limit_bottom])
 
 func EnemyDied() -> void:
 	enemies -= 1
@@ -88,14 +91,12 @@ func AdvanceToNextSegment() -> void:
 	
 	# Normal Segment
 	if currentSegmentIndex < camLimiters.size() - 1:
-		# camera.UpdateSegmentBoundary(GetCurrentSegmentBoundary())
 		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 	# Reached BOSS
 	elif currentSegmentIndex == camLimiters.size() - 1:
 		Global.level.lastArea = true
 		Global.debug.DebugPrint("Reached Last Area")
-		# camera.UpdateSegmentBoundary(GetCurrentSegmentBoundary())
 		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 		
@@ -112,8 +113,7 @@ func AdvanceToNextSegment() -> void:
 func ConfigNextArea(__amount: int) -> void:
 	enemies = __amount
 
-func GetCurrentSegmentBoundary() -> Vector2:
-	return camLimiters[currentSegmentIndex].position
+#func GetCurrentSegmentBoundary() -> Vector2: return camLimiters[currentSegmentIndex].position
 
 func EndGame():
 	print("GAME OVER")
