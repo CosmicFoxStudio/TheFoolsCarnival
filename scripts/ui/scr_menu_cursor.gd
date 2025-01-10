@@ -8,7 +8,7 @@ var cursor_index : int = 0
 
 var last_item : Control
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var input := Vector2.ZERO
 	
 	if Input.is_action_just_pressed("ui_up"):

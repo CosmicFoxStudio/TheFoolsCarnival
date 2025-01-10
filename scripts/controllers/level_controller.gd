@@ -5,23 +5,20 @@ class_name LevelController extends Scene
 # These variables are specific to each instance of the LevelController
 @export var _player : CharacterBody2D
 @export var _HUD : UI
-# @export var areaMarkers : Array[Line2D]  # List of area boundary markers (Marker2D)
-
 @export var camLimiters : Array[Node2D] # List of camera limiters
 
 var score : int = 0
 var enemies := 0
 var currentSegmentIndex: int = 1
 var lastArea : bool = false
+var gameOverScene := preload("res://scenes/screens/game_over.tscn")
 
 # Static variables persist across instances and scene changes
 # ideal for global data management, utility functions, and ensuring a single data copy 
 # These variables can be accessed directly from the class without creating a new instance
 static var player: CharacterBody2D 
 static var HUD: UI
-var music: String
 
-var gameOverScene := preload("res://scenes/screens/game_over.tscn")
 # Runs before ready
 func _enter_tree() -> void:
 	player = _player
@@ -34,10 +31,7 @@ func _ready():
 	player.camera.limit_left = 0
 	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
 	
-	Global.audio.set_music_tag("InGame")
-	#Global.audio.musicPlayer.stream = load("res://assets/audio/music/mus_battle.ogg")
-	music = Global.audio.currentMusicTag
-	#Global.audio.musicPlayer.play()
+	Global.audio.SetMusic("Stage")
 
 # Update camera limits based on the current segment
 func UpdateCameraLimits() -> void:
@@ -97,12 +91,8 @@ func AdvanceToNextSegment() -> void:
 		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 		
-		# Pause Current Music
-		Global.audio.musicPlayer.stop()
-		
 		# Play Boss Music
-		Global.audio.musicPlayer.stream = load("res://assets/audio/music/boss_fight.mp3")
-		Global.audio.musicPlayer.play()
+		Global.audio.SetMusic("Boss")
 	else: 
 		currentSegmentIndex = camLimiters.size()
 
@@ -117,7 +107,7 @@ func EndGame():
 	if gameOverScene: # is loaded
 		var game_over_instance = gameOverScene.instantiate()
 		get_parent().get_node("/root/MainScene/LayerControl").add_child(game_over_instance)
-		
+		Global.audio.SetSFX("CrowdBooing")
 
 func _process(_delta: float) -> void: _debug()
 

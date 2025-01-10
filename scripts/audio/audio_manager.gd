@@ -1,50 +1,53 @@
 class_name AudioManager extends Node
 
+# Are we using these?
 @export var musicVolume : float
 @export var sfxVolume : float
 
 @onready var musicPlayer: AudioStreamPlayer = $BackgroundMusicPlayer
-@onready var menuSFXs: AudioStreamPlayer = $SFXs
+@onready var sfxPlayer: AudioStreamPlayer = $SFXMusicPlayer
 
-var currentMusicTag : String # Nome do Clip da Playlist
+var musicName: String  # Name of the music clip
+var sfxName: String    # Name of the SFX clip
+var musicPaused: bool = false
 
-func set_music_tag(tag : String) -> void:
-	if(currentMusicTag != tag): 
-		currentMusicTag = tag
-		UpdateLevelMusic()
-		
 func _ready() -> void:
 	Global.audio = self
 
 func _process(_delta: float) -> void:
 	update_volume()
-	if(currentMusicTag != Global.audio.currentMusicTag):
-		currentMusicTag = Global.audio.currentMusicTag
+	_debug()
+
+func SetMusic(tag : String) -> void:
+	if(musicName != tag): 
+		musicName = tag
 		UpdateLevelMusic()
 
+func SetSFX(tag: String) -> void:
+	if sfxName != tag:
+		sfxName = tag
+		UpdateLevelSFX()
+
 func UpdateLevelMusic():
-	# var currentStageMusic = str(currentMusicTag + "Music")
-	
-	# Gets the Name of the Clip
-	# Each one MUST present the naming convention "Music" at the end
-	musicPlayer["parameters/switch_to_clip"] = currentMusicTag
+	musicPlayer["parameters/switch_to_clip"] = musicName
 
-func PlaySFX(playlistIndex: int) -> void:
-	if menuSFXs.stream is AudioStreamPlaylist:
-		var playlist = menuSFXs.stream as AudioStreamPlaylist
-		
-		# Check if the index is within bounds
-		if playlistIndex >= 0 and playlistIndex < playlist.stream_count:
-			# Access the stream from the playlist
-			var selected_stream = playlist.get_list_stream(playlistIndex)
-			menuSFXs.stream = selected_stream
-			menuSFXs.play()
-		else:
-			print("Error: Invalid playlist index:", playlistIndex)
-	else:
-		print("Error: menuSFXs.stream is not an AudioStreamPlaylist.")
+func UpdateLevelSFX() -> void:
+	sfxPlayer["parameters/switch_to_clip"] = sfxName
 
+func PauseMusic() -> void:
+	if musicPlayer.playing:
+		musicPlayer.stop()
+		musicPaused = true
 
+func ResumeMusic() -> void:
+	if musicPaused:
+		musicPlayer.play()
+		musicPaused = false
+	else: # Reset
+		UpdateLevelMusic()
+		musicPlayer.play()
+
+# (TO-DO: Convert to PascalCase (func) and camelCase (var)
 func update_volume() -> void:
 	var music_bus_index = AudioServer.get_bus_index("music")
 	var sfx_bus_index = AudioServer.get_bus_index("sfx")
@@ -55,5 +58,7 @@ func update_volume() -> void:
 func set_volume(busTag : String, volume : float) -> void:
 	var audio_bus = AudioServer.get_bus_index(busTag)
 	AudioServer.set_bus_volume_db(audio_bus, volume)
-	
-# The index of the Clip from the Playlist that will be played
+
+func _debug() -> void:
+	Global.debug.UpdateDebugVariable(18, "[AUDIO] Music: " + str(musicName))
+	Global.debug.UpdateDebugVariable(19, "[AUDIO] SFX: " + str(sfxName))

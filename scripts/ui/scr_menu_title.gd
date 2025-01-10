@@ -6,10 +6,10 @@ extends Scene
 
 var selected_index: int = 0
 
-var music : String
-
 func _ready() -> void:
-	music = "CircusMusic"
+	Global.audio.SetMusic("Title")
+	Global.audio.ResumeMusic()
+	
 	# Add buttons to array
 	for child in menu_grid_container.get_children():
 		if child is Button:
@@ -42,7 +42,7 @@ func _update_selection() -> void:
 		else:
 			menu_items[i].add_theme_color_override("font_color", Color(1, 1, 1))
 	
-	Global.audio.PlaySFX(0)
+	Global.audio.SetSFX("CursorMenuHover")
 
 func _on_menu_item_selected() -> void:
 	match selected_index:
@@ -54,16 +54,13 @@ func _on_menu_item_selected() -> void:
 func _on_start_button_pressed() -> void:
 	animation_player.play("MenuOperations/start_game")
 	await animation_player.animation_finished
-	Global.audio.set_music_tag("CircusMusic")
 	Global.sceneTransition.transition("res://scenes/screens/game_intro.tscn")
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
-
 func _on_start_button_focus_entered() -> void:
-	Global.audio.PlaySFX(0)
-
+	Global.audio.SetSFX("CursorMenuEnter")
 
 func _on_quit_button_focus_entered() -> void:
-	Global.audio.PlaySFX(1)
+	Global.audio.SetSFX("CursorMenuBack")

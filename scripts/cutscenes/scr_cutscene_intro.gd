@@ -11,6 +11,8 @@ var buttons: Array[Button] = []
 var selected_button_index: int = 0
 
 func _ready() -> void:
+	Global.audio.SetMusic("Intro")
+	
 	cutscenePlayer.play(cutsceneName)
 	nextButton.visible = false
 

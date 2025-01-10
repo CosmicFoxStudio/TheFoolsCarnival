@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cdrex8wggbvry" path="res://assets/sprites/ui/icons/go.png" id="2_pkq37"]
 [ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="3_rfdim"]
 [ext_resource type="Texture2D" uid="uid://dsh8r4m7va8d5" path="res://assets/sprites/ui/portraits/spr_portrait_thug.png" id="4_1iqq3"]
-[ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_clear_cute.mp3" id="6_05i8f"]
+[ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_cleared.mp3" id="6_05i8f"]
 [ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui/ui_dramameter.tscn" id="7_xpvwm"]
 [ext_resource type="PackedScene" uid="uid://xih1orensxu3" path="res://scenes/ui/audience/ui_audience.tscn" id="8_7rosk"]
 [ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="9_iem04"]

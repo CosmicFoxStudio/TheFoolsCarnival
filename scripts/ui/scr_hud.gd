@@ -80,11 +80,11 @@ func ShowGo() -> void:
 	$Go.hide()
 
 func LevelCleared() -> void:
-	# Pause level music
-	Global.audio.musicPlayer.stop()
+	Global.audio.SetMusic("LevelCleared")
+	Global.audio.SetSFX("CrowdApplause")
 
 	# Stop Player Movement (TO-DO: We need a pause system)
-	# Global.level.player.StopMovement() # --> This obvsly doesn't work lol
+	Global.pause = true
 
 	# Show Level Cleared
 	var hudLevelCleared = $UIGameplay/HUDLevelCleared

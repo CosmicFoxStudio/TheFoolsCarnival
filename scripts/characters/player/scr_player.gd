@@ -36,8 +36,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if (Global.pause):
-		ChangeState(eState.IDLE)
+	if (Global.pause): ChangeState(eState.IDLE)
 
 func EnablePlayerMovement(delta) -> void:
 	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
