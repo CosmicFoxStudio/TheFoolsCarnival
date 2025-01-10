@@ -28,7 +28,7 @@ window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_mouse.png"
 
 [global_group]
 

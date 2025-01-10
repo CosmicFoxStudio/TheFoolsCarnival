@@ -1,11 +1,10 @@
-extends Control
+extends TextureRect
 
 @export var menu_parent_path : NodePath
 @export var cursor_offset : Vector2
 @onready var menu_parent := get_node(menu_parent_path)
 
 var cursor_index : int = 0
-
 var last_item : Control
 
 func _process(_delta: float) -> void:
@@ -21,12 +20,13 @@ func _process(_delta: float) -> void:
 		input.x += 1
 		
 	if menu_parent is VBoxContainer:
-		set_cursor_item_at_index(cursor_index + input.y)
+		set_cursor_from_index(cursor_index + input.y)
 	elif menu_parent is HBoxContainer:
-		set_cursor_item_at_index(cursor_index + input.x)
+		set_cursor_from_index(cursor_index + input.x)
+	elif menu_parent is GridContainer:
+		set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
 		
 	if Input.is_action_just_pressed("ui_select"):
-		
 		var current_menu_item := get_menu_item_at_index(cursor_index)
 		
 		if(current_menu_item != null):
@@ -37,7 +37,6 @@ func _process(_delta: float) -> void:
 			last_item = current_menu_item
 			if current_menu_item.has_method("cursor_select"):
 				current_menu_item.cursor_select()
-	
 
 func get_menu_item_at_index(index : int) -> Control:
 	if menu_parent == null:
@@ -48,7 +47,7 @@ func get_menu_item_at_index(index : int) -> Control:
 		
 	return menu_parent.get_child(index) as Control
 	
-func set_cursor_item_at_index(index : int) -> void:
+func set_cursor_from_index(index : int) -> void:
 	var menu_item := get_menu_item_at_index(index)
 	
 	if menu_item == null:
@@ -57,7 +56,7 @@ func set_cursor_item_at_index(index : int) -> void:
 	var pos = menu_item.global_position
 	var size = menu_item.size
 	
-	global_position = Vector2(pos.x, pos.y + size.y / 2.0)
+	global_position = Vector2(pos.x, pos.y + size.y / 2.0) - cursor_offset
 	
 	cursor_index = index
 	

@@ -27,6 +27,9 @@ func _enter_tree() -> void:
 	Global.level = self
 
 func _ready():
+	# Check if the game is paused and unpause it
+	if Global.pause == true: Global.pause = false
+	
 	# Set to first limiter
 	player.camera.limit_left = 0
 	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)

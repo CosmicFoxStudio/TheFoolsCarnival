@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/ui/scr_settings_manager.gd" id="1_57pyb"]
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_item.gd" id="2_eo3oh"]
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_fpt48"]
+[ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="2_hvmfl"]
 [ext_resource type="Texture2D" uid="uid://coomnwsog1qx0" path="res://assets/sprites/square.png" id="2_ty8bl"]
 [ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="3_h17j1"]
 [ext_resource type="FontFile" uid="uid://dve7mgsjik4dg" path="res://addons/phantom_camera/fonts/Nunito-Regular.ttf" id="4_tudtn"]
-[ext_resource type="Texture2D" uid="uid://6aytb4jp2nq1" path="res://assets/sprites/ui/icons/spr_cursor.png" id="5_5qche"]
-[ext_resource type="Script" path="res://scripts/ui/scr_menu_cursor.gd" id="6_orahu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2pa03"]
 font = ExtResource("3_h17j1")
@@ -16,21 +16,31 @@ font_size = 32
 font = ExtResource("4_tudtn")
 font_size = 20
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("settingsButton", "vBoxContainer")]
+[node name="Settings" type="Control"]
 process_mode = 3
 z_index = 200
 y_sort_enabled = true
 layout_mode = 3
-anchor_left = 0.2
-anchor_top = 0.2
-anchor_right = 0.8
-anchor_bottom = 0.8
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_57pyb")
-settingsButton = NodePath("OpenSettingsButton")
-vBoxContainer = NodePath("VBoxContainer")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.5
+offset_right = 119.5
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_fpt48")
+theme_override_font_sizes/font_size = 37
+text = "PAUSED"
 
 [node name="OpenSettingsButton" type="Button" parent="."]
 process_mode = 3
@@ -38,10 +48,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 36.0
-offset_top = -115.0
-offset_right = 106.0
-offset_bottom = -84.0
+offset_left = -118.0
+offset_top = 14.0
+offset_right = -48.0
+offset_bottom = 45.0
 grow_horizontal = 0
 mouse_filter = 2
 toggle_mode = true
@@ -50,39 +60,71 @@ action_mode = 0
 text = "Settings"
 script = ExtResource("2_eo3oh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-visible = false
+[node name="SettingsBox" type="TextureRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.278431)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -102.0
+offset_right = 230.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ty8bl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsBox"]
 clip_contents = true
-layout_mode = 2
-offset_right = 384.0
-offset_bottom = 100.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -50.0
+offset_right = 184.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Music_Text" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Music" type="BoxContainer" parent="SettingsBox/VBoxContainer"]
+layout_mode = 2
+vertical = true
+script = ExtResource("2_eo3oh")
+
+[node name="Music_Text" type="Label" parent="SettingsBox/VBoxContainer/Music"]
 process_mode = 4
 layout_mode = 2
 text = "Music
 "
-fit_content = true
 
-[node name="Music (in dB)" type="HScrollBar" parent="VBoxContainer"]
+[node name="Music (in dB)" type="HScrollBar" parent="SettingsBox/VBoxContainer/Music"]
 layout_mode = 2
 mouse_filter = 2
-min_value = -30.0
-max_value = 0.0
+min_value = -20.0
+max_value = 20.0
 page = 2.0
-value = -2.0
 script = ExtResource("2_eo3oh")
 
-[node name="SFX_Text" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Sounds" type="BoxContainer" parent="SettingsBox/VBoxContainer"]
+layout_mode = 2
+vertical = true
+script = ExtResource("2_eo3oh")
+
+[node name="SFX_Text" type="Label" parent="SettingsBox/VBoxContainer/Sounds"]
 process_mode = 4
 layout_mode = 2
-text = "SFX
+text = "Sounds
 "
-fit_content = true
 
-[node name="SFX (in dB)" type="HScrollBar" parent="VBoxContainer"]
+[node name="SFX (in dB)" type="HScrollBar" parent="SettingsBox/VBoxContainer/Sounds"]
 layout_mode = 2
 mouse_filter = 2
 min_value = -20.0
@@ -136,21 +178,18 @@ Espaço - Pular
 Enter - Menu"
 label_settings = SubResource("LabelSettings_b6vn3")
 
-[node name="Cursor" type="TextureRect" parent="."]
+[node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
-offset_top = -205.0
-offset_right = 28.0
-offset_bottom = -165.0
-rotation = 1.5708
-texture = ExtResource("5_5qche")
-stretch_mode = 2
-script = ExtResource("6_orahu")
-menu_parent_path = NodePath("../VBoxContainer")
-cursor_offset = Vector2(0, -5)
+menu_parent_path = NodePath("../SettingsBox/VBoxContainer")
+cursor_offset = Vector2(50, 10)
 
 [connection signal="cursor_selected" from="OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]
 [connection signal="toggled" from="OpenSettingsButton" to="." method="_on_settings_button_toggled"]
-[connection signal="cursor_deselected" from="VBoxContainer/Music (in dB)" to="." method="_on_music_cursor_deselected"]
-[connection signal="cursor_selected" from="VBoxContainer/Music (in dB)" to="." method="_on_music_cursor_selected"]
-[connection signal="cursor_deselected" from="VBoxContainer/SFX (in dB)" to="." method="_on_sfx_cursor_deselected"]
-[connection signal="cursor_selected" from="VBoxContainer/SFX (in dB)" to="." method="_on_sfx_cursor_selected"]
+[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_deselected"]
+[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_selected"]
+[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Music/Music (in dB)" to="." method="_on_music_cursor_deselected"]
+[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Music/Music (in dB)" to="." method="_on_music_cursor_selected"]
+[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Sounds" to="." method="_on_sounds_cursor_deselected"]
+[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Sounds" to="." method="_on_sounds_cursor_selected"]
+[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Sounds/SFX (in dB)" to="." method="_on_sfx_cursor_deselected"]
+[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Sounds/SFX (in dB)" to="." method="_on_sfx_cursor_selected"]
