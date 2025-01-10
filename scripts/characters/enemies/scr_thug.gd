@@ -1,7 +1,5 @@
 extends Enemy
 
-var targetDistance : Vector2 # Distance to player
-
 # State Overrides
 func StateIdle() -> void:
 	if dead: return
@@ -28,6 +26,8 @@ func StateIdle() -> void:
 		ChangeState(eState.WALK)
 
 func StateWalk(delta) -> void:
+	super(delta)
+	
 	if dead: return
 
 	if enterState:
@@ -48,12 +48,19 @@ func StateWalk(delta) -> void:
 	# This code executes before the timer timeout
 	# =============================================
 	
-	# Distance to the player position
-	targetDistance = Global.level.player.position - self.position
-	
 	# Horizontal Movement (move toward the player's x position)
 	# sign() ensures the enemy moves left (-1) or right (1) based on the player's position
-	self.velocity.x = sign(targetDistance.x) * speed * delta
+	self.velocity.x = sign(targetDistance.x) * properties.speed * delta
+	
+	# DEBUG
+	#print(
+		#"Char: %s, 
+		#Direction: %s, 
+		#Speed (properties): %s, 
+		#Delta: %s, 
+		#Final Velocity: %s" % 
+		#[get_name(), sign(targetDistance.x), properties.speed, delta, velocity]
+	#)
 	
 	# Walks for a random duration between 1s and 2s
 	walkTimer += delta
@@ -65,10 +72,11 @@ func StateWalk(delta) -> void:
 		# Stops moving before reaching the player position to attack
 		self.velocity.x = 0
 		
-	# Start attack
-	if abs(targetDistance.x) < distanceAttack:
-		velocity.x = 0
-		ChangeState(eState.ATTACK)
+		# Start attack
+		# if attackBox.get_overlapping_bodies().has(Global.level.player.hitbox):
+		if abs(targetDistance.x) < distanceAttack:
+			velocity.x = 0
+			ChangeState(eState.ATTACK)
 
 	PlayAnimation("idle" if velocity == Vector2.ZERO else "walk")
 	Flip() # Only flips towards the player while in walk state
@@ -101,6 +109,7 @@ func StateHurt() -> void:
 	if enterState:
 		enterState = false
 		PlayAnimation("hurt")
+		Global.effects.spawn_effect(effectResource, global_position)
 
 		AITimer.stop()
 		AITimer.wait_time = randf_range(0.5, 1)
@@ -122,19 +131,6 @@ func StateDown() -> void:
 	# Physics
 	move_and_slide()
 
-func SetHurtThrow() -> void:
-	PlayAnimation("down")
-	
-	# Can't receive damage while downed
-	hitboxCollision.disabled = true
-	
-	# Horizontal throw - Not working too nicely with move_and_slide() :( 
-	velocity.x = 0.3 if Global.level.player.global_position.x < self.global_position.x else -0.3
-	
-	# Vertical throw
-	velocity.y = 3
-	#velocity.x = 0
-
 	AITimer.stop()
 	AITimer.wait_time = randf_range(1, 2)
 	AITimer.start()
@@ -151,6 +147,8 @@ func StateUp() -> void:
 		ChangeState(eState.IDLE)
 
 func StateDied() -> void:
+	super()
+	
 	if enterState:
 		enterState = false
 		dead = true
@@ -161,7 +159,7 @@ func StateDied() -> void:
 		SetHurtThrow()
 		
 		# Update enemy HUD 
-		HUD.HudUpdateEnemy(properties, 0)
+		Global.level.HUD.HudUpdateEnemy(properties, 0)
 
 		await AITimer.timeout
 		velocity.x = 0 # To prevent the death sliding
@@ -186,7 +184,7 @@ func StateDied() -> void:
 
 func OnDamage(__health: float) -> void:
 	# Update enemy HUD 
-	HUD.HudUpdateEnemy(properties, __health)
+	Global.level.HUD.HudUpdateEnemy(properties, __health)
 	
 	hurtIndex += 1 # Reset is on idle state
 	match hurtIndex:
@@ -198,10 +196,9 @@ func OnDamage(__health: float) -> void:
 			ChangeState(eState.DOWN)
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(10, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(11, "Velocity Y: " + str(velocity.y))
-	Global.debug.UpdateDebugVariable(12, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(13, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(14, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(15, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
-	
+	Global.debug.UpdateDebugVariable(13, "Velocity: " + str(velocity))
+	Global.debug.UpdateDebugVariable(14, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(15, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(16, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(17, "AI Timer Running: " + str(AITimer.is_stopped() == false) + " Time Left: " + str(AITimer.time_left))
+	Global.debug.UpdateDebugVariable(18, "Distance to player: " + str(targetDistance.x))

@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1rr4cb6qbteb"]
+
+[ext_resource type="Texture2D" uid="uid://n2yl3txi218y" path="res://assets/sprites/ui/drama_meter/spr_dramameter.png" id="1_i1mo1"]
+[ext_resource type="Texture2D" uid="uid://bixd5kod2ut7v" path="res://assets/sprites/ui/drama_meter/spr_drama_3_yellow.png" id="2_tm65x"]
+[ext_resource type="Script" path="res://scripts/ui/scr_dramameter.gd" id="3_yrwi1"]
+[ext_resource type="Texture2D" uid="uid://l8r8u2t5a5l0" path="res://assets/sprites/ui/drama_meter/spr_drama_1_red.png" id="4_ivcyw"]
+[ext_resource type="Texture2D" uid="uid://bw8r8u265u4by" path="res://assets/sprites/ui/drama_meter/spr_drama_2_orange.png" id="5_isbgc"]
+[ext_resource type="Texture2D" uid="uid://d03nr08l2bfym" path="res://assets/sprites/ui/drama_meter/spr_drama_4_green.png" id="6_lclnp"]
+[ext_resource type="Texture2D" uid="uid://c5nrecrt2s7ly" path="res://assets/sprites/ui/drama_meter/spr_drama_5_blue.png" id="7_vrl1h"]
+
+[node name="DramaMeter" type="TextureProgressBar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = 1.0
+offset_right = 87.0
+offset_bottom = 67.0
+grow_horizontal = 2
+min_value = -10.0
+max_value = 10.0
+value = 10.0
+texture_under = ExtResource("1_i1mo1")
+texture_over = ExtResource("2_tm65x")
+texture_progress_offset = Vector2(9, 0)
+script = ExtResource("3_yrwi1")
+overlayTextures = Array[CompressedTexture2D]([ExtResource("4_ivcyw"), ExtResource("5_isbgc"), ExtResource("2_tm65x"), ExtResource("6_lclnp"), ExtResource("7_vrl1h")])
+
+[node name="DecayTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]

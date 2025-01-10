@@ -1,14 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=18 format=3 uid="uid://de1grc5og7a72"]
 
-[ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_1hkr3"]
+[ext_resource type="Script" path="res://scripts/ui/scr_menu_title.gd" id="1_1hkr3"]
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="3_m27lk"]
 [ext_resource type="Texture2D" uid="uid://bymhnonhdcjno" path="res://assets/sprites/ui/logo/logo.png" id="5_qb540"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="6_ly0se"]
 [ext_resource type="Texture2D" uid="uid://cw5bq5m06bw4u" path="res://assets/sprites/ui/tent/tent_left/spr_tent_part_left_1.png" id="8_wcslb"]
+[ext_resource type="Script" path="res://scripts/ui/scr_menu_item.gd" id="9_r40df"]
+[ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="9_sp1vi"]
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
-[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/music/mus_title.ogg" id="12_dllvj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
 
@@ -291,7 +292,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_1hkr3")
-next_scene = "res://scenes/screens/game_intro.tscn"
 
 [node name="BG_Palco" type="TextureRect" parent="."]
 layout_mode = 1
@@ -366,21 +366,30 @@ offset_right = 58.5
 offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_top = NodePath("StartButton")
+focus_neighbor_bottom = NodePath("QuitButton")
+focus_mode = 2
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath(".")
+focus_neighbor_bottom = NodePath("../QuitButton")
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("6_ly0se")
 theme_override_font_sizes/font_size = 20
 text = "Start
 "
+script = ExtResource("9_r40df")
 
 [node name="QuitButton" type="Button" parent="Buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath(".")
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("6_ly0se")
 theme_override_font_sizes/font_size = 20
 text = "Exit"
+script = ExtResource("9_r40df")
 
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -388,10 +397,14 @@ libraries = {
 "MenuOperations": SubResource("AnimationLibrary_1jp1y")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_dllvj")
-volume_db = 5.0
-autoplay = true
+[node name="Cursor" parent="." instance=ExtResource("9_sp1vi")]
+layout_mode = 0
+menu_parent_path = NodePath("../Buttons")
+cursor_offset = Vector2(40, 10)
 
+[connection signal="cursor_selected" from="Buttons/StartButton" to="." method="_on_start_button_cursor_selected"]
+[connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="cursor_selected" from="Buttons/QuitButton" to="." method="_on_quit_button_cursor_selected"]
+[connection signal="focus_entered" from="Buttons/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]

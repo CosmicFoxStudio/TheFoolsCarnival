@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_hxaiu")
-name = "Thug"
+name = "CAPACHO"
 portrait = ExtResource("1_gcm6a")
 hpMax = 20.0
-speed = 8.0
+speed = 1200.0
 jumpVelocity = 100.0
-strength = 3
+strength = 20
 color = Color(1, 0.129412, 0.270588, 1)

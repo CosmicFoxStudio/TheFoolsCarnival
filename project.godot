@@ -28,7 +28,7 @@ window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/ui/icons/spr_mouse.png"
 
 [global_group]
 
@@ -68,14 +68,20 @@ jump={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
+ui_enter={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
-2d_physics/layer_1="World"
+2d_physics/layer_1="Ground"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Pickup"
 2d_physics/layer_5="Destructible"
+2d_physics/layer_6="Platforms"
 
 [rendering]
 

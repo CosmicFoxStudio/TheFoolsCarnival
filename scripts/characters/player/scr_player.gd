@@ -2,10 +2,12 @@ class_name Player extends Character
 
 # enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
 
+@onready var camera: Camera = $Camera
+
 # Get input dynamically (read-only)
 var direction: float:
 	get:
-		return Input.get_axis("move_left", "move_right") * properties.speed
+		return Input.get_axis("move_left", "move_right")
 var jump: float:
 	get: return Input.is_action_pressed("jump")
 var attack: bool:
@@ -21,6 +23,12 @@ func _ready() -> void:
 	super()
 	type = eType.PLAYER
 	
+	# Set initial position on the room (directly on ground)
+	# position = Vector2(80, Global.FLOOR)
+	
+	# Spawn falling
+	position = Vector2(80, 300)
+	
 	# Get player properties
 	if Global.playerResource != null:
 		properties = Global.playerResource
@@ -28,23 +36,22 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if (Global.pause):
-		ChangeState(eState.IDLE)
+	if (Global.pause): ChangeState(eState.IDLE)
 
-	## Handle pressure logic only when jump is pressed
-	#if jump:
-		#pressure += delta * 10.0
-	#else:
-		#pressure -= delta * 15.0
-#
-	## Clamp pressure between min and max
-	#pressure = clamp(pressure, minPressure, maxPressure)
-
-func EnablePlayerMovement() -> void:
-	if direction:
-		velocity.x = direction * properties.speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, properties.speed)
+func EnablePlayerMovement(delta) -> void:
+	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
+	if direction: velocity.x = direction * properties.speed * delta
+	else: velocity.x = move_toward(velocity.x, 0, properties.speed)
+	
+	# DEBUG 
+	#print(
+		#"Char: %s, 
+		#Direction: %s, 
+		#Speed (properties): %s, 
+		#Delta: %s, 
+		#Final Velocity: %s" % 
+		#[get_name(), direction, properties.speed, delta, velocity]
+	#)
 
 # State Overrides
 func StateIdle() -> void:
@@ -62,11 +69,11 @@ func StateIdle() -> void:
 	if jump: ChangeState(eState.JUMP)
 	if attack: ChangeState(eState.ATTACK)
 
-func StateWalk(_delta) -> void:
+func StateWalk(delta) -> void:
 	if dead or isAttacking: return
 	
 	PlayAnimation("walk")
-	EnablePlayerMovement()
+	EnablePlayerMovement(delta)
 	Flip()
 	
 	if not direction: ChangeState(eState.IDLE)
@@ -74,11 +81,11 @@ func StateWalk(_delta) -> void:
 	if attack: ChangeState(eState.ATTACK)
 
 # Handle input for jumping
-func StateJump() -> void:
+func StateJump(delta) -> void:
 	if dead: return
 	
 	PlayAnimation("jump")
-	EnablePlayerMovement()
+	EnablePlayerMovement(delta)
 	
 	if is_on_floor():
 		# Ensure pressure starts at minimum when jump is triggered
@@ -103,9 +110,9 @@ func StateJump() -> void:
 	if velocity.y > 0:
 		ChangeState(eState.FALL)
 
-func StateFall() -> void:
+func StateFall(delta) -> void:
 	PlayAnimation("fall")
-	EnablePlayerMovement()
+	EnablePlayerMovement(delta)
 
 	# Transition to idle when landing
 	if is_on_floor():
@@ -125,10 +132,15 @@ func StateAttack() -> void:
 	if not comboTimer.is_stopped():
 		if attack:  # Player pressed attack again
 			if comboIndex == 1:
+				var playerComboMultiplier = 1
 				print("Second attack triggered")
 				StartAttackCollision()
 				animationPlayer.play("attack2")
 				comboIndex += 1
+				
+				# Update DramaMeter
+				Global.level.HUD.dramaMeter.IncreaseMeter(10 * playerComboMultiplier)
+				
 				#comboTimer.stop()
 				#comboTimer.start()
 
@@ -145,28 +157,81 @@ func OnAnimationFinished(__animName: String) -> void:
 	EndAttackCollision()
 	
 	if __animName in ["attack1", "attack2"]:
-		print(__animName, " finished, returning to idle")
 		isAttacking = false
 		
 		ChangeState(eState.IDLE)
+		# DEBUG
+		# print(__animName, " finished, returning to idle")
 
+func OnDamage(__health: float) -> void:
+	# Update DramaMeter
+	var enemyComboMultiplier = 2
+	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
+
+func StateHurt() -> void:
+	if enterState:
+		enterState = false
+		
+		PlayAnimation("hurt")
+		StopMovement()
+		
+		# Update HUD
+		Global.level.HUD.HudUpdateHealth(health.hp)
+	
+	# Wait 0.5 seconds before changing state
+	await get_tree().create_timer(0.5).timeout
+	ChangeState(eState.IDLE)
+
+func StateDied() -> void:
+	if enterState:
+		enterState = false
+		PlayAnimation("died")
+		dead = true
+		StopMovement()
+		
+		# Update HUD
+		Global.level.HUD.HudUpdateHealth(health.hp)
+		
+		# Death VFX (flicker sprite)
+		for i in range(8):
+			sprite.visible = not sprite.visible
+			await get_tree().create_timer(0.1).timeout
+
+		# Makes the player disappear after being defeated
+		sprite.hide()
+		# if shadow != null: shadow.hide()
+		
+		# Change back to menu after 2 seconds
+		await get_tree().create_timer(2).timeout
+		
+		# Scene transition (TO-DO: Add pixilate transition here)
+		#Global.sceneTransition.transition("res://scenes/screens/menu_interface.tscn")
+		Global.level.EndGame()
+		
 func _physics_process(delta: float) -> void: 
 	super(delta)
+	
 	# Clamps the player position to the camera boundaries
-	position.x = clamp(position.x, camera.position.x - 640, camera.clampedPos + 640)
+	var camPos = camera.position.x
+	# var camLimit = camera.clampedPos.x
+	var camLimit = Global.level.camLimiters[Global.level.currentSegmentIndex].position.x
+	
+	if camPos != null and camLimit != null:
+		position.x = clamp(position.x, camPos - camLimit, camLimit)
+	else:
+		print("Camera positions not properly set.")
 
 func _debug() -> void:
-	Global.debug.UpdateDebugVariable(0, "Velocity X: " + str(velocity.x))
-	Global.debug.UpdateDebugVariable(1, "Velocity Y: " + str(velocity.y))
-	Global.debug.UpdateDebugVariable(2, "State: " + str(eState.keys()[state]))
-	Global.debug.UpdateDebugVariable(3, "Direction: " + str(direction))
-	Global.debug.UpdateDebugVariable(4, "Jump: " + str(jump))
-	Global.debug.UpdateDebugVariable(5, "Attack: " + str(attack))
-	Global.debug.UpdateDebugVariable(6, "Is attacking?: " + str(isAttacking))
-	Global.debug.UpdateDebugVariable(7, "Combo Index: " + str(comboIndex))
-	Global.debug.UpdateDebugVariable(8, "Camera Pos: " + str(camera.position.x) + " / " + str(camera.position.y))
-	Global.debug.UpdateDebugVariable(9, "Last Area?: " + str(Global.level.lastArea))
-
+	Global.debug.UpdateDebugVariable(0, "Velocity: " + str(velocity))
+	Global.debug.UpdateDebugVariable(1, "State: " + str(eState.keys()[state]))
+	Global.debug.UpdateDebugVariable(2, "Direction: " + str(direction))
+	#Global.debug.UpdateDebugVariable(3, "Jump: " + str(jump))
+	#Global.debug.UpdateDebugVariable(4, "Attack: " + str(attack))
+	Global.debug.UpdateDebugVariable(3, "Is attacking?: " + str(isAttacking))
+	Global.debug.UpdateDebugVariable(4, "Combo Index: " + str(comboIndex))
+	Global.debug.UpdateDebugVariable(5, "DramaMeter: " + str(Global.level.HUD.dramaMeter.audienceValue))
+	Global.debug.UpdateDebugVariable(6, "Player Pos: " + str(position))
+	#Global.debug.UpdateDebugVariable(7, "Player Global Pos: " + str(global_position))
+	
 	# Console
 	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))
-	

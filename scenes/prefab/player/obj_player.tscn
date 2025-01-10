@@ -1,14 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://3ay3cu5gnbw2"]
+[gd_scene load_steps=28 format=3 uid="uid://3ay3cu5gnbw2"]
 
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
 [ext_resource type="Resource" uid="uid://drt3b8pm3eayx" path="res://resources/characters/res_char_pierrot.tres" id="2_7k0pf"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_00ysq"]
+[ext_resource type="PackedScene" uid="uid://bjrjkb1m42ho6" path="res://scenes/prefab/camera/camera.tscn" id="5_k2bh6"]
 [ext_resource type="PackedScene" uid="uid://b017j8kmnrqn7" path="res://scenes/prefab/debug/obj_debug_overlay.tscn" id="6_affh4"]
-[ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/crowd_applause.wav" id="7_f6o7l"]
+[ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/sfx_crowd_applause.wav" id="7_f6o7l"]
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
-[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/crowd_applause_crushed.wav" id="8_s6yx5"]
-[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/crowd_booing_crushed.wav" id="9_oybm7"]
+[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav" id="8_s6yx5"]
+[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="9_oybm7"]
+[ext_resource type="Script" path="res://scripts/characters/player/scr_player_interaction.gd" id="10_jdhmr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]
 radius = 21.0
@@ -57,6 +59,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_sq7pr"]
@@ -115,6 +129,21 @@ tracks/1/keys = {
 "values": [Rect2(210, 118, 70, 106), Rect2(280, 118, 70, 106), Rect2(350, 118, 70, 106), Rect2(420, 118, 70, 106), Rect2(420, 118, 70, 106)]
 }
 
+[sub_resource type="Animation" id="Animation_ifo3m"]
+resource_name = "died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.169245, 0.169245, 0.169245, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_d6dq3"]
 resource_name = "fall"
 length = 0.1
@@ -141,6 +170,21 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Rect2(140, 6, 70, 106)]
+}
+
+[sub_resource type="Animation" id="Animation_4ka1j"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.12549, 0.168627, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_unifs"]
@@ -170,6 +214,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 6, 70, 106), Rect2(70, 6, 70, 106), Rect2(140, 6, 70, 106), Rect2(210, 6, 70, 106), Rect2(280, 6, 70, 106)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_0h335"]
@@ -226,13 +282,27 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0, 0.0698132, 0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k1ba5"]
 _data = {
 "RESET": SubResource("Animation_56qf7"),
 "attack1": SubResource("Animation_sq7pr"),
 "attack2": SubResource("Animation_lwh0n"),
+"died": SubResource("Animation_ifo3m"),
 "fall": SubResource("Animation_d6dq3"),
+"hurt": SubResource("Animation_4ka1j"),
 "idle": SubResource("Animation_unifs"),
 "jump": SubResource("Animation_0h335"),
 "walk": SubResource("Animation_faukw")
@@ -256,9 +326,13 @@ clip_2/name = &"ATTACK"
 clip_2/stream = SubResource("AudioStreamPlaylist_lk7uh")
 clip_2/auto_advance = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5770w"]
+size = Vector2(47, 94)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 50
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1_yjweb")
 properties = ExtResource("2_7k0pf")
 
@@ -274,7 +348,14 @@ shape = SubResource("CapsuleShape2D_h2465")
 
 [node name="Health" parent="." instance=ExtResource("1_safe6")]
 
+[node name="Camera" parent="." instance=ExtResource("5_k2bh6")]
+position = Vector2(0, 0)
+offset = Vector2(0, 0)
+limit_right = 2760
+
 [node name="Hitbox" parent="." instance=ExtResource("4_00ysq")]
+collision_layer = 2
+collision_mask = 0
 
 [node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(2, -37)
@@ -316,3 +397,11 @@ wait_time = 0.8
 one_shot = true
 
 [node name="PlayerVoice" type="AudioStreamPlayer" parent="."]
+
+[node name="InteractionArea" type="Area2D" parent="."]
+script = ExtResource("10_jdhmr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(2.5, -47)
+shape = SubResource("RectangleShape2D_5770w")
+debug_color = Color(0.843165, 0.00105945, 0.915948, 0.42)

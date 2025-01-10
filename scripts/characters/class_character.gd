@@ -8,8 +8,6 @@ enum eType { PLAYER, ENEMY, NPC }
 
 # Shared properties
 @export var properties: CharacterData
-@export var speed: float = 200.0
-@export var maxHealth: int = 100
 
 # Variables
 var type : eType
@@ -21,13 +19,13 @@ var dead : bool = false
 #var comboAnims: Array[String] = ["attack1", "attack2"]
 var comboIndex: int = 0  # The current attack in the combo
 
-@onready var HUD: UI = Global.level.HUD
-@onready var camera: Camera2D = Global.level.camera
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite
 @onready var hpMax := properties.hpMax
 @onready var attackBox: Area2D = $Attack
 @onready var attackCollision: CollisionShape2D = $Attack/AttackCollision
+#@onready var hitbox: Hitbox = $Hitbox
+#@onready var hitbox_collision: CollisionShape2D = $Hitbox/HitboxCollision
 @onready var health: Health = $Health
 @onready var comboTimer: Timer = $ComboTimer # Timer to reset combo after a delay
 
@@ -52,8 +50,8 @@ func PlayAnimation(__animName: String) -> void:
 # State Methods (overridable in subclasses)
 func StateIdle() -> void: pass
 func StateWalk(_delta) -> void: pass
-func StateJump() -> void: pass
-func StateFall() -> void: pass
+func StateJump(_delta) -> void: pass
+func StateFall(_delta) -> void: pass
 func StateAttack() -> void: pass
 func StateHurt() -> void: pass
 func StateDied() -> void: queue_free()
@@ -61,9 +59,10 @@ func StateDied() -> void: queue_free()
 # Change State Method
 func ChangeState(new_state: eState) -> void:
 	if state != new_state:
-		Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 		state = new_state
 		enterState = true
+		# DEBUG
+		# Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 
 # Attack Functions
 func StartAttackCollision() -> void:
@@ -99,25 +98,34 @@ func _ready() -> void:
 		OnDamage(_hp)
 		# SFX and VFX could go here
 		ChangeState(eState.HURT)
-	)	
+	)
 	
-	health.__on_dead.connect(func(): ChangeState(eState.DIED))
+	health.__on_dead.connect(func(): 
+		if type == eType.ENEMY: 
+			# Add "Heart Reaction" to the audience
+			Global.level.HUD.audience.SpawnReaction("Heart")
+		ChangeState(eState.DIED)
+	)
+		
 	health.__on_recover.connect(func(__amount: float): 
 		print("Recovered " + str(__amount) + " HP"))
 	
 	# Detects collision with the enemy's hitbox component
-	attackBox.area_entered.connect(func(hitbox: Hitbox):
-		Global.debug.DebugPrint("Hitting on: " + str(hitbox.get_parent().name))
-		hitbox.__take_damage(properties.strength)
+	attackBox.area_entered.connect(func(__hitbox: Hitbox):
+		Global.debug.DebugPrint("Hitting on: " + str(__hitbox.get_parent().name))
+		__hitbox.TakeDamage(properties.strength)
 	)
+	
+	# Update HUD
+	# Global.level.HUD.HudUpdateHealth(properties.hpMax)
 
 # Main Loop
 func _physics_process(delta: float) -> void:
 	match state:
 		eState.IDLE: StateIdle()
 		eState.WALK: StateWalk(delta)
-		eState.JUMP: StateJump()
-		eState.FALL: StateFall()
+		eState.JUMP: StateJump(delta)
+		eState.FALL: StateFall(delta)
 		eState.ATTACK: StateAttack()
 		eState.HURT: StateHurt()
 		eState.DIED: StateDied()

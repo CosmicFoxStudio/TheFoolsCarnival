@@ -1,21 +1,64 @@
 class_name AudioManager extends Node
 
-@export var bg_music_stage : AudioStreamPlayer
+# Are we using these?
+@export var musicVolume : float
+@export var sfxVolume : float
 
-@export var music_volume : int
-@export var sfx_volume : int
+@onready var musicPlayer: AudioStreamPlayer = $BackgroundMusicPlayer
+@onready var sfxPlayer: AudioStreamPlayer = $SFXMusicPlayer
 
-var current_stage : String
+var musicName: String  # Name of the music clip
+var sfxName: String    # Name of the SFX clip
+var musicPaused: bool = false
 
 func _ready() -> void:
-	Global.audioManager = self
-	
-	
+	Global.audio = self
+
 func _process(_delta: float) -> void:
-	if(current_stage != Global.audioManager.current_stage):
-		current_stage = Global.audioManager.current_stage
-		update_music_for_scene()
-		
-func update_music_for_scene():
-	# var current_stage_music = str(current_stage + "Music") # Gets the Name of the Clip, each one MUST present the naming convention "Music" at the end
-	bg_music_stage["parameters/switch_to_clip"] = current_stage
+	update_volume()
+	_debug()
+
+func SetMusic(tag : String) -> void:
+	if(musicName != tag): 
+		musicName = tag
+		UpdateLevelMusic()
+
+func SetSFX(tag: String) -> void:
+	if sfxName != tag:
+		sfxName = tag
+		UpdateLevelSFX()
+
+func UpdateLevelMusic():
+	musicPlayer["parameters/switch_to_clip"] = musicName
+
+func UpdateLevelSFX() -> void:
+	sfxPlayer["parameters/switch_to_clip"] = sfxName
+
+func PauseMusic() -> void:
+	if musicPlayer.playing:
+		musicPlayer.stop()
+		musicPaused = true
+
+func ResumeMusic() -> void:
+	if musicPaused:
+		musicPlayer.play()
+		musicPaused = false
+	else: # Reset
+		UpdateLevelMusic()
+		musicPlayer.play()
+
+# (TO-DO: Convert to PascalCase (func) and camelCase (var)
+func update_volume() -> void:
+	var music_bus_index = AudioServer.get_bus_index("music")
+	var sfx_bus_index = AudioServer.get_bus_index("sfx")
+	
+	AudioServer.set_bus_volume_db(music_bus_index, Global.audio.musicVolume)
+	AudioServer.set_bus_volume_db(sfx_bus_index, Global.audio.sfxVolume)
+
+func set_volume(busTag : String, volume : float) -> void:
+	var audio_bus = AudioServer.get_bus_index(busTag)
+	AudioServer.set_bus_volume_db(audio_bus, volume)
+
+func _debug() -> void:
+	Global.debug.UpdateDebugVariable(18, "[AUDIO] Music: " + str(musicName))
+	Global.debug.UpdateDebugVariable(19, "[AUDIO] SFX: " + str(sfxName))

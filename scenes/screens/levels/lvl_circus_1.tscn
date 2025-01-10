@@ -1,109 +1,262 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=23 format=4 uid="uid://bh5aw3urpaxq0"]
 
-[ext_resource type="Script" path="res://scripts/controllers/level_controller.gd" id="1_01xsf"]
-[ext_resource type="Texture2D" uid="uid://7hrd5cfkmoao" path="res://assets/sprites/backgrounds/spr_bg_circus.png" id="1_if02w"]
+[ext_resource type="Script" path="res://scripts/levels/circus/scr_circus_1.gd" id="1_6gsv2"]
+[ext_resource type="Texture2D" uid="uid://bak115t0s1dhm" path="res://assets/sprites/backgrounds/spr_bg_pattern.png" id="2_cwfxy"]
 [ext_resource type="PackedScene" uid="uid://3ay3cu5gnbw2" path="res://scenes/prefab/player/obj_player.tscn" id="2_xu5av"]
+[ext_resource type="Texture2D" uid="uid://qfdhpit2xqg0" path="res://assets/sprites/tilesets/spr_tileset_test.png" id="3_5duxu"]
 [ext_resource type="PackedScene" uid="uid://d3r2navhe16nx" path="res://scenes/prefab/enemies/obj_enemy_thug.tscn" id="3_7ies1"]
-[ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/hud.tscn" id="3_kp1wh"]
-[ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_spawn_enemy.tscn" id="4_3exrk"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="4_888jb"]
-[ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="8_cguhp"]
+[ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/ui_hud.tscn" id="3_kp1wh"]
+[ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
+[ext_resource type="PackedScene" uid="uid://cg6v4kb7j5754" path="res://scenes/prefab/triggers/obj_camera_limiter.tscn" id="4_vxcq0"]
+[ext_resource type="PackedScene" uid="uid://dcya6dfpmgmyd" path="res://scenes/prefab/enemies/obj_enemy_purple.tscn" id="7_1xqmh"]
+[ext_resource type="PackedScene" uid="uid://cwkpwnd3luxdr" path="res://scenes/prefab/triggers/obj_trigger.tscn" id="10_h0vhq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxc3u"]
-size = Vector2(20, 360)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7xnf"]
+resource_name = "Ground"
+texture = ExtResource("3_5duxu")
+texture_region_size = Vector2i(40, 40)
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+7:7/0 = 0
+1:7/0 = 0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgsi4"]
-size = Vector2(20, 360)
+[sub_resource type="TileSet" id="TileSet_rplea"]
+tile_size = Vector2i(40, 40)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_k7xnf")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wych1"]
-size = Vector2(2560, 20)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bra0"]
+resource_name = "FakeGround"
+texture = ExtResource("3_5duxu")
+texture_region_size = Vector2i(40, 40)
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+0:7/0 = 0
+8:7/0 = 0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk4j7"]
-size = Vector2(2560, 20)
+[sub_resource type="TileSet" id="TileSet_h4vo7"]
+tile_size = Vector2i(40, 40)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_8bra0")
 
-[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_camera")]
-script = ExtResource("1_01xsf")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n3gws"]
+resource_name = "Decoration1"
+texture = ExtResource("3_5duxu")
+texture_region_size = Vector2i(40, 40)
+10:5/0 = 0
+11:5/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+9:5/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hxvur"]
+tile_size = Vector2i(40, 40)
+sources/0 = SubResource("TileSetAtlasSource_n3gws")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ckwt"]
+resource_name = "Decoration2"
+texture = ExtResource("3_5duxu")
+texture_region_size = Vector2i(40, 40)
+8:0/0 = 0
+8:1/0 = 0
+10:1/0 = 0
+8:2/0 = 0
+10:2/0 = 0
+8:3/0 = 0
+10:3/0 = 0
+8:4/0 = 0
+10:4/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+10:0/0 = 0
+4:0/0 = 0
+4:1/0 = 0
+4:2/0 = 0
+4:3/0 = 0
+4:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gd244"]
+tile_size = Vector2i(40, 40)
+sources/0 = SubResource("TileSetAtlasSource_2ckwt")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_osoi2"]
+resource_name = "Platforms"
+texture = ExtResource("3_5duxu")
+texture_region_size = Vector2i(40, 40)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, 10, 20, 10, 20, 20, -20, 20)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, 10, 20, 10, 20, 20, -20, 20)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+5:7/0 = 0
+6:7/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -10, 20, -10, 20, 20, -20, 20)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, 10, 20, 10, 20, 20, -20, 20)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[sub_resource type="TileSet" id="TileSet_iql5t"]
+tile_size = Vector2i(40, 40)
+physics_layer_0/collision_layer = 32
+physics_layer_0/collision_mask = 6
+sources/0 = SubResource("TileSetAtlasSource_osoi2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45cin"]
+size = Vector2(20, 359.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcaqg"]
+size = Vector2(20, 12.0121)
+
+[node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_HUD", "camLimiters")]
+script = ExtResource("1_6gsv2")
 _player = NodePath("Player")
-_camera = NodePath("Camera")
+_HUD = NodePath("HUD")
+camLimiters = [NodePath("CameraLimiters/CameraLimiter0"), NodePath("CameraLimiters/CameraLimiter1"), NodePath("CameraLimiters/CameraLimiter2"), NodePath("CameraLimiters/CameraLimiter3"), NodePath("CameraLimiters/CameraLimiter4")]
+metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("1_if02w")
+position = Vector2(0, -52)
+texture = ExtResource("2_cwfxy")
 centered = false
+
+[node name="TilemapLayers" type="Node2D" parent="."]
+
+[node name="GroundLayer" type="TileMapLayer" parent="TilemapLayers"]
+tile_map_data = PackedByteArray("AAAAAAgAAAAEAAcAAAABAAgAAAAEAAcAAAACAAgAAAAEAAcAAAADAAgAAAAEAAcAAAAEAAgAAAAEAAcAAAAFAAgAAAAEAAcAAAAGAAgAAAAEAAcAAAAHAAgAAAAEAAcAAAAIAAgAAAAEAAcAAAAJAAgAAAAEAAcAAAAKAAgAAAAEAAcAAAALAAgAAAAEAAcAAAAMAAgAAAAEAAcAAAANAAgAAAAEAAcAAAAOAAgAAAAEAAcAAAAPAAgAAAAEAAcAAAAQAAgAAAAEAAcAAAARAAgAAAAEAAcAAAASAAgAAAAEAAcAAAATAAgAAAAEAAcAAAAUAAgAAAAEAAcAAAAVAAgAAAAEAAcAAAAWAAgAAAAEAAcAAAAXAAgAAAAEAAcAAAAYAAgAAAAEAAcAAAAZAAgAAAAEAAcAAAAaAAgAAAAEAAcAAAAbAAgAAAAEAAcAAAAcAAgAAAAEAAcAAAAdAAgAAAAEAAcAAAAeAAgAAAAEAAcAAAAfAAgAAAAEAAcAAAAgAAgAAAAEAAcAAAAhAAgAAAAEAAcAAAAiAAgAAAAEAAcAAAAjAAgAAAAEAAcAAAAkAAgAAAAEAAcAAAAlAAgAAAAEAAcAAAAmAAgAAAAEAAcAAAAnAAgAAAAEAAcAAAAoAAgAAAAEAAcAAAApAAgAAAAEAAcAAAAqAAgAAAAEAAcAAAArAAgAAAAEAAcAAAAsAAgAAAAEAAcAAAAtAAgAAAAEAAcAAAAuAAgAAAAEAAcAAAAvAAgAAAAEAAcAAAAwAAgAAAAEAAcAAAAxAAgAAAAEAAcAAAAyAAgAAAAEAAcAAAAzAAgAAAAEAAcAAAA0AAgAAAAEAAcAAAA1AAgAAAAEAAcAAAA2AAgAAAAEAAcAAAA3AAgAAAAEAAcAAAA4AAgAAAAEAAcAAAA5AAgAAAAEAAcAAAA6AAgAAAAEAAcAAAA7AAgAAAAEAAcAAAA8AAgAAAAEAAcAAAA9AAgAAAAEAAcAAAA+AAgAAAAEAAcAAAA/AAgAAAAEAAcAAAD//wgAAAAEAAcAAABAAAgAAAAEAAcAAABBAAgAAAAEAAcAAABCAAgAAAAEAAcAAABDAAgAAAAEAAcAAABEAAgAAAAEAAcAAAA=")
+tile_set = SubResource("TileSet_rplea")
+
+[node name="FakeGroundLayer" type="TileMapLayer" parent="TilemapLayers"]
+tile_map_data = PackedByteArray("AAAAAAcAAAAEAAYAAAABAAcAAAAEAAYAAAACAAcAAAAEAAYAAAADAAcAAAAEAAYAAAAEAAcAAAAEAAYAAAAFAAcAAAAEAAYAAAAGAAcAAAAEAAYAAAAHAAcAAAAEAAYAAAAIAAcAAAAEAAYAAAAJAAcAAAAEAAYAAAAKAAcAAAAEAAYAAAALAAcAAAAEAAYAAAAMAAcAAAAEAAYAAAANAAcAAAAEAAYAAAAOAAcAAAAEAAYAAAAPAAcAAAAEAAYAAAAQAAcAAAAEAAYAAAARAAcAAAAEAAYAAAASAAcAAAAEAAYAAAATAAcAAAAEAAYAAAAUAAcAAAAEAAYAAAAVAAcAAAAEAAYAAAAWAAcAAAAEAAYAAAAXAAcAAAAEAAYAAAAYAAcAAAAEAAYAAAAZAAcAAAAEAAYAAAAaAAcAAAAEAAYAAAAbAAcAAAAEAAYAAAAcAAcAAAAEAAYAAAAdAAcAAAAEAAYAAAAeAAcAAAAEAAYAAAAfAAcAAAAEAAYAAAAgAAcAAAAEAAYAAAAhAAcAAAAEAAYAAAAiAAcAAAAEAAYAAAAjAAcAAAAEAAYAAAAkAAcAAAAEAAYAAAAlAAcAAAAEAAYAAAAmAAcAAAAEAAYAAAAnAAcAAAAEAAYAAAAoAAcAAAAEAAYAAAApAAcAAAAEAAYAAAAqAAcAAAAEAAYAAAArAAcAAAAEAAYAAAAsAAcAAAAEAAYAAAAtAAcAAAAEAAYAAAAuAAcAAAAEAAYAAAAvAAcAAAAEAAYAAAAwAAcAAAAEAAYAAAAxAAcAAAAEAAYAAAAyAAcAAAAEAAYAAAAzAAcAAAAEAAYAAAA0AAcAAAAEAAYAAAA1AAcAAAAEAAYAAAA2AAcAAAAEAAYAAAA3AAcAAAAEAAYAAAA4AAcAAAAEAAYAAAA5AAcAAAAEAAYAAAA6AAcAAAAEAAYAAAA7AAcAAAAEAAYAAAA8AAcAAAAEAAYAAAA9AAcAAAAEAAYAAAA+AAcAAAAEAAYAAAA/AAcAAAAEAAYAAAD//wcAAAAEAAYAAABAAAcAAAAEAAYAAABBAAcAAAAEAAYAAABCAAcAAAAEAAYAAABDAAcAAAAEAAYAAABEAAcAAAAEAAYAAAA=")
+tile_set = SubResource("TileSet_h4vo7")
+
+[node name="Decoration1Layer" type="TileMapLayer" parent="TilemapLayers"]
+tile_map_data = PackedByteArray("AAAPAAYAAAAFAAcAAAAOAAYAAAAFAAcAAAANAAYAAAAFAAcAAAAMAAYAAAAFAAcAAAALAAYAAAAFAAcAAAAKAAYAAAAFAAcAAAAJAAYAAAAFAAcAAAAIAAYAAAAFAAcAAAAHAAYAAAAFAAcAAAAGAAYAAAAFAAcAAAAFAAYAAAAFAAcAAAAEAAYAAAAFAAcAAAADAAYAAAAFAAcAAAACAAYAAAAFAAcAAAABAAYAAAAFAAcAAAAAAAYAAAAFAAcAAAARAAYAAAAFAAcAAAASAAYAAAAFAAcAAAATAAYAAAAFAAcAAAAUAAYAAAAFAAcAAAAVAAYAAAAFAAcAAAAWAAYAAAAFAAcAAAAXAAYAAAAFAAcAAAAYAAYAAAAFAAcAAAAZAAYAAAAFAAcAAAAaAAYAAAAFAAcAAAAbAAYAAAAFAAcAAAAcAAYAAAAFAAcAAAAdAAYAAAAFAAcAAAAeAAYAAAAFAAcAAAAfAAYAAAAFAAcAAAAhAAYAAAAFAAcAAAAiAAYAAAAFAAcAAAAjAAYAAAAFAAcAAAAkAAYAAAAFAAcAAAAmAAYAAAAFAAcAAAAnAAYAAAAFAAcAAAAlAAYAAAAFAAcAAAAoAAYAAAAFAAcAAAApAAYAAAAFAAcAAAAqAAYAAAAFAAcAAAArAAYAAAAFAAcAAAAsAAYAAAAFAAcAAAAtAAYAAAAFAAcAAAAuAAYAAAAFAAcAAAAvAAYAAAAFAAcAAAAwAAYAAAAFAAcAAAAxAAYAAAAFAAcAAAAyAAYAAAAFAAcAAAA0AAYAAAAFAAcAAAA1AAYAAAAFAAcAAAA2AAYAAAAFAAcAAAA3AAYAAAAFAAcAAAA4AAYAAAAFAAcAAAA5AAYAAAAFAAcAAAA6AAYAAAAFAAcAAAA7AAYAAAAFAAcAAAA8AAYAAAAFAAcAAAA9AAYAAAAFAAcAAAA+AAYAAAAFAAcAAAA/AAYAAAAFAAcAAAAQAAYAAAAFAAcAAAAgAAYAAAAFAAcAAAAzAAYAAAAFAAcAAABAAAYAAAAFAAcAAABBAAYAAAAFAAcAAABCAAYAAAAFAAcAAABDAAYAAAAFAAcAAABEAAYAAAAFAAcAAAA=")
+tile_set = SubResource("TileSet_hxvur")
+
+[node name="Decoration2Layer" type="TileMapLayer" parent="TilemapLayers"]
+tile_map_data = PackedByteArray("AAAQAAMAAAAEAAAAAAAQAAQAAAAEAAEAAAAQAAUAAAAEAAIAAAAQAAYAAAAEAAMAAAAQAAcAAAAEAAQAAAAgAAMAAAAEAAAAAAAgAAQAAAAEAAEAAAAgAAUAAAAEAAIAAAAgAAYAAAAEAAMAAAAgAAcAAAAEAAQAAAAzAAMAAAAEAAAAAAAzAAQAAAAEAAEAAAAzAAUAAAAEAAIAAAAzAAYAAAAEAAMAAAAzAAcAAAAEAAQAAAA=")
+tile_set = SubResource("TileSet_gd244")
+
+[node name="PlatformLayer" type="TileMapLayer" parent="TilemapLayers"]
+tile_map_data = PackedByteArray("AAAJAAUAAAABAAIAAAAJAAYAAAABAAMAAAAJAAcAAAABAAQAAAAKAAUAAAACAAIAAAAKAAYAAAACAAMAAAAKAAcAAAACAAQAAAALAAUAAAADAAIAAAALAAYAAAADAAMAAAALAAcAAAADAAQAAAAFAAcAAAABAAEAAAAGAAcAAAACAAEAAAAHAAcAAAADAAEAAAA=")
+tile_set = SubResource("TileSet_iql5t")
+
+[node name="StageLimiters" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StageLimiters"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimiters/StaticBody2D"]
+position = Vector2(-10, 179.25)
+shape = SubResource("RectangleShape2D_45cin")
+
+[node name="CameraLimiters" type="Node" parent="."]
+
+[node name="CameraLimiter0" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(-1, 360)
+limitX = 1
+limitY = 2
+
+[node name="CameraLimiter1" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(640, 360)
+limitX = 2
+limitY = 2
+
+[node name="CameraLimiter2" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(1280, 360)
+limitX = 2
+limitY = 2
+
+[node name="CameraLimiter3" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(2040, 360)
+limitX = 2
+limitY = 2
+
+[node name="CameraLimiter4" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
+position = Vector2(2752, 360)
+limitX = 2
+limitY = 2
+
+[node name="Player" parent="." instance=ExtResource("2_xu5av")]
+position = Vector2(80, 296)
 
 [node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
 
-[node name="Camera" type="Camera2D" parent="."]
-anchor_mode = 0
-script = ExtResource("4_888jb")
+[node name="Spawners" type="Node2D" parent="."]
 
-[node name="StageLimits" type="Node" parent="."]
-
-[node name="StageLimitsLeft" type="StaticBody2D" parent="StageLimits"]
-collision_mask = 6
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsLeft"]
-position = Vector2(-10, 180)
-shape = SubResource("RectangleShape2D_hxc3u")
-
-[node name="StageLimitsRight" type="StaticBody2D" parent="StageLimits"]
-collision_mask = 6
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsRight"]
-position = Vector2(2570, 180)
-shape = SubResource("RectangleShape2D_jgsi4")
-
-[node name="StageLimitsBottom" type="StaticBody2D" parent="StageLimits"]
-collision_mask = 6
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsBottom"]
-position = Vector2(1280, 337)
-shape = SubResource("RectangleShape2D_wych1")
-
-[node name="StageLimitsTop" type="StaticBody2D" parent="StageLimits"]
-collision_mask = 6
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageLimits/StageLimitsTop"]
-position = Vector2(1280, -10)
-shape = SubResource("RectangleShape2D_vk4j7")
-
-[node name="SpawnEnemy" parent="." instance=ExtResource("4_3exrk")]
-position = Vector2(480, 359)
-unlockedAtArea = 480.0
+[node name="SpawnEnemy1" parent="Spawners" instance=ExtResource("4_3exrk")]
+position = Vector2(253, 359)
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy2" parent="." instance=ExtResource("4_3exrk")]
+[node name="SpawnEnemy2" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(1015, 361)
-unlockedAtArea = 1120.0
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy3" parent="." instance=ExtResource("4_3exrk")]
-position = Vector2(1431, 360)
-unlockedAtArea = 1600.0
-amount = 1
+[node name="SpawnEnemy3" parent="Spawners" instance=ExtResource("4_3exrk")]
+position = Vector2(1500, 360)
+amount = 3
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy4" parent="." instance=ExtResource("4_3exrk")]
-position = Vector2(1833, 360)
-unlockedAtArea = 2080.0
-amount = 1
-enemies = Array[PackedScene]([ExtResource("3_7ies1")])
-
-[node name="SpawnEnemy5" parent="." instance=ExtResource("4_3exrk")]
+[node name="SpawnEnemy4" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(2323, 360)
-unlockedAtArea = 2080.0
 amount = 1
-enemies = Array[PackedScene]([ExtResource("3_7ies1")])
-lastArea = true
+enemies = Array[PackedScene]([ExtResource("7_1xqmh")])
 
-[node name="Player" parent="." instance=ExtResource("2_xu5av")]
-position = Vector2(75, 327)
+[node name="Triggers" type="Node2D" parent="."]
+position = Vector2(2323, 360)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_cguhp")
-autoplay = true
+[node name="Trigger" parent="Triggers" instance=ExtResource("10_h0vhq")]
+value = "Boss"
+
+[node name="TriggerCollision" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(5.25952, 3.89487)
+shape = SubResource("RectangleShape2D_bcaqg")
+
+[connection signal="area_entered" from="Triggers/Trigger" to="Triggers/Trigger" method="_on_area_entered"]

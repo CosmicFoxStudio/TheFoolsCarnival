@@ -1,32 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://djcmkr3wdgvix"]
+[gd_scene load_steps=14 format=3 uid="uid://djcmkr3wdgvix"]
 
 [ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="1_mgqhi"]
-[ext_resource type="AudioStream" uid="uid://c4aaw2qoku4ax" path="res://assets/audio/sfx/tfc_intro.ogg" id="2_chv0h"]
-[ext_resource type="AudioStream" uid="uid://d1mdmynewbhch" path="res://assets/audio/sfx/tfc_battle.ogg" id="3_25p1q"]
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_brvyg"]
-stream_count = 2
-stream_0 = ExtResource("2_chv0h")
-stream_1 = ExtResource("3_25p1q")
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_5byfl"]
+[ext_resource type="AudioStream" uid="uid://dx1qwopialsi7" path="res://assets/audio/music/mus_intro.ogg" id="2_864xn"]
+[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/music/mus_title.ogg" id="2_l7dct"]
+[ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="3_pw3u2"]
+[ext_resource type="AudioStream" uid="uid://bqlkrsewf4okp" path="res://assets/audio/sfx/sfx_cursor_menu_back.wav" id="4_tnvtt"]
+[ext_resource type="AudioStream" uid="uid://g7j5hcyh86uu" path="res://assets/audio/sfx/sfx_cursor_menu_enter.wav" id="5_4vmfv"]
+[ext_resource type="AudioStream" uid="uid://dv4lvyso162oq" path="res://assets/audio/music/boss_fight.mp3" id="5_s5dp3"]
+[ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="6_w3it8"]
+[ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_cleared.mp3" id="9_6d2p8"]
+[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="10_1k0uw"]
+[ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav" id="11_ela68"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_wcblp"]
-clip_count = 2
-clip_0/name = &"CircusMusic"
-clip_0/stream = SubResource("AudioStreamPlaylist_brvyg")
+clip_count = 5
+clip_0/name = &"Title"
+clip_0/stream = ExtResource("2_l7dct")
 clip_0/auto_advance = 0
-clip_1/name = &"Stage2Music"
-clip_1/stream = SubResource("AudioStreamPlaylist_5byfl")
+clip_1/name = &"Intro"
+clip_1/stream = ExtResource("2_864xn")
 clip_1/auto_advance = 0
+clip_2/name = &"Stage"
+clip_2/stream = ExtResource("3_pw3u2")
+clip_2/auto_advance = 0
+clip_3/name = &"Boss"
+clip_3/stream = ExtResource("5_s5dp3")
+clip_3/auto_advance = 0
+clip_4/name = &"LevelCleared"
+clip_4/stream = ExtResource("9_6d2p8")
+clip_4/auto_advance = 0
 _transitions = {
-Vector2i(0, 1): {
+Vector2i(0, 3): {
 "fade_beats": 1,
 "fade_mode": 3,
 "from_time": 0,
 "to_time": 0
 },
-Vector2i(1, 0): {
+Vector2i(3, 0): {
 "fade_beats": 1,
 "fade_mode": 3,
 "from_time": 0,
@@ -34,14 +44,33 @@ Vector2i(1, 0): {
 }
 }
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("bg_music_stage")]
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_fb15y"]
+clip_count = 5
+clip_0/name = &"CursorMenuBack"
+clip_0/stream = ExtResource("4_tnvtt")
+clip_0/auto_advance = 0
+clip_1/name = &"CursorMenuEnter"
+clip_1/stream = ExtResource("5_4vmfv")
+clip_1/auto_advance = 0
+clip_2/name = &"CursorMenuHover"
+clip_2/stream = ExtResource("6_w3it8")
+clip_2/auto_advance = 0
+clip_3/name = &"CrowdBooing"
+clip_3/stream = ExtResource("10_1k0uw")
+clip_3/auto_advance = 0
+clip_4/name = &"CrowdApplause"
+clip_4/stream = ExtResource("11_ela68")
+clip_4/auto_advance = 0
+
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_mgqhi")
-bg_music_stage = NodePath("BackgroundMusicPlayer")
-music_volume = 1
-sfx_volume = 1
+musicVolume = 50.0
+sfxVolume = 50.0
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_wcblp")
-volume_db = -20.0
 autoplay = true
 bus = &"music"
+
+[node name="SFXMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_fb15y")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://i4jyh46grfcy"]
+
+[ext_resource type="Texture2D" uid="uid://bvebqgngw38pn" path="res://assets/sprites/ui/icons/spr_cursor.png" id="1_26jgq"]
+[ext_resource type="Script" path="res://scripts/ui/scr_menu_cursor.gd" id="2_okmf5"]
+
+[node name="Cursor" type="TextureRect"]
+offset_right = 38.0
+offset_bottom = 28.0
+texture = ExtResource("1_26jgq")
+stretch_mode = 2
+script = ExtResource("2_okmf5")

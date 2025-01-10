@@ -30,12 +30,13 @@ _data = {
 }
 
 [node name="HitEffect" type="Node2D" node_paths=PackedStringArray("animation_player") groups=["effects"]]
+visibility_layer = 512
+z_index = 100
 script = ExtResource("1_1t2re")
 hitEffectResource = ExtResource("2_dcdnw")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0, 0, 1)
 texture = SubResource("AtlasTexture_5ogrj")
 hframes = 8
 frame = 1
