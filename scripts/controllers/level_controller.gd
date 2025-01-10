@@ -21,6 +21,7 @@ static var player: CharacterBody2D
 static var HUD: UI
 var music: String
 
+var gameOverScene := preload("res://scenes/screens/game_over.tscn")
 # Runs before ready
 func _enter_tree() -> void:
 	player = _player
@@ -113,14 +114,10 @@ func ConfigNextArea(__amount: int) -> void:
 
 func EndGame():
 	print("GAME OVER")
-
-	# if gameOverScene: # is loaded
-		# var game_over_instance = gameOverScene.instantiate()
-		# get_tree().root.add_child(game_over_instance)
+	if gameOverScene: # is loaded
+		var game_over_instance = gameOverScene.instantiate()
+		get_parent().get_node("/root/MainScene/LayerControl").add_child(game_over_instance)
 		
-		# (TO-DO), Add the scene as a child of a dedicated Control or CanvasLayer node
-		# var ui_layer = get_tree().current_scene.get_node("UILayer")
-		# ui_layer.add_child(game_over_instance)
 
 func _process(_delta: float) -> void: _debug()
 

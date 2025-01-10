@@ -206,8 +206,9 @@ func StateDied() -> void:
 		await get_tree().create_timer(2).timeout
 		
 		# Scene transition (TO-DO: Add pixilate transition here)
-		Global.sceneTransition.transition("res://scenes/screens/menu_interface.tscn")
-
+		#Global.sceneTransition.transition("res://scenes/screens/menu_interface.tscn")
+		Global.level.EndGame()
+		
 func _physics_process(delta: float) -> void: 
 	super(delta)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djcmkr3wdgvix"]
+[gd_scene load_steps=13 format=3 uid="uid://djcmkr3wdgvix"]
 
 [ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="1_mgqhi"]
 [ext_resource type="AudioStream" uid="uid://dx1qwopialsi7" path="res://assets/audio/music/mus_intro.ogg" id="2_864xn"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="3_pw3u2"]
 [ext_resource type="AudioStream" uid="uid://bqlkrsewf4okp" path="res://assets/audio/sfx/sfx_cursor_menu_back.wav" id="4_tnvtt"]
 [ext_resource type="AudioStream" uid="uid://g7j5hcyh86uu" path="res://assets/audio/sfx/sfx_cursor_menu_enter.wav" id="5_4vmfv"]
-[ext_resource type="AudioStream" uid="uid://dv4lvyso162oq" path="res://assets/audio/music/boss_fight.mp3" id="5_6qnhp"]
 [ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="6_w3it8"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_5ekvw"]
@@ -14,14 +13,8 @@ stream_count = 1
 stream_0 = ExtResource("2_l7dct")
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_brvyg"]
-stream_count = 2
+stream_count = 1
 stream_0 = ExtResource("2_864xn")
-stream_1 = ExtResource("3_pw3u2")
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_ik5bj"]
-stream_count = 2
-stream_0 = ExtResource("3_pw3u2")
-stream_1 = ExtResource("5_6qnhp")
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_5byfl"]
 
@@ -34,7 +27,7 @@ clip_1/name = &"CircusMusic"
 clip_1/stream = SubResource("AudioStreamPlaylist_brvyg")
 clip_1/auto_advance = 0
 clip_2/name = &"InGame"
-clip_2/stream = SubResource("AudioStreamPlaylist_ik5bj")
+clip_2/stream = ExtResource("3_pw3u2")
 clip_2/auto_advance = 0
 clip_3/name = &"Stage2Music"
 clip_3/stream = SubResource("AudioStreamPlaylist_5byfl")

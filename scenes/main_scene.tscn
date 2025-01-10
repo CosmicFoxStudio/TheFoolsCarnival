@@ -23,12 +23,13 @@ hitEffectResources = Array[ExtResource("4_fcky6")]([ExtResource("5_0feaj"), ExtR
 [node name="Layer2D" type="Node2D" parent="."]
 
 [node name="LayerControl" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Debug" parent="LayerControl" instance=ExtResource("2_feukp")]
 
 [node name="Settings" parent="LayerControl" instance=ExtResource("3_djt05")]
 
 [node name="LayerTransition" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="Transition" parent="LayerTransition" instance=ExtResource("2_v7yv1")]
