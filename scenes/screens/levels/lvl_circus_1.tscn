@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bh5aw3urpaxq0"]
+[gd_scene load_steps=23 format=4 uid="uid://bh5aw3urpaxq0"]
 
 [ext_resource type="Script" path="res://scripts/levels/circus/scr_circus_1.gd" id="1_6gsv2"]
 [ext_resource type="Texture2D" uid="uid://bak115t0s1dhm" path="res://assets/sprites/backgrounds/spr_bg_pattern.png" id="2_cwfxy"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="PackedScene" uid="uid://cg6v4kb7j5754" path="res://scenes/prefab/triggers/obj_camera_limiter.tscn" id="4_vxcq0"]
 [ext_resource type="PackedScene" uid="uid://dcya6dfpmgmyd" path="res://scenes/prefab/enemies/obj_enemy_purple.tscn" id="7_1xqmh"]
+[ext_resource type="PackedScene" uid="uid://cwkpwnd3luxdr" path="res://scenes/prefab/triggers/obj_trigger.tscn" id="10_h0vhq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7xnf"]
 resource_name = "Ground"
@@ -149,6 +150,9 @@ sources/0 = SubResource("TileSetAtlasSource_osoi2")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45cin"]
 size = Vector2(20, 359.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcaqg"]
+size = Vector2(20, 12.0121)
+
 [node name="LevelCircus1" type="Node2D" node_paths=PackedStringArray("_player", "_HUD", "camLimiters")]
 script = ExtResource("1_6gsv2")
 _player = NodePath("Player")
@@ -157,6 +161,7 @@ camLimiters = [NodePath("CameraLimiters/CameraLimiter0"), NodePath("CameraLimite
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, -52)
 texture = ExtResource("2_cwfxy")
 centered = false
 
@@ -193,7 +198,7 @@ shape = SubResource("RectangleShape2D_45cin")
 [node name="CameraLimiters" type="Node" parent="."]
 
 [node name="CameraLimiter0" parent="CameraLimiters" instance=ExtResource("4_vxcq0")]
-position = Vector2(0, 360)
+position = Vector2(-1, 360)
 limitX = 1
 limitY = 2
 
@@ -222,22 +227,36 @@ position = Vector2(80, 296)
 
 [node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
 
-[node name="SpawnEnemy1" parent="." instance=ExtResource("4_3exrk")]
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="SpawnEnemy1" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(253, 359)
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy2" parent="." instance=ExtResource("4_3exrk")]
+[node name="SpawnEnemy2" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(1015, 361)
 amount = 1
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy3" parent="." instance=ExtResource("4_3exrk")]
+[node name="SpawnEnemy3" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(1500, 360)
 amount = 3
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
-[node name="SpawnEnemy4" parent="." instance=ExtResource("4_3exrk")]
+[node name="SpawnEnemy4" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(2323, 360)
 amount = 1
 enemies = Array[PackedScene]([ExtResource("7_1xqmh")])
+
+[node name="Triggers" type="Node2D" parent="."]
+position = Vector2(2323, 360)
+
+[node name="Trigger" parent="Triggers" instance=ExtResource("10_h0vhq")]
+value = "Boss"
+
+[node name="TriggerCollision" type="CollisionShape2D" parent="Triggers/Trigger"]
+position = Vector2(5.25952, 3.89487)
+shape = SubResource("RectangleShape2D_bcaqg")
+
+[connection signal="area_entered" from="Triggers/Trigger" to="Triggers/Trigger" method="_on_area_entered"]

@@ -91,8 +91,8 @@ func AdvanceToNextSegment() -> void:
 		UpdateCameraLimits()
 		ConfigNextArea(enemies)
 		
-		# Play Boss Music
-		Global.audio.SetMusic("Boss")
+		# Play Boss Music (currently doing it through a Trigger in the Level)
+		# Global.audio.SetMusic("Boss")
 	else: 
 		currentSegmentIndex = camLimiters.size()
 

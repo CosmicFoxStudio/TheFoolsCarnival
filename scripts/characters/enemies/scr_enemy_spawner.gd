@@ -27,8 +27,8 @@ func SpawnEnemies() -> void:
 func SetEnemyRandomPosition() -> Vector2:
 	# Retrieve the current segment's boundaries from the Line2D markers
 	var segment = Global.level.currentSegmentIndex
-	var screenLeft = get_parent().camLimiters[segment - 1].position
-	var screenRight = get_parent().camLimiters[segment].position
+	var screenLeft = Global.level.camLimiters[segment - 1].position
+	var screenRight = Global.level.camLimiters[segment].position
 	var spawnY = Global.FLOOR 
 	#var spawnY = randf_range(0.0, 260.0)  # Random Y position within height range
 	

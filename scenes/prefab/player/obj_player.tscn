@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
 [ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav" id="8_s6yx5"]
 [ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="9_oybm7"]
-[ext_resource type="Script" path="res://scenes/prefab/player/scr_player_interaction.gd" id="10_jdhmr"]
+[ext_resource type="Script" path="res://scripts/characters/player/scr_player_interaction.gd" id="10_jdhmr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]
 radius = 21.0
