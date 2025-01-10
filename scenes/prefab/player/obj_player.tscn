@@ -332,7 +332,7 @@ size = Vector2(47, 94)
 [node name="Player" type="CharacterBody2D"]
 z_index = 50
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1_yjweb")
 properties = ExtResource("2_7k0pf")
 
@@ -351,6 +351,7 @@ shape = SubResource("CapsuleShape2D_h2465")
 [node name="Camera" parent="." instance=ExtResource("5_k2bh6")]
 position = Vector2(0, 0)
 offset = Vector2(0, 0)
+limit_right = 2760
 
 [node name="Hitbox" parent="." instance=ExtResource("4_00ysq")]
 collision_layer = 2

@@ -230,6 +230,8 @@ func _debug() -> void:
 	Global.debug.UpdateDebugVariable(3, "Is attacking?: " + str(isAttacking))
 	Global.debug.UpdateDebugVariable(4, "Combo Index: " + str(comboIndex))
 	Global.debug.UpdateDebugVariable(5, "DramaMeter: " + str(Global.level.HUD.dramaMeter.audienceValue))
-
+	Global.debug.UpdateDebugVariable(6, "Player Pos: " + str(position))
+	#Global.debug.UpdateDebugVariable(7, "Player Global Pos: " + str(global_position))
+	
 	# Console
 	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))
