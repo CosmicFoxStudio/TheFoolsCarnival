@@ -6,6 +6,8 @@ extends Control
 
 var cursor_index : int = 0
 
+var last_item : Control
+
 func _process(delta: float) -> void:
 	var input := Vector2.ZERO
 	
@@ -22,6 +24,20 @@ func _process(delta: float) -> void:
 		set_cursor_item_at_index(cursor_index + input.y)
 	elif menu_parent is HBoxContainer:
 		set_cursor_item_at_index(cursor_index + input.x)
+		
+	if Input.is_action_just_pressed("ui_select"):
+		
+		var current_menu_item := get_menu_item_at_index(cursor_index)
+		
+		if(current_menu_item != null):
+			if last_item != null and last_item != current_menu_item:
+				if last_item.has_method("cursor_deselect"):
+					last_item.cursor_deselect()
+					
+			last_item = current_menu_item
+			if current_menu_item.has_method("cursor_select"):
+				current_menu_item.cursor_select()
+	
 
 func get_menu_item_at_index(index : int) -> Control:
 	if menu_parent == null:
@@ -43,4 +59,5 @@ func set_cursor_item_at_index(index : int) -> void:
 	
 	global_position = Vector2(pos.x, pos.y + size.y / 2.0)
 	
+	cursor_index = index
 	

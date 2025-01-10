@@ -14,9 +14,9 @@ void twirl(vec2 uv, vec2 center, float Strength, vec2 Offset, out vec2 Out){
 	float angle = Strength * length(delta);
     float x = cos(angle) * delta.x - sin(angle) * delta.y;
     float y = sin(angle) * delta.x + cos(angle) * delta.y;
-	
+
 	Out = vec2(
-	x + center.x + Offset.x, 
+	x + center.x + Offset.x,
 	y + center.y + Offset.y);
 }
 
@@ -24,7 +24,7 @@ void vertex() {
 	// Called for every vertex the material is visible on.
 	vec2 result;
 	//twirl(UV,POSITION.xy,strength, vec2(1,1), result);
-	
+
 }
 
 void fragment() {
@@ -32,6 +32,5 @@ void fragment() {
 	float noise = texture(noise_texture, UV + TIME * speed).r * strength;
 	vec2 distortion = vec2(noise) * direction;
 	COLOR = texture(screen_texture, SCREEN_UV + distortion - direction * strength / 2.0);
-	
-}
 
+}

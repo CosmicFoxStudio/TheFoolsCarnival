@@ -6,7 +6,10 @@ extends Scene
 
 var selected_index: int = 0
 
+var music : String
+
 func _ready() -> void:
+	music = "CircusMusic"
 	# Add buttons to array
 	for child in menu_grid_container.get_children():
 		if child is Button:
@@ -51,6 +54,7 @@ func _on_menu_item_selected() -> void:
 func _on_start_button_pressed() -> void:
 	animation_player.play("MenuOperations/start_game")
 	await animation_player.animation_finished
+	Global.audio.set_music_tag("CircusMusic")
 	Global.sceneTransition.transition("res://scenes/screens/game_intro.tscn")
 
 func _on_quit_button_pressed() -> void:

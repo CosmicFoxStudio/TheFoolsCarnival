@@ -9,8 +9,6 @@ class_name LevelController extends Scene
 
 @export var camLimiters : Array[Node2D] # List of camera limiters
 
-@export_file("*.ogg") var _music : String = "res://assets/audio/music/mus_default.ogg"
-
 var score : int = 0
 var enemies := 0
 var currentSegmentIndex: int = 1
@@ -21,26 +19,24 @@ var lastArea : bool = false
 # These variables can be accessed directly from the class without creating a new instance
 static var player: CharacterBody2D 
 static var HUD: UI
-static var music: String
+var music: String
 
 # Runs before ready
 func _enter_tree() -> void:
 	player = _player
 	HUD = _HUD
-	music = _music
 	
 	Global.level = self
-	Global.audio.currentStage = self
-	Global.audio.currentStageName = get_name()
-	Global.audio.currentMusic = music
 
 func _ready():
 	# Set to first limiter
 	player.camera.limit_left = 0
 	player.camera.limitManager.SetLimiter(camLimiters[currentSegmentIndex], false)
 	
-	Global.audio.musicPlayer.stream = load("res://assets/audio/music/mus_battle.ogg")
-	Global.audio.musicPlayer.play()
+	Global.audio.set_music_tag("InGame")
+	#Global.audio.musicPlayer.stream = load("res://assets/audio/music/mus_battle.ogg")
+	music = Global.audio.currentMusicTag
+	#Global.audio.musicPlayer.play()
 
 # Update camera limits based on the current segment
 func UpdateCameraLimits() -> void:

@@ -18,6 +18,7 @@ func _ready():
 	value = audienceValue  # Sync meter value with progress bar
 	UpdateOverlay()
 	
+	Global.audio.set_volume("audience_meter_influence",-value)
 	# Connect the DecayTimer timeout signal (Already connected through Godot UI)
 	# $DecayTimer.timeout.connect(_on_DecayTimer_timeout)
 

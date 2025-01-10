@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=16 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_options.gd" id="1_1hkr3"]
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="3_m27lk"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
-[ext_resource type="AudioStream" uid="uid://b0bkan80fmife" path="res://assets/audio/music/mus_title.ogg" id="12_dllvj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
 
@@ -393,11 +392,6 @@ libraries = {
 "": SubResource("AnimationLibrary_fgekc"),
 "MenuOperations": SubResource("AnimationLibrary_1jp1y")
 }
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_dllvj")
-volume_db = 5.0
-autoplay = true
 
 [connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
