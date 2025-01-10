@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bak115t0s1dhm"
-path="res://.godot/imported/spr_bg_pattern.png-2ec78bb3c947ca23423ef46d7164507c.ctex"
+uid="uid://c2jx2tul33j3f"
+path="res://.godot/imported/spr_dramameter_icon.png-851af4723639a348b84488194cbfa228.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/spr_bg_pattern.png"
-dest_files=["res://.godot/imported/spr_bg_pattern.png-2ec78bb3c947ca23423ef46d7164507c.ctex"]
+source_file="res://assets/sprites/ui/drama_meter/spr_dramameter_icon.png"
+dest_files=["res://.godot/imported/spr_dramameter_icon.png-851af4723639a348b84488194cbfa228.ctex"]
 
 [params]
 
