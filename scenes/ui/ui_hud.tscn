@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="3_rfdim"]
 [ext_resource type="Texture2D" uid="uid://dsh8r4m7va8d5" path="res://assets/sprites/ui/portraits/spr_portrait_thug.png" id="4_1iqq3"]
 [ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_clear_cute.mp3" id="6_05i8f"]
-[ext_resource type="AudioStream" uid="uid://cd5uy3tdipe0v" path="res://assets/audio/sfx/sfx_go.wav" id="6_oxw1x"]
 [ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui/ui_dramameter.tscn" id="7_xpvwm"]
 [ext_resource type="PackedScene" uid="uid://xih1orensxu3" path="res://scenes/ui/audience/ui_audience.tscn" id="8_7rosk"]
+[ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="9_iem04"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmqlr"]
 bg_color = Color(0.886275, 0.427451, 0.580392, 1)
@@ -238,7 +238,8 @@ layout_mode = 1
 wait_time = 2.0
 
 [node name="GoSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_oxw1x")
+stream = ExtResource("9_iem04")
+volume_db = -15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
