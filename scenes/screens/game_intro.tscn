@@ -217,10 +217,10 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 2, 3.56667, 5.53333, 6.73333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": ["Era uma vez... Um reino onde o espetaculo nunca parava e o riso era a lei.", "Ainda que muito jovem, pierrot sonhava em comandar seu proprio circo. Mas a paz nao duraria...", "
+"values": ["Once upon a time... There was a kingdom where the spectacle never ceased, and all the folks danced to the rhythm of laughter.
+", "Among the clowns of this lively land, young Porriet dreamed of commanding a circus of their own, bringing slapstick delights and playful tricks to the crowd.", "
 
-", "Sua família foi capturada, oh nao...! E agora? ", "Elu deve dar o show de sua vida ou encarar o seu fim e a todos que ama.
-"]
+", "But one fateful day, shadows crept into the spotlight... The Ringmaster's evil gang took down the kingdom, leaving only despair.", "Now, Porriet must dazzle the world with the show of a lifetime... Or risk losing everything they hold dear."]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -435,7 +435,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -272.0
 offset_top = -157.0
-offset_right = 275.0
+offset_right = 285.0
 offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 0
