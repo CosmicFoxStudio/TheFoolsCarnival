@@ -12,7 +12,7 @@ func _ready() -> void:
 	randomize()
 	
 	# Hides the mouse cursor
-	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	Global.mainScene = self
 

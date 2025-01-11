@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=19 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_title.gd" id="1_1hkr3"]
+[ext_resource type="Shader" path="res://scenes/screens/shake.gdshader" id="3_g2x1o"]
 [ext_resource type="Texture2D" uid="uid://drtjp84ytc00i" path="res://assets/sprites/backgrounds/spr_bg_stage.png" id="3_m27lk"]
 [ext_resource type="Texture2D" uid="uid://bymhnonhdcjno" path="res://assets/sprites/ui/logo/logo.png" id="5_qb540"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="6_ly0se"]
@@ -12,6 +13,10 @@
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
+shader = ExtResource("3_g2x1o")
+shader_parameter/dirToShake = Vector2(1, 0.9)
+shader_parameter/amplitude = 5.0
+shader_parameter/frequency = 7.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p6j03"]
 atlas = ExtResource("9_x0b47")
