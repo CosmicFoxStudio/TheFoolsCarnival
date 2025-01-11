@@ -8,7 +8,7 @@ extends Control
 
 @onready var _controlsBox: TextureRect = $ControlsBox
 @onready var _settings_box: TextureRect = $SettingsBox
-@onready var _cursor: TextureRect = $Cursor
+@onready var _cursor: Cursor = $Cursor
 
 var paused := false
 var music_selected : bool

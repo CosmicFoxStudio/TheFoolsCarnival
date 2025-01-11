@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2dftu4pgnmt8"]
+[gd_scene load_steps=20 format=3 uid="uid://2dftu4pgnmt8"]
 
 [ext_resource type="Script" path="res://scripts/cutscenes/scr_cutscene_intro.gd" id="1_tyida"]
 [ext_resource type="Texture2D" uid="uid://k357p08xnvau" path="res://assets/sprites/cutscenes/intro/intro_template.png" id="2_u7e2m"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://dc3dycd1wgo7a" path="res://assets/sprites/cutscenes/intro/spr_bg_intro.png" id="7_okyso"]
 [ext_resource type="Texture2D" uid="uid://jjmbpo54mypa" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_frame.png" id="8_8q3uf"]
 [ext_resource type="Texture2D" uid="uid://1qmyk417y2p2" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_2_ringmaster.png" id="9_xickg"]
+[ext_resource type="Script" path="res://scripts/ui/scr_menu_item.gd" id="10_qkryw"]
 [ext_resource type="Texture2D" uid="uid://cueruggulirdq" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_2_jester.png" id="10_s5s0y"]
 [ext_resource type="Texture2D" uid="uid://bx63vou22wseg" path="res://assets/sprites/cutscenes/intro/intro_3.png" id="11_my21w"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="12_c26lo"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="13_wvcn2"]
+[ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="13_yus4t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cdirn"]
 font_size = 11
@@ -383,7 +385,7 @@ texture = ExtResource("11_my21w")
 anchor_mode = 0
 metadata/_edit_lock_ = true
 
-[node name="SideButtons" type="BoxContainer" parent="."]
+[node name="SideButtons" type="VBoxContainer" parent="."]
 clip_contents = true
 layout_direction = 1
 layout_mode = 1
@@ -393,27 +395,28 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 192.0
-offset_top = 133.0
+offset_top = 100.0
 offset_right = 574.0
-offset_bottom = 288.0
+offset_bottom = 327.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 mouse_filter = 0
 alignment = 1
-vertical = true
 
 [node name="NextButton" type="Button" parent="SideButtons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_c26lo")
 theme_override_font_sizes/font_size = 72
 text = "NEXT"
+script = ExtResource("10_qkryw")
 
 [node name="SkipButton" type="Button" parent="SideButtons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_c26lo")
 theme_override_font_sizes/font_size = 85
 text = "SKIP"
+script = ExtResource("10_qkryw")
 
 [node name="FadeAnim" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -421,6 +424,7 @@ position = Vector2(320, 180)
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("13_wvcn2")
 frame_progress = 0.819944
+metadata/_edit_lock_ = true
 
 [node name="DialogueBoxLabel" type="Label" parent="."]
 layout_mode = 1
@@ -429,9 +433,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -273.5
-offset_top = -145.0
-offset_right = 273.5
+offset_left = -272.0
+offset_top = -157.0
+offset_right = 275.0
+offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 0.74902, 0, 1)
@@ -448,5 +453,12 @@ libraries = {
 "intro_cutscene": SubResource("AnimationLibrary_56and")
 }
 
+[node name="Cursor" parent="." instance=ExtResource("13_yus4t")]
+layout_mode = 0
+menu_parent_path = NodePath("../SideButtons")
+cursor_offset = Vector2(40, 55)
+
+[connection signal="cursor_selected" from="SideButtons/NextButton" to="." method="_on_next_button_cursor_selected"]
 [connection signal="pressed" from="SideButtons/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="cursor_selected" from="SideButtons/SkipButton" to="." method="_on_skip_button_cursor_selected"]
 [connection signal="pressed" from="SideButtons/SkipButton" to="." method="_on_skip_button_pressed"]

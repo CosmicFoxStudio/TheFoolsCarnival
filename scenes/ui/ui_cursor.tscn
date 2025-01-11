@@ -1,11 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://i4jyh46grfcy"]
+[gd_scene load_steps=6 format=3 uid="uid://i4jyh46grfcy"]
 
 [ext_resource type="Texture2D" uid="uid://bvebqgngw38pn" path="res://assets/sprites/ui/icons/spr_cursor.png" id="1_26jgq"]
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_cursor.gd" id="2_okmf5"]
 
-[node name="Cursor" type="TextureRect"]
-offset_right = 38.0
-offset_bottom = 28.0
-texture = ExtResource("1_26jgq")
-stretch_mode = 2
+[sub_resource type="Animation" id="Animation_5kpyg"]
+resource_name = "anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a5im6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2ojo"]
+_data = {
+"RESET": SubResource("Animation_a5im6"),
+"anim": SubResource("Animation_5kpyg")
+}
+
+[node name="Cursor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 46.0
+offset_bottom = 36.0
 script = ExtResource("2_okmf5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 40.0
+texture = ExtResource("1_26jgq")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h2ojo")
+}
+autoplay = "anim"

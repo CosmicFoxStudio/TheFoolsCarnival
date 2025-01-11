@@ -1,4 +1,4 @@
-extends TextureRect
+class_name Cursor extends Control
 
 @export var menu_parent_path : NodePath
 @export var cursor_offset : Vector2
@@ -50,8 +50,7 @@ func get_menu_item_at_index(index : int) -> Control:
 func set_cursor_from_index(index : int) -> void:
 	var menu_item := get_menu_item_at_index(index)
 	
-	if menu_item == null:
-		return
+	if menu_item == null: return
 	
 	var pos = menu_item.global_position
 	var size = menu_item.size
@@ -59,4 +58,3 @@ func set_cursor_from_index(index : int) -> void:
 	global_position = Vector2(pos.x, pos.y + size.y / 2.0) - cursor_offset
 	
 	cursor_index = index
-	
