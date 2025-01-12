@@ -180,6 +180,7 @@ label_settings = SubResource("LabelSettings_b6vn3")
 
 [node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
+settings_path = NodePath("..")
 menu_parent_path = NodePath("../SettingsBox/VBoxContainer")
 cursor_offset = Vector2(50, 20)
 

@@ -227,7 +227,7 @@ limitX = 2
 limitY = 2
 
 [node name="Player" parent="." instance=ExtResource("2_xu5av")]
-position = Vector2(80, 296)
+position = Vector2(80, 318)
 
 [node name="HUD" parent="." instance=ExtResource("3_kp1wh")]
 

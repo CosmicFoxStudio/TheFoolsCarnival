@@ -6,18 +6,22 @@ class_name Player extends Character
 
 # Get input dynamically (read-only)
 var direction: float:
-	get:
-		return Input.get_axis("move_left", "move_right")
+	get: return Input.get_axis("move_left", "move_right")
 var jump: float:
-	get: return Input.is_action_pressed("jump")
+	get: return Input.is_action_just_pressed("jump")
 var attack: bool:
 	get: return Input.is_action_just_pressed("basic_attack")
 
 # Keyboard Pressure Variables
-var minPressure: float = 0.8
-var maxPressure: float = 8.0
-var pressureThreshold: float = 8.0
-var pressure: float = 0.0
+#var minPressure: float = 0.8
+#var maxPressure: float = 8.0
+#var pressureThreshold: float = 8.0
+#var pressure: float = 0.0
+
+var defaultJumpStrength = 0.6  # Default jump strength (80% of max)
+var jumpAcceleration = 0.03
+var jumpStrength = defaultJumpStrength
+var canHoldJump = true
 
 func _ready() -> void:
 	super()
@@ -28,6 +32,7 @@ func _ready() -> void:
 	
 	# Spawn falling
 	position = Vector2(80, 300)
+	ChangeState(eState.FALL)
 	
 	# Get player properties
 	if Global.playerResource != null:
@@ -40,7 +45,7 @@ func _process(delta: float) -> void:
 
 func EnablePlayerMovement(delta) -> void:
 	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
-	if direction: velocity.x = direction * properties.speed * delta
+	if direction: velocity.x = direction * properties.speed
 	else: velocity.x = move_toward(velocity.x, 0, properties.speed)
 	
 	# DEBUG 
@@ -84,31 +89,34 @@ func StateWalk(delta) -> void:
 func StateJump(delta) -> void:
 	if dead: return
 	
+	if velocity.y > 0:
+		ChangeState(eState.FALL)
+		return
+	
 	PlayAnimation("jump")
 	EnablePlayerMovement(delta)
 	
 	if is_on_floor():
-		# Ensure pressure starts at minimum when jump is triggered
-		if pressure <= minPressure:
-			pressure = minPressure
+		# Ensure pressure starts at minimum when jump is triggered	
+		canHoldJump = true	
+		jumpStrength = defaultJumpStrength
+		velocity.y = -properties.jumpVelocity * defaultJumpStrength
 		
-		# Build pressure while the jump key is held
-		if Input.is_action_pressed("jump"):
-			pressure += get_process_delta_time() * 20.0  # Faster pressure accumulation
-			pressure = clamp(pressure, minPressure, maxPressure)
-		else:
-			# Apply jump velocity when jump key is released
-			var defaultJumpStrength = 0.5  # Default jump strength (50% of max)
-			var jumpStrength = max(defaultJumpStrength, pressure / maxPressure)
-			velocity.y = -properties.jumpVelocity * jumpStrength
-			print("Jumping with strength:", jumpStrength, "Velocity:", velocity.y)
-			
-			# Reset pressure for the next jump
-			pressure = 0
+	if not canHoldJump: return
+		
+	if Input.is_action_just_released("jump") or jumpStrength >= 1:
+		canHoldJump = false
+		return
+	
+	var previousJumpStrength = jumpStrength
+	
+	jumpStrength += jumpAcceleration  # Faster pressure accumulation
+	jumpStrength = clamp(jumpStrength, defaultJumpStrength, 1)
+	velocity.y -= properties.jumpVelocity * (jumpStrength - previousJumpStrength)
+	print("Jumping with strength:", jumpStrength, "Velocity:", velocity.y)
+		# Reset pressure for the next jump
 	
 	# Transition to falling state if airborne
-	if velocity.y > 0:
-		ChangeState(eState.FALL)
 
 func StateFall(delta) -> void:
 	PlayAnimation("fall")
