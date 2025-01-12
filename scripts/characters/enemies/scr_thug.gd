@@ -50,7 +50,7 @@ func StateWalk(delta) -> void:
 	
 	# Horizontal Movement (move toward the player's x position)
 	# sign() ensures the enemy moves left (-1) or right (1) based on the player's position
-	self.velocity.x = sign(targetDistance.x) * properties.speed * delta
+	self.velocity.x = sign(targetDistance.x) * properties.speed
 	
 	# DEBUG
 	#print(
