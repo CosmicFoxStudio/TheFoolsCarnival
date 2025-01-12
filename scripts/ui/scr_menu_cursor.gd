@@ -14,9 +14,9 @@ func _process(_delta: float) -> void:
 	# Check if settings are active to decide whether to disable the current menu navigation
 	if Global.settings.active:
 		if not is_settings: 
-			handTexture.visible = false
+			# handTexture.visible = false
 			return
-	else: handTexture.visible = true
+	# else: handTexture.visible = true
 		
 	var input := Vector2.ZERO
 	
