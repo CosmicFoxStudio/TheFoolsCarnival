@@ -1,14 +1,12 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://drt3b8pm3eayx"]
 
+[ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="1_b3qqo"]
 [ext_resource type="Script" path="res://scripts/characters/data/scr_data_character.gd" id="1_ohbo3"]
-
-[sub_resource type="Resource" id="Resource_vxbsm"]
-metadata/__load_path__ = "res://assets/sprites/ui/portraits/spr_portrait_porriet.png"
 
 [resource]
 script = ExtResource("1_ohbo3")
 name = "Pierrot"
-portrait = SubResource("Resource_vxbsm")
+portrait = ExtResource("1_b3qqo")
 hpMax = 100.0
 speed = 180.0
 jumpVelocity = 450.0

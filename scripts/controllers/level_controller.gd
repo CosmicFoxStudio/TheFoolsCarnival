@@ -118,10 +118,6 @@ func _process(_delta: float) -> void: _debug()
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(6, "[LEVEL] Enemies in Area: " + str(enemies))
 	Global.debug.UpdateDebugVariable(7, "[LEVEL] Last Area?: " + str(lastArea))
-	# Global.debug.UpdateDebugVariable(19, "[LEVEL] Segment 0: " + str(areaMarkers[0].position.x))
 	Global.debug.UpdateDebugVariable(8, "[LEVEL] Segment Index: " + str(currentSegmentIndex))
-	# Camera Stuff
 	Global.debug.UpdateDebugVariable(9, "[LEVEL] Camera Pos: " + str(player.camera.position))
-
-	#Global.debug.UpdateDebugVariable(10, "[LEVEL] Camera Clamped Pos: " + str(camera.clampedPos)) 
-	#Global.debug.UpdateDebugVariable(11, "[LEVEL] Camera Clamped New Pos: " + str(camera.targetClampedPos))
+	Global.debug.UpdateDebugVariable(10, "[LEVEL] Settings Active?: " + str(Global.settings.active))

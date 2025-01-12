@@ -180,7 +180,7 @@ label_settings = SubResource("LabelSettings_b6vn3")
 
 [node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
-settings_path = NodePath("..")
+is_settings = true
 menu_parent_path = NodePath("../SettingsBox/VBoxContainer")
 cursor_offset = Vector2(50, 20)
 
@@ -188,9 +188,5 @@ cursor_offset = Vector2(50, 20)
 [connection signal="toggled" from="OpenSettingsButton" to="." method="_on_settings_button_toggled"]
 [connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_deselected"]
 [connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_selected"]
-[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Music/Music (in dB)" to="." method="_on_music_cursor_deselected"]
-[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Music/Music (in dB)" to="." method="_on_music_cursor_selected"]
 [connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Sounds" to="." method="_on_sounds_cursor_deselected"]
 [connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Sounds" to="." method="_on_sounds_cursor_selected"]
-[connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Sounds/SFX (in dB)" to="." method="_on_sfx_cursor_deselected"]
-[connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Sounds/SFX (in dB)" to="." method="_on_sfx_cursor_selected"]

@@ -64,8 +64,6 @@ clip_4/auto_advance = 0
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_mgqhi")
-musicVolume = 50.0
-sfxVolume = 50.0
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_wcblp")

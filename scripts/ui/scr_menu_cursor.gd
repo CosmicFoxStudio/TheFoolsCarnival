@@ -1,18 +1,23 @@
 class_name Cursor extends Control
 
-@export var settings_path: NodePath
+@export var is_settings : bool = false
 @export var menu_parent_path : NodePath
 @export var cursor_offset : Vector2
+
 @onready var menu_parent := get_node(menu_parent_path)
-@onready var settings := get_node(settings_path)
+@onready var handTexture: TextureRect = $TextureRect
 
 var cursor_index : int = 0
 var last_item : Control
 
 func _process(_delta: float) -> void:
-	if not settings.paused:
-		return
-	
+	# Check if settings are active to decide whether to disable the current menu navigation
+	if Global.settings.active:
+		if not is_settings: 
+			handTexture.visible = false
+			return
+	else: handTexture.visible = true
+		
 	var input := Vector2.ZERO
 	
 	if Input.is_action_just_pressed("ui_up"):

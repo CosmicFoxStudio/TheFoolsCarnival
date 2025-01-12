@@ -1,15 +1,16 @@
 class_name AudioManager extends Node
 
 # Are we using these?
-@export var musicVolume : float
-@export var sfxVolume : float
+
 
 @onready var musicPlayer: AudioStreamPlayer = $BackgroundMusicPlayer
 @onready var sfxPlayer: AudioStreamPlayer = $SFXMusicPlayer
 
-var musicName: String  # Name of the music clip
-var sfxName: String    # Name of the SFX clip
-var musicPaused: bool = false
+var musicName : String  # Name of the music clip
+var sfxName : String    # Name of the SFX clip
+var musicPaused : bool = false
+var musicVolume : float = 10
+var sfxVolume : float = 10
 
 func _ready() -> void:
 	Global.audio = self
