@@ -3,6 +3,7 @@ class_name Player extends Character
 # enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
 
 @onready var camera: Camera = $Camera
+@onready var player_audio_stream: AudioStreamPlayer2D = $PlayerAudioStream
 
 # Get input dynamically (read-only)
 var direction: float:
@@ -132,6 +133,8 @@ func StateAttack() -> void:
 
 	StopMovement()
 
+	player_audio_stream["parameters/switch_to_clip"] = "ATTACK"
+	
 	# Connect the animation_finished signal if not already connected
 	if not animationPlayer.animation_finished.is_connected(OnAnimationFinished):
 		animationPlayer.animation_finished.connect(OnAnimationFinished)
@@ -160,6 +163,9 @@ func StateAttack() -> void:
 		isAttacking = true
 		comboTimer.wait_time = 0.8
 		comboTimer.start()
+		
+		
+		
 
 func OnAnimationFinished(__animName: String) -> void:
 	EndAttackCollision()
@@ -175,6 +181,7 @@ func OnDamage(__health: float) -> void:
 	# Update DramaMeter
 	var enemyComboMultiplier = 2
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
+	player_audio_stream.play()
 
 func StateHurt() -> void:
 	if enterState:

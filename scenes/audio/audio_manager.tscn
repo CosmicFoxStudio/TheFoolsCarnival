@@ -72,3 +72,4 @@ bus = &"music"
 
 [node name="SFXMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_fb15y")
+bus = &"sfx"
