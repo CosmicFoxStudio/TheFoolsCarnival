@@ -30,13 +30,13 @@ func _process(_delta: float) -> void:
 		input.x += 1
 		
 	if menu_parent is VBoxContainer:
-		set_cursor_from_index(cursor_index + input.y)
+		set_cursor_from_index(cursor_index + int(input.y))
 	elif menu_parent is HBoxContainer:
-		set_cursor_from_index(cursor_index + input.x)
+		set_cursor_from_index(cursor_index + int(input.x))
 	elif menu_parent is GridContainer:
-		set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
+		set_cursor_from_index(cursor_index + int(input.x) + int(input.y) * menu_parent.columns)
 		
-	if Input.is_action_just_pressed("ui_select"):
+	if Input.is_action_just_pressed("ui_confirm"):
 		var current_menu_item := get_menu_item_at_index(cursor_index)
 		
 		if(current_menu_item != null):
@@ -63,8 +63,8 @@ func set_cursor_from_index(index : int) -> void:
 	if menu_item == null: return
 	
 	var pos = menu_item.global_position
-	var size = menu_item.size
+	var itemSize = menu_item.size
 	
-	global_position = Vector2(pos.x, pos.y + size.y / 2.0) - cursor_offset
+	global_position = Vector2(pos.x, pos.y + itemSize.y / 2.0) - cursor_offset
 	
 	cursor_index = index

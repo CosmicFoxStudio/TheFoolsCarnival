@@ -1,7 +1,7 @@
 extends Scene
 
 @onready var animation_player : AnimationPlayer = $SelectionSequence
-@onready var gameover_sfxs: AudioStreamPlayer = $GameOverSFXs
+# @onready var gameover_sfxs: AudioStreamPlayer = $GameOverSFXs
 
 var dramaMeter : DramaMeter
 

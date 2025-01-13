@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 	
 	if (Global.pause): ChangeState(eState.IDLE)
 
-func EnablePlayerMovement(delta) -> void:
+func EnablePlayerMovement(_delta) -> void:
 	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
 	if direction: velocity.x = direction * properties.speed
 	else: velocity.x = move_toward(velocity.x, 0, properties.speed)

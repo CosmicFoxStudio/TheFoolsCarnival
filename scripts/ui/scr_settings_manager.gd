@@ -64,36 +64,40 @@ func ToggleControlsPanel() -> void:
 	cursor.visible = !cursor.visible
 
 # Signals
-func _on_settings_button_toggled(toggled_on: bool) -> void:
-	controlsBox.visible = toggled_on
-
-func _on_settings_button_cursor_selected() -> void:
-	controlsBox.visible = true
-
-func _on_music_cursor_selected() -> void:
-	Global.debug.DebugPrint("Music Volume selected")
-	musicSelected = true
-	musicVolume.self_modulate = Color(1, 1, 0)
-
-func _on_music_cursor_deselected() -> void:
-	Global.debug.DebugPrint("Music Volume deselected")
-	musicSelected = false
-	musicVolume.self_modulate = Color(1, 1, 1)
-
-func _on_sounds_cursor_selected() -> void:
-	Global.debug.DebugPrint("SFX Volume selected")
-	sfxSelected = true
-	sfxVolume.self_modulate = Color(1, 1, 0)
-
-func _on_sounds_cursor_deselected() -> void:
-	Global.debug.DebugPrint("SFX Volume deselected")
-	sfxSelected = false
-	sfxVolume.self_modulate = Color(1, 1, 1)
-
-
+# HBoxContainer
 func _on_control_button_cursor_selected() -> void:
-	controlsBox.visible = true
-
+	if active: controlsBox.visible = true
 
 func _on_control_button_cursor_deselected() -> void:
-	controlsBox.visible = false
+	if active: controlsBox.visible = false
+
+# VBoxContainer
+func _on_settings_button_toggled(toggled_on: bool) -> void:
+	if active: controlsBox.visible = toggled_on
+
+func _on_settings_button_cursor_selected() -> void:
+	if active: controlsBox.visible = true
+
+func _on_music_cursor_selected() -> void:
+	if active:
+		Global.debug.DebugPrint("Music Volume selected")
+		musicSelected = true
+		musicVolume.self_modulate = Color(1, 1, 0)
+
+func _on_music_cursor_deselected() -> void:
+	if active:
+		Global.debug.DebugPrint("Music Volume deselected")
+		musicSelected = false
+		musicVolume.self_modulate = Color(1, 1, 1)
+
+func _on_sounds_cursor_selected() -> void:
+	if active:
+		Global.debug.DebugPrint("SFX Volume selected")
+		sfxSelected = true
+		sfxVolume.self_modulate = Color(1, 1, 0)
+
+func _on_sounds_cursor_deselected() -> void:
+	if active:
+		Global.debug.DebugPrint("SFX Volume deselected")
+		sfxSelected = false
+		sfxVolume.self_modulate = Color(1, 1, 1)
