@@ -56,10 +56,11 @@ func ToggleSettingsMenu() -> void:
 
 	var tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	if paused:
-		tween.tween_property(buttonsContainer, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
-		tween.tween_property(topBar, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(buttonsContainer, "position", Vector2(487, 0), 0.25).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(0, 0), 0.25).set_ease(Tween.EASE_IN)
 	else:
-		tween.tween_property(topBar, "position", Vector2(420, -115), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(buttonsContainer, "position", Vector2(487, -100), 0.25).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(0, -200), 0.25).set_ease(Tween.EASE_IN)
 	tween.play()
 
 func ToggleControlsPanel() -> void:
