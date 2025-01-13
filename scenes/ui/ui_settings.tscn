@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmo7ql8f31kes"]
+[gd_scene load_steps=11 format=3 uid="uid://dmo7ql8f31kes"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_settings_manager.gd" id="1_57pyb"]
+[ext_resource type="Texture2D" uid="uid://6l3e1gxwag7n" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_1.png" id="2_4j41e"]
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_item.gd" id="2_eo3oh"]
-[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_fpt48"]
 [ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="2_hvmfl"]
+[ext_resource type="Texture2D" uid="uid://c5smr15bl8gv8" path="res://assets/sprites/ui/spr_title_menu.png" id="2_o08w6"]
 [ext_resource type="Texture2D" uid="uid://coomnwsog1qx0" path="res://assets/sprites/square.png" id="2_ty8bl"]
 [ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="3_h17j1"]
 [ext_resource type="FontFile" uid="uid://dve7mgsjik4dg" path="res://addons/phantom_camera/fonts/Nunito-Regular.ttf" id="4_tudtn"]
@@ -29,18 +30,25 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_57pyb")
 
-[node name="Label" type="Label" parent="."]
+[node name="ArtTop" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -119.5
-offset_right = 119.5
-offset_bottom = 50.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 38.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_fpt48")
-theme_override_font_sizes/font_size = 37
-text = "PAUSED"
+
+[node name="Arrows" type="TextureRect" parent="ArtTop"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_4j41e")
+
+[node name="TitleMenu" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 208.0
+offset_bottom = 37.0
+texture = ExtResource("2_o08w6")
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
