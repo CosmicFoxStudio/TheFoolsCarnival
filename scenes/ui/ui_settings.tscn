@@ -113,7 +113,7 @@ libraries = {
 }
 autoplay = "ui_arrows"
 
-[node name="TitleMenu" type="TextureRect" parent="."]
+[node name="TitleMenu" type="TextureRect" parent="TopBar"]
 layout_mode = 1
 offset_top = 8.0
 offset_right = 192.0
@@ -121,7 +121,7 @@ offset_bottom = 38.0
 texture = ExtResource("2_o08w6")
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainerButtons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -132,7 +132,7 @@ grow_horizontal = 0
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="OpenSettingsButton" type="Button" parent="HBoxContainer"]
+[node name="OpenSettingsButton" type="Button" parent="HBoxContainerButtons"]
 process_mode = 3
 layout_mode = 2
 mouse_filter = 2
@@ -142,12 +142,13 @@ action_mode = 0
 icon = ExtResource("4_xu7kj")
 script = ExtResource("2_eo3oh")
 
-[node name="ControlButton" type="Button" parent="HBoxContainer"]
+[node name="ControlButton" type="Button" parent="HBoxContainerButtons"]
 layout_mode = 2
 icon = ExtResource("6_oyp7e")
 script = ExtResource("2_eo3oh")
 
 [node name="SettingsBox" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color(0, 0, 0, 0.278431)
 layout_mode = 1
 anchors_preset = 8
@@ -295,10 +296,10 @@ isSettings = true
 menuParentPath = NodePath("../SettingsBox/VBoxContainer")
 cursorOffset = Vector2(50, 20)
 
-[connection signal="cursor_selected" from="HBoxContainer/OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]
-[connection signal="toggled" from="HBoxContainer/OpenSettingsButton" to="." method="_on_settings_button_toggled"]
-[connection signal="cursor_deselected" from="HBoxContainer/ControlButton" to="." method="_on_control_button_cursor_deselected"]
-[connection signal="cursor_selected" from="HBoxContainer/ControlButton" to="." method="_on_control_button_cursor_selected"]
+[connection signal="cursor_selected" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]
+[connection signal="toggled" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_settings_button_toggled"]
+[connection signal="cursor_deselected" from="HBoxContainerButtons/ControlButton" to="." method="_on_control_button_cursor_deselected"]
+[connection signal="cursor_selected" from="HBoxContainerButtons/ControlButton" to="." method="_on_control_button_cursor_selected"]
 [connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_deselected"]
 [connection signal="cursor_selected" from="SettingsBox/VBoxContainer/Music" to="." method="_on_music_cursor_selected"]
 [connection signal="cursor_deselected" from="SettingsBox/VBoxContainer/Sounds" to="." method="_on_sounds_cursor_deselected"]

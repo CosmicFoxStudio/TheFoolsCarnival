@@ -1,5 +1,8 @@
 class_name Settings extends Control
 
+@onready var buttonsContainer: HBoxContainer = $HBoxContainerButtons
+@onready var topBar: Control = $TopBar
+
 @onready var settingsButton: Button = $HBoxContainer/OpenSettingsButton
 @onready var vBoxContainer: VBoxContainer = $SettingsBox/VBoxContainer
 
@@ -53,9 +56,10 @@ func ToggleSettingsMenu() -> void:
 
 	var tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	if paused:
-		tween.tween_property(settingsButton, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(buttonsContainer, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
 	else:
-		tween.tween_property(settingsButton, "position", Vector2(420, -115), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(420, -115), 0.5).set_ease(Tween.EASE_IN)
 	tween.play()
 
 func ToggleControlsPanel() -> void:
