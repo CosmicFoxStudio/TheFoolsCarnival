@@ -1,6 +1,6 @@
 class_name Settings extends Control
 
-@onready var settingsButton: Button = $OpenSettingsButton
+@onready var settingsButton: Button = $HBoxContainer/OpenSettingsButton
 @onready var vBoxContainer: VBoxContainer = $SettingsBox/VBoxContainer
 
 @onready var musicVolume: HScrollBar = $"SettingsBox/VBoxContainer/Music/Music (in dB)"
@@ -89,3 +89,11 @@ func _on_sounds_cursor_deselected() -> void:
 	Global.debug.DebugPrint("SFX Volume deselected")
 	sfxSelected = false
 	sfxVolume.self_modulate = Color(1, 1, 1)
+
+
+func _on_control_button_cursor_selected() -> void:
+	controlsBox.visible = true
+
+
+func _on_control_button_cursor_deselected() -> void:
+	controlsBox.visible = false
