@@ -1,13 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmo7ql8f31kes"]
+[gd_scene load_steps=24 format=3 uid="uid://dmo7ql8f31kes"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_settings_manager.gd" id="1_57pyb"]
 [ext_resource type="Texture2D" uid="uid://6l3e1gxwag7n" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_1.png" id="2_4j41e"]
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_item.gd" id="2_eo3oh"]
+[ext_resource type="Texture2D" uid="uid://c5ndui6atp1wp" path="res://assets/sprites/ui/settings/spr_menu_fundo.png" id="2_hqjcf"]
 [ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="2_hvmfl"]
+[ext_resource type="Texture2D" uid="uid://50whrbbsua8b" path="res://assets/sprites/ui/settings/spr_topbarX2.png" id="2_jdudw"]
 [ext_resource type="Texture2D" uid="uid://c5smr15bl8gv8" path="res://assets/sprites/ui/spr_title_menu.png" id="2_o08w6"]
-[ext_resource type="Texture2D" uid="uid://coomnwsog1qx0" path="res://assets/sprites/square.png" id="2_ty8bl"]
+[ext_resource type="Texture2D" uid="uid://bnrcltog8ero3" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_2.png" id="3_c44lx"]
+[ext_resource type="Texture2D" uid="uid://cdkow8hlw0c35" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_3.png" id="4_3jp8s"]
 [ext_resource type="FontFile" uid="uid://dve7mgsjik4dg" path="res://addons/phantom_camera/fonts/Nunito-Regular.ttf" id="4_tudtn"]
 [ext_resource type="Texture2D" uid="uid://bm7a6xedxnaq8" path="res://assets/sprites/ui/settings/spr_btn_settingsX2.png" id="4_xu7kj"]
+[ext_resource type="Texture2D" uid="uid://skmru77voax1" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_4.png" id="5_0ifa4"]
 [ext_resource type="Texture2D" uid="uid://dj1q5afv1mlft" path="res://assets/sprites/ui/settings/spr_btn_controlsX2.png" id="6_oyp7e"]
 [ext_resource type="Texture2D" uid="uid://c6ht200tjyu23" path="res://assets/sprites/ui/settings/spr_panel.png" id="8_3k3al"]
 [ext_resource type="Texture2D" uid="uid://dk5xy26ctmvr8" path="res://assets/sprites/ui/settings/spr_controls_panel.png" id="8_7uloi"]
@@ -15,6 +19,44 @@
 [ext_resource type="Texture2D" uid="uid://bk5empq0p278e" path="res://assets/sprites/ui/settings/spr_settings_title.png" id="9_cbjwn"]
 [ext_resource type="Texture2D" uid="uid://ke6r5pjimwxu" path="res://assets/sprites/ui/settings/spr_sfx_label.png" id="9_ckb2j"]
 [ext_resource type="Texture2D" uid="uid://dskiscxrfg7l5" path="res://assets/sprites/ui/settings/arrows/spr_title_controls.png" id="9_tt56q"]
+
+[sub_resource type="Animation" id="Animation_j641o"]
+resource_name = "ui_arrows"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_4j41e"), ExtResource("3_c44lx"), ExtResource("4_3jp8s"), ExtResource("5_0ifa4")]
+}
+
+[sub_resource type="Animation" id="Animation_4ftn7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_4j41e")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6eyyb"]
+_data = {
+"RESET": SubResource("Animation_4ftn7"),
+"ui_arrows": SubResource("Animation_j641o")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_b6vn3"]
 font = ExtResource("4_tudtn")
@@ -33,23 +75,49 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_57pyb")
 
-[node name="ArtTop" type="Control" parent="."]
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hqjcf")
+
+[node name="TopBar" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 38.0
 grow_horizontal = 2
 
-[node name="Arrows" type="TextureRect" parent="ArtTop"]
+[node name="TopBarSprite" type="TextureRect" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+texture = ExtResource("2_jdudw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrows" type="TextureRect" parent="TopBar"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 46.0
 texture = ExtResource("2_4j41e")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TopBar/Arrows"]
+libraries = {
+"": SubResource("AnimationLibrary_6eyyb")
+}
+autoplay = "ui_arrows"
+
 [node name="TitleMenu" type="TextureRect" parent="."]
 layout_mode = 1
+offset_top = 8.0
 offset_right = 192.0
-offset_bottom = 45.0
+offset_bottom = 38.0
 texture = ExtResource("2_o08w6")
 stretch_mode = 5
 
@@ -61,6 +129,7 @@ anchor_right = 1.0
 offset_left = -153.0
 offset_bottom = 44.0
 grow_horizontal = 0
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="OpenSettingsButton" type="Button" parent="HBoxContainer"]
@@ -87,12 +156,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -230.0
-offset_top = -102.0
+offset_top = -84.0
 offset_right = 230.0
-offset_bottom = 18.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ty8bl")
+metadata/_edit_lock_ = true
 
 [node name="Panel" type="TextureRect" parent="SettingsBox"]
 layout_mode = 2
@@ -102,7 +171,7 @@ offset_right = 416.0
 offset_bottom = 226.0
 texture = ExtResource("8_3k3al")
 stretch_mode = 5
-metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="SettingsBox/Panel"]
 layout_mode = 1
@@ -123,17 +192,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -156.0
-offset_top = -50.0
-offset_right = 184.0
-offset_bottom = 50.0
+offset_top = -32.0
+offset_right = 163.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 25
 alignment = 1
 
 [node name="Music" type="BoxContainer" parent="SettingsBox/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
 vertical = true
 script = ExtResource("2_eo3oh")
 
@@ -179,13 +249,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -222.0
-offset_top = -130.0
+offset_top = -111.0
 offset_right = 222.0
-offset_bottom = 120.0
+offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_7uloi")
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="Title" type="TextureRect" parent="ControlsBox"]
 visible = false
