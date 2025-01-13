@@ -293,7 +293,7 @@ label_settings = SubResource("LabelSettings_b6vn3")
 [node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
 isSettings = true
-menuParentPath = NodePath("../SettingsBox/VBoxContainer")
+menuParentPath = NodePath("../HBoxContainerButtons")
 cursorOffset = Vector2(50, 20)
 
 [connection signal="cursor_selected" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]

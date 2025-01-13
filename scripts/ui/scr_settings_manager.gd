@@ -3,7 +3,7 @@ class_name Settings extends Control
 @onready var buttonsContainer: HBoxContainer = $HBoxContainerButtons
 @onready var topBar: Control = $TopBar
 
-@onready var settingsButton: Button = $HBoxContainer/OpenSettingsButton
+@onready var settingsButton: Button = $HBoxContainerButtons/OpenSettingsButton
 @onready var vBoxContainer: VBoxContainer = $SettingsBox/VBoxContainer
 
 @onready var musicVolume: HScrollBar = $"SettingsBox/VBoxContainer/Music/Music (in dB)"
