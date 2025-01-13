@@ -332,6 +332,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("11_sxiee")
 
 [node name="Curtains" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
@@ -404,8 +405,8 @@ libraries = {
 
 [node name="Cursor" parent="." instance=ExtResource("9_sp1vi")]
 layout_mode = 0
-menu_parent_path = NodePath("../Buttons")
-cursor_offset = Vector2(40, 18)
+menuParentPath = NodePath("../Buttons")
+cursorOffset = Vector2(40, 18)
 
 [connection signal="cursor_selected" from="Buttons/StartButton" to="." method="_on_start_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]

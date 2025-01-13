@@ -187,9 +187,9 @@ label_settings = SubResource("LabelSettings_b6vn3")
 
 [node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
-is_settings = true
-menu_parent_path = NodePath("../SettingsBox/VBoxContainer")
-cursor_offset = Vector2(50, 20)
+isSettings = true
+menuParentPath = NodePath("../SettingsBox/VBoxContainer")
+cursorOffset = Vector2(50, 20)
 
 [connection signal="cursor_selected" from="HBoxContainer/OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]
 [connection signal="toggled" from="HBoxContainer/OpenSettingsButton" to="." method="_on_settings_button_toggled"]

@@ -180,8 +180,7 @@ libraries = {
 
 [node name="Cursor" parent="." instance=ExtResource("6_tt3hp")]
 layout_mode = 0
-menu_parent_path = NodePath("../VBoxContainer")
-cursor_offset = Vector2(20, 20)
+menuParentPath = NodePath("../VBoxContainer")
 
 [connection signal="button_up" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_button_up"]
 [connection signal="cursor_selected" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_cursor_selected"]

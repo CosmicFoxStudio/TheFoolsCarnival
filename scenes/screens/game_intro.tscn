@@ -485,8 +485,8 @@ libraries = {
 
 [node name="Cursor" parent="." instance=ExtResource("13_yus4t")]
 layout_mode = 0
-menu_parent_path = NodePath("../SideButtons")
-cursor_offset = Vector2(40, 55)
+menuParentPath = NodePath("../SideButtons")
+cursorOffset = Vector2(40, 55)
 
 [connection signal="cursor_selected" from="SideButtons/NextButton" to="." method="_on_next_button_cursor_selected"]
 [connection signal="pressed" from="SideButtons/NextButton" to="." method="_on_next_button_pressed"]
