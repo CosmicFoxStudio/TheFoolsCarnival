@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3r2navhe16nx"]
+[gd_scene load_steps=22 format=3 uid="uid://d3r2navhe16nx"]
 
 [ext_resource type="Script" path="res://scripts/characters/enemies/scr_thug.gd" id="1_gavmj"]
 [ext_resource type="Resource" uid="uid://cc2827sdn5wil" path="res://resources/characters/res_char_thug.tres" id="2_bckja"]
@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://bem4iv408plrm" path="res://scripts/resources/effects/hit_effect1.tres" id="2_ivitl"]
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="3_ynp6g"]
 [ext_resource type="PackedScene" uid="uid://dm26vvwcfy8d6" path="res://scenes/prefab/components/obj_hitbox.tscn" id="4_5prjj"]
+[ext_resource type="AudioStream" uid="uid://43ah78t3te3s" path="res://assets/audio/sfx/blade_hit_07.wav" id="7_mkmsf"]
+[ext_resource type="AudioStream" uid="uid://cs7pikvjd830g" path="res://assets/audio/sfx/sfx-damage.mp3" id="8_jpfdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcyja"]
 size = Vector2(110, 98)
@@ -249,6 +251,15 @@ _data = {
 "walk": SubResource("Animation_oyru8")
 }
 
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_7s30q"]
+clip_count = 2
+clip_0/name = &"ATTACK"
+clip_0/stream = ExtResource("7_mkmsf")
+clip_0/auto_advance = 0
+clip_1/name = &"HURT"
+clip_1/stream = ExtResource("8_jpfdd")
+clip_1/auto_advance = 0
+
 [node name="EnemyThug" type="CharacterBody2D"]
 position = Vector2(0, -36)
 collision_layer = 4
@@ -299,4 +310,5 @@ autoplay = "idle"
 
 [node name="ComboTimer" type="Timer" parent="."]
 
-[node name="EnemyVoice" type="AudioStreamPlayer" parent="."]
+[node name="EnemySFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamInteractive_7s30q")

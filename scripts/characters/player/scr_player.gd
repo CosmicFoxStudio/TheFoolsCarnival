@@ -44,6 +44,10 @@ func _process(delta: float) -> void:
 	
 	if (Global.pause): ChangeState(eState.IDLE)
 
+func PlaySound(__soundTag : String) -> void:
+	player_audio_stream["parameters/switch_to_clip"] = __soundTag
+	player_audio_stream.play()
+	
 func EnablePlayerMovement(_delta) -> void:
 	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
 	if direction: velocity.x = direction * properties.speed
@@ -133,7 +137,7 @@ func StateAttack() -> void:
 
 	StopMovement()
 
-	player_audio_stream["parameters/switch_to_clip"] = "ATTACK"
+	PlaySound("ATTACK")
 	
 	# Connect the animation_finished signal if not already connected
 	if not animationPlayer.animation_finished.is_connected(OnAnimationFinished):
@@ -189,7 +193,7 @@ func StateHurt() -> void:
 		
 		PlayAnimation("hurt")
 		StopMovement()
-		player_audio_stream["parameters/switch_to_clip"] = "HURT"
+		PlaySound("HURT")
 		# Update HUD
 		Global.level.HUD.HudUpdateHealth(health.hp)
 	

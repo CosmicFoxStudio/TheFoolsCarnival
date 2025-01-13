@@ -83,7 +83,8 @@ func ResetCombo() -> void:
 func OnDamage(__hp: float) -> void: pass
 
 # Sound
-func PlaySound(__sound) -> void: pass
+func PlaySound(__soundTag : String) -> void: 
+	pass
 	#audio_stream_player.stream = sound
 	#audio_stream_player.play()
 	
