@@ -181,7 +181,7 @@ func OnDamage(__health: float) -> void:
 	# Update DramaMeter
 	var enemyComboMultiplier = 2
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
-	player_audio_stream.play()
+	
 
 func StateHurt() -> void:
 	if enterState:
@@ -189,7 +189,7 @@ func StateHurt() -> void:
 		
 		PlayAnimation("hurt")
 		StopMovement()
-		
+		player_audio_stream["parameters/switch_to_clip"] = "HURT"
 		# Update HUD
 		Global.level.HUD.HudUpdateHealth(health.hp)
 	
