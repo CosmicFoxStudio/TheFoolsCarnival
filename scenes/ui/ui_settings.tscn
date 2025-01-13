@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmo7ql8f31kes"]
+[gd_scene load_steps=17 format=3 uid="uid://dmo7ql8f31kes"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_settings_manager.gd" id="1_57pyb"]
 [ext_resource type="Texture2D" uid="uid://6l3e1gxwag7n" path="res://assets/sprites/ui/settings/arrows/frames/spr_arrows_1.png" id="2_4j41e"]
@@ -6,12 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="2_hvmfl"]
 [ext_resource type="Texture2D" uid="uid://c5smr15bl8gv8" path="res://assets/sprites/ui/spr_title_menu.png" id="2_o08w6"]
 [ext_resource type="Texture2D" uid="uid://coomnwsog1qx0" path="res://assets/sprites/square.png" id="2_ty8bl"]
-[ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="3_h17j1"]
 [ext_resource type="FontFile" uid="uid://dve7mgsjik4dg" path="res://addons/phantom_camera/fonts/Nunito-Regular.ttf" id="4_tudtn"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2pa03"]
-font = ExtResource("3_h17j1")
-font_size = 32
+[ext_resource type="Texture2D" uid="uid://bm7a6xedxnaq8" path="res://assets/sprites/ui/settings/spr_btn_settingsX2.png" id="4_xu7kj"]
+[ext_resource type="Texture2D" uid="uid://dj1q5afv1mlft" path="res://assets/sprites/ui/settings/spr_btn_controlsX2.png" id="6_oyp7e"]
+[ext_resource type="Texture2D" uid="uid://c6ht200tjyu23" path="res://assets/sprites/ui/settings/spr_panel.png" id="8_3k3al"]
+[ext_resource type="Texture2D" uid="uid://dk5xy26ctmvr8" path="res://assets/sprites/ui/settings/spr_controls_panel.png" id="8_7uloi"]
+[ext_resource type="Texture2D" uid="uid://dqroyi3a2oaqn" path="res://assets/sprites/ui/settings/spr_music_volume.png" id="8_41mia"]
+[ext_resource type="Texture2D" uid="uid://bk5empq0p278e" path="res://assets/sprites/ui/settings/spr_settings_title.png" id="9_cbjwn"]
+[ext_resource type="Texture2D" uid="uid://ke6r5pjimwxu" path="res://assets/sprites/ui/settings/spr_sfx_label.png" id="9_ckb2j"]
+[ext_resource type="Texture2D" uid="uid://dskiscxrfg7l5" path="res://assets/sprites/ui/settings/arrows/spr_title_controls.png" id="9_tt56q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b6vn3"]
 font = ExtResource("4_tudtn")
@@ -39,14 +42,14 @@ grow_horizontal = 2
 
 [node name="Arrows" type="TextureRect" parent="ArtTop"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 640.0
+offset_bottom = 46.0
 texture = ExtResource("2_4j41e")
 
 [node name="TitleMenu" type="TextureRect" parent="."]
 layout_mode = 1
-offset_right = 208.0
-offset_bottom = 37.0
+offset_right = 192.0
+offset_bottom = 45.0
 texture = ExtResource("2_o08w6")
 stretch_mode = 5
 
@@ -56,7 +59,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -153.0
-offset_bottom = 40.0
+offset_bottom = 44.0
 grow_horizontal = 0
 alignment = 1
 
@@ -67,12 +70,12 @@ mouse_filter = 2
 toggle_mode = true
 button_pressed = true
 action_mode = 0
-text = "Settings"
+icon = ExtResource("4_xu7kj")
 script = ExtResource("2_eo3oh")
 
 [node name="ControlButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Controls"
+icon = ExtResource("6_oyp7e")
 script = ExtResource("2_eo3oh")
 
 [node name="SettingsBox" type="TextureRect" parent="."]
@@ -90,6 +93,26 @@ offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ty8bl")
+
+[node name="Panel" type="TextureRect" parent="SettingsBox"]
+layout_mode = 2
+offset_left = 45.0
+offset_top = -32.0
+offset_right = 416.0
+offset_bottom = 226.0
+texture = ExtResource("8_3k3al")
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="SettingsBox/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 55.0
+grow_horizontal = 2
+texture = ExtResource("9_cbjwn")
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SettingsBox"]
 clip_contents = true
@@ -114,11 +137,11 @@ layout_mode = 2
 vertical = true
 script = ExtResource("2_eo3oh")
 
-[node name="Music_Text" type="Label" parent="SettingsBox/VBoxContainer/Music"]
+[node name="Music_Text" type="TextureRect" parent="SettingsBox/VBoxContainer/Music"]
 process_mode = 4
 layout_mode = 2
-text = "Music
-"
+texture = ExtResource("8_41mia")
+stretch_mode = 4
 
 [node name="Music (in dB)" type="HScrollBar" parent="SettingsBox/VBoxContainer/Music"]
 layout_mode = 2
@@ -133,11 +156,11 @@ layout_mode = 2
 vertical = true
 script = ExtResource("2_eo3oh")
 
-[node name="SFX_Text" type="Label" parent="SettingsBox/VBoxContainer/Sounds"]
+[node name="SFX_Text" type="TextureRect" parent="SettingsBox/VBoxContainer/Sounds"]
 process_mode = 4
 layout_mode = 2
-text = "Sounds
-"
+texture = ExtResource("9_ckb2j")
+stretch_mode = 4
 
 [node name="SFX (in dB)" type="HScrollBar" parent="SettingsBox/VBoxContainer/Sounds"]
 layout_mode = 2
@@ -148,8 +171,6 @@ page = 2.0
 script = ExtResource("2_eo3oh")
 
 [node name="ControlsBox" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(0, 0, 0, 0.278431)
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 8
@@ -158,33 +179,37 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -222.0
-offset_top = -150.0
+offset_top = -130.0
 offset_right = 222.0
-offset_bottom = 150.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ty8bl")
+texture = ExtResource("8_7uloi")
+stretch_mode = 5
 
-[node name="Title" type="Label" parent="ControlsBox"]
+[node name="Title" type="TextureRect" parent="ControlsBox"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 28.0
+offset_bottom = -194.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Controls"
-label_settings = SubResource("LabelSettings_2pa03")
-horizontal_alignment = 1
+texture = ExtResource("9_tt56q")
+stretch_mode = 5
 
 [node name="ControlDescription" type="Label" parent="ControlsBox"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = 51.0
+offset_top = 70.0
 offset_right = -24.0
-offset_bottom = -4.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "WASD - Movimentar
