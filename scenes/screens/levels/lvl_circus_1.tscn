@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://3eyt7ia23p7u" path="res://scenes/ui/ui_hud.tscn" id="3_kp1wh"]
 [ext_resource type="PackedScene" uid="uid://38t6or63jfwa" path="res://scenes/prefab/enemies/obj_enemy_spawner.tscn" id="4_3exrk"]
 [ext_resource type="PackedScene" uid="uid://cg6v4kb7j5754" path="res://scenes/prefab/triggers/obj_camera_limiter.tscn" id="4_vxcq0"]
-[ext_resource type="PackedScene" uid="uid://dcya6dfpmgmyd" path="res://scenes/prefab/enemies/obj_enemy_purple.tscn" id="7_1xqmh"]
+[ext_resource type="PackedScene" uid="uid://brkh5s4fmashi" path="res://scenes/prefab/enemies/obj_enemy_boss.tscn" id="9_toa67"]
 [ext_resource type="PackedScene" uid="uid://cwkpwnd3luxdr" path="res://scenes/prefab/triggers/obj_trigger.tscn" id="10_h0vhq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7xnf"]
@@ -245,13 +245,13 @@ enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy3" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(1500, 360)
-amount = 3
+amount = 2
 enemies = Array[PackedScene]([ExtResource("3_7ies1")])
 
 [node name="SpawnEnemy4" parent="Spawners" instance=ExtResource("4_3exrk")]
 position = Vector2(2323, 360)
 amount = 1
-enemies = Array[PackedScene]([ExtResource("7_1xqmh")])
+enemies = Array[PackedScene]([ExtResource("9_toa67")])
 
 [node name="Triggers" type="Node2D" parent="."]
 position = Vector2(2323, 360)
