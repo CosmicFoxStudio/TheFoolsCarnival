@@ -333,6 +333,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("11_sxiee")
 
 [node name="Curtains" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
@@ -366,13 +367,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -58.5
-offset_top = -128.0
-offset_right = 58.5
-offset_bottom = -54.0
+offset_left = -59.0
+offset_top = -148.0
+offset_right = 59.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_neighbor_top = NodePath("StartButton")
+focus_neighbor_right = NodePath("CreditsButton")
 focus_neighbor_bottom = NodePath("QuitButton")
 focus_mode = 2
 
@@ -385,6 +387,12 @@ theme_override_fonts/font = ExtResource("6_ly0se")
 theme_override_font_sizes/font_size = 20
 text = "Start
 "
+script = ExtResource("9_r40df")
+
+[node name="CreditsButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_ly0se")
+text = "Credits"
 script = ExtResource("9_r40df")
 
 [node name="QuitButton" type="Button" parent="Buttons"]
@@ -422,6 +430,8 @@ grow_vertical = 1
 [connection signal="cursor_selected" from="Buttons/StartButton" to="." method="_on_start_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="cursor_deselected" from="Buttons/CreditsButton" to="." method="_on_credits_button_cursor_deselected"]
+[connection signal="cursor_selected" from="Buttons/CreditsButton" to="." method="_on_credits_button_cursor_selected"]
 [connection signal="cursor_selected" from="Buttons/QuitButton" to="." method="_on_quit_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]

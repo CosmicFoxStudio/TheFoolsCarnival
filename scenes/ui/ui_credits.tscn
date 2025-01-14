@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2hn17mjp35m7"]
+[gd_scene load_steps=5 format=3 uid="uid://d2hn17mjp35m7"]
 
 [ext_resource type="Texture2D" uid="uid://btdje18dyj8h" path="res://assets/sprites/ui/credits/credits_panel_ref.png" id="1_2awfr"]
 [ext_resource type="LabelSettings" uid="uid://cr5ahs2ej174d" path="res://assets/label_settings/credits_label.tres" id="2_4njrl"]
+[ext_resource type="Script" path="res://scripts/ui/src_credits.gd" id="2_5qrvj"]
 [ext_resource type="LabelSettings" uid="uid://2dtyn8fvrrir" path="res://assets/label_settings/credits_name_label.tres" id="3_kv6du"]
 
 [node name="CreditsBox" type="TextureRect"]
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2awfr")
 stretch_mode = 5
+script = ExtResource("2_5qrvj")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -20,7 +22,9 @@ anchor_right = 1.0
 offset_top = 88.0
 offset_bottom = 360.0
 grow_horizontal = 2
+theme_override_constants/h_separation = 125
 theme_override_constants/v_separation = 67
+columns = 2
 
 [node name="Artists" type="Label" parent="GridContainer"]
 layout_mode = 2
@@ -33,7 +37,7 @@ offset_left = 14.0
 offset_top = 29.0
 offset_right = 150.0
 offset_bottom = 51.0
-text = "Anael Fontes??"
+text = "Nael"
 label_settings = ExtResource("3_kv6du")
 
 [node name="Renata" type="Label" parent="GridContainer/Artists"]
@@ -55,7 +59,7 @@ offset_left = 14.0
 offset_top = 25.0
 offset_right = 147.0
 offset_bottom = 47.0
-text = "Anael what?
+text = "Nael
 Caio hudson
 Raniery"
 label_settings = ExtResource("3_kv6du")
@@ -70,5 +74,31 @@ offset_left = 14.0
 offset_top = 25.0
 offset_right = 147.0
 offset_bottom = 47.0
-text = "Garps"
+text = "Garu
+Melo"
 label_settings = ExtResource("3_kv6du")
+
+[node name="Producers" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Producers"
+label_settings = ExtResource("2_4njrl")
+
+[node name="Products" type="Label" parent="GridContainer/Producers"]
+offset_left = 14.0
+offset_top = 25.0
+offset_right = 147.0
+offset_bottom = 47.0
+text = "Otto"
+label_settings = ExtResource("3_kv6du")
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "CLOSE"
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
