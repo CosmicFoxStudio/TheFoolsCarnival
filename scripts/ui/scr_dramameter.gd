@@ -35,6 +35,9 @@ func DecreaseMeter(delta: float):
 	audienceValue = max(audienceValue, minMeter)
 	value = audienceValue
 	UpdateOverlay()
+	
+	if audienceValue <= 0:
+		Global.level.EndGame()
 
 func GetAudienceLevel() -> String:
 	if audienceValue < 20:
