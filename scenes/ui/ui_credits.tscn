@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://btdje18dyj8h" path="res://assets/sprites/ui/credits/credits_panel_ref.png" id="1_2awfr"]
 [ext_resource type="LabelSettings" uid="uid://cr5ahs2ej174d" path="res://assets/label_settings/credits_label.tres" id="2_4njrl"]
-[ext_resource type="Script" path="res://scripts/ui/src_credits.gd" id="2_5qrvj"]
+[ext_resource type="Script" path="res://scripts/ui/scr_credits.gd" id="2_5qrvj"]
 [ext_resource type="LabelSettings" uid="uid://2dtyn8fvrrir" path="res://assets/label_settings/credits_name_label.tres" id="3_kv6du"]
 
 [node name="CreditsBox" type="TextureRect"]

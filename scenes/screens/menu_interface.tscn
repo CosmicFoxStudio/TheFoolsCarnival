@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=21 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_title.gd" id="1_1hkr3"]
 [ext_resource type="Shader" path="res://scenes/screens/shake.gdshader" id="3_g2x1o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
+[ext_resource type="Script" path="res://scripts/ui/scr_credits.gd" id="12_1wicm"]
 [ext_resource type="PackedScene" uid="uid://d2hn17mjp35m7" path="res://scenes/ui/ui_credits.tscn" id="12_lf3vp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
@@ -333,7 +334,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("11_sxiee")
 
 [node name="Curtains" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
@@ -416,16 +416,39 @@ layout_mode = 0
 menuParentPath = NodePath("../Buttons")
 cursorOffset = Vector2(40, 18)
 
-[node name="CreditsBox" parent="." instance=ExtResource("12_lf3vp")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 360.0
-offset_right = 640.0
-offset_bottom = 720.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="Credits" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 361.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_1wicm")
+
+[node name="CreditsBox" parent="Credits" instance=ExtResource("12_lf3vp")]
+layout_mode = 1
+script = null
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="BackButton" type="Button" parent="Credits/HBoxContainer"]
+layout_mode = 2
+text = "BACK"
+script = ExtResource("9_r40df")
+
+[node name="Cursor2" parent="Credits" instance=ExtResource("9_sp1vi")]
+layout_mode = 1
+menuParentPath = NodePath("../HBoxContainer")
+cursorOffset = Vector2(30, 20)
 
 [connection signal="cursor_selected" from="Buttons/StartButton" to="." method="_on_start_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
@@ -435,3 +458,4 @@ grow_vertical = 1
 [connection signal="cursor_selected" from="Buttons/QuitButton" to="." method="_on_quit_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="cursor_selected" from="Credits/HBoxContainer/BackButton" to="Credits" method="_on_back_button_cursor_selected"]

@@ -7,10 +7,15 @@ class_name Cursor extends Control
 @onready var menuParent := get_node(menuParentPath)
 @onready var handTexture: TextureRect = $TextureRect
 
+var inactive : bool = false
+
 var cursorIndex : int = 0
 var lastItem : Control
 
 func _process(_delta: float) -> void:
+	# Check if other instance deactivated this instance
+	if inactive: return 
+	
 	# Check if settings are active 
 	# To decide whether to disable the current menu navigation
 	if Global.settings.active:
