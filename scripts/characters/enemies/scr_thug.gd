@@ -162,6 +162,8 @@ func StateDied() -> void:
 func OnDamage(__health: float) -> void:
 	# Update enemy HUD 
 	Global.level.HUD.HudUpdateEnemy(properties, __health)
+	Global.playerHitCount += 1
+	Global.level.HUD.dramaMeter.IncreaseMeter(10 * Global.playerHitCount)
 	
 	hurtIndex += 1 # Reset is on idle state
 	match hurtIndex:

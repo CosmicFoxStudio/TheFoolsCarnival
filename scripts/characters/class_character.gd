@@ -67,11 +67,9 @@ func ChangeState(newState: eState) -> void:
 
 # Attack Functions
 func StartAttackCollision() -> void:
-	if not isAttacking:
-		attackCollision.disabled = false
+	attackCollision.disabled = false
 
 func EndAttackCollision() -> void:
-	if isAttacking:
 		attackCollision.disabled = true
 
 # Reset the combo chain

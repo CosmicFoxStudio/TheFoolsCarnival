@@ -3,6 +3,7 @@ class_name Player extends Character
 enum eAttackState { NONE, JAB, CROSS, KICK, KICK_AIR }
 
 @onready var camera: Camera = $Camera
+@onready var hitTimer: Timer = $HitTimer
 
 # Get input dynamically (read-only)
 var direction: float:
@@ -23,8 +24,6 @@ var jumpAcceleration = 0.03
 var jumpStrength = defaultJumpStrength
 var canHoldJump = true
 var comboAnimationQueue = ["attack1", "attack2", "attack3", "attack4"]
-var playerComboMultiplier = 0
-var playerHitCount = 0
 var attackPressCount = 0
 var currentAttackState = eAttackState.NONE
 
@@ -159,11 +158,7 @@ func UpdateCombo():
 	comboIndex += 1
 
 	print("Attack " + animationName + " triggered")
-	
-func UpdateComboMultiplier(value: int):
-	playerComboMultiplier = value
-	Global.level.HUD.dramaMeter.IncreaseMeter(10 * playerComboMultiplier)
-	
+		
 func StartCombo():
 	print("Started Combo")
 	isAttacking = true
@@ -174,22 +169,19 @@ func StartCombo():
 
 func ResetCombo():
 	super()
+	hitTimer.start()
 	attackPressCount = 0
+	
 
 func OnAnimationFinished(__animName: String) -> void:	
 	if __animName in comboAnimationQueue:
 		EndAttackCollision()
 		
 		if comboIndex < attackPressCount and comboIndex < len(comboAnimationQueue):
-			currentAttackState = eAttackState[eAttackState.keys()[comboIndex + 1]]
-			if comboIndex == 1: 
-				UpdateComboMultiplier(2)
-			elif comboIndex == 3:
-				UpdateComboMultiplier(4)
+			currentAttackState = comboIndex + 1 as eAttackState
 			
 			UpdateCombo()
 		else:
-			UpdateComboMultiplier(1)
 			ResetCombo()
 			ChangeState(eState.IDLE)
 		# DEBUG
@@ -199,6 +191,7 @@ func OnDamage(__health: float) -> void:
 	# Update DramaMeter
 	var enemyComboMultiplier = 2
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
+	Global.playerHitCount = 0
 
 func StateHurt() -> void:
 	if enterState:		
@@ -264,3 +257,7 @@ func _debug() -> void:
 	
 	# Console
 	#if state == eState.ATTACK: Global.debug.DebugPrint("Combo Timer Running: " + str(comboTimer.is_stopped() == false) + " Time Left: " + str(comboTimer.time_left))
+
+
+func _on_hit_timer_timeout():
+	Global.playerHitCount = 0
