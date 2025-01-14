@@ -1,6 +1,9 @@
 class_name Settings extends Control
 
-@onready var settingsButton: Button = $OpenSettingsButton
+@onready var buttonsContainer: HBoxContainer = $HBoxContainerButtons
+@onready var topBar: Control = $TopBar
+
+@onready var settingsButton: Button = $HBoxContainerButtons/OpenSettingsButton
 @onready var vBoxContainer: VBoxContainer = $SettingsBox/VBoxContainer
 
 @onready var musicVolume: HScrollBar = $"SettingsBox/VBoxContainer/Music/Music (in dB)"
@@ -53,9 +56,11 @@ func ToggleSettingsMenu() -> void:
 
 	var tween = get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	if paused:
-		tween.tween_property(settingsButton, "position", Vector2(420, -72), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(buttonsContainer, "position", Vector2(487, 0), 0.25).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(0, 0), 0.25).set_ease(Tween.EASE_IN)
 	else:
-		tween.tween_property(settingsButton, "position", Vector2(420, -115), 0.5).set_ease(Tween.EASE_IN)
+		tween.tween_property(buttonsContainer, "position", Vector2(487, -100), 0.25).set_ease(Tween.EASE_IN)
+		tween.tween_property(topBar, "position", Vector2(0, -200), 0.25).set_ease(Tween.EASE_IN)
 	tween.play()
 
 func ToggleControlsPanel() -> void:
@@ -64,28 +69,45 @@ func ToggleControlsPanel() -> void:
 	cursor.visible = !cursor.visible
 
 # Signals
+# HBoxContainer
+func _on_control_button_cursor_selected() -> void:
+	if active: controlsBox.visible = true
+
+func _on_control_button_cursor_deselected() -> void:
+	if active: controlsBox.visible = false
+
+# VBoxContainer
 func _on_settings_button_toggled(toggled_on: bool) -> void:
-	controlsBox.visible = toggled_on
+	if active: controlsBox.visible = toggled_on
 
 func _on_settings_button_cursor_selected() -> void:
-	controlsBox.visible = true
+	if active: settingsBox.visible = true
 
 func _on_music_cursor_selected() -> void:
-	Global.debug.DebugPrint("Music Volume selected")
-	musicSelected = true
-	musicVolume.self_modulate = Color(1, 1, 0)
+	if active:
+		Global.debug.DebugPrint("Music Volume selected")
+		musicSelected = true
+		musicVolume.self_modulate = Color(1, 1, 0)
 
 func _on_music_cursor_deselected() -> void:
-	Global.debug.DebugPrint("Music Volume deselected")
-	musicSelected = false
-	musicVolume.self_modulate = Color(1, 1, 1)
+	if active:
+		Global.debug.DebugPrint("Music Volume deselected")
+		musicSelected = false
+		musicVolume.self_modulate = Color(1, 1, 1)
 
 func _on_sounds_cursor_selected() -> void:
-	Global.debug.DebugPrint("SFX Volume selected")
-	sfxSelected = true
-	sfxVolume.self_modulate = Color(1, 1, 0)
+	if active:
+		Global.debug.DebugPrint("SFX Volume selected")
+		sfxSelected = true
+		sfxVolume.self_modulate = Color(1, 1, 0)
 
 func _on_sounds_cursor_deselected() -> void:
-	Global.debug.DebugPrint("SFX Volume deselected")
-	sfxSelected = false
-	sfxVolume.self_modulate = Color(1, 1, 1)
+	if active:
+		Global.debug.DebugPrint("SFX Volume deselected")
+		sfxSelected = false
+		sfxVolume.self_modulate = Color(1, 1, 1)
+
+
+func _on_open_settings_button_cursor_deselected() -> void:
+	if active: 
+		settingsBox.visible = false

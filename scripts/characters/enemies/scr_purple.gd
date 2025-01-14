@@ -3,7 +3,7 @@ extends Enemy
 # Add Voices
 var SOUNDS = [
 	# These are placeholders for now
-	preload("res://assets/audio/sfx/sfx_cursor_menu_back.wav"),  # 0 ---> HURT
+	preload("res://assets/audio/sfx/sfx-damage.mp3"),  # 0 ---> HURT
 	preload("res://assets/audio/sfx/sfx_cursor_menu_enter.wav"), # 1 ---> DOWN
 	preload("res://assets/audio/sfx/sfx_cursor_menu_hover.wav")  # 2 ---> DIED
 ]

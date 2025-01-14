@@ -9,8 +9,8 @@ class_name AudioManager extends Node
 var musicName : String  # Name of the music clip
 var sfxName : String    # Name of the SFX clip
 var musicPaused : bool = false
-var musicVolume : float = 10
-var sfxVolume : float = 10
+var musicVolume : float = -15
+var sfxVolume : float = -10
 
 func _ready() -> void:
 	Global.audio = self

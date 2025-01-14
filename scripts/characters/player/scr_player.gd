@@ -3,7 +3,11 @@ class_name Player extends Character
 enum eAttackState { NONE, JAB, CROSS, KICK, KICK_AIR }
 
 @onready var camera: Camera = $Camera
+
+@onready var player_audio_stream: AudioStreamPlayer2D = $PlayerAudioStream
+
 @onready var hitTimer: Timer = $HitTimer
+
 
 # Get input dynamically (read-only)
 var direction: float:
@@ -47,7 +51,11 @@ func _process(delta: float) -> void:
 	
 	if (Global.pause): ChangeState(eState.IDLE)
 
-func EnablePlayerMovement(delta) -> void:
+func PlaySound(__soundTag : String) -> void:
+	player_audio_stream["parameters/switch_to_clip"] = __soundTag
+	player_audio_stream.play()
+	
+func EnablePlayerMovement(_delta) -> void:
 	# (FIX-ME) For some weird reason, player has much higher speed but moves slower than enemies)
 	if direction: velocity.x = direction * properties.speed
 	else: velocity.x = move_toward(velocity.x, 0, properties.speed)
@@ -134,6 +142,8 @@ func StateAttack() -> void:
 	
 	StopMovement()
 
+	PlaySound("ATTACK")
+	
 	# Connect the animation_finished signal if not already connected
 	if not animationPlayer.animation_finished.is_connected(OnAnimationFinished):
 		animationPlayer.animation_finished.connect(OnAnimationFinished)
@@ -158,6 +168,7 @@ func UpdateCombo():
 	comboIndex += 1
 
 	print("Attack " + animationName + " triggered")
+
 		
 func StartCombo():
 	print("Started Combo")
@@ -191,13 +202,15 @@ func OnDamage(__health: float) -> void:
 	# Update DramaMeter
 	var enemyComboMultiplier = 2
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
+
 	Global.playerHitCount = 0
+
 
 func StateHurt() -> void:
 	if enterState:		
 		PlayAnimation("hurt")
 		StopMovement()
-		
+		PlaySound("HURT")
 		# Update HUD
 		Global.level.HUD.HudUpdateHealth(health.hp)
 	

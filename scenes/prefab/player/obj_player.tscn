@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=30 format=3 uid="uid://3ay3cu5gnbw2"]
+
 
 [ext_resource type="PackedScene" uid="uid://c46cooc6dh316" path="res://scenes/prefab/components/obj_health.tscn" id="1_safe6"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player.gd" id="1_yjweb"]
@@ -9,8 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://co46avr4sbxq5" path="res://assets/audio/sfx/sfx_crowd_applause.wav" id="7_f6o7l"]
 [ext_resource type="Texture2D" uid="uid://c3hcsrqm3ftru" path="res://assets/sprites/characters/porriet/sheet_porriet.png" id="7_qkmcm"]
 [ext_resource type="AudioStream" uid="uid://b5fhwsjliclu1" path="res://assets/audio/sfx/sfx_crowd_applause_crushed.wav" id="8_s6yx5"]
-[ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="9_oybm7"]
 [ext_resource type="Script" path="res://scripts/characters/player/scr_player_interaction.gd" id="10_jdhmr"]
+[ext_resource type="AudioStream" uid="uid://dfahvbshm76o5" path="res://assets/audio/sfx/body_hit_small_11.wav" id="10_rqx7u"]
+[ext_resource type="AudioStream" uid="uid://cs7pikvjd830g" path="res://assets/audio/sfx/sfx-damage.mp3" id="11_wj1ic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h2465"]
 radius = 21.0
@@ -366,14 +369,14 @@ _data = {
 "walk": SubResource("Animation_faukw")
 }
 
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_lk7uh"]
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_7m7yj"]
 shuffle = true
-stream_count = 2
-stream_0 = ExtResource("9_oybm7")
-stream_1 = ExtResource("8_s6yx5")
+loop = false
+stream_count = 1
+stream_0 = ExtResource("10_rqx7u")
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_mkb2x"]
-clip_count = 3
+clip_count = 4
 clip_0/name = &"IDLE"
 clip_0/stream = ExtResource("7_f6o7l")
 clip_0/auto_advance = 0
@@ -381,8 +384,11 @@ clip_1/name = &"WALK"
 clip_1/stream = ExtResource("8_s6yx5")
 clip_1/auto_advance = 0
 clip_2/name = &"ATTACK"
-clip_2/stream = SubResource("AudioStreamPlaylist_lk7uh")
+clip_2/stream = SubResource("AudioStreamPlaylist_7m7yj")
 clip_2/auto_advance = 0
+clip_3/name = &"HURT"
+clip_3/stream = ExtResource("11_wj1ic")
+clip_3/auto_advance = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5770w"]
 size = Vector2(47, 94)

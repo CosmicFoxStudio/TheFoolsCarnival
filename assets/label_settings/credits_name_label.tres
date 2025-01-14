@@ -1,0 +1,13 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://2dtyn8fvrrir"]
+
+[ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="1_y23ky"]
+
+[resource]
+font = ExtResource("1_y23ky")
+font_size = 10
+font_color = Color(0.99, 0.74745, 0.297, 1)
+outline_size = 2
+outline_color = Color(1, 0.283333, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 1.945)

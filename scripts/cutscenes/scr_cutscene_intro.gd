@@ -27,7 +27,7 @@ func _pause() -> void:
 
 func _skip() -> void:
 	# Skip the scene
-	cutscenePlayer.seek(cutscenePlayer.current_animation_length - 1, true)
+	#cutscenePlayer.seek(cutscenePlayer.current_animation_length - 1, true)
 	Global.sceneTransition.transition("res://scenes/screens/levels/lvl_circus_1.tscn")
 
 func _on_next_button_cursor_selected() -> void:

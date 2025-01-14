@@ -1,5 +1,11 @@
 extends Enemy
 
+@onready var enemy_sfx_player: AudioStreamPlayer2D = $EnemySFXPlayer
+
+func PlaySound(__soundTag : String):
+	enemy_sfx_player["parameters/switch_to_clip"] = __soundTag
+	enemy_sfx_player.play()
+	
 # State Overrides
 func StateIdle() -> void:
 	if dead: return
@@ -84,6 +90,7 @@ func StateAttack() -> void:
 		PlayAnimation("attack1")
 		isAttacking = true
 
+		PlaySound("ATTACK")
 		# Ensure the animation_finished signal is connected
 		if not animationPlayer.animation_finished.is_connected(OnEnemyAnimationFinished):
 			animationPlayer.animation_finished.connect(OnEnemyAnimationFinished)
@@ -173,6 +180,8 @@ func OnDamage(__health: float) -> void:
 		2: 
 			# PlaySound(SOUNDS[1])
 			ChangeState(eState.DOWN)
+			
+	PlaySound("HURT")
 
 func _debug() -> void:
 	Global.debug.UpdateDebugVariable(13, "Velocity: " + str(velocity))

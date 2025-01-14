@@ -1,26 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://3eyt7ia23p7u"]
+[gd_scene load_steps=18 format=3 uid="uid://3eyt7ia23p7u"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_hud.gd" id="1_tnmyb"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="2_cvup0"]
 [ext_resource type="Texture2D" uid="uid://cdrex8wggbvry" path="res://assets/sprites/ui/icons/go.png" id="2_pkq37"]
 [ext_resource type="Texture2D" uid="uid://b7r718xmb2ok0" path="res://assets/sprites/ui/portraits/spr_portrait_porriet.png" id="3_rfdim"]
 [ext_resource type="Texture2D" uid="uid://dsh8r4m7va8d5" path="res://assets/sprites/ui/portraits/spr_portrait_thug.png" id="4_1iqq3"]
+[ext_resource type="Texture2D" uid="uid://dal20acn6kuny" path="res://assets/sprites/ui/hud/hp_bar/spr_hpbar_empty.png" id="4_34l5o"]
+[ext_resource type="Texture2D" uid="uid://vcsvrxoikbbe" path="res://assets/sprites/ui/hud/hp_bar/spr_hpbar_outer.png" id="5_j4o14"]
 [ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_cleared.mp3" id="6_05i8f"]
+[ext_resource type="Texture2D" uid="uid://cjihf4rv8t7aa" path="res://assets/sprites/ui/hud/hp_bar/spr_hpbar_fill.png" id="6_8nxtr"]
 [ext_resource type="PackedScene" uid="uid://d1rr4cb6qbteb" path="res://scenes/ui/ui_dramameter.tscn" id="7_xpvwm"]
 [ext_resource type="PackedScene" uid="uid://xih1orensxu3" path="res://scenes/ui/audience/ui_audience.tscn" id="8_7rosk"]
+[ext_resource type="Texture2D" uid="uid://emrsqgi2bvi3" path="res://assets/sprites/ui/hud/hp_bar/spr_hpbar_default_empty.png" id="8_c082j"]
 [ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="9_iem04"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmqlr"]
-bg_color = Color(0.886275, 0.427451, 0.580392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwwma"]
-bg_color = Color(0.286275, 0.682353, 0.580392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2gfd"]
-bg_color = Color(0.886275, 0.427451, 0.580392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssith"]
-bg_color = Color(0.286275, 0.682353, 0.580392, 1)
+[ext_resource type="Texture2D" uid="uid://c870jqsegobw6" path="res://assets/sprites/ui/hud/hp_bar/spr_fill_default.png" id="9_jmkol"]
 
 [sub_resource type="Animation" id="Animation_uhr8r"]
 length = 0.001
@@ -76,10 +69,10 @@ script = ExtResource("1_tnmyb")
 
 [node name="Go" type="TextureRect" parent="."]
 visible = false
-offset_left = 530.0
-offset_right = 570.0
+offset_left = 509.0
+offset_right = 568.0
 offset_bottom = 40.0
-scale = Vector2(2.5, 2.5)
+scale = Vector2(1.8, 1.8)
 texture = ExtResource("2_pkq37")
 stretch_mode = 5
 
@@ -118,20 +111,19 @@ offset_right = 187.0
 offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("2_cvup0")
 theme_override_font_sizes/font_size = 12
-text = "PLAYER"
+text = "PORRIET"
 vertical_alignment = 1
 
-[node name="HealthPlayer" type="ProgressBar" parent="UIGameplay/HUDPlayer"]
+[node name="HealthPlayer" type="TextureProgressBar" parent="UIGameplay/HUDPlayer"]
 layout_mode = 0
 offset_left = 69.0
 offset_top = 23.0
 offset_right = 187.0
 offset_bottom = 41.0
-theme_override_fonts/font = ExtResource("2_cvup0")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_mmqlr")
-theme_override_styles/fill = SubResource("StyleBoxFlat_dwwma")
 value = 100.0
+texture_under = ExtResource("4_34l5o")
+texture_over = ExtResource("5_j4o14")
+texture_progress = ExtResource("6_8nxtr")
 metadata/_edit_lock_ = true
 
 [node name="PortraitPlayer" type="TextureRect" parent="UIGameplay/HUDPlayer"]
@@ -163,18 +155,17 @@ horizontal_alignment = 2
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="HealthEnemy" type="ProgressBar" parent="UIGameplay/HUDEnemy"]
+[node name="HealthEnemy" type="TextureProgressBar" parent="UIGameplay/HUDEnemy"]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 22.0
 offset_right = 124.0
 offset_bottom = 40.0
-theme_override_fonts/font = ExtResource("2_cvup0")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_x2gfd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ssith")
 value = 100.0
 fill_mode = 1
+texture_under = ExtResource("8_c082j")
+texture_over = ExtResource("5_j4o14")
+texture_progress = ExtResource("9_jmkol")
 metadata/_edit_lock_ = true
 
 [node name="PortraitEnemy" type="TextureRect" parent="UIGameplay/HUDEnemy"]

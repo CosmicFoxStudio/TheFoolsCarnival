@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://2dftu4pgnmt8"]
+[gd_scene load_steps=21 format=3 uid="uid://2dftu4pgnmt8"]
 
 [ext_resource type="Script" path="res://scripts/cutscenes/scr_cutscene_intro.gd" id="1_tyida"]
 [ext_resource type="Texture2D" uid="uid://k357p08xnvau" path="res://assets/sprites/cutscenes/intro/intro_template.png" id="2_u7e2m"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cueruggulirdq" path="res://assets/sprites/cutscenes/intro/cutout/spr_intro_2_jester.png" id="10_s5s0y"]
 [ext_resource type="Texture2D" uid="uid://bx63vou22wseg" path="res://assets/sprites/cutscenes/intro/intro_3.png" id="11_my21w"]
 [ext_resource type="FontFile" uid="uid://bnp8sribl86sv" path="res://assets/fonts/daydream/fnt_daydream.ttf" id="12_c26lo"]
+[ext_resource type="Script" path="res://scenes/ui/typewriter_effect.gd" id="12_e8aig"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="13_wvcn2"]
 [ext_resource type="PackedScene" uid="uid://i4jyh46grfcy" path="res://scenes/ui/ui_cursor.tscn" id="13_yus4t"]
 
@@ -318,6 +319,29 @@ tracks/11/keys = {
 "update": 1,
 "values": [false, true, true]
 }
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("DialogueBoxLabel")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 2, 5.53333, 6.73333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [1.5],
+"method": &"typewriter_effect"
+}, {
+"args": [1.5],
+"method": &"typewriter_effect"
+}, {
+"args": [0.75],
+"method": &"typewriter_effect"
+}, {
+"args": [1.0],
+"method": &"typewriter_effect"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56and"]
 _data = {
@@ -446,6 +470,9 @@ theme_override_font_sizes/font_size = 2
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tortor sem, scelerisque id pellentesque ac, vehicula quis neque. Sed dignissim lacus id tortor maximus, in euismod nulla pharetra. Donec at porttitor lectus, a faucibus massa. Nunc ante dui, malesuada sit amet varius a, dapibus at arcu. Nullam bibendum augue quis mauris"
 label_settings = SubResource("LabelSettings_cdirn")
 autowrap_mode = 2
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("12_e8aig")
 
 [node name="CutscenePlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -455,8 +482,8 @@ libraries = {
 
 [node name="Cursor" parent="." instance=ExtResource("13_yus4t")]
 layout_mode = 0
-menu_parent_path = NodePath("../SideButtons")
-cursor_offset = Vector2(40, 55)
+menuParentPath = NodePath("../SideButtons")
+cursorOffset = Vector2(40, 55)
 
 [connection signal="cursor_selected" from="SideButtons/NextButton" to="." method="_on_next_button_cursor_selected"]
 [connection signal="pressed" from="SideButtons/NextButton" to="." method="_on_next_button_pressed"]

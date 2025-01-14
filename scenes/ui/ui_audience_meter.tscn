@@ -1,15 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3uvdfcnymyeu"]
+[gd_scene load_steps=4 format=3 uid="uid://b3uvdfcnymyeu"]
 
 [ext_resource type="Script" path="res://scripts/ui/audience/scr_audience.gd" id="1_a3plt"]
 [ext_resource type="Texture2D" uid="uid://co6srri4jvslo" path="res://assets/sprites/ui/spr_dramameter_old.png" id="1_iu2si"]
 [ext_resource type="Texture2D" uid="uid://caoktebhj3lg8" path="res://assets/sprites/ui/icons/spr_arrow.png" id="3_rgpex"]
 
-[sub_resource type="Curve" id="Curve_60tnk"]
-max_value = 10.0
-_data = [Vector2(0.00544959, 10), 0.0, 0.399843, 0, 0, Vector2(0.99455, 0.184794), -33.1772, 0.0, 0, 0]
-point_count = 2
-
-[node name="AudienceMeter" type="TextureProgressBar" node_paths=PackedStringArray("meterArrow")]
+[node name="AudienceMeter" type="TextureProgressBar"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -24,8 +19,6 @@ value = 10.0
 texture_under = ExtResource("1_iu2si")
 texture_progress_offset = Vector2(9, 0)
 script = ExtResource("1_a3plt")
-meterCurve = SubResource("Curve_60tnk")
-meterArrow = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

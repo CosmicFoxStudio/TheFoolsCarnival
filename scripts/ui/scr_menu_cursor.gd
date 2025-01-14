@@ -1,19 +1,25 @@
 class_name Cursor extends Control
 
-@export var is_settings : bool = false
-@export var menu_parent_path : NodePath
-@export var cursor_offset : Vector2
+@export var isSettings : bool = false
+@export var menuParentPath : NodePath
+@export var cursorOffset : Vector2
 
-@onready var menu_parent := get_node(menu_parent_path)
+@onready var menuParent := get_node(menuParentPath)
 @onready var handTexture: TextureRect = $TextureRect
 
-var cursor_index : int = 0
-var last_item : Control
+var inactive : bool = false
+
+var cursorIndex : int = 0
+var lastItem : Control
 
 func _process(_delta: float) -> void:
-	# Check if settings are active to decide whether to disable the current menu navigation
+	# Check if other instance deactivated this instance
+	if inactive: return 
+	
+	# Check if settings are active 
+	# To decide whether to disable the current menu navigation
 	if Global.settings.active:
-		if not is_settings: 
+		if not isSettings: 
 			# handTexture.visible = false
 			return
 	# else: handTexture.visible = true
@@ -29,42 +35,42 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_right"):
 		input.x += 1
 		
-	if menu_parent is VBoxContainer:
-		set_cursor_from_index(cursor_index + input.y)
-	elif menu_parent is HBoxContainer:
-		set_cursor_from_index(cursor_index + input.x)
-	elif menu_parent is GridContainer:
-		set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
+	if menuParent is VBoxContainer:
+		set_cursor_from_index(cursorIndex + int(input.y))
+	elif menuParent is HBoxContainer:
+		set_cursor_from_index(cursorIndex + int(input.x))
+	elif menuParent is GridContainer:
+		set_cursor_from_index(cursorIndex + int(input.x) + int(input.y) * menuParent.columns)
 		
-	if Input.is_action_just_pressed("ui_select"):
-		var current_menu_item := get_menu_item_at_index(cursor_index)
+	if Input.is_action_just_pressed("ui_confirm"):
+		var currentMenuItem := GetMenuItemAtIndex(cursorIndex)
 		
-		if(current_menu_item != null):
-			if last_item != null and last_item != current_menu_item:
-				if last_item.has_method("cursor_deselect"):
-					last_item.cursor_deselect()
+		if(currentMenuItem != null):
+			if lastItem != null and lastItem != currentMenuItem:
+				if lastItem.has_method("cursor_deselect"):
+					lastItem.cursor_deselect()
 					
-			last_item = current_menu_item
-			if current_menu_item.has_method("cursor_select"):
-				current_menu_item.cursor_select()
+			lastItem = currentMenuItem
+			if currentMenuItem.has_method("cursor_select"):
+				currentMenuItem.cursor_select()
 
-func get_menu_item_at_index(index : int) -> Control:
-	if menu_parent == null:
+func GetMenuItemAtIndex(index : int) -> Control:
+	if menuParent == null:
 		return null
 		
-	if index >= menu_parent.get_child_count() or index < 0:
+	if index >= menuParent.get_child_count() or index < 0:
 		return null
 		
-	return menu_parent.get_child(index) as Control
+	return menuParent.get_child(index) as Control
 	
 func set_cursor_from_index(index : int) -> void:
-	var menu_item := get_menu_item_at_index(index)
+	var menuItem := GetMenuItemAtIndex(index)
 	
-	if menu_item == null: return
+	if menuItem == null: return
 	
-	var pos = menu_item.global_position
-	var size = menu_item.size
+	var pos = menuItem.global_position
+	var itemSize = menuItem.size
 	
-	global_position = Vector2(pos.x, pos.y + size.y / 2.0) - cursor_offset
+	global_position = Vector2(pos.x, pos.y + itemSize.y / 2.0) - cursorOffset
 	
-	cursor_index = index
+	cursorIndex = index

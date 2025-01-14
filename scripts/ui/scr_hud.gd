@@ -14,14 +14,14 @@ var score: int = 0
 # Player
 @onready var hudPlayer: Control = $UIGameplay/HUDPlayer
 @onready var namePlayer: Label = $UIGameplay/HUDPlayer/NamePlayer
-@onready var healthPlayer: ProgressBar = $UIGameplay/HUDPlayer/HealthPlayer
+@onready var healthPlayer: TextureProgressBar = $UIGameplay/HUDPlayer/HealthPlayer
 @onready var portraitPlayer: TextureRect = $UIGameplay/HUDPlayer/PortraitPlayer
 @onready var scorePlayer: Label = $UIGameplay/HUDPlayer/ScorePlayer
 
 # Enemy
 @onready var hudEnemy: Control = $UIGameplay/HUDEnemy
 @onready var nameEnemy: Label = $UIGameplay/HUDEnemy/NameEnemy
-@onready var healthEnemy: ProgressBar = $UIGameplay/HUDEnemy/HealthEnemy
+@onready var healthEnemy: TextureProgressBar = $UIGameplay/HUDEnemy/HealthEnemy
 @onready var portraitEnemy: TextureRect = $UIGameplay/HUDEnemy/PortraitEnemy
 @onready var timerEnemyUI: Timer = $TimerEnemyUI
 

@@ -16,7 +16,7 @@ var scoreValue : int = 30 # Change Later
 
 @onready var AITimer: Timer = $AITimer
 @onready var hitboxCollision: CollisionShape2D = $Hitbox/HitboxCollision
-@onready var enemyVoice: AudioStreamPlayer = $EnemyVoice
+# @onready var enemy_sfx_player: AudioStreamPlayer2D = $EnemySFXPlayer
 
 # Initialization
 func _ready() -> void:
