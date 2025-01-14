@@ -442,6 +442,7 @@ grow_horizontal = 0
 
 [node name="BackButton" type="Button" parent="Credits/HBoxContainer"]
 layout_mode = 2
+action_mode = 0
 text = "BACK"
 script = ExtResource("9_r40df")
 

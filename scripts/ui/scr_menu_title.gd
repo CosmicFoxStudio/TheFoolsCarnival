@@ -2,7 +2,7 @@ extends Scene
 
 @onready var animationPlayer: AnimationPlayer = $MenuAnimationPlayer
 @onready var gridContainer: GridContainer = $Buttons
-@onready var credits: Control = $Credits
+@onready var credits: Credits = $Credits
 @onready var credits_box: TextureRect = $Credits/CreditsBox
 @onready var mainMenuCursor: Cursor = $Cursor
 
@@ -31,7 +31,11 @@ func _on_quit_button_cursor_selected() -> void:
 	get_tree().quit()
 
 func _on_credits_button_cursor_selected() -> void:
+	credits.mainMenuCursor.inactive = true
 	mainMenuCursor.inactive = true
-	credits.visible = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(credits,"position",Vector2(0,0),.35)
+	tween.tween_callback(turn_backbtn_on).set_delay(.35)
+	
+func turn_backbtn_on():
+	credits.mainMenuCursor.inactive = false

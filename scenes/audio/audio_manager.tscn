@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ttb1o07blvi5" path="res://assets/audio/music/mus_battle.ogg" id="3_pw3u2"]
 [ext_resource type="AudioStream" uid="uid://bqlkrsewf4okp" path="res://assets/audio/sfx/sfx_cursor_menu_back.wav" id="4_tnvtt"]
 [ext_resource type="AudioStream" uid="uid://g7j5hcyh86uu" path="res://assets/audio/sfx/sfx_cursor_menu_enter.wav" id="5_4vmfv"]
-[ext_resource type="AudioStream" uid="uid://dv4lvyso162oq" path="res://assets/audio/music/boss_fight.mp3" id="5_s5dp3"]
+[ext_resource type="AudioStream" uid="uid://d1ujwiegfoq4p" path="res://assets/audio/music/mus_boss.wav" id="5_nptq1"]
 [ext_resource type="AudioStream" uid="uid://bdo2njpcg73ln" path="res://assets/audio/sfx/sfx_cursor_menu_hover.wav" id="6_w3it8"]
 [ext_resource type="AudioStream" uid="uid://cx6ptbyguwy4x" path="res://assets/audio/sfx/sfx_level_cleared.mp3" id="9_6d2p8"]
 [ext_resource type="AudioStream" uid="uid://ca8xxv75e6fdf" path="res://assets/audio/sfx/sfx_crowd_booing_crushed.wav" id="10_1k0uw"]
@@ -24,7 +24,7 @@ clip_2/name = &"Stage"
 clip_2/stream = ExtResource("3_pw3u2")
 clip_2/auto_advance = 0
 clip_3/name = &"Boss"
-clip_3/stream = ExtResource("5_s5dp3")
+clip_3/stream = ExtResource("5_nptq1")
 clip_3/auto_advance = 0
 clip_4/name = &"LevelCleared"
 clip_4/stream = ExtResource("9_6d2p8")
@@ -71,5 +71,6 @@ autoplay = true
 bus = &"music"
 
 [node name="SFXMusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = SubResource("AudioStreamInteractive_fb15y")
 bus = &"sfx"
