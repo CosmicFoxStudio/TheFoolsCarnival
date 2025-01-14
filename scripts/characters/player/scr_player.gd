@@ -1,6 +1,6 @@
 class_name Player extends Character
 
-# enum ePlayerState { ACTIVE, INACTIVE, TALKING, MENU, WARPING }
+enum eAttackState { NONE, JAB, CROSS, KICK, KICK_AIR }
 
 @onready var camera: Camera = $Camera
 
@@ -22,6 +22,11 @@ var defaultJumpStrength = 0.6  # Default jump strength (80% of max)
 var jumpAcceleration = 0.03
 var jumpStrength = defaultJumpStrength
 var canHoldJump = true
+var comboAnimationQueue = ["attack1", "attack2", "attack3", "attack4"]
+var playerComboMultiplier = 0
+var playerHitCount = 0
+var attackPressCount = 0
+var currentAttackState = eAttackState.NONE
 
 func _ready() -> void:
 	super()
@@ -63,9 +68,7 @@ func StateIdle() -> void:
 	if dead: return
 	
 	# For safety, reset variables
-	isAttacking = false
-	comboIndex = 0
-	comboTimer.stop()
+	ResetCombo()
 	
 	PlayAnimation("idle")
 	StopMovement()
@@ -129,7 +132,7 @@ func StateFall(delta) -> void:
 
 func StateAttack() -> void:
 	if dead: return
-
+	
 	StopMovement()
 
 	# Connect the animation_finished signal if not already connected
@@ -137,37 +140,58 @@ func StateAttack() -> void:
 		animationPlayer.animation_finished.connect(OnAnimationFinished)
 
 	# Combo logic
-	if not comboTimer.is_stopped():
-		if attack:  # Player pressed attack again
-			if comboIndex == 1:
-				var playerComboMultiplier = 1
-				print("Second attack triggered")
-				StartAttackCollision()
-				animationPlayer.play("attack2")
-				comboIndex += 1
-				
-				# Update DramaMeter
-				Global.level.HUD.dramaMeter.IncreaseMeter(10 * playerComboMultiplier)
-				
-				#comboTimer.stop()
-				#comboTimer.start()
-
-	if comboIndex == 0:
-		print("First attack triggered")
-		StartAttackCollision()
-		animationPlayer.play("attack1")
-		comboIndex += 1
-		isAttacking = true
-		comboTimer.wait_time = 0.8
-		comboTimer.start()
-
-func OnAnimationFinished(__animName: String) -> void:
-	EndAttackCollision()
+	if not comboTimer.is_stopped() and attack:
+		attackPressCount = clamp(attackPressCount +1, 0, len(comboAnimationQueue))
+		print("Attack Button pressed " + str(attackPressCount) + " times")
+		#comboTimer.stop()
+		#comboTimer.start()
+			
+	if not isAttacking and enterState:
+		StartCombo()
 	
-	if __animName in ["attack1", "attack2"]:
-		isAttacking = false
+	
+func UpdateCombo():
+	var animationName = comboAnimationQueue[comboIndex]
+	
+	comboTimer.stop()
+	comboTimer.start()
+	animationPlayer.play(animationName)
+	comboIndex += 1
+
+	print("Attack " + animationName + " triggered")
+	
+func UpdateComboMultiplier(value: int):
+	playerComboMultiplier = value
+	Global.level.HUD.dramaMeter.IncreaseMeter(10 * playerComboMultiplier)
+	
+func StartCombo():
+	print("Started Combo")
+	isAttacking = true
+	attackPressCount = 1
+	comboTimer.wait_time = 0.8
+	StartAttackCollision()
+	UpdateCombo()
+
+func ResetCombo():
+	super()
+	attackPressCount = 0
+
+func OnAnimationFinished(__animName: String) -> void:	
+	if __animName in comboAnimationQueue:
+		EndAttackCollision()
 		
-		ChangeState(eState.IDLE)
+		if comboIndex < attackPressCount and comboIndex < len(comboAnimationQueue):
+			currentAttackState = eAttackState[eAttackState.keys()[comboIndex + 1]]
+			if comboIndex == 1: 
+				UpdateComboMultiplier(2)
+			elif comboIndex == 3:
+				UpdateComboMultiplier(4)
+			
+			UpdateCombo()
+		else:
+			UpdateComboMultiplier(1)
+			ResetCombo()
+			ChangeState(eState.IDLE)
 		# DEBUG
 		# print(__animName, " finished, returning to idle")
 
@@ -177,9 +201,7 @@ func OnDamage(__health: float) -> void:
 	Global.level.HUD.dramaMeter.DecreaseMeter(10 * enemyComboMultiplier)
 
 func StateHurt() -> void:
-	if enterState:
-		enterState = false
-		
+	if enterState:		
 		PlayAnimation("hurt")
 		StopMovement()
 		
@@ -192,7 +214,6 @@ func StateHurt() -> void:
 
 func StateDied() -> void:
 	if enterState:
-		enterState = false
 		PlayAnimation("died")
 		dead = true
 		StopMovement()

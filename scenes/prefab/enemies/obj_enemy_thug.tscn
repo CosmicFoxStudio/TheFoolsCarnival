@@ -296,7 +296,11 @@ libraries = {
 autoplay = "idle"
 
 [node name="AITimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
 [node name="ComboTimer" type="Timer" parent="."]
 
 [node name="EnemyVoice" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="AITimer" to="." method="OnAiTimerTimeout"]
