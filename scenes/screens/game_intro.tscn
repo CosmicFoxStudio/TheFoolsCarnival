@@ -326,12 +326,9 @@ tracks/12/path = NodePath("DialogueBoxLabel")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0, 2, 3.56667, 5.53333, 6.73333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2, 5.53333, 6.73333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": [1.5],
-"method": &"typewriter_effect"
-}, {
 "args": [1.5],
 "method": &"typewriter_effect"
 }, {

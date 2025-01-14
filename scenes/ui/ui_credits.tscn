@@ -55,6 +55,7 @@ text = "Coders"
 label_settings = ExtResource("2_4njrl")
 
 [node name="TheBoys" type="Label" parent="GridContainer/Coders"]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 25.0
 offset_right = 147.0
@@ -70,6 +71,7 @@ text = "Sound designers"
 label_settings = ExtResource("2_4njrl")
 
 [node name="OsSonistas" type="Label" parent="GridContainer/Sound Design"]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 25.0
 offset_right = 147.0
@@ -84,6 +86,7 @@ text = "Producers"
 label_settings = ExtResource("2_4njrl")
 
 [node name="Products" type="Label" parent="GridContainer/Producers"]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 25.0
 offset_right = 147.0
