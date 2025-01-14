@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://de1grc5og7a72"]
+[gd_scene load_steps=20 format=3 uid="uid://de1grc5og7a72"]
 
 [ext_resource type="Script" path="res://scripts/ui/scr_menu_title.gd" id="1_1hkr3"]
 [ext_resource type="Shader" path="res://scenes/screens/shake.gdshader" id="3_g2x1o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://3qcfsj586v8v" path="res://assets/sprites/ui/tent/tent_right/spr_tent_part_right_1.png" id="9_x0b47"]
 [ext_resource type="Texture2D" uid="uid://dyms77qx6j7fi" path="res://assets/sprites/ui/tent/spr_tent_part_decoration.png" id="10_psq3u"]
 [ext_resource type="SpriteFrames" uid="uid://baa3vo41b1uf0" path="res://assets/sprites/ui/transitions/diamond_transition/spr_transition_diamond.tres" id="11_sxiee"]
+[ext_resource type="PackedScene" uid="uid://d2hn17mjp35m7" path="res://scenes/ui/ui_credits.tscn" id="12_lf3vp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_whpjl"]
 shader = ExtResource("3_g2x1o")
@@ -406,6 +407,17 @@ libraries = {
 layout_mode = 0
 menuParentPath = NodePath("../Buttons")
 cursorOffset = Vector2(40, 18)
+
+[node name="CreditsBox" parent="." instance=ExtResource("12_lf3vp")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="cursor_selected" from="Buttons/StartButton" to="." method="_on_start_button_cursor_selected"]
 [connection signal="focus_entered" from="Buttons/StartButton" to="." method="_on_start_button_focus_entered"]
