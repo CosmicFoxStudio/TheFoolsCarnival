@@ -6,6 +6,8 @@ func _ready() -> void:
 	animation_player.play("gameover/start")
 
 func _restart_game() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
 	Global.sceneTransition.transition("res://scenes/screens/levels/lvl_circus_1.tscn")
 	queue_free()
 

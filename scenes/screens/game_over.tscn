@@ -109,6 +109,7 @@ _data = {
 }
 
 [node name="GameOver" type="Control"]
+process_mode = 2
 z_index = 100
 y_sort_enabled = true
 layout_mode = 3

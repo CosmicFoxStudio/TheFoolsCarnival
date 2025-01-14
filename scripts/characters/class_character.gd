@@ -12,6 +12,7 @@ enum eType { PLAYER, ENEMY, NPC }
 # Variables
 var type : eType
 var state : eState = eState.IDLE
+var nextState = eState.IDLE
 var enterState: bool = true
 var currentHealth: int
 var isAttacking: bool = false
@@ -57,20 +58,18 @@ func StateHurt() -> void: pass
 func StateDied() -> void: queue_free()
 
 # Change State Method
-func ChangeState(new_state: eState) -> void:
-	if state != new_state:
-		state = new_state
-		enterState = true
+func ChangeState(newState: eState) -> void:
+	#Updates the next state to the new state, deffering the actual state change to the end of the frame
+	if state != newState:
+		nextState = newState
 		# DEBUG
 		# Global.debug.DebugPrint("Changing state from " + eState.keys()[state] + " to " + eState.keys()[new_state])
 
 # Attack Functions
 func StartAttackCollision() -> void:
-	if not isAttacking:
-		attackCollision.disabled = false
+	attackCollision.disabled = false
 
 func EndAttackCollision() -> void:
-	if isAttacking:
 		attackCollision.disabled = true
 
 # Reset the combo chain
@@ -78,6 +77,7 @@ func ResetCombo() -> void:
 	comboIndex = 0
 	isAttacking = false
 	ChangeState(eState.IDLE)
+	comboTimer.stop()
 
 # This function is different for each enemy, based on the amount of hurt states
 func OnDamage(__hp: float) -> void: pass
@@ -121,6 +121,9 @@ func _ready() -> void:
 
 # Main Loop
 func _physics_process(delta: float) -> void:
+	#Only changes the frame if a state change was schedule last frame, ensuring that state changes
+	#always happens at the beginning of the frame.	
+	
 	match state:
 		eState.IDLE: StateIdle()
 		eState.WALK: StateWalk(delta)
@@ -129,6 +132,12 @@ func _physics_process(delta: float) -> void:
 		eState.ATTACK: StateAttack()
 		eState.HURT: StateHurt()
 		eState.DIED: StateDied()
+	
+	if nextState != state:
+		enterState = true
+		state = nextState
+	else:
+		enterState = false
 
 	ApplyGravity(delta)
 	move_and_slide() # Needs to be the last function call

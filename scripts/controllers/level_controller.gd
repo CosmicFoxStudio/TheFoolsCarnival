@@ -111,6 +111,7 @@ func EndGame():
 		var game_over_instance = gameOverScene.instantiate()
 		get_parent().get_node("/root/MainScene/LayerControl").add_child(game_over_instance)
 		Global.audio.SetSFX("CrowdBooing")
+		get_tree().paused = true
 
 func _process(_delta: float) -> void: _debug()
 

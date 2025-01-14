@@ -12,9 +12,7 @@ var SOUNDS = [
 func StateIdle() -> void:
 	if dead: return
 	
-	if enterState:
-		enterState = false
-	
+	if enterState:	
 		# For safety, reset variables
 		isAttacking = false
 		comboIndex = 0
@@ -39,8 +37,6 @@ func StateWalk(delta) -> void:
 	if dead: return
 
 	if enterState:
-		enterState = false
-
 		velocity = Vector2.ZERO # Velocity starts at zero
 
 		# Wait a random amount of time in walk state
@@ -87,7 +83,6 @@ func StateAttack() -> void:
 	if dead or Global.level.player.dead: return
 
 	if enterState:
-		enterState = false
 		StopMovement()
 		StartAttackCollision()
 		PlayAnimation("attack1")
@@ -105,7 +100,6 @@ func OnEnemyAnimationFinished(__animName: String) -> void:
 
 func StateHurt() -> void:
 	if enterState:
-		enterState = false
 		PlayAnimation("hurt")
 		Global.effects.spawn_effect(effectResource, global_position)
 
@@ -118,8 +112,6 @@ func StateHurt() -> void:
 
 func StateDown() -> void:
 	if enterState:
-		enterState = false
-
 		# Down animation and VFX
 		SetHurtThrow()
 		await AITimer.timeout
@@ -135,7 +127,6 @@ func StateDown() -> void:
 
 func StateUp() -> void:
 	if enterState:
-		enterState = false
 		PlayAnimation("up")
 		await animationPlayer.animation_finished
 		
@@ -148,7 +139,6 @@ func StateDied() -> void:
 	super()
 	
 	if enterState:
-		enterState = false
 		dead = true
 
 		PlaySound(SOUNDS[2]) # Play death sound
