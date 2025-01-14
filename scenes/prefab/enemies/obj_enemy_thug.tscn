@@ -307,8 +307,15 @@ libraries = {
 autoplay = "idle"
 
 [node name="AITimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
 [node name="ComboTimer" type="Timer" parent="."]
 
+
 [node name="EnemySFXPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamInteractive_7s30q")
+
+
+[connection signal="timeout" from="AITimer" to="." method="OnAiTimerTimeout"]
+

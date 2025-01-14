@@ -17,6 +17,7 @@ var debug : GlobalDebug
 var audio : AudioManager
 var effects : EffectManager
 var settings : Settings
+var playerHitCount: int = 0
 
 # Global Variables
 var pause : bool = false
