@@ -81,7 +81,7 @@ func _on_settings_button_toggled(toggled_on: bool) -> void:
 	if active: controlsBox.visible = toggled_on
 
 func _on_settings_button_cursor_selected() -> void:
-	if active: controlsBox.visible = true
+	if active: settingsBox.visible = true
 
 func _on_music_cursor_selected() -> void:
 	if active:
@@ -106,3 +106,8 @@ func _on_sounds_cursor_deselected() -> void:
 		Global.debug.DebugPrint("SFX Volume deselected")
 		sfxSelected = false
 		sfxVolume.self_modulate = Color(1, 1, 1)
+
+
+func _on_open_settings_button_cursor_deselected() -> void:
+	if active: 
+		settingsBox.visible = false

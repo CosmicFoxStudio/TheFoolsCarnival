@@ -147,6 +147,56 @@ layout_mode = 2
 icon = ExtResource("6_oyp7e")
 script = ExtResource("2_eo3oh")
 
+[node name="ControlsBox" type="TextureRect" parent="."]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -111.0
+offset_right = 222.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_7uloi")
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Title" type="TextureRect" parent="ControlsBox"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 28.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_tt56q")
+stretch_mode = 5
+
+[node name="ControlDescription" type="Label" parent="ControlsBox"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = -24.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WASD - Movimentar
+Z - Atacar
+Espaço - Pular
+Enter - Menu"
+label_settings = SubResource("LabelSettings_b6vn3")
+
 [node name="SettingsBox" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color(0, 0, 0, 0.278431)
@@ -241,61 +291,13 @@ max_value = 20.0
 page = 2.0
 script = ExtResource("2_eo3oh")
 
-[node name="ControlsBox" type="TextureRect" parent="."]
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -222.0
-offset_top = -111.0
-offset_right = 222.0
-offset_bottom = 139.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_7uloi")
-stretch_mode = 5
-metadata/_edit_lock_ = true
-
-[node name="Title" type="TextureRect" parent="ControlsBox"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 28.0
-offset_bottom = -194.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_tt56q")
-stretch_mode = 5
-
-[node name="ControlDescription" type="Label" parent="ControlsBox"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 70.0
-offset_right = -24.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "WASD - Movimentar
-Z - Atacar
-Espaço - Pular
-Enter - Menu"
-label_settings = SubResource("LabelSettings_b6vn3")
-
 [node name="Cursor" parent="." instance=ExtResource("2_hvmfl")]
 layout_mode = 0
 isSettings = true
 menuParentPath = NodePath("../HBoxContainerButtons")
 cursorOffset = Vector2(50, 20)
 
+[connection signal="cursor_deselected" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_open_settings_button_cursor_deselected"]
 [connection signal="cursor_selected" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_settings_button_cursor_selected"]
 [connection signal="toggled" from="HBoxContainerButtons/OpenSettingsButton" to="." method="_on_settings_button_toggled"]
 [connection signal="cursor_deselected" from="HBoxContainerButtons/ControlButton" to="." method="_on_control_button_cursor_deselected"]
